@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-// XML comment around #defines so this will validate with plutil before preprocessing.
-#include "../InfoPlist.h"
--->
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
@@ -40,7 +36,7 @@
 	<key>CFBundleIconFile</key>
 	<string>GSAppIcon.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>$(OMNI_BUNDLE_IDENTIFIER)</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -53,14 +49,14 @@
 	<string>RSGS</string>
 	<key>CFBundleVersion</key>
 	<string>FULL_BUNDLE_VERSION</string>
-	<key>LinkBackApplicationURL</key>
-	<string>http://www.graphsketcher.com/</string>
-	<key>LinkBackServer</key>
-	<string>GraphSketcher</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.productivity</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.8</string>
+	<key>LinkBackApplicationURL</key>
+	<string>http://www.graphsketcher.com/</string>
+	<key>LinkBackServer</key>
+	<string>GraphSketcher</string>
 	<key>NSAppleScriptEnabled</key>
 	<string>NO</string>
 	<key>NSHumanReadableCopyright</key>
@@ -79,123 +75,16 @@
 		<dict>
 			<key>defaultsDictionary</key>
 			<dict>
-				<!-- ____________ -->
-				<!-- app-specific -->
-				<!-- ____________ -->
-				
-				<key>GSFirstTimeUser</key>
-				<true/>
-				
-				<!-- default styles -->
-				<key>DefaultLineColor</key>
-				<string>0 0 0</string>
-				<key>DefaultTextColor</key>
-				<string>0 0 0</string>
-				<key>DefaultFillColor</key>
-				<string>0.39 0.64 1.0 0.5</string>  <!-- light blue, in rgba -->
-				<key>DefaultBackgroundColor</key>
-				<string>1 1 1</string>
-				<key>DefaultAxisColor</key>
-				<string>0 0 0</string>
-				<key>DefaultGridColor</key>
-				<string>0.9 0.9 0.9</string>
-				
-				<key>DefaultLabelFont</key>
-				<dict/>
-				<key>DefaultAxisTickLabelFont</key>
-				<dict/>
-				<key>DefaultXAxisTickLabelFont</key>
-				<dict/>
-				<key>DefaultYAxisTickLabelFont</key>
-				<dict/>
-				<key>DefaultXAxisTitleFont</key>
-				<dict/>
-				<key>DefaultYAxisTitleFont</key>
-				<dict/>
-				
-				<key>DefaultLineWidth</key>
-				<real>2.0</real>
-				<key>DefaultGridWidth</key>
-				<real>1</real>
-				<key>DefaultAxisWidth</key>
-				<real>1.0</real>
-				<key>DefaultVertexShape</key>
-				<integer>1</integer>  <!-- RS_CIRCLE -->
-				<key>DefaultDashStyle</key>
-				<integer>0</integer>
-				<key>DefaultAxisShape</key>
-				<integer>0</integer>
-				<key>DefaultConnectMethod</key>
-				<string>curved</string>
-				
-				<key>DisplayAxis</key>
-				<true/>
-				<key>DefaultAxisPlacement</key>
-				<string>origin</string>
-				
-				<key>DisplayAxisTicks</key>
-				<true/>
-				<key>DefaultAxisTickWidthIn</key>
-				<real>3.0</real>
-				<key>DefaultAxisTickWidthOut</key>
-				<real>1.0</real>
-				
-				<key>DisplayAxisTickLabels</key>
-				<true/>
-				<key>DefaultDistanceToXAxisTickLabels</key>
-				<real>3.0</real>
-				<key>DefaultDistanceToYAxisTickLabels</key>
-				<real>5.0</real>
-				
-				<key>DisplayAxisTitles</key>
-				<true/>
-				<key>DefaultXAxisTitlePlacement</key>
-				<real>0.5</real>
-				<key>DefaultYAxisTitlePlacement</key>
-				<real>0.5</real>
-				<key>DefaultDistanceToXAxisTitle</key>
-				<real>18.0</real>
-				<key>DefaultDistanceToYAxisTitle</key>
-				<real>18.0</real>
-				
-				<key>DisplayVerticalGrid</key>
-				<false/>
-				<key>DisplayHorizontalGrid</key>
-				<false/>
-				
-				<key>ScientificNotationSetting</key>
-				<string>auto</string>
-				
-				<key>EnableLineHinting</key>
-				<true/>
-				<key>DefaultErrorBarWidth</key>
-				<real>1.0</real>
-				
-				<key>LastFrameString</key>
-				<string>122 998 600 500 0 0 2560 1578</string>
-				<key>LastCanvasSize</key>
-				<string>{520, 420}</string>
-				
-				<!-- importing data -->
-				<key>MaximumDataSetSize</key>
-				<integer>5001</integer>
-				<key>DataFieldSeparators</key>
-				<array>
-					<string>&#x09;</string> <!-- tab -->
-					<string>|</string>
-					<string>;</string>
-					<!-- After trying all separators listed above, the app will try comma or period, whichever is *not* set as the decimal delimiter in System Preferences. -->
-				</array>
-				<key>ImportDataSeriesAsRows</key>
-				<false/>
-				<key>ImportDataSeriesAsLines</key>
-				<false/>
-				<key>ImportTextColumnAsPointLabels</key>
-				<true/>
 				<key>AutoScaleRangeOnImport</key>
 				<false/>
-				<key>UseColorPaletteWhenImportingData</key>
-				<true/>
+				<key>AutosaveDelaySeconds</key>
+				<real>120</real>
+				<key>DataFieldSeparators</key>
+				<array>
+					<string>	</string>
+					<string>|</string>
+					<string>;</string>
+				</array>
 				<key>DataSeriesColorPalette</key>
 				<array>
 					<string>0 0 0</string>
@@ -212,62 +101,130 @@
 					<string>0.835828 0.675547 0.917159</string>
 					<string>0.930953 0.643015 0.482506</string>
 				</array>
-				
-				
-				<!-- app behavior -->
-				<key>UseStickyTools</key>
-				<true/>
-				<key>UseContinuousSpellChecking</key>
-				<true/>
+				<key>DefaultAxisColor</key>
+				<string>0 0 0</string>
+				<key>DefaultAxisPlacement</key>
+				<string>origin</string>
+				<key>DefaultAxisShape</key>
+				<integer>0</integer>
+				<key>DefaultAxisTickLabelFont</key>
+				<dict/>
+				<key>DefaultAxisTickWidthIn</key>
+				<real>3</real>
+				<key>DefaultAxisTickWidthOut</key>
+				<real>1</real>
+				<key>DefaultAxisWidth</key>
+				<real>1</real>
+				<key>DefaultBackgroundColor</key>
+				<string>1 1 1</string>
+				<key>DefaultConnectMethod</key>
+				<string>curved</string>
+				<key>DefaultDashStyle</key>
+				<integer>0</integer>
+				<key>DefaultDistanceToXAxisTickLabels</key>
+				<real>3</real>
+				<key>DefaultDistanceToXAxisTitle</key>
+				<real>18</real>
+				<key>DefaultDistanceToYAxisTickLabels</key>
+				<real>5</real>
+				<key>DefaultDistanceToYAxisTitle</key>
+				<real>18</real>
+				<key>DefaultErrorBarWidth</key>
+				<real>1</real>
+				<key>DefaultFillColor</key>
+				<string>0.39 0.64 1.0 0.5</string>
+				<key>DefaultGridColor</key>
+				<string>0.9 0.9 0.9</string>
+				<key>DefaultGridWidth</key>
+				<real>1</real>
+				<key>DefaultLabelFont</key>
+				<dict/>
+				<key>DefaultLineColor</key>
+				<string>0 0 0</string>
+				<key>DefaultLineWidth</key>
+				<real>2</real>
+				<key>DefaultTextColor</key>
+				<string>0 0 0</string>
 				<key>DefaultTransparentWindowOpacity</key>
 				<real>0.38</real>
-				
-				<key>SelectionSensitivity</key>
-				<real>6</real>
+				<key>DefaultVertexShape</key>
+				<integer>1</integer>
+				<key>DefaultXAxisTickLabelFont</key>
+				<dict/>
+				<key>DefaultXAxisTitleFont</key>
+				<dict/>
+				<key>DefaultXAxisTitlePlacement</key>
+				<real>0.5</real>
+				<key>DefaultYAxisTickLabelFont</key>
+				<dict/>
+				<key>DefaultYAxisTitleFont</key>
+				<dict/>
+				<key>DefaultYAxisTitlePlacement</key>
+				<real>0.5</real>
+				<key>DisplayAxis</key>
+				<true/>
+				<key>DisplayAxisTickLabels</key>
+				<true/>
+				<key>DisplayAxisTicks</key>
+				<true/>
+				<key>DisplayAxisTitles</key>
+				<true/>
+				<key>DisplayHorizontalGrid</key>
+				<false/>
+				<key>DisplayVerticalGrid</key>
+				<false/>
+				<key>DrawCurvedLines</key>
+				<true/>
+				<key>EnableLineHinting</key>
+				<true/>
+				<key>GSFirstTimeUser</key>
+				<true/>
+				<key>ImportDataSeriesAsLines</key>
+				<false/>
+				<key>ImportDataSeriesAsRows</key>
+				<false/>
+				<key>ImportTextColumnAsPointLabels</key>
+				<true/>
+				<key>IncludeQuicklookPreview</key>
+				<true/>
+				<key>LastCanvasSize</key>
+				<string>{520, 420}</string>
+				<key>LastFrameString</key>
+				<string>122 998 600 500 0 0 2560 1578</string>
+				<key>MaximumDataSetSize</key>
+				<integer>5001</integer>
+				<key>OIColorInspectorShowsAlpha</key>
+				<true/>
+				<key>OIInspectorDefaultTopLeftPosition</key>
+				<string>{900, 53}</string>
+				<key>OITabbedInspectorUnifiedLook</key>
+				<true/>
 				<key>PopoutSensitivity</key>
 				<real>60</real>
-				<key>SnapToObjectSensitivity</key>  <!-- most snapping still uses SelectionSensitivity -->
+				<key>SaveFilesAsPlainXML</key>
+				<false/>
+				<key>ScientificNotationSetting</key>
+				<string>auto</string>
+				<key>SegmentStrokesWhileDrawing</key>
+				<false/>
+				<key>SelectionSensitivity</key>
 				<real>6</real>
+				<key>ShowExperimentalFeaturesMenu</key>
+				<false/>
 				<key>SnapToGrid</key>
 				<true/>
 				<key>SnapToGridSensitivity</key>
 				<real>6</real>
-				
-				<key>AutosaveDelaySeconds</key>  <!-- You can turn off autosave by using the value 0 -->
-				<real>120</real>
-				
-				
-				<!-- stroke recognition -->
-				<key>DrawCurvedLines</key>
+				<key>SnapToObjectSensitivity</key>
+				<real>6</real>
+				<key>UseColorPaletteWhenImportingData</key>
 				<true/>
-				<key>SegmentStrokesWhileDrawing</key>
-				<false/>
-				
-				
-				<!-- File format -->
-				<key>IncludeQuicklookPreview</key>
+				<key>UseContinuousSpellChecking</key>
 				<true/>
-				
-				
-				<!-- Debugging -->
-				<key>ShowExperimentalFeaturesMenu</key>
-				<false/>
+				<key>UseStickyTools</key>
+				<true/>
 				<key>ValidateXMLOnSave</key>
 				<false/>
-				<key>SaveFilesAsPlainXML</key>
-				<false/>
-				
-				
-				<!-- ___________________ -->
-				<!-- imported frameworks -->
-				
-				<!-- OmniInspector -->
-				<key>OITabbedInspectorUnifiedLook</key>  <!-- Gives the inspector the Leopard-ish title bar -->
-				<true/>
-				<key>OIInspectorDefaultTopLeftPosition</key>  <!-- Default distance of the inspector from the top-left corner of the screen -->
-				<string>{900, 53}</string>
-				<key>OIColorInspectorShowsAlpha</key>
-				<true/>
 			</dict>
 		</dict>
 	</dict>

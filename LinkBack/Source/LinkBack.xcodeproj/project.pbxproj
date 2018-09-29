@@ -205,7 +205,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 1000;
 			};
 			buildConfigurationList = 4A8BBBD608AB123000C5998B /* Build configuration list for PBXProject "LinkBack" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -275,8 +275,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4A8BBBEB08AB131E00C5998B /* Omni-Framework-Debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "$(OMNI_MAC_CODE_SIGN_IDENTITY)";
+				CODE_SIGN_IDENTITY = "";
 				INFOPLIST_FILE = Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = org.linkbackproject.LinkBack;
 				PRODUCT_NAME = LinkBack;
 			};
 			name = Debug;
@@ -285,26 +286,18 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4A8BBBEC08AB131E00C5998B /* Omni-Framework-Release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "$(OMNI_MAC_CODE_SIGN_IDENTITY)";
+				CODE_SIGN_IDENTITY = "";
 				INFOPLIST_FILE = Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = org.linkbackproject.LinkBack;
 				PRODUCT_NAME = LinkBack;
 			};
 			name = Release;
-		};
-		4A8BBBD508AB123000C5998B /* Coverage */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A8BBBEA08AB131E00C5998B /* Omni-Framework-Coverage.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "$(OMNI_MAC_CODE_SIGN_IDENTITY)";
-				INFOPLIST_FILE = Info.plist;
-				PRODUCT_NAME = LinkBack;
-			};
-			name = Coverage;
 		};
 		4A8BBBD708AB123000C5998B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4ADFF51008AB31B200281C2B /* Omni-Global-Debug.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -315,21 +308,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4ADFF51108AB31B200281C2B /* Omni-Global-Release.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 			};
 			name = Release;
-		};
-		4A8BBBD908AB123000C5998B /* Coverage */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4ADFF50F08AB31B200281C2B /* Omni-Global-Coverage.xcconfig */;
-			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "";
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-			};
-			name = Coverage;
 		};
 /* End XCBuildConfiguration section */
 
@@ -339,7 +323,6 @@
 			buildConfigurations = (
 				4A8BBBD308AB123000C5998B /* Debug */,
 				4A8BBBD408AB123000C5998B /* Release */,
-				4A8BBBD508AB123000C5998B /* Coverage */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -349,7 +332,6 @@
 			buildConfigurations = (
 				4A8BBBD708AB123000C5998B /* Debug */,
 				4A8BBBD808AB123000C5998B /* Release */,
-				4A8BBBD908AB123000C5998B /* Coverage */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

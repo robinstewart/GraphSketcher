@@ -151,14 +151,14 @@
 		4AAD545F1743FEC6001441F2 /* transparentWindowIcon@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 4AAD544E1743FEC6001441F2 /* transparentWindowIcon@2x.tiff */; };
 		4AAD54601743FEC6001441F2 /* ungroupIcon@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 4AAD544F1743FEC6001441F2 /* ungroupIcon@2x.tiff */; };
 		4AAD54611743FEC6001441F2 /* unlockIcon@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 4AAD54501743FEC6001441F2 /* unlockIcon@2x.tiff */; };
-		5F1A94281857AE62009A1111 /* GraphSketcherModel.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 3402C1FB111A87370046638B /* GraphSketcherModel.framework */; };
-		5F1A94291857AE62009A1111 /* OmniAppKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 34874C210EA7D5380012BB56 /* OmniAppKit.framework */; };
-		5F1A942A1857AE62009A1111 /* OmniInspector.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 009094E70EF096FA00350081 /* OmniInspector.framework */; };
-		5F1A942B1857AE62009A1111 /* OmniBase.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 34874C220EA7D5380012BB56 /* OmniBase.framework */; };
-		5F1A942C1857AE62009A1111 /* OmniFoundation.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 34874C240EA7D5380012BB56 /* OmniFoundation.framework */; };
-		5F1A942D1857AE62009A1111 /* OmniUnzip.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 003A17910FC376DD0055EE51 /* OmniUnzip.framework */; };
-		5F1A942E1857AE62009A1111 /* LinkBack.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 00098920102A61C100D5B559 /* LinkBack.framework */; };
-		5F1A942F1857AE62009A1111 /* OmniQuartz.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 34830833111A7C54000BEB55 /* OmniQuartz.framework */; };
+		5F1A94281857AE62009A1111 /* GraphSketcherModel.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 3402C1FB111A87370046638B /* GraphSketcherModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5F1A94291857AE62009A1111 /* OmniAppKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 34874C210EA7D5380012BB56 /* OmniAppKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5F1A942A1857AE62009A1111 /* OmniInspector.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 009094E70EF096FA00350081 /* OmniInspector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5F1A942B1857AE62009A1111 /* OmniBase.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 34874C220EA7D5380012BB56 /* OmniBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5F1A942C1857AE62009A1111 /* OmniFoundation.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 34874C240EA7D5380012BB56 /* OmniFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5F1A942D1857AE62009A1111 /* OmniUnzip.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 003A17910FC376DD0055EE51 /* OmniUnzip.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5F1A942E1857AE62009A1111 /* LinkBack.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 00098920102A61C100D5B559 /* LinkBack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5F1A942F1857AE62009A1111 /* OmniQuartz.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 34830833111A7C54000BEB55 /* OmniQuartz.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -944,7 +944,7 @@
 		2A37F4A9FDCFA73011CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 1000;
 			};
 			buildConfigurationList = C05733CB08A9546B00998B17 /* Build configuration list for PBXProject "GraphSketcher" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1325,6 +1325,7 @@
 					"-lxml2",
 					"$(OMNI_STORE_OTHER_LDFLAGS)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(OMNI_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = GraphSketcher;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1348,6 +1349,7 @@
 					"-lxml2",
 					"$(OMNI_STORE_OTHER_LDFLAGS)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(OMNI_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = GraphSketcher;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1357,6 +1359,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 00BB84140EA7C66800A9D91D /* Omni-Global-Debug.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Debug;
 		};
@@ -1364,6 +1367,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 00BB84150EA7C66800A9D91D /* Omni-Global-Release.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Release;
 		};

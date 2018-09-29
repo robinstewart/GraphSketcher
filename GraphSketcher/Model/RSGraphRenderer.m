@@ -2668,7 +2668,7 @@ static void appendTick(NSBezierPath *path, int axisOrientation, CGFloat p, CGFlo
     // make mini arrows along the line's length
     if( [L dash] == RS_ARROWS_DASH ) {  
 	CGFloat t = 0;
-	CGFloat w = [L width];
+	w = [L width];
 	CGFloat b = w*3;
 	CGRect r = CGRectMake(0,0,b,b);
 	CGFloat rotation;
@@ -2705,7 +2705,7 @@ static void appendTick(NSBezierPath *path, int axisOrientation, CGFloat p, CGFlo
     // reverse direction
     else if( [L dash] == RS_REVERSE_ARROWS_DASH ) {  
 	CGFloat t = 1;
-	CGFloat w = [L width];
+	w = [L width];
 	CGFloat b = w*3;
 	CGRect r = CGRectMake(0,0,b,b);
 	CGFloat rotation;
@@ -2739,7 +2739,7 @@ static void appendTick(NSBezierPath *path, int axisOrientation, CGFloat p, CGFlo
     //
     else if( [L dash] == RS_RAILROAD_DASH ) {  
 	CGFloat t = 0;
-	CGFloat w = [L width];
+	w = [L width];
 	CGFloat b = w*4;
 	CGRect r = CGRectMake(0,0,b,b);
 	CGFloat rotation;

@@ -317,7 +317,7 @@ NSString *messageForCanvasSize(CGSize size)
         NSArray *vertexCluster = [first vertexCluster];
         for (RSVertex *V in [(RSGroup *)GE elements]) {
             if (![V isKindOfClass:[RSVertex class]])
-                return NO;
+                return nil;
             if (![vertexCluster containsObjectIdenticalTo:V]) {
                 return nil;
             }

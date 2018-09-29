@@ -391,7 +391,6 @@ static char * displayf(NSInteger start, NSInteger stop, CGFloat *array) {
     
     // Calculate some values that will be useful:
     NSInteger len = [stroke count];
-    CGFloat pi = (CGFloat)M_PI;
     CGFloat stroke_x[len+1];
     CGFloat stroke_y[len+1];
     CGFloat stroke_t[len+1];
@@ -489,10 +488,10 @@ static char * displayf(NSInteger start, NSInteger stop, CGFloat *array) {
     CGFloat adjust = 0;
     angles[1] = arctans[1];
     for( i=2; i<=len; i++ ) {
-	if( fabs(arctans[i] - arctans[i-1]) > fabs(arctans[i] - pi - arctans[i-1]) )
-	    adjust = adjust - pi;
-	else if( fabs(arctans[i] - arctans[i-1]) > fabs(arctans[i] + pi - arctans[i-1]) )
-	    adjust = adjust + pi;
+	if( fabs(arctans[i] - arctans[i-1]) > fabs(arctans[i] - M_PI - arctans[i-1]) )
+	    adjust = adjust - M_PI;
+	else if( fabs(arctans[i] - arctans[i-1]) > fabs(arctans[i] + M_PI - arctans[i-1]) )
+	    adjust = adjust + M_PI;
 	angles[i] = arctans[i] + adjust;
     }
     // compute the derivative using another least squares line fit:
@@ -501,7 +500,7 @@ static char * displayf(NSInteger start, NSInteger stop, CGFloat *array) {
 	win_start = maxf(2, i - DERIVATIVE_WINDOW);
 	win_end = minf(len, i + DERIVATIVE_WINDOW);
 	curvatures[i] = [RSFreehandStroke tangentFrom:win_start to:win_end xValues:arcLength yValues:angles];
-	curvatures[i] = curvatures[i]*180/pi;  // convert from radians/pixel to degrees/pixel:
+	curvatures[i] = curvatures[i]*180/M_PI;  // convert from radians/pixel to degrees/pixel:
     }
     curvatures[1] = 0;  // this is arbitrary (but unimportant)
     LogP(@"curvatures:");

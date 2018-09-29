@@ -389,12 +389,12 @@ NSDictionary *RSTextAttributesMake(OAFontDescriptor *fontDescriptor, OAColor *co
 
 	[NSGraphicsContext restoreGraphicsState];
     } else {
-        if (0) {
-            CGContextRef ctx = [[NSGraphicsContext currentContext] graphicsPort];
-            [[NSColor redColor] set];
-            CGSize size = [self size];
-            CGContextStrokeRect(ctx, CGRectMake(pt.x, pt.y, size.width, size.height));
-        }
+//        if (0) {
+//            CGContextRef ctx = [[NSGraphicsContext currentContext] graphicsPort];
+//            [[NSColor redColor] set];
+//            CGSize size = [self size];
+//            CGContextStrokeRect(ctx, CGRectMake(pt.x, pt.y, size.width, size.height));
+//        }
 
 	//[attributedString drawAtPoint:p];
         // width of 0 means "no maximum width"

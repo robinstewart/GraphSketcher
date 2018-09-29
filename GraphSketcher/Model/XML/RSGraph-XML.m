@@ -379,7 +379,7 @@ static NSString * const PreviewFileName = @"preview.pdf";
 	osName = [[UIDevice currentDevice] systemName];
 	model = [[UIDevice currentDevice] model];
 #else
-	osName = [[NSProcessInfo processInfo] operatingSystemName];
+        osName = @"NSMACHOperatingSystem";//[[NSProcessInfo processInfo] operatingSystemName];
 	int name[] = {CTL_HW, HW_MODEL};
 	model = stringForSysctlName(name, 2);
 #endif

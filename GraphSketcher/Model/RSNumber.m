@@ -8,7 +8,7 @@
 #import <GraphSketcherModel/RSNumber.h>
 
 #if !defined(TARGET_OS_IPHONE) || !TARGET_OS_IPHONE
-#import <AppKit/NSPanel.h>
+#import <AppKit/NSAlert.h>
 #endif
 
 RSDataPoint RSDataPointMake(data_p x, data_p y) {
@@ -234,7 +234,11 @@ CGPoint lineIntersection(CGPoint p1, CGPoint p2, CGPoint q1, CGPoint q2) {
         UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Invalid state reached" message:@"We recommend that you quit and relaunch OmniGraphSketcher, then alert the developers using Send Feedback.\n\nReason: A non-finite point value was detected when calculating a line intersection." delegate:nil cancelButtonTitle:NSLocalizedStringFromTableInBundle(@"Cancel", @"GraphSketcherModel", OMNI_BUNDLE, @"button title") otherButtonTitles:nil] autorelease];
         [alert show];
 #else
-        NSRunAlertPanel(@"Invalid state reached.", @"We recommend that you quit and relaunch OmniGraphSketcher, then alert the developers using the Help > Send Feedback menu item.\n\nReason: A non-finite point value was detected when calculating a line intersection.", @"Continue", nil, nil);
+//        NSAlert *alert = [[NSAlert alloc] init];
+//        alert.messageText = @"Invalid state reached";
+//        alert.informativeText = @"We recommend that you quit and relaunch OmniGraphSketcher, then alert the developers using the Help > Send Feedback menu item.\n\nReason: A non-finite point value was detected when calculating a line intersection.";
+//        [alert addButtonWithTitle:@"Continue"];
+//        [alert runModal];
 #endif
     }
     
@@ -458,7 +462,7 @@ static NSNumberFormatter *_strictNumberFormatter;
     }
     
     NSNumber *number = [_strictNumberFormatter numberFromString:string];
-    if (number) {
+    if (number != nil) {
         *doubleVal = [number doubleValue];
         return YES;
     }

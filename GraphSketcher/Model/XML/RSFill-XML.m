@@ -10,7 +10,7 @@
 #import <GraphSketcherModel/RSGroup.h>
 
 #import "RSGraph-XML.h"
-#import <OmniQuartz/OQColor-Archiving.h>
+#import <OmniAppKit/OAColor-Archiving.h>
 
 #import <OmniFoundation/OFXMLCursor.h>
 #import <OmniFoundation/OFXMLDocument.h>
@@ -42,10 +42,10 @@
     
     _color = nil;
     if ([cursor openNextChildElementNamed:@"color"]) {
-	_color = [[OQColor colorFromXML:cursor] retain];
+	_color = [[OAColor colorFromXML:cursor] retain];
 	[cursor closeElement];
     } else {
-	_color = [[OQColor colorWithRed:0 green:0 blue:0 alpha:0.5f] retain];
+	_color = [[OAColor colorWithRed:0 green:0 blue:0 alpha:0.5f] retain];
     }
     
     // vertices

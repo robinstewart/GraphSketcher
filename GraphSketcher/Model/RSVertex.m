@@ -15,7 +15,7 @@
 #import <GraphSketcherModel/RSGroup.h>
 #import <GraphSketcherModel/RSNumber.h>
 #import <GraphSketcherModel/RSTextLabel.h>
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 #import <GraphSketcherModel/NSArray-RSExtensions.h>
 
 #import <OmniFoundation/OFPreference.h>
@@ -77,14 +77,14 @@
     int shape = 0;
     
     // use defaults:
-    OQColor *color = [OQColor colorForPreferenceKey:@"DefaultLineColor"];
+    OAColor *color = [OAColor colorForPreferenceKey:@"DefaultLineColor"];
     CGFloat width = [[OFPreferenceWrapper sharedPreferenceWrapper] floatForKey:@"DefaultLineWidth"];
     
     return [self initWithGraph:graph identifier:nil point:p width:width color:color shape:shape];
 }
 
 // DESIGNATED INITIALIZER
-- (id)initWithGraph:(RSGraph *)graph identifier:(NSString *)identifier point:(RSDataPoint)p width:(CGFloat)width color:(OQColor *)color shape:(NSInteger)shape;
+- (id)initWithGraph:(RSGraph *)graph identifier:(NSString *)identifier point:(RSDataPoint)p width:(CGFloat)width color:(OAColor *)color shape:(NSInteger)shape;
 {
     if (!(self = [super initWithGraph:graph identifier:identifier]))
 	return nil;
@@ -144,7 +144,7 @@
 
 - (void)acceptLatestDefaults;
 {
-    [self setColor:[OQColor colorForPreferenceKey:@"DefaultLineColor"]];
+    [self setColor:[OAColor colorForPreferenceKey:@"DefaultLineColor"]];
     [self setWidth:[[OFPreferenceWrapper sharedPreferenceWrapper] floatForKey:@"DefaultLineWidth"]];
 }
 
@@ -155,10 +155,10 @@
 #pragma mark RSGraphElement subclass
 ////////////////////////////////////////
 
-- (OQColor *)color {
+- (OAColor *)color {
     return _color;
 }
-- (void)setColor:(OQColor *)color;
+- (void)setColor:(OAColor *)color;
 {
     if ([color isEqual:_color])
         return;
@@ -1103,8 +1103,8 @@
     if ( [self position].y < [other position].y ) return NSOrderedAscending;
     if ( [self position].y > [other position].y ) return NSOrderedDescending;
     
-    OQColor *selfColor = [[self color] colorUsingColorSpace:OQColorSpaceRGB];
-    OQColor *otherColor = [(OQColor *)[other color] colorUsingColorSpace:OQColorSpaceRGB];
+    OAColor *selfColor = [[self color] colorUsingColorSpace:OAColorSpaceRGB];
+    OAColor *otherColor = [(OAColor *)[other color] colorUsingColorSpace:OAColorSpaceRGB];
     if ( [selfColor brightnessComponent] < [otherColor brightnessComponent] )
         return NSOrderedAscending;
     if ( [selfColor brightnessComponent] > [otherColor brightnessComponent] )
@@ -1190,7 +1190,7 @@
 
 - (NSMutableDictionary *)debugDictionary;
 /*
- possible objects: self, CGPoint _p, CGFloat _width, OQColor * _color, 
+ possible objects: self, CGPoint _p, CGFloat _width, OAColor * _color, 
  RSGroup *_parents, RSTextLabel *_label;
  
  */

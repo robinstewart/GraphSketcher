@@ -13,7 +13,7 @@
 #import <GraphSketcherModel/RSGroup.h>
 #import <GraphSketcherModel/RSConnectLine.h>
 #import <OmniFoundation/OFPreference.h>
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 
 NSString * const RSDataImporterWarningTitle = @"RSDataImporterWarningTitle";
 NSString * const RSDataImporterWarningDescription = @"RSDataImporterWarningDescription";
@@ -1204,7 +1204,7 @@ static RSAxis *_shouldHideEndLabels = nil;
 }
 
 
-- (void)processDataSeries:(RSGroup *)series addToGroup:(RSGroup *)everything width:(CGFloat)width shape:(NSUInteger)shape color:(OQColor *)currentColor connectMethod:(RSConnectType)connectMethod dashStyle:(NSInteger)dashStyle;
+- (void)processDataSeries:(RSGroup *)series addToGroup:(RSGroup *)everything width:(CGFloat)width shape:(NSUInteger)shape color:(OAColor *)currentColor connectMethod:(RSConnectType)connectMethod dashStyle:(NSInteger)dashStyle;
 {
     OBASSERT([series isKindOfClass:[RSGroup class]]);
     if (![series count]) {
@@ -1274,18 +1274,18 @@ static RSAxis *_shouldHideEndLabels = nil;
     return colorPalette;
 }
 
-+ (OQColor *)_colorForDataSeriesNumber:(NSUInteger)n;
++ (OAColor *)_colorForDataSeriesNumber:(NSUInteger)n;
 {
     NSArray *colorPalette = [RSDataImporter _dataSeriesColorPalette];
     NSUInteger count = [colorPalette count];
     if (count == 0)
-        return [OQColor blackColor];
+        return [OAColor blackColor];
 
     NSUInteger index = n % count;
     
-    OQColor *currentColor = [OQColor colorFromRGBAString:[colorPalette objectAtIndex:index]];
+    OAColor *currentColor = [OAColor colorFromRGBAString:[colorPalette objectAtIndex:index]];
     if (!currentColor)
-        currentColor = [OQColor blackColor];
+        currentColor = [OAColor blackColor];
     return currentColor;
 }
 
@@ -1315,7 +1315,7 @@ static RSAxis *_shouldHideEndLabels = nil;
     if (![colorPalette count] || ![[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"UseColorPaletteWhenImportingData"])
         colorPalette = nil;
     NSUInteger currentColorIndex = 0;
-    OQColor *currentColor = nil;
+    OAColor *currentColor = nil;
 
     // Process each data series
     for (RSGroup *series in A) {
@@ -1340,9 +1340,9 @@ static RSAxis *_shouldHideEndLabels = nil;
         // Get a new color for this series
         if (colorPalette) {
             OBASSERT(currentColorIndex < [colorPalette count]);
-            currentColor = [OQColor colorFromRGBAString:[colorPalette objectAtIndex:currentColorIndex]];
+            currentColor = [OAColor colorFromRGBAString:[colorPalette objectAtIndex:currentColorIndex]];
             if (!currentColor)
-                currentColor = [OQColor blackColor];
+                currentColor = [OAColor blackColor];
             // set up for next iteration
             currentColorIndex += 1;
             if (currentColorIndex >= [colorPalette count])
@@ -1388,7 +1388,7 @@ static RSAxis *_shouldHideEndLabels = nil;
         // Initialize default style settings
         CGFloat currentWidth = 0;
         NSUInteger currentShape = RS_NONE;
-        OQColor *currentColor = nil;
+        OAColor *currentColor = nil;
         RSConnectType connectMethod = RSConnectNone;
         NSInteger dashStyle = 0;
         

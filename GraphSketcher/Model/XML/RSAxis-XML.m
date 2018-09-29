@@ -19,7 +19,7 @@
 #endif
 
 #import "OFObject-XML.h"
-#import <OmniQuartz/OQColor-Archiving.h>
+#import <OmniAppKit/OAColor-Archiving.h>
 
 @implementation RSAxis (XML)
 
@@ -56,10 +56,10 @@
     
     _color = nil;
     if ([cursor openNextChildElementNamed:@"color"]) {
-	_color = [[OQColor colorFromXML:cursor] retain];
+	_color = [[OAColor colorFromXML:cursor] retain];
 	[cursor closeElement];
     } else {
-	_color = [[OQColor blackColor] retain];
+	_color = [[OAColor blackColor] retain];
     }
     
     
@@ -100,11 +100,11 @@
 	[_grid setDisplayGrid:[element boolValueForAttributeNamed:@"visible" defaultValue:YES]];
 	
 	if ([cursor openNextChildElementNamed:@"color"]) {
-	    [_grid setColor:[OQColor colorFromXML:cursor]];
+	    [_grid setColor:[OAColor colorFromXML:cursor]];
 	    [cursor closeElement];
 	}
 	else {
-	    [_grid setColor:[OQColor colorWithRed:0.9f green:0.9f blue:0.9f alpha:1]];
+	    [_grid setColor:[OAColor colorWithRed:0.9f green:0.9f blue:0.9f alpha:1]];
 	}
         
         _grid.dotted = [element boolValueForAttributeNamed:@"dotted" defaultValue:NO];
@@ -113,7 +113,7 @@
     }
     else {  // no <grid> element found
 	[_grid setWidth:1];
-	[_grid setColor:[OQColor colorWithRed:0.9f green:0.9f blue:0.9f alpha:1]];
+	[_grid setColor:[OAColor colorWithRed:0.9f green:0.9f blue:0.9f alpha:1]];
 	[_grid setDisplayGrid:NO];
         _grid.dotted = NO;
     }

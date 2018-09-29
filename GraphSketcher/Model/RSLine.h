@@ -21,7 +21,7 @@ RSConnectType defaultConnectMethod(void);
     RSVertex *_v1;
     RSVertex *_v2;
     
-    OQColor *_color;
+    OAColor *_color;
     CGFloat _width;
     NSInteger _dash;  // line dash style
     
@@ -41,7 +41,7 @@ RSConnectType defaultConnectMethod(void);
 
 
 // designated initializer:
-- (id)initWithGraph:(RSGraph *)graph identifier:(NSString *)identifier color:(OQColor *)color width:(CGFloat)width dash:(NSInteger)dash slide:(CGFloat)slide labelDistance:(CGFloat)labelDistance;
+- (id)initWithGraph:(RSGraph *)graph identifier:(NSString *)identifier color:(OAColor *)color width:(CGFloat)width dash:(NSInteger)dash slide:(CGFloat)slide labelDistance:(CGFloat)labelDistance;
 
 
 // Public API:

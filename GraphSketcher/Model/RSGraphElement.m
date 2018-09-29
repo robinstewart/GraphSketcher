@@ -9,7 +9,7 @@
 
 #import <GraphSketcherModel/RSGraph.h>
 #import <GraphSketcherModel/RSGroup.h>
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 
 CGFloat dimensionOfPointInOrientation(CGPoint p, int orientation) {
     if (orientation == RS_ORIENTATION_HORIZONTAL)
@@ -347,18 +347,18 @@ CGFloat dimensionOfSizeInOrientation(CGSize size, int orientation) {
 
 #pragma mark - Graphical properties
 
-- (OQColor *)color {
+- (OAColor *)color {
     Log1(@"WARNING: \"color\" Not implemented for class: %@", [self class]);
-    return [OQColor blueColor];
+    return [OAColor blueColor];
 }
-- (void)setColor:(OQColor *)color {
+- (void)setColor:(OAColor *)color {
     Log1(@"WARNING: \"color\" Not implemented for class: %@", [self class]);
 }
 - (CGFloat)opacity {
-    return [[[self color] colorUsingColorSpace:OQColorSpaceRGB] alphaComponent];
+    return [[[self color] colorUsingColorSpace:OAColorSpaceRGB] alphaComponent];
 }
 - (void)setOpacity:(CGFloat)opacity {
-    [self setColor:[[[self color] colorUsingColorSpace:OQColorSpaceRGB] colorWithAlphaComponent:opacity]];
+    [self setColor:[[[self color] colorUsingColorSpace:OAColorSpaceRGB] colorWithAlphaComponent:opacity]];
 }
 - (BOOL)hasColor;
 {

@@ -106,9 +106,9 @@
 #pragma mark -
 #pragma mark RSGraphElement subclass
 ///////////////////////////////////////////////////
-- (OQColor *)color;
+- (OAColor *)color;
 {
-    OQColor *consensus = nil;
+    OAColor *consensus = nil;
     
     for (RSGraphElement *obj in _elements)
     {
@@ -126,7 +126,7 @@
     // if got this far, we have a consensus:
     return consensus;
 }
-- (void)setColor:(OQColor *)color {
+- (void)setColor:(OAColor *)color {
     RSGraphElement *obj;
     
     for (obj in _elements)

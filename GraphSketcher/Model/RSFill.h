@@ -13,7 +13,7 @@
 @interface RSFill : RSGraphElement <RSVertexList>
 {
     RSGroup *_vertices;
-    OQColor * _color;
+    OAColor * _color;
     
     RSTextLabel *_label;
     CGPoint _labelPlacement;  // this is not actually a point but an x- and y-percentage
@@ -28,7 +28,7 @@
 // DESIGNATED INITIALIZER
 - (id)initWithGraph:(RSGraph *)graph identifier:(NSString *)identifier
 	vertexGroup:(RSGroup *)vertices
-	      color:(OQColor *)color
+	      color:(OAColor *)color
 	  placement:(CGPoint)placement;
 
 // Return a new fill with GE included

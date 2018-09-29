@@ -10,10 +10,10 @@
 
 @class OUITextLayout;
 @class OFXMLElement;
-@class OQColor;
+@class OAColor;
 @class OAFontDescriptor;
 
-extern NSDictionary *RSTextAttributesMake(OAFontDescriptor *fontDescriptor, OQColor *color);
+extern NSDictionary *RSTextAttributesMake(OAFontDescriptor *fontDescriptor, OAColor *color);
 extern const CGSize RSTextLayoutContraints;
 
 @interface RSText : OFObject
@@ -44,7 +44,7 @@ extern const CGSize RSTextLayoutContraints;
 - (id)attributeForKey:(NSString *)name;
 - (void)setAttribute:(id)value forKey:(NSString *)key;
 
-@property(copy,nonatomic) OQColor *color;
+@property(copy,nonatomic) OAColor *color;
 @property(assign,nonatomic) CGFloat fontSize;
 @property(copy,nonatomic) OAFontDescriptor *fontDescriptor;
 

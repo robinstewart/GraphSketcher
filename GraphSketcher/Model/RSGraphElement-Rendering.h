@@ -19,11 +19,11 @@
 
 - (CGSize)selectionSize;
 - (CGSize)selectionSizeWithMinSize:(CGSize)minSize;
-- (void)drawSelectedUsingMapper:(RSDataMapper *)mapper selectionColor:(OQColor *)selectionColor borderWidth:(CGFloat)borderWidth alpha:(CGFloat)startingAlpha fingerWidth:(CGFloat)fingerWidth subpart:(RSGraphElementSubpart)subpart;
+- (void)drawSelectedUsingMapper:(RSDataMapper *)mapper selectionColor:(OAColor *)selectionColor borderWidth:(CGFloat)borderWidth alpha:(CGFloat)startingAlpha fingerWidth:(CGFloat)fingerWidth subpart:(RSGraphElementSubpart)subpart;
 
 // deprecated:
-- (void)drawSelectionAtPoint:(CGPoint)p borderWidth:(CGFloat)borderWidth color:(OQColor *)selectionColor minSize:(CGSize)minSize;
-- (void)drawSelectionAtPoint:(CGPoint)p borderWidth:(CGFloat)borderWidth color:(OQColor *)selectionColor minSize:(CGSize)minSize subpart:(RSGraphElementSubpart)subpart;
+- (void)drawSelectionAtPoint:(CGPoint)p borderWidth:(CGFloat)borderWidth color:(OAColor *)selectionColor minSize:(CGSize)minSize;
+- (void)drawSelectionAtPoint:(CGPoint)p borderWidth:(CGFloat)borderWidth color:(OAColor *)selectionColor minSize:(CGSize)minSize subpart:(RSGraphElementSubpart)subpart;
 
 - (CGRect)viewRectWithMapper:(RSDataMapper *)mapper;
 - (CGRect)selectionViewRectWithMapper:(RSDataMapper *)mapper;

@@ -20,7 +20,7 @@
 #import <GraphSketcherModel/NSBezierPath-RSExtensions.h>
 #import <GraphSketcherModel/OFPreference-RSExtensions.h>
 #import <GraphSketcherModel/RSLog.h>
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 
 #import "GraphDocument.h"
 #import "RSSelector.h"
@@ -303,10 +303,10 @@
 
 - (void)updateColorControls:(RSGraphElement *)obj;
 {
-    OQColor *color = [obj color];
+    OAColor *color = [obj color];
     
     if (![_s selected] && [[RSMode sharedModeController] mode] == RS_fill) {
-	color = [OQColor colorForPreferenceKey:@"DefaultFillColor"];
+	color = [OAColor colorForPreferenceKey:@"DefaultFillColor"];
     }
     
     if (!color || ![obj hasColor]) {

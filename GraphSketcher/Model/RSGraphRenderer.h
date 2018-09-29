@@ -113,7 +113,7 @@ void RSAppendShapeToBezierPath(NSBezierPath *P, CGPoint p, NSInteger shape, CGFl
 
 
 // Highest-level graph drawing methods
-- (void)drawBackgroundWithColor:(OQColor *)backgroundColor;
+- (void)drawBackgroundWithColor:(OAColor *)backgroundColor;
 - (void)turnOnShadows;
 - (void)turnOffShadows;
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE

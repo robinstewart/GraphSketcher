@@ -10,7 +10,7 @@
 #import <GraphSketcherModel/RSDataMapper.h>
 #import <GraphSketcherModel/RSGraphRenderer.h>
 #import <GraphSketcherModel/RSEquationLine.h>
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
 #import <OmniQuartz/OQDrawing.h>
@@ -138,7 +138,7 @@
     [self updateLayout];
     
     // Draw the graph background and grid lines
-    OQColor *backgroundColor = [[_graph backgroundColor] colorUsingColorSpace:OQColorSpaceRGB];
+    OAColor *backgroundColor = [[_graph backgroundColor] colorUsingColorSpace:OAColorSpaceRGB];
     [_renderer drawBackgroundWithColor:backgroundColor];
     
     // Draw all of the normal graph objects
@@ -199,7 +199,7 @@
     {
         CGContextRef ctx = UIGraphicsGetCurrentContext();
         
-        [[[_graph backgroundColor] colorUsingColorSpace:OQColorSpaceRGB] set];
+        [[[_graph backgroundColor] colorUsingColorSpace:OAColorSpaceRGB] set];
         CGContextFillRect(ctx, CGRectMake(0, 0, exportSize.width, exportSize.height));
         
         OQFlipVerticallyInRect(ctx, CGRectMake(0, 0, exportSize.width, exportSize.height));

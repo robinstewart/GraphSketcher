@@ -10,8 +10,8 @@
 #if !defined(TARGET_OS_IPHONE) || !TARGET_OS_IPHONE
 #import <OmniAppKit/NSColor-OAExtensions.h>
 #else
-#import <OmniQuartz/OQColor.h>
-#import <OmniQuartz/OQColor-Archiving.h>
+#import <OmniAppKit/OAColor.h>
+#import <OmniAppKit/OAColor-Archiving.h>
 #import <OmniFoundation/OFXMLElement.h>
 #import <OmniFoundation/OFXMLCursor.h>
 #endif

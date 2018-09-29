@@ -17,10 +17,10 @@
 
 #else //
 
-@class OQColor;
+@class OAColor;
 
-#define OS_COLOR_CLASS OQColor
-#define OS_COLOR_CLASS_FROM_PLATFORM_COLOR(color) ([OQColor colorWithPlatformColor:(color)])
+#define OS_COLOR_CLASS OAColor
+#define OS_COLOR_CLASS_FROM_PLATFORM_COLOR(color) ([OAColor colorWithPlatformColor:(color)])
 #define OS_COLOR_CLASS_TO_PLATFORM_COLOR(color) ([(color) toColor])
 
 #endif

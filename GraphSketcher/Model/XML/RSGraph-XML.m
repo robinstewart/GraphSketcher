@@ -16,7 +16,7 @@
 #import "RSTextLabel-XML.h"
 #import "RSGroup-XML.h"
 #import "BackwardsCompatibility.h"
-#import <OmniQuartz/OQColor-Archiving.h>
+#import <OmniAppKit/OAColor-Archiving.h>
 
 #import <OmniFoundation/OFXMLDocument.h>
 #import <OmniFoundation/OFXMLCursor.h>
@@ -542,10 +542,10 @@ static NSString * const PreviewFileName = @"preview.pdf";
     [_bgColor release];
     _bgColor = nil;
     if ([cursor openNextChildElementNamed:@"color"]) {
-	_bgColor = [[OQColor colorFromXML:cursor] retain];
+	_bgColor = [[OAColor colorFromXML:cursor] retain];
 	[cursor closeElement];
     } else {
-	_bgColor = [[OQColor whiteColor] retain];
+	_bgColor = [[OAColor whiteColor] retain];
     }
     
     if ([cursor openNextChildElementNamed:@"whitespace"]) {
@@ -604,9 +604,9 @@ static NSString * const PreviewFileName = @"preview.pdf";
     [_baseStyle setValue:@"Verdana" forAttribute:OSFontFamilyNameStyleAttribute];
 #endif
     
-    id blackColor = [OQColor blackColor];
+    id blackColor = [OAColor blackColor];
 #if !defined(TARGET_OS_IPHONE) || !TARGET_OS_IPHONE
-    blackColor = ((OQColor *)blackColor).toColor; // Mac wants NSColor, iPad OQColor
+    blackColor = ((OAColor *)blackColor).toColor; // Mac wants NSColor, iPad OAColor
 #endif
     [_baseStyle setValue:blackColor forAttribute:OSFontFillColorStyleAttribute];
     

@@ -10,7 +10,7 @@
 #import <GraphSketcherModel/RSGraph.h>
 #import <GraphSketcherModel/RSUndoer.h>
 #import <GraphSketcherModel/RSNumber.h>
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 #import <OmniAppKit/OAFontDescriptor.h>
 #import <OmniAppKit/OATextAttributes.h>
 
@@ -256,11 +256,11 @@
     return (_owner == nil) && !_partOfAxis;
 }
 
-- (OQColor *)color;
+- (OAColor *)color;
 {
     return _text.color;
 }
-- (void)setColor:(OQColor *)color;
+- (void)setColor:(OAColor *)color;
 {
     if (!color) {
         OBASSERT_NOT_REACHED("How is this hit? Should we assign the default color of black instead?");
@@ -268,7 +268,7 @@
     }
     
     // TODO: This seems incorrect -- it bails if the *first* color is the same, but if the text has mulitple colors, it seems like we should adjust them all.
-    OQColor *currentColor = _text.color;
+    OAColor *currentColor = _text.color;
     if ([color isEqual:currentColor])
         return;
     

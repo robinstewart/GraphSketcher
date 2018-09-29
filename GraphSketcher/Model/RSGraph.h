@@ -12,7 +12,7 @@
 #import <GraphSketcherModel/RSGraphDelegate.h>
 
 @class OSStyleContext, OSStyle;
-@class RSAxis, OQColor, RSUndoer, RSLine, RSVertex, RSTextLabel, RSGraphElement, RSFill, RSConnectLine, RSGroup, RSFitLine, RSEquationLine;
+@class RSAxis, OAColor, RSUndoer, RSLine, RSVertex, RSTextLabel, RSGraphElement, RSFill, RSConnectLine, RSGroup, RSFitLine, RSEquationLine;
 
 // Percentage of auto-scaled graph allowed to be between origin and first data point.  This MUST be less than 0.5:
 #define RS_SCALE_TO_FIT_MAX_SPACE_TO_ZERO_PERCENTAGE (0.38f)
@@ -83,7 +83,7 @@ NSString *messageForCanvasSize(CGSize size);
     RSAxis *_xAxis;
     RSAxis *_yAxis;
     
-    OQColor *_bgColor;
+    OAColor *_bgColor;
     CGFloat _shadowStrength;  // strength of shadow (0 is "off")
     
     CGSize _canvasSize;
@@ -217,7 +217,7 @@ NSString *messageForCanvasSize(CGSize size);
 - (NSArray *)importedDataPrototypes;
 
 // Accessor methods for graph properties
-@property(nonatomic,copy) OQColor *backgroundColor; // canvas color
+@property(nonatomic,copy) OAColor *backgroundColor; // canvas color
 
 - (BOOL)displayAxes;
 - (void)setDisplayAxes:(BOOL)flag;
@@ -313,8 +313,8 @@ NSString *messageForCanvasSize(CGSize size);
 - (void)displayGridIfNotAlready;
 - (CGFloat)gridWidth;
 - (void)setGridWidth:(CGFloat)width;
-- (OQColor *)gridColor;
-- (void)setGridColor:(OQColor *)newColor;
+- (OAColor *)gridColor;
+- (void)setGridColor:(OAColor *)newColor;
 
 
 // Number formatting

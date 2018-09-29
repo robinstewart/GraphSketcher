@@ -13,7 +13,7 @@
 {
     RSDataPoint _p;
     CGFloat _width;
-    OQColor *_color;
+    OAColor *_color;
     NSInteger _shape;
     id _arrowParent;
     CGFloat _rotation;  // applies to certain point types (tick marks, arrows)
@@ -38,7 +38,7 @@
 - (id)parentlessCopy NS_RETURNS_RETAINED;
 
 // Designated initializer:
-- (id)initWithGraph:(RSGraph *)graph identifier:(NSString *)identifier point:(RSDataPoint)p width:(CGFloat)width color:(OQColor *)color shape:(NSInteger)shape;
+- (id)initWithGraph:(RSGraph *)graph identifier:(NSString *)identifier point:(RSDataPoint)p width:(CGFloat)width color:(OAColor *)color shape:(NSInteger)shape;
 
 - (void)acceptLatestDefaults;
 

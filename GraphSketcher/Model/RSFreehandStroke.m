@@ -9,7 +9,7 @@
 
 #import <GraphSketcherModel/RSStrokePoint.h>
 #import <GraphSketcherModel/RSNumber.h>
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 #import <OmniFoundation/OFPreference.h>
 
 @interface RSFreehandStroke (/*Private*/)

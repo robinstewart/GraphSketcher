@@ -24,7 +24,7 @@
 #import <AppKit/AppKit.h>
 #import "OSStyle-AttributeExtensions.h"
 #else
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 #endif
 
 #import <OmniFoundation/NSNumber-OFExtensions-CGTypes.h>
@@ -103,8 +103,8 @@ OSStyleAttributeBeginRegistration
     NSBundle *bundle = OMNI_BUNDLE;
     
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
-    id blackColor = [OQColor blackColor];
-    id clearColor = [OQColor clearColor];
+    id blackColor = [OAColor blackColor];
+    id clearColor = [OAColor clearColor];
 #else
     id blackColor = [NSColor blackColor];
     id clearColor = [NSColor clearColor];

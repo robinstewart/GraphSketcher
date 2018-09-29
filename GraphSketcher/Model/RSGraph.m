@@ -18,7 +18,7 @@
 #import <GraphSketcherModel/RSConnectLine.h>
 #import <GraphSketcherModel/RSFitLine.h>
 #import <GraphSketcherModel/OFPreference-RSExtensions.h>
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 
 #import "OSStyleContext.h"
 
@@ -1119,7 +1119,7 @@ static int data_value_comparison(const void *aPtr, const void *bPtr) {
     _yAxis = nil;
     
     // default bgcolor
-    _bgColor = [[OQColor colorForPreferenceKey:@"DefaultBackgroundColor"] retain];
+    _bgColor = [[OAColor colorForPreferenceKey:@"DefaultBackgroundColor"] retain];
     
     _canvasSize = [[OFPreferenceWrapper sharedPreferenceWrapper] sizeForKey:@"LastCanvasSize"];
     _frameOrigin = frameOriginFromFrameString([[OFPreferenceWrapper sharedPreferenceWrapper] objectForKey:@"LastFrameString"]);
@@ -1651,7 +1651,7 @@ static int data_value_comparison(const void *aPtr, const void *bPtr) {
     if ([RSFitLine supportsConnectMethod:connectMethod]) {
 	// Add an RSFitLine
 	RSFitLine *newLine = [self addBestFitLineFromGroup:G];
-        OQColor *sharedVertexColor = [[newLine data] color];
+        OAColor *sharedVertexColor = [[newLine data] color];
         if (sharedVertexColor) {
             [newLine setColor:sharedVertexColor];
             RSTextLabel *equationLabel = [newLine label];
@@ -1667,7 +1667,7 @@ static int data_value_comparison(const void *aPtr, const void *bPtr) {
         }
 	RSConnectLine *newLine = [[RSConnectLine alloc] initWithGraph:self vertices:G];
 	[newLine setConnectMethod:connectMethod];
-        OQColor *sharedVertexColor = [[newLine vertices] color];
+        OAColor *sharedVertexColor = [[newLine vertices] color];
         if (sharedVertexColor) {
             [newLine setColor:sharedVertexColor];
         }
@@ -2176,7 +2176,7 @@ static int data_value_comparison(const void *aPtr, const void *bPtr) {
     return result;
 }
 
-- (RSConnectLine *)_createErrorBarFromVertices:(NSArray *)vertices color:(OQColor *)color topTick:(BOOL)topTick bottomTick:(BOOL)bottomTick;
+- (RSConnectLine *)_createErrorBarFromVertices:(NSArray *)vertices color:(OAColor *)color topTick:(BOOL)topTick bottomTick:(BOOL)bottomTick;
 // The "top" and "bottom" vertices are assumed to be the first and last elements in the array.
 {
     OBASSERT(vertices && [vertices count] >= 2);
@@ -2234,7 +2234,7 @@ static int data_value_comparison(const void *aPtr, const void *bPtr) {
     NSArray *sortedBucket = [bucket sortedArrayUsingSelector:@selector(yAndColorSort:)];
     
     // Special case for <bug://bugs/57966>
-    if ([(RSVertex *)[sortedBucket objectAtIndex:0] position].y == [(RSVertex *)[sortedBucket objectAtIndex:1] position].y && [[[[sortedBucket objectAtIndex:0] color] colorUsingColorSpace:OQColorSpaceRGB] brightnessComponent] == 0) {
+    if ([(RSVertex *)[sortedBucket objectAtIndex:0] position].y == [(RSVertex *)[sortedBucket objectAtIndex:1] position].y && [[[[sortedBucket objectAtIndex:0] color] colorUsingColorSpace:OAColorSpaceRGB] brightnessComponent] == 0) {
         // Swap the first and second object
         sortedBucket = [[NSArray arrayWithObjects:[sortedBucket objectAtIndex:1], [sortedBucket objectAtIndex:0], nil] arrayByAddingObjectsFromArray:[sortedBucket objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(2, [sortedBucket count] - 2)]]];
     }
@@ -2290,7 +2290,7 @@ static int data_value_comparison(const void *aPtr, const void *bPtr) {
             continue;
         
         NSArray *sortedBucket = [self _sortedErrorBarBucket:(NSArray *)bucket];
-        OQColor *color = [[sortedBucket objectAtIndex:1] color];
+        OAColor *color = [[sortedBucket objectAtIndex:1] color];
         RSLine *L = [self _createErrorBarFromVertices:sortedBucket color:color topTick:YES bottomTick:YES];
         if (!L || ![L isKindOfClass:[RSLine class]]) {
             OBASSERT_NOT_REACHED("No line was created");
@@ -2441,11 +2441,11 @@ static int data_value_comparison(const void *aPtr, const void *bPtr) {
 #pragma mark Accessor methods for graph properties
 ////////////////////////////////////
 
-- (OQColor *)backgroundColor;
+- (OAColor *)backgroundColor;
 {
     return _bgColor;
 }
-- (void)setBackgroundColor:(OQColor *)color;
+- (void)setBackgroundColor:(OAColor *)color;
 {
     if ([color isEqual:_bgColor])
         return;
@@ -3155,10 +3155,10 @@ static void _replaceAxis(RSGraph *self, RSAxis **axis, RSAxis *newAxis)
     
     [_delegate modelChangeRequires:RSUpdateDraw];
 }
-- (OQColor *)gridColor {
+- (OAColor *)gridColor {
     return [[_xAxis grid] color];
 }
-- (void)setGridColor:(OQColor *)newColor;
+- (void)setGridColor:(OAColor *)newColor;
 {
     if ([_u firstUndoWithObject:self key:@"setGridColor"]) {
 	[(typeof(self))[[self undoManager] prepareWithInvocationTarget:self] setGridColor:[self gridColor]];

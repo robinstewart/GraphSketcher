@@ -7,7 +7,7 @@
 
 #import "RSText.h"
 
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 #import <OmniAppKit/OAFontDescriptor.h>
 #import <OmniAppKit/OATextAttributes.h>
 #import <OmniFoundation/NSMutableAttributedString-OFExtensions.h>
@@ -43,7 +43,7 @@ static OAFontDescriptorPlatformFont _getDefaultFont(void)
 #endif
 }
 
-NSDictionary *RSTextAttributesMake(OAFontDescriptor *fontDescriptor, OQColor *color)
+NSDictionary *RSTextAttributesMake(OAFontDescriptor *fontDescriptor, OAColor *color)
 {
     NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
     
@@ -57,7 +57,7 @@ NSDictionary *RSTextAttributesMake(OAFontDescriptor *fontDescriptor, OQColor *co
         [attributes setObject:font forKey:NSFontAttributeName];
 
     if (!color)
-        color = [OQColor colorForPreferenceKey:@"DefaultTextColor"];
+        color = [OAColor colorForPreferenceKey:@"DefaultTextColor"];
     if (color)
         [attributes setObject:color.toColor forKey:NSForegroundColorAttributeName];
 
@@ -192,29 +192,29 @@ NSDictionary *RSTextAttributesMake(OAFontDescriptor *fontDescriptor, OQColor *co
     [_attributedString addAttribute:key value:value range:NSMakeRange(0, [_attributedString length])];
 }
 
-- (OQColor *)color;
+- (OAColor *)color;
 {
     if (![_attributedString length])
 	return nil;
     
     id rawColor = [_attributedString attribute:NSForegroundColorAttributeName atIndex:0 effectiveRange:NULL];
-    OQColor *color = nil;
+    OAColor *color = nil;
     
     if (rawColor) {
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
         OBASSERT([rawColor isKindOfClass:[UIColor class]]);
-        color = [OQColor colorWithPlatformColor:rawColor];
+        color = [OAColor colorWithPlatformColor:rawColor];
 #else
-        color = [OQColor colorWithPlatformColor:rawColor];
+        color = [OAColor colorWithPlatformColor:rawColor];
 #endif
     }
     if (!color)
-        color = [OQColor blackColor]; // The default for NSForegroundColorAttributeName
+        color = [OAColor blackColor]; // The default for NSForegroundColorAttributeName
 
     return color;
 }
 
-- (void)setColor:(OQColor *)color;
+- (void)setColor:(OAColor *)color;
 {
     [self _changed];
 

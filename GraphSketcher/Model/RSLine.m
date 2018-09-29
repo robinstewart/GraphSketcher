@@ -104,7 +104,7 @@ RSConnectType defaultConnectMethod(void)
 }
 
 // DESIGNATED INITIALIZER
-- (id)initWithGraph:(RSGraph *)graph identifier:(NSString *)identifier color:(OQColor *)color width:(CGFloat)width dash:(NSInteger)dash slide:(CGFloat)slide labelDistance:(CGFloat)labelDistance;
+- (id)initWithGraph:(RSGraph *)graph identifier:(NSString *)identifier color:(OAColor *)color width:(CGFloat)width dash:(NSInteger)dash slide:(CGFloat)slide labelDistance:(CGFloat)labelDistance;
 {
     if (!(self = [super initWithGraph:graph identifier:identifier]))
 	return nil;
@@ -157,10 +157,10 @@ RSConnectType defaultConnectMethod(void)
 #pragma mark RSGraphElement subclass
 ////////////////////////////////////////
 
-- (OQColor *)color {
+- (OAColor *)color {
     return _color;
 }
-- (void)setColor:(OQColor *)color;
+- (void)setColor:(OAColor *)color;
 {
     if ([color isEqual:_color])
         return;

@@ -9,7 +9,7 @@
 
 #import <Foundation/NSGeometry.h>
 #import <OmniQuartz/OQDrawing.h>
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 
 RCS_ID("$Header$");
 

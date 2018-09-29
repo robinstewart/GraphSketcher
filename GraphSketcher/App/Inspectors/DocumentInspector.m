@@ -8,7 +8,7 @@
 #import "DocumentInspector.h"
 
 #import <GraphSketcherModel/RSGraph.h>
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 
 #import "GraphDocument.h"
 #import "RSSelector.h"
@@ -206,7 +206,7 @@
     // set user preference:
     //[[OFPreferenceWrapper sharedPreferenceWrapper] setColor:newColor forKey: @"DefaultBackgroundColor"];
     
-    [_graph setBackgroundColor:[OQColor colorWithPlatformColor:newColor]];
+    [_graph setBackgroundColor:[OAColor colorWithPlatformColor:newColor]];
     [self updateDisplay];
 }
 

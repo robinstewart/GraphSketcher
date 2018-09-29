@@ -8,7 +8,7 @@
 #import <GraphSketcherModel/RSGrid.h>
 
 #import <GraphSketcherModel/RSGraphElement.h>
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 
 #import <OmniFoundation/OFPreference.h>
 #if !defined(TARGET_OS_IPHONE) || !TARGET_OS_IPHONE
@@ -44,7 +44,7 @@
     else if( _orientation == RS_ORIENTATION_VERTICAL )
 	_displayGrid = [[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"DisplayVerticalGrid"];
     
-    _color = [[OQColor colorForPreferenceKey:@"DefaultGridColor"] retain];
+    _color = [[OAColor colorForPreferenceKey:@"DefaultGridColor"] retain];
     _dotted = NO;
     
     Log1(@"RSGrid initialized.");
@@ -80,10 +80,10 @@
 #pragma mark -
 #pragma mark Accessor methods
 ///////////////////////////////////////////
-- (OQColor *)color {
+- (OAColor *)color {
     return _color;
 }
-- (void)setColor:(OQColor *)color {
+- (void)setColor:(OAColor *)color {
     [_color autorelease];
     _color = [color retain];
 }

@@ -29,7 +29,7 @@
 - (id)initWithGraph:(RSGraph *)graph start:(RSVertex *)V1 end:(RSVertex *)V2;
 - (id)initWithGraph:(RSGraph *)graph vertices:(RSGroup *)vertices;
 // DESIGNATED INITIALIZER
-- (id)initWithGraph:(RSGraph *)graph identifier:(NSString *)identifier vertices:(RSGroup *)vertices color:(OQColor *)color width:(CGFloat)width dash:(CGFloat)dash slide:(CGFloat)slide labelDistance:(CGFloat)labelDistance;
+- (id)initWithGraph:(RSGraph *)graph identifier:(NSString *)identifier vertices:(RSGroup *)vertices color:(OAColor *)color width:(CGFloat)width dash:(CGFloat)dash slide:(CGFloat)slide labelDistance:(CGFloat)labelDistance;
 
 - (RSConnectLine *)lineWithElement:(RSGraphElement *)GE;
 - (void)acceptLatestDefaults;

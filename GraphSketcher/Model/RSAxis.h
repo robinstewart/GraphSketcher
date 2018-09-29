@@ -82,7 +82,7 @@ RSScientificNotationSetting scientificNotationSettingFromName(NSString *name);
     NSUInteger _spacingSigFigs;
     
     CGFloat _width;   // width of entire path
-    OQColor *_color;
+    OAColor *_color;
     
     RSAxisPlacement _placement;  // origin, edge, both-edges
     RSAxisTickLayout _tickLayout;

@@ -12,7 +12,7 @@
 #import <GraphSketcherModel/RSUndoer.h>
 #import <GraphSketcherModel/RSGraphEditor.h>
 
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 
 #import "GraphDocument.h"
 #import "RSSelector.h"
@@ -636,7 +636,7 @@ static BOOL boolFromState(NSInteger state)
     // set user preference:
     //[[OFPreferenceWrapper sharedPreferenceWrapper] setColor:newColor forKey: @"DefaultGridColor"];
     
-    [_graph setGridColor:[OQColor colorWithPlatformColor:newColor]];
+    [_graph setGridColor:[OAColor colorWithPlatformColor:newColor]];
     
     // also, turn on the grid if it's currently off!
     [_graph displayGridIfNotAlready];

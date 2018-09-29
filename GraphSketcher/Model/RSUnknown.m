@@ -7,7 +7,7 @@
 
 #import <GraphSketcherModel/RSUnknown.h>
 #import <GraphSketcherModel/RSLine.h>
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 
 #import <OmniFoundation/OFPreference.h>
 #if !defined(TARGET_OS_IPHONE) || !TARGET_OS_IPHONE
@@ -38,7 +38,7 @@
     RSTextLabel *label = nil;
     
     // use defaults:
-    OQColor *color = [OQColor colorForPreferenceKey:@"DefaultLineColor"];
+    OAColor *color = [OAColor colorForPreferenceKey:@"DefaultLineColor"];
     width = [[OFPreferenceWrapper sharedPreferenceWrapper] floatForKey:@"DefaultLineWidth"];
     NSInteger dash = [[OFPreferenceWrapper sharedPreferenceWrapper] integerForKey:@"DefaultDashStyle"];
     NSInteger shape = [[OFPreferenceWrapper sharedPreferenceWrapper] integerForKey:@"DefaultVertexShape"];
@@ -49,7 +49,7 @@
 }
 
 // DESIGNATED INITIALIZER
-- (id)initWithIdentifier:(NSString *)identifier color:(OQColor *)color width:(CGFloat)width position:(RSDataPoint)p label:(RSTextLabel *)label dash:(NSInteger)dash shape:(NSInteger)shape connectMethod:(RSConnectType)connect;
+- (id)initWithIdentifier:(NSString *)identifier color:(OAColor *)color width:(CGFloat)width position:(RSDataPoint)p label:(RSTextLabel *)label dash:(NSInteger)dash shape:(NSInteger)shape connectMethod:(RSConnectType)connect;
 {
     if (!(self = [super initWithoutIdentifier]))
         return nil;
@@ -84,10 +84,10 @@
 #pragma mark -
 #pragma mark Accessor methods
 ///////////////////////////////////////////////////
-- (OQColor *)color {
+- (OAColor *)color {
     return _color;
 }
-- (void)setColor:(OQColor *)color {
+- (void)setColor:(OAColor *)color {
     [_color autorelease];
     _color = [color retain];
 }

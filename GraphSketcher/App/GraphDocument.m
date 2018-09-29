@@ -20,7 +20,7 @@
 #import <GraphSketcherModel/RSHitTester-Snapping.h>
 #import <GraphSketcherModel/RSTextLabel.h>
 #import <GraphSketcherModel/RSUndoer.h>
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 
 NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
 
@@ -681,16 +681,16 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
     [prefWrapper setBool:[[graph xAxis] shape] forKey:@"DefaultAxisShape"];
     
     // Axis style settings
-    [OQColor setColor:[[graph xAxis] color] forPreferenceKey:@"DefaultAxisColor"];
+    [OAColor setColor:[[graph xAxis] color] forPreferenceKey:@"DefaultAxisColor"];
     [prefWrapper setDouble:[[graph xAxis] width] forKey:@"DefaultAxisWidth"];
-    [OQColor setColor:[[graph xGrid] color] forPreferenceKey:@"DefaultGridColor"];
+    [OAColor setColor:[[graph xGrid] color] forPreferenceKey:@"DefaultGridColor"];
     [prefWrapper setDouble:[[graph xGrid] width] forKey:@"DefaultGridWidth"];
     [prefWrapper setDouble:[[graph xAxis] titlePlacement] forKey:@"DefaultXAxisTitlePlacement"];
     [prefWrapper setDouble:[[graph yAxis] titlePlacement] forKey:@"DefaultYAxisTitlePlacement"];
     [prefWrapper setObject:nameFromScientificNotationSetting([[graph xAxis] scientificNotationSetting]) forKey:@"ScientificNotationSetting"];
     
     // Canvas settings
-    [OQColor setColor:[graph backgroundColor] forPreferenceKey:@"DefaultBackgroundColor"];
+    [OAColor setColor:[graph backgroundColor] forPreferenceKey:@"DefaultBackgroundColor"];
     [prefWrapper setObject:NSStringFromSize([graph canvasSize]) forKey:@"LastCanvasSize"];
 }
 

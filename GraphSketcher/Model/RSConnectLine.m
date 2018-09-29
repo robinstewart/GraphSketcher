@@ -12,7 +12,7 @@
 #import <GraphSketcherModel/RSNumber.h>
 #import <GraphSketcherModel/RSGraph.h>
 #import <GraphSketcherModel/RSUndoer.h>
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 
 #import <OmniFoundation/OFPreference.h>
 #if !defined(TARGET_OS_IPHONE) || !TARGET_OS_IPHONE
@@ -64,7 +64,7 @@
 - (id)initWithGraph:(RSGraph *)graph vertices:(RSGroup *)vertices;
 {
     // use defaults
-    OQColor *color = [OQColor colorForPreferenceKey:@"DefaultLineColor"];
+    OAColor *color = [OAColor colorForPreferenceKey:@"DefaultLineColor"];
     CGFloat width = [[OFPreferenceWrapper sharedPreferenceWrapper] floatForKey:@"DefaultLineWidth"];
     NSInteger dash = [[OFPreferenceWrapper sharedPreferenceWrapper] integerForKey:@"DefaultDashStyle"];
     CGFloat slide = 0.5f;
@@ -75,7 +75,7 @@
 
 
 // DESIGNATED INITIALIZER
-- (id)initWithGraph:(RSGraph *)graph identifier:(NSString *)identifier vertices:(RSGroup *)vertices color:(OQColor *)color width:(CGFloat)width dash:(CGFloat)dash slide:(CGFloat)slide labelDistance:(CGFloat)labelDistance;
+- (id)initWithGraph:(RSGraph *)graph identifier:(NSString *)identifier vertices:(RSGroup *)vertices color:(OAColor *)color width:(CGFloat)width dash:(CGFloat)dash slide:(CGFloat)slide labelDistance:(CGFloat)labelDistance;
 {
     if (!(self = [super initWithGraph:graph identifier:identifier color:color width:width dash:dash slide:slide labelDistance:labelDistance]))
 	return nil;
@@ -154,7 +154,7 @@
 
 
 - (void)acceptLatestDefaults {
-    [self setColor:[OQColor colorForPreferenceKey:@"DefaultLineColor"]];
+    [self setColor:[OAColor colorForPreferenceKey:@"DefaultLineColor"]];
     [self setWidth:[[OFPreferenceWrapper sharedPreferenceWrapper] floatForKey:@"DefaultLineWidth"]];
     [self setDash:[[OFPreferenceWrapper sharedPreferenceWrapper] integerForKey:@"DefaultDashStyle"]];
     [self setConnectMethod:connectMethodFromName([[OFPreferenceWrapper sharedPreferenceWrapper] stringForKey:@"DefaultConnectMethod"])];

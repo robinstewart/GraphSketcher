@@ -24,7 +24,7 @@
 #import <OmniAppKit/NSFontManager-OAExtensions.h>
 //#import "OSStyledTextStorage.h"
 #else
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 #endif
 
 #import <OmniBase/OmniBase.h>

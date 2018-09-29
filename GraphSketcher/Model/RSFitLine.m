@@ -12,7 +12,7 @@
 #import <GraphSketcherModel/RSGraph.h>
 #import <GraphSketcherModel/RSVertex.h>
 #import <GraphSketcherModel/RSTextLabel.h>
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 
 #import <OmniFoundation/OFPreference.h>
 #if !defined(TARGET_OS_IPHONE) || !TARGET_OS_IPHONE
@@ -206,7 +206,7 @@
 - (id)initWithGraph:(RSGraph *)graph identifier:(NSString *)identifier data:(RSGroup *)data;
 {
     // use defaults
-    OQColor *color = [OQColor colorForPreferenceKey:@"DefaultLineColor"];
+    OAColor *color = [OAColor colorForPreferenceKey:@"DefaultLineColor"];
     CGFloat width = [[OFPreferenceWrapper sharedPreferenceWrapper] floatForKey:@"DefaultLineWidth"];
     CGFloat dash = [[OFPreferenceWrapper sharedPreferenceWrapper] integerForKey:@"DefaultDashStyle"];
     CGFloat slide = 0.5f;

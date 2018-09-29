@@ -36,7 +36,7 @@
 #import <GraphSketcherModel/RSGraph-XML.h>  // for object copy/paste
 
 #import <OmniInspector/OIInspectorRegistry.h>
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 #import <OmniAppKit/OAFontDescriptor.h>
 
 
@@ -497,7 +497,7 @@
     NSColor *newColor = [sender color];
     
     // set the color
-    [obj setColor:[OQColor colorWithPlatformColor:newColor]];
+    [obj setColor:[OAColor colorWithPlatformColor:newColor]];
     
     if ( [obj isKindOfClass:[RSUnknown class]] ) {
 	if ([_m mode] == RS_fill) {
@@ -664,7 +664,7 @@
     
     
     // Draw the graph background and grid lines
-    OQColor *backgroundColor = [[graph backgroundColor] colorUsingColorSpace:OQColorSpaceRGB];
+    OAColor *backgroundColor = [[graph backgroundColor] colorUsingColorSpace:OAColorSpaceRGB];
     if ([self isDrawingToScreen] && [graph windowAlpha] < 1) {
         backgroundColor = [backgroundColor colorWithAlphaComponent:[graph windowAlpha]];
     }

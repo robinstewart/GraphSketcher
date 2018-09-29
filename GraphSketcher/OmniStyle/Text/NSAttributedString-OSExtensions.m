@@ -29,7 +29,7 @@
 #import <OmniFoundation/NSMutableAttributedString-OFExtensions.h>
 #import <OmniFoundation/OFEnumNameTable.h>
 #import <OmniFoundation/OFPoint.h>
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
 #import <UIKit/UIColor.h>
@@ -197,7 +197,7 @@ OS_COLOR_CLASS *OSColorForTextAttribute(NSDictionary *textAttributes, NSString *
         OBPRECONDITION(!colorValue || [colorValue isKindOfClass:[OQ_PLATFORM_COLOR_CLASS class]]);
         
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
-        colorObject = [OQColor colorWithPlatformColor:colorValue];
+        colorObject = [OAColor colorWithPlatformColor:colorValue];
 #else
         colorObject = colorValue;
 #endif
@@ -208,7 +208,7 @@ OS_COLOR_CLASS *OSColorForTextAttribute(NSDictionary *textAttributes, NSString *
 }
 #define COLOR_ATTR(key) OSColorForTextAttribute(textAttributes, key, OSOriginal ## key)
 
-// Text attributes contain UIColor on the iPhone and we want OQColor.
+// Text attributes contain UIColor on the iPhone and we want OAColor.
 void OSSetColorForTextAttribute(NSMutableDictionary *textAttributes, NSString *textKey, NSString *originalKey, OS_COLOR_CLASS *color)
 {
     OBPRECONDITION([color isKindOfClass:[OS_COLOR_CLASS class]]);

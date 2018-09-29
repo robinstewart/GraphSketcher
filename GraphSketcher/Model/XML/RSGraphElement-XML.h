@@ -13,7 +13,7 @@
     #define DEBUG_XML(format, ...)
 #endif
 
-@class OQColor;
+@class OAColor;
 @class OFXMLCursor, OFXMLDocument, OFVersionNumber;
 
 @protocol XMLArchiving
@@ -35,8 +35,8 @@ NSUInteger shapeFromName(NSString *name);
 + (OFVersionNumber *)appVersionOfImportedFile;
 
 + (void)appendRect:(CGRect)rect toXML:(OFXMLDocument *)xmlDoc;
-+ (void)appendColorIfNotBlack:(OQColor *)color toXML:(OFXMLDocument *)xmlDoc;
-+ (void)appendColorIfNotWhite:(OQColor *)color toXML:(OFXMLDocument *)xmlDoc;
++ (void)appendColorIfNotBlack:(OAColor *)color toXML:(OFXMLDocument *)xmlDoc;
++ (void)appendColorIfNotWhite:(OAColor *)color toXML:(OFXMLDocument *)xmlDoc;
 
 @end
 

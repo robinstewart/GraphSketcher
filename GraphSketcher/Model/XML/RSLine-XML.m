@@ -8,7 +8,7 @@
 #import "RSLine-XML.h"
 
 #import <GraphSketcherModel/RSGroup.h>
-#import <OmniQuartz/OQColor-Archiving.h>
+#import <OmniAppKit/OAColor-Archiving.h>
 #import "RSVertex-XML.h"
 #import "RSGraph-XML.h"
 
@@ -102,10 +102,10 @@ static NSUInteger dashStyleFromName(NSString *name)
     
     _color = nil;
     if ([cursor openNextChildElementNamed:@"color"]) {
-	_color = [[OQColor colorFromXML:cursor] retain];
+	_color = [[OAColor colorFromXML:cursor] retain];
 	[cursor closeElement];
     } else {
-	_color = [[OQColor blackColor] retain];
+	_color = [[OAColor blackColor] retain];
     }
     
     return YES;

@@ -16,7 +16,7 @@
 #import <GraphSketcherModel/RSFill.h>
 #import <GraphSketcherModel/RSGroup.h>
 #import <GraphSketcherModel/RSNumber.h>
-#import <OmniQuartz/OQColor.h>
+#import <OmniAppKit/OAColor.h>
 
 
 
@@ -30,17 +30,17 @@
     return nil;
 }
 
-- (void)drawSelectedUsingMapper:(RSDataMapper *)mapper selectionColor:(OQColor *)selectionColor borderWidth:(CGFloat)borderWidth alpha:(CGFloat)startingAlpha fingerWidth:(CGFloat)fingerWidth subpart:(RSGraphElementSubpart)subpart;
+- (void)drawSelectedUsingMapper:(RSDataMapper *)mapper selectionColor:(OAColor *)selectionColor borderWidth:(CGFloat)borderWidth alpha:(CGFloat)startingAlpha fingerWidth:(CGFloat)fingerWidth subpart:(RSGraphElementSubpart)subpart;
 {
     NSLog(@"Subclass (%@) should override", NSStringFromClass([self class]));
 }
 
-- (void)drawSelectionAtPoint:(CGPoint)p borderWidth:(CGFloat)borderWidth color:(OQColor *)selectionColor minSize:(CGSize)minSize;
+- (void)drawSelectionAtPoint:(CGPoint)p borderWidth:(CGFloat)borderWidth color:(OAColor *)selectionColor minSize:(CGSize)minSize;
 {
     [self drawSelectionAtPoint:p borderWidth:borderWidth color:selectionColor minSize:minSize subpart:RSGraphElementSubpartWhole];
 }
 
-- (void)drawSelectionAtPoint:(CGPoint)p borderWidth:(CGFloat)borderWidth color:(OQColor *)selectionColor minSize:(CGSize)minSize subpart:(RSGraphElementSubpart)subpart;
+- (void)drawSelectionAtPoint:(CGPoint)p borderWidth:(CGFloat)borderWidth color:(OAColor *)selectionColor minSize:(CGSize)minSize subpart:(RSGraphElementSubpart)subpart;
 {
     NSLog(@"Subclass (%@) should override", NSStringFromClass([self class]));
 }
@@ -305,7 +305,7 @@
 
 #define RS_SELECTION_RINGS 1  /*was 4 -- number of "rings" to draw around the selection*/
 
-- (void)drawSelectedUsingMapper:(RSDataMapper *)mapper selectionColor:(OQColor *)selectionColor borderWidth:(CGFloat)borderWidth alpha:(CGFloat)startingAlpha fingerWidth:(CGFloat)fingerWidth subpart:(RSGraphElementSubpart)subpart;
+- (void)drawSelectedUsingMapper:(RSDataMapper *)mapper selectionColor:(OAColor *)selectionColor borderWidth:(CGFloat)borderWidth alpha:(CGFloat)startingAlpha fingerWidth:(CGFloat)fingerWidth subpart:(RSGraphElementSubpart)subpart;
 {
     NSBezierPath *P;
     CGFloat adjustedBorderWidth;
@@ -365,7 +365,7 @@
     }
 }
 
-- (void)drawSelectionAtPoint:(CGPoint)p borderWidth:(CGFloat)borderWidth color:(OQColor *)selectionColor minSize:(CGSize)minSize subpart:(RSGraphElementSubpart)subpart;
+- (void)drawSelectionAtPoint:(CGPoint)p borderWidth:(CGFloat)borderWidth color:(OAColor *)selectionColor minSize:(CGSize)minSize subpart:(RSGraphElementSubpart)subpart;
 {
     CGFloat minWidth = [self widthFromSize:minSize];
     
@@ -464,7 +464,7 @@
     return RSSizeRotate(size, self.rotation);
 }
 
-- (void)drawSelectedUsingMapper:(RSDataMapper *)mapper selectionColor:(OQColor *)selectionColor borderWidth:(CGFloat)borderWidth alpha:(CGFloat)startingAlpha fingerWidth:(CGFloat)fingerWidth subpart:(RSGraphElementSubpart)subpart;
+- (void)drawSelectedUsingMapper:(RSDataMapper *)mapper selectionColor:(OAColor *)selectionColor borderWidth:(CGFloat)borderWidth alpha:(CGFloat)startingAlpha fingerWidth:(CGFloat)fingerWidth subpart:(RSGraphElementSubpart)subpart;
 {
     NSBezierPath *P;
     CGFloat newWidth;
@@ -489,7 +489,7 @@
     }
 }
 
-- (void)drawSelectionAtPoint:(CGPoint)p borderWidth:(CGFloat)borderWidth color:(OQColor *)selectionColor minSize:(CGSize)minSize subpart:(RSGraphElementSubpart)subpart;
+- (void)drawSelectionAtPoint:(CGPoint)p borderWidth:(CGFloat)borderWidth color:(OAColor *)selectionColor minSize:(CGSize)minSize subpart:(RSGraphElementSubpart)subpart;
 {
     CGSize size = [self size];
     CGFloat smallDimension = RSMinSizeDimension(size);

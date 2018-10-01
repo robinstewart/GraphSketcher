@@ -25,13 +25,13 @@ static NSShadow *WhiteShadow = nil;
 
 static CGShadingRef CreateShadingWithGrays(float lightGray, float darkGray)
 {
-    OQRGBAColorPair *colorPair = malloc(sizeof(OQRGBAColorPair));
+    OARGBAColorPair *colorPair = malloc(sizeof(OARGBAColorPair));
     NSColor *lighterColor = [[NSColor colorWithCalibratedWhite:lightGray alpha:1] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     NSColor *darkerColor = [[NSColor colorWithCalibratedWhite:darkGray alpha:1] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-    OQFillRGBAColorPair(colorPair, lighterColor, darkerColor);
+    OAFillRGBAColorPair(colorPair, lighterColor, darkerColor);
     
     static const CGFloat domainAndRange[8] = {0, 1, 0, 1, 0, 1, 0, 1};
-    CGFunctionRef blendFunction = CGFunctionCreate(colorPair, 1, domainAndRange, 4, domainAndRange, &OQLinearFunctionCallbacks);
+    CGFunctionRef blendFunction = CGFunctionCreate(colorPair, 1, domainAndRange, 4, domainAndRange, &OALinearFunctionCallbacks);
     
     CGColorSpaceRef colorSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
     CGShadingRef shading = CGShadingCreateAxial(colorSpace, CGPointMake(0, 0), CGPointMake(0, ButtonRibbonCellCellHeight), blendFunction, NO, NO);

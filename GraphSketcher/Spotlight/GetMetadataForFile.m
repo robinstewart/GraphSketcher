@@ -10,8 +10,8 @@
 #import <CoreServices/CoreServices.h> 
 #import <dlfcn.h>
 
-#import <OmniUnzip/OUUnzipArchive.h>
-#import <OmniUnzip/OUUnzipEntry.h>
+//#import <OmniUnzip/OUUnzipArchive.h>
+//#import <OmniUnzip/OUUnzipEntry.h>
 #import <libxml/SAX2.h>
 #import <libxml/parser.h>
 
@@ -555,27 +555,6 @@ static Boolean _addMetadataFromXML(CFMutableDictionaryRef attributes, NSData *xm
     }
     
     CFDictionarySetValue(attributes, kMDItemTextContent, parseContext->textContent);
-#if 0
-    CFDictionarySetValue(attributes, kMDItemTitle, parseContext->documentTitle);
-    //DEBUG_LOG(@"textContent = %@", parseContext->textContent);
-    
-    
-    CFDictionarySetValue(attributes, CFSTR("com_omnigroup_OmniOutliner_NamedStyles"), parseContext->namedStyleNames);
-    AddIntAttribute(attributes, CFSTR("com_omnigroup_OmniOutliner_NamedStyleCount"), CFArrayGetCount(parseContext->namedStyleNames));
-    
-    CFDictionarySetValue(attributes, CFSTR("com_omnigroup_OmniOutliner_ColumnTitles"), parseContext->columnTitles);
-    AddIntAttribute(attributes, CFSTR("com_omnigroup_OmniOutliner_ColumnCount"), parseContext->columnCount); // Not count-of columnTitles since that doesn't include columns with empty titles
-    
-    AddIntAttribute(attributes, CFSTR("com_omnigroup_OmniOutliner_ItemCount"), parseContext->itemCount);
-    AddIntAttribute(attributes, CFSTR("com_omnigroup_OmniOutliner_UncheckedItemCount"), parseContext->uncheckedCount);
-    AddIntAttribute(attributes, CFSTR("com_omnigroup_OmniOutliner_CheckedItemCount"), parseContext->checkedCount);
-    AddIntAttribute(attributes, CFSTR("com_omnigroup_OmniOutliner_IndeterminateItemCount"), parseContext->indeterminateCount);
-    AddIntAttribute(attributes, CFSTR("com_omnigroup_OmniOutliner_MaxItemDepth"), parseContext->maxItemDepth);
-    
-    AddIntAttribute(attributes, CFSTR("com_omnigroup_OmniOutliner_CellCount"), parseContext->cellCount);
-    
-#endif
-    
     
     ParserContextFree(parseContext);
 
@@ -643,6 +622,7 @@ Boolean GetMetadataForFile(void* thisInterface,
     LIBXML_TEST_VERSION
     
     @try {
+        /*TEMPORARILY-DISABLE
         OUUnzipArchive *zipArchive = [[[OUUnzipArchive alloc] initWithPath:(NSString *)pathToFile error:nil] autorelease];
         if (zipArchive) {
             OUUnzipEntry *zipEntry = [zipArchive entryNamed:@"contents.xml"];
@@ -664,6 +644,7 @@ Boolean GetMetadataForFile(void* thisInterface,
                 return FALSE;
             }
         }
+         */_addMetadataFromXML(nil, nil);
     } @catch (NSException *exc) {
 	NSLog(@"Caught exception while indexing '%@' -- '%@'", pathToFile, exc);
     } @finally {

@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		00445FFF0FCF12AA00DC1307 /* OBUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 00445FF70FCF12AA00DC1307 /* OBUtilities.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		004460010FCF12AA00DC1307 /* OBBacktraceBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 00445FF90FCF12AA00DC1307 /* OBBacktraceBuffer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		0044601A0FCF12B500DC1307 /* OUErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 004460040FCF12B500DC1307 /* OUErrors.m */; };
-		0044601C0FCF12B500DC1307 /* OUUnzipEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 004460060FCF12B500DC1307 /* OUUnzipEntry.m */; };
-		0044601E0FCF12B500DC1307 /* OUUnzipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 004460080FCF12B500DC1307 /* OUUnzipArchive.m */; };
 		0044602A0FCF12B500DC1307 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 004460150FCF12B500DC1307 /* unzip.c */; };
 		004460350FCF13C900DC1307 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004460340FCF13C900DC1307 /* Foundation.framework */; };
 		004460390FCF13D100DC1307 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 004460380FCF13D100DC1307 /* libz.dylib */; };
@@ -770,9 +767,6 @@
 				5F95B1D71858023400DB60E9 /* assertions.m in Sources */,
 				34F1879B111A4E6D00DCEF79 /* NSError-OBExtensions.m in Sources */,
 				34F187A0111A4E7A00DCEF79 /* NSError-OBUtilities.m in Sources */,
-				0044601A0FCF12B500DC1307 /* OUErrors.m in Sources */,
-				0044601C0FCF12B500DC1307 /* OUUnzipEntry.m in Sources */,
-				0044601E0FCF12B500DC1307 /* OUUnzipArchive.m in Sources */,
 				0044602A0FCF12B500DC1307 /* unzip.c in Sources */,
 				004460420FCF14A200DC1307 /* ioapi.c in Sources */,
 				34C76A560FCF400C00D33716 /* CFHelpers.m in Sources */,

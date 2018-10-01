@@ -8,7 +8,7 @@
 #import <tgmath.h>
 #include <QuickLook/QuickLook.h>
 #include <AppKit/AppKit.h>
-#include <OmniUnzip/OUUnzipArchive.h>
+//#include <OmniUnzip/OUUnzipArchive.h>
 
 #import "GenerateThumbnailForURL.h"
 
@@ -18,13 +18,13 @@
    This function's job is to create thumbnail for designated file as fast as possible
    ----------------------------------------------------------------------------- */
 
-OSStatus GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thumbnail, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options, CGSize maxSize)
+OSStatus GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thumbnail, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options, CGSize unusedMaxSize)
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     //NSLog(@"Generating thumbnail with bundle %@", [[NSBundle mainBundle] bundlePath]);
     //NSLog(@"QL max size: %@", NSStringFromSize(QLThumbnailRequestGetMaximumSize(thumbnail)));
-    
+    /*TEMPORARILY-DISABLE
     NSString *path = [(NSURL *)url path];
     
     OUUnzipArchive *zipArchive = [[[OUUnzipArchive alloc] initWithPath:path error:nil] autorelease];
@@ -65,7 +65,7 @@ OSStatus GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thum
         NSLog(@"No zip archive found at %@", (NSURL *)url);
 #endif
     }
-    
+    */
     [pool release];
     return noErr;
 }

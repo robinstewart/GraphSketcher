@@ -9,7 +9,7 @@
 #include <CoreServices/CoreServices.h>
 #include <QuickLook/QuickLook.h>
 #include <Foundation/Foundation.h>
-#include <OmniUnzip/OUUnzipArchive.h>
+//#include <OmniUnzip/OUUnzipArchive.h>
 
 #import "GeneratePreviewForURL.h"
 
@@ -24,7 +24,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     //NSLog(@"Generating preview with bundle %@", [[NSBundle mainBundle] bundlePath]);
-    
+    /*TEMPORARILY-DISABLE
     NSString *path = [(NSURL *)url path];
     
     OUUnzipArchive *zipArchive = [[[OUUnzipArchive alloc] initWithPath:path error:nil] autorelease];
@@ -36,7 +36,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
             QLPreviewRequestSetDataRepresentation(preview, (CFDataRef)pdfData, kUTTypePDF, nil);
         }
     }
-    
+    */
     [pool release];
     return noErr;
 }

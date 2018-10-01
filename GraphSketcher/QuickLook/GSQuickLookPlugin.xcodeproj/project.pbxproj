@@ -7,10 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		001FD67C0FCC96D700FC3ADB /* OUUnzipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 001FD67A0FCC96D700FC3ADB /* OUUnzipArchive.m */; };
 		001FD7060FCC99DE00FC3ADB /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 001FD6AE0FCC988B00FC3ADB /* unzip.c */; };
-		001FD71A0FCC9A5600FC3ADB /* OUUnzipEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 001FD7180FCC9A5600FC3ADB /* OUUnzipEntry.m */; };
-		001FD7210FCC9A8400FC3ADB /* OUErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 001FD71F0FCC9A8400FC3ADB /* OUErrors.m */; };
 		001FD7230FCC9A9100FC3ADB /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 001FD6A50FCC988B00FC3ADB /* ioapi.c */; };
 		001FD75F0FCC9CA000FC3ADB /* assertions.m in Sources */ = {isa = PBXBuildFile; fileRef = 001FD75D0FCC9CA000FC3ADB /* assertions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		001FD7620FCC9CB100FC3ADB /* OBUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 001FD7610FCC9CB100FC3ADB /* OBUtilities.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -432,8 +429,8 @@
 			isa = PBXGroup;
 			children = (
 				001FD6DD0FCC993B00FC3ADB /* GSQuickLookPlugin_Prefix.h */,
-				61E3BCFA0870B4F2002186A0 /* GenerateThumbnailForURL.m */,
 				34710F0013C3B29800BFB912 /* GenerateThumbnailForURL.h */,
+				61E3BCFA0870B4F2002186A0 /* GenerateThumbnailForURL.m */,
 				34710EFE13C3B27500BFB912 /* GeneratePreviewForURL.h */,
 				2C05A19B06CAA52B00D84F6F /* GeneratePreviewForURL.m */,
 				08FB77B6FE84183AC02AAC07 /* main.m */,
@@ -748,10 +745,7 @@
 				8D576312048677EA00EA77CD /* main.m in Sources */,
 				2C05A19C06CAA52B00D84F6F /* GeneratePreviewForURL.m in Sources */,
 				61E3BCFB0870B4F2002186A0 /* GenerateThumbnailForURL.m in Sources */,
-				001FD67C0FCC96D700FC3ADB /* OUUnzipArchive.m in Sources */,
 				001FD7060FCC99DE00FC3ADB /* unzip.c in Sources */,
-				001FD71A0FCC9A5600FC3ADB /* OUUnzipEntry.m in Sources */,
-				001FD7210FCC9A8400FC3ADB /* OUErrors.m in Sources */,
 				001FD7230FCC9A9100FC3ADB /* ioapi.c in Sources */,
 				001FD75F0FCC9CA000FC3ADB /* assertions.m in Sources */,
 				001FD7620FCC9CB100FC3ADB /* OBUtilities.m in Sources */,

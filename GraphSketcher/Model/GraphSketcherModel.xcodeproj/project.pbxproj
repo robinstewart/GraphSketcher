@@ -15,6 +15,8 @@
 		0056554C11374D4B002FFA5B /* RSDataImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0056554A11374D4B002FFA5B /* RSDataImporter.m */; };
 		0069983C112367FA00925C72 /* RSHitTester.m in Sources */ = {isa = PBXBuildFile; fileRef = 0069983A112367FA00925C72 /* RSHitTester.m */; };
 		008AE3F7112370F9002D2077 /* RSHitTester.h in Headers */ = {isa = PBXBuildFile; fileRef = 00699839112367FA00925C72 /* RSHitTester.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		009244442162A3E80061D5D5 /* NSNumber-OFNaN.h in Headers */ = {isa = PBXBuildFile; fileRef = 009244422162A3E80061D5D5 /* NSNumber-OFNaN.h */; };
+		009244452162A3E80061D5D5 /* NSNumber-OFNaN.m in Sources */ = {isa = PBXBuildFile; fileRef = 009244432162A3E80061D5D5 /* NSNumber-OFNaN.m */; };
 		009FB9771120C9A90081EB55 /* RSGraphElementSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = 009FB9751120C9A90081EB55 /* RSGraphElementSelector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		009FB9781120C9A90081EB55 /* RSGraphElementSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 009FB9761120C9A90081EB55 /* RSGraphElementSelector.m */; };
 		00A2E3E7112F4D7E001DFC91 /* RSFreehandStroke.h in Headers */ = {isa = PBXBuildFile; fileRef = 00A2E3E5112F4D7E001DFC91 /* RSFreehandStroke.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -161,6 +163,8 @@
 		0056554A11374D4B002FFA5B /* RSDataImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSDataImporter.m; sourceTree = "<group>"; };
 		00699839112367FA00925C72 /* RSHitTester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSHitTester.h; sourceTree = "<group>"; };
 		0069983A112367FA00925C72 /* RSHitTester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSHitTester.m; sourceTree = "<group>"; };
+		009244422162A3E80061D5D5 /* NSNumber-OFNaN.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSNumber-OFNaN.h"; sourceTree = "<group>"; };
+		009244432162A3E80061D5D5 /* NSNumber-OFNaN.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSNumber-OFNaN.m"; sourceTree = "<group>"; };
 		009FB9751120C9A90081EB55 /* RSGraphElementSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSGraphElementSelector.h; sourceTree = "<group>"; };
 		009FB9761120C9A90081EB55 /* RSGraphElementSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSGraphElementSelector.m; sourceTree = "<group>"; };
 		00A2E3E5112F4D7E001DFC91 /* RSFreehandStroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSFreehandStroke.h; sourceTree = "<group>"; };
@@ -574,6 +578,8 @@
 				34A64134111A8ED9002CCA09 /* OFPreference-RSExtensions.m */,
 				34A6411E111A8E82002CCA09 /* NSBezierPath-RSExtensions.h */,
 				34A6411F111A8E82002CCA09 /* NSBezierPath-RSExtensions.m */,
+				009244422162A3E80061D5D5 /* NSNumber-OFNaN.h */,
+				009244432162A3E80061D5D5 /* NSNumber-OFNaN.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -740,6 +746,7 @@
 				34C139121121FC5A0032BA71 /* RSText-XML.h in Headers */,
 				34801A6211226A5A00798B2C /* RSGraphEditor.h in Headers */,
 				34801A6911226BE000798B2C /* RSGraphEditorDelegate.h in Headers */,
+				009244442162A3E80061D5D5 /* NSNumber-OFNaN.h in Headers */,
 				34801AAE11226F0700798B2C /* RSGraphDelegate.h in Headers */,
 				34C9606C1122B8530097BB72 /* RSUndoerTarget.h in Headers */,
 				008AE3F7112370F9002D2077 /* RSHitTester.h in Headers */,
@@ -842,6 +849,7 @@
 				34A640AD111A8C2F002CCA09 /* RSGrid.m in Sources */,
 				5FC62D42184FF32900B05EB4 /* OSNumberStyleAttribute.m in Sources */,
 				34A640AF111A8C2F002CCA09 /* RSGroup.m in Sources */,
+				009244452162A3E80061D5D5 /* NSNumber-OFNaN.m in Sources */,
 				34A640B3111A8C2F002CCA09 /* RSLine.m in Sources */,
 				34A640B5111A8C2F002CCA09 /* RSTextLabel.m in Sources */,
 				34A640B7111A8C2F002CCA09 /* RSUnknown.m in Sources */,

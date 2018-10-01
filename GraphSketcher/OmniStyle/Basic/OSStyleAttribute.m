@@ -14,6 +14,7 @@
 #import "OSStringStyleAttribute.h"
 #import "OSVectorStyleAttribute.h"
 #import "OSStyledTextStorage-XML.h"
+#import "NSNumber-OFNaN.h"
 #import <OmniFoundation/NSNumber-OFExtensions.h>
 #import <OmniFoundation/OFXMLDocument.h>
 #import <OmniFoundation/OFXMLElement.h>

@@ -30,6 +30,7 @@
 #import <OmniFoundation/NSNumber-OFExtensions-CGTypes.h>
 #import <OmniFoundation/OFEnumNameTable.h>
 #import <OmniFoundation/NSNumber-OFExtensions.h>
+#import "NSNumber-OFNaN.h"
 #import <OmniFoundation/OFPoint.h>
 
 #import <OmniBase/rcsid.h>

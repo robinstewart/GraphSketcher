@@ -11,6 +11,7 @@
 
 #import <OmniFoundation/NSNumber-OFExtensions-CGTypes.h>
 #import <OmniFoundation/NSNumber-OFExtensions.h>
+#import "NSNumber-OFNaN.h"
 #import <OmniFoundation/OFXMLDocument.h>
 #import <OmniFoundation/OFXMLElement.h>
 #import <OmniFoundation/OFXMLCursor.h>

@@ -100,7 +100,7 @@ OFXMLElement *SkipToNextChildElement(OFXMLCursor *cursor)
     if ([value length] == 0)
         value = nil;
     
-    [xmlDoc appendElement:elementName containingString:[value base64String]];
+    [xmlDoc appendElement:elementName containingString:[value base64EncodedStringWithOptions:kNilOptions]];
     return value;
 }
 

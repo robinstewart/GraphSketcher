@@ -1199,6 +1199,7 @@ static int data_value_comparison(const void *aPtr, const void *bPtr) {
     
     [_bgColor release];
     [_IPs release];
+    [_idPasteMap release];
     
     [super dealloc];
 }

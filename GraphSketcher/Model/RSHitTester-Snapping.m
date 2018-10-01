@@ -346,10 +346,10 @@ static NSMutableDictionary *mergedDictionary(NSDictionary *first, NSDictionary *
 {
     RSDataPoint final = p;
     NSNumber *val;
-    if ( (val = [constraints valueForKey:RSSnapConstraintXKey]) ) {
+    if ( (val = [constraints valueForKey:RSSnapConstraintXKey]) != nil ) {
         final.x = [val doubleValue];
     }
-    if ( (val = [constraints valueForKey:RSSnapConstraintYKey]) ) {
+    if ( (val = [constraints valueForKey:RSSnapConstraintYKey]) != nil ) {
         final.y = [val doubleValue];
     }
     

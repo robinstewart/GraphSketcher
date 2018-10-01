@@ -753,7 +753,7 @@ static NSInteger sortHitResultValues(NSValue *value1, NSValue *value2, void *con
     CGPoint start2, end2;
     CGRect bounds = [_mapper bounds];
     NSNumber *val = [constraints objectForKey:constraintKey];
-    OBASSERT(val);
+    OBASSERT(val != nil);
     if ([constraintKey isEqualToString:RSSnapConstraintXKey]) {
         RSDataPoint d = RSDataPointMake([val doubleValue], 0);
         start2.x = end2.x = [_mapper convertToViewCoords:d].x;

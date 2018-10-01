@@ -65,7 +65,14 @@ static RSDataImporter *sharedDataImporter;
 }
 
 @synthesize delegate;
-@synthesize warning = _warning;
+@synthesize warning;
+
+- (void)dealloc
+{
+    self.warning = nil;
+    
+    [super dealloc];
+}
 
 
 ////////////////////

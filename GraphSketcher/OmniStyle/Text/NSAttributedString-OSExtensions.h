@@ -36,17 +36,6 @@ extern NSString * const OSInheritedStylesAttributeName;
 
 @end
 
-#define OS_DEFINE_ORIGINAL_COLOR_KEY(key) \
-NSString * const OSOriginal ## key OB_HIDDEN;
-
-OS_DEFINE_ORIGINAL_COLOR_KEY(NSForegroundColorAttributeName);
-OS_DEFINE_ORIGINAL_COLOR_KEY(NSBackgroundColorAttributeName);
-OS_DEFINE_ORIGINAL_COLOR_KEY(NSStrokeColorAttributeName);
-OS_DEFINE_ORIGINAL_COLOR_KEY(NSUnderlineColorAttributeName);
-OS_DEFINE_ORIGINAL_COLOR_KEY(NSStrikethroughColorAttributeName);
-
-#undef OS_DEFINE_ORIGINAL_COLOR_KEY
-
 #define _OSColorKeys(textKey, originalKey) textKey, originalKey
 #define OSColorKeys(key) _OSColorKeys(key, OSOriginal ## key)
 

@@ -193,8 +193,8 @@ OS_COLOR_CLASS *OSColorForTextAttribute(NSDictionary *textAttributes, NSString *
 #endif
     
     if (!colorObject) {
-        OQ_PLATFORM_COLOR_CLASS *colorValue = ATTR(textKey);
-        OBPRECONDITION(!colorValue || [colorValue isKindOfClass:[OQ_PLATFORM_COLOR_CLASS class]]);
+        OA_PLATFORM_COLOR_CLASS *colorValue = ATTR(textKey);
+        OBPRECONDITION(!colorValue || [colorValue isKindOfClass:[OA_PLATFORM_COLOR_CLASS class]]);
         
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
         colorObject = [OAColor colorWithPlatformColor:colorValue];
@@ -219,7 +219,7 @@ void OSSetColorForTextAttribute(NSMutableDictionary *textAttributes, NSString *t
         textAttributes[originalKey] = color;
 #endif
 
-    OQ_PLATFORM_COLOR_CLASS *colorValue = OS_COLOR_CLASS_TO_PLATFORM_COLOR(color);
+    OA_PLATFORM_COLOR_CLASS *colorValue = OS_COLOR_CLASS_TO_PLATFORM_COLOR(color);
 
     textAttributes[textKey] = colorValue;
 }

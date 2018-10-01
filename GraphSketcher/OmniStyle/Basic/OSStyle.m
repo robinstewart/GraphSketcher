@@ -984,9 +984,9 @@ static BOOL _validateForAssociatingStyles(OSStyle *self, OSStyle *style, NSError
         CFArrayRemoveValueAtIndex(multiple, index);
         if (CFArrayGetCount(multiple) == 1) {
             // Down to one listener. Drop the array.
-            id listener = (id)CFArrayGetValueAtIndex(multiple, 0);
+            id singleListener = (id)CFArrayGetValueAtIndex(multiple, 0);
             CFRelease(multiple);
-            _listeners.single = listener;
+            _listeners.single = singleListener;
             _flags.hasListenerArray = NO;
         }
     }

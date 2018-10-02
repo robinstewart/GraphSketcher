@@ -3051,7 +3051,7 @@ static ErrorBarSheet *errorBarSheet = nil;
     
     if (sel == @selector(copyAsImage:)) {
 	if (showWhaBam) {
-	    [item setLabel:@"Wha-BAM!"];
+	    [item setLabel:NSLocalizedString(@"Wha-BAM!", @"Toolbar label")];
 	}
 	else {
 	    [item setLabel:NSLocalizedString(@"Copy As Image", @"Toolbar label")];

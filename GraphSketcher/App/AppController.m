@@ -176,30 +176,30 @@
     
     // Add a menu of experimental features if the preference for it is turned on.
     if ([[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"ShowExperimentalFeaturesMenu"]) {
-        NSMenu *experimentalMenu = [[NSMenu alloc] initWithTitle:@"Experimental"];
+        NSMenu *experimentalMenu = [[NSMenu alloc] initWithTitle:NSLocalizedString(@"Experimental", @"Menu item")];
         NSInteger index = -1;
-        [experimentalMenu insertItemWithTitle:@"Generate Normal Data" action:NSSelectorFromString(@"generateStandardNormalData:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"Generate Normal Data", @"Menu item") action:NSSelectorFromString(@"generateStandardNormalData:") keyEquivalent:@"" atIndex:++index];
         
         [experimentalMenu insertItem:[NSMenuItem separatorItem] atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"Tufte Tick Marks" action:NSSelectorFromString(@"toggleTickLayoutAtData:") keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"Tufte Axis Extent" action:NSSelectorFromString(@"toggleAxesUseDataExtent:") keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"Show Data Quartiles" action:NSSelectorFromString(@"toggleAxesUseDataQuartiles:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"Tufte Tick Marks", @"Menu item") action:NSSelectorFromString(@"toggleTickLayoutAtData:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"Tufte Axis Extent", @"Menu item") action:NSSelectorFromString(@"toggleAxesUseDataExtent:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"Show Data Quartiles", @"Menu item") action:NSSelectorFromString(@"toggleAxesUseDataQuartiles:") keyEquivalent:@"" atIndex:++index];
         
         [experimentalMenu insertItem:[NSMenuItem separatorItem] atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"Dotted Grid Lines" action:NSSelectorFromString(@"toggleDottedGrid:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"Dotted Grid Lines", @"Menu item") action:NSSelectorFromString(@"toggleDottedGrid:") keyEquivalent:@"" atIndex:++index];
         
         [experimentalMenu insertItem:[NSMenuItem separatorItem] atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"y = x^2 + c" action:NSSelectorFromString(@"addEquationLine:") keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"y = x^3 + c" action:NSSelectorFromString(@"addEquationLine:") keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"y = sin(x) + c" action:NSSelectorFromString(@"addEquationLine:") keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"y = e^(-x^2) + c (Bell Curve)" action:NSSelectorFromString(@"addEquationLine:") keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"y = 1/(1 + e^-x) + c (Logistic)" action:NSSelectorFromString(@"addEquationLine:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"y = x^2 + c", @"Menu item") action:NSSelectorFromString(@"addEquationLine:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"y = x^3 + c", @"Menu item") action:NSSelectorFromString(@"addEquationLine:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"y = sin(x) + c", @"Menu item") action:NSSelectorFromString(@"addEquationLine:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"y = e^(-x^2) + c (Bell Curve)", @"Menu item") action:NSSelectorFromString(@"addEquationLine:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"y = 1/(1 + e^-x) + c (Logistic)", @"Menu item") action:NSSelectorFromString(@"addEquationLine:") keyEquivalent:@"" atIndex:++index];
         
         [experimentalMenu insertItem:[NSMenuItem separatorItem] atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"Import and Replace Data" action:NSSelectorFromString(@"importDataSeriesReplacingCurrent:") keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"Import Data Series In Rows" action:NSSelectorFromString(@"importDataInRows:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"Import and Replace Data", @"Menu item") action:NSSelectorFromString(@"importDataSeriesReplacingCurrent:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"Import Data Series In Rows", @"Menu item") action:NSSelectorFromString(@"importDataInRows:") keyEquivalent:@"" atIndex:++index];
         
-        NSMenuItem *experimentalMenuItem = [[NSMenuItem alloc] initWithTitle:@"Experimental" action:NULL keyEquivalent:@""];
+        NSMenuItem *experimentalMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Experimental", @"Menu item") action:NULL keyEquivalent:@""];
         [experimentalMenuItem setImage:[NSImage imageNamed:@"experimental"]];
         [experimentalMenuItem setSubmenu:experimentalMenu];
         [[NSApp mainMenu] insertItem:experimentalMenuItem atIndex:7];
@@ -471,7 +471,7 @@
     [alert setInformativeText:NSLocalizedStringFromTable(@"To import and plot data from a spreadsheet, database, or text file, copy (⌘C) the data and paste it (⌘V) directly onto your graph.\n\nThe data must be in columns. If you include column headers, they will automatically be interpreted as axis titles. If the first column is descriptive labels, each label will be associated with the data point that follows.", @"DataImporter", @"Alert explaining how to import data")];
     [alert addButtonWithTitle:NSLocalizedStringFromTable(@"Okay", @"DataImporter", @"Alert explaining how to import data")];
     [alert setShowsHelp:YES];
-    [alert setHelpAnchor:@"importdata"];
+    [alert setHelpAnchor:NSLocalizedStringFromTable(@"importdata", @"DataImporter", @"Help anchor name")];
     
     [alert runModal];
     [alert release];

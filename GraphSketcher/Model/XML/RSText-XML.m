@@ -36,7 +36,7 @@ RCS_ID("$Header$");
 	[cursor closeElement];
     }
     else {
-	_attributedString = [[NSMutableAttributedString alloc] initWithString:@"[Unknown]"];
+	_attributedString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedStringFromTableInBundle(@"[Unknown]", @"GraphSketcherModel", OMNI_BUNDLE, @"Text label when opened from malformed XML")];
     }
     
     _cachedSize = CGSizeZero;

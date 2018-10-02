@@ -112,10 +112,10 @@ static NSUInteger modeFromChar(unichar theChar)
 }
 
 //NSAlphaShiftKeyMask - Set if Caps Lock key is pressed.
-//NSShiftKeyMask - Set if Shift key is pressed.
-//NSControlKeyMask - Set if Control key is pressed.
-//NSAlternateKeyMask - Set if Option or Alternate key is pressed.
-//NSCommandKeyMask - Set if Command key is pressed.
+//NSEventModifierFlagShift - Set if Shift key is pressed.
+//NSEventModifierFlagControl - Set if Control key is pressed.
+//NSEventModifierFlagOption - Set if Option or Alternate key is pressed.
+//NSEventModifierFlagCommand - Set if Command key is pressed.
 //NSNumericPadKeyMask - Set if any key in the numeric keypad is pressed.
 //NSHelpKeyMask - Set if the Help key is pressed.
 //NSFunctionKeyMask - Set if any function key is pressed.
@@ -149,7 +149,7 @@ static NSUInteger modeFromChar(unichar theChar)
 {
     NSString *chars = [event charactersIgnoringModifiers];
     
-    if (![chars length] || ([event modifierFlags] & (NSCommandKeyMask|NSAlternateKeyMask|NSControlKeyMask)))
+    if (![chars length] || ([event modifierFlags] & (NSEventModifierFlagCommand|NSEventModifierFlagOption|NSEventModifierFlagControl)))
         return NO;
     
     unichar theChar = [chars characterAtIndex:0];
@@ -239,13 +239,13 @@ static NSUInteger modeFromChar(unichar theChar)
 
 - (BOOL)commandKeyIsDown;
 {
-    if (_modifierFlags & NSCommandKeyMask) // apple key is down
+    if (_modifierFlags & NSEventModifierFlagCommand) // apple key is down
 	return YES;
     return NO;
 }
 - (BOOL)optionKeyIsDown;
 {
-    if (_modifierFlags & NSAlternateKeyMask)
+    if (_modifierFlags & NSEventModifierFlagOption)
 	return YES;
     return NO;
 }

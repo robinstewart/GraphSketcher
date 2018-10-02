@@ -874,7 +874,7 @@ BOOL showWhaBam = NO;
 {
     NSString *chars = [event charactersIgnoringModifiers];
     
-    if (![chars length] || ([event modifierFlags] & (NSCommandKeyMask|NSAlternateKeyMask|NSControlKeyMask)))
+    if (![chars length] || ([event modifierFlags] & (NSEventModifierFlagCommand|NSEventModifierFlagOption|NSEventModifierFlagControl)))
         return NO;
     
     unichar theChar = [chars characterAtIndex:0];

@@ -36,6 +36,7 @@
 #import <GraphSketcherModel/RSGraph-XML.h>  // for object copy/paste
 
 #import <OmniInspector/OIInspectorRegistry.h>
+#import <OmniInspector/OIInspectionSet.h>
 #import <OmniAppKit/OAColor.h>
 #import <OmniAppKit/OAFontDescriptor.h>
 
@@ -1637,7 +1638,7 @@ BOOL showWhaBam = NO;
     if ( [GE isKindOfClass:[RSTextLabel class]] ) {
         // Rich text
         NSAttributedString *attrString = [(RSTextLabel *)GE attributedString];
-        NSData *rtfData = [attrString RTFFromRange:NSMakeRange(0, [attrString length]) documentAttributes:nil];
+        NSData *rtfData = [attrString RTFFromRange:NSMakeRange(0, [attrString length]) documentAttributes:@{NSDocumentTypeDocumentAttribute: NSRTFTextDocumentType}];
         [pb setData:rtfData forType:NSRTFPboardType];
         
         // Plain text

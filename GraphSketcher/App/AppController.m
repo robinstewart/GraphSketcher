@@ -78,29 +78,6 @@
 
 @implementation AppController
 
-///////////////////////////////
-#pragma mark -
-#pragma mark NSInputContext hack
-// (copied from OmniOutliner 4/trunk)
-// We're hoping that this will fix a crasher in NSInputContext: <bug://bugs/53268>
-
-static id (*_original_keyBindingState)(id self, SEL _cmd) = NULL;
-static id _replacement_keyBindingState(id self, SEL _cmd)
-{
-    id result = _original_keyBindingState(self, _cmd);
-    return [[result retain] autorelease];
-}
-
-+ (void)performPosing;
-{
-    Class NSTSMInputContext = NSClassFromString(@"NSTSMInputContext");
-    if (NSTSMInputContext) {
-        SEL sel = @selector(keyBindingState);
-        if ([NSTSMInputContext instancesRespondToSelector:sel])
-            _original_keyBindingState = (typeof(_original_keyBindingState))OBReplaceMethodImplementation(NSTSMInputContext, sel, (IMP)_replacement_keyBindingState);
-    }
-}
-
 
 ///////////////////////////////
 #pragma mark -

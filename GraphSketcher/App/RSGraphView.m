@@ -296,7 +296,7 @@
     // and other things are done there.
     [_editor updateBounds:[self bounds]];
     
-    [self mouseEntered:nil];
+    [self setupMouseTracking];
 }
 
 
@@ -390,7 +390,8 @@
     [self setWasEditingText:NO];
     
     // Go through the mouseMoved code path with the new tool to initialize it properly:
-    [self mouseMoved:nil];
+    NSEvent *event = [NSEvent otherEventWithType:NSEventTypeApplicationDefined location:[NSEvent mouseLocation] modifierFlags:0 timestamp:[NSProcessInfo processInfo].systemUptime windowNumber:[[self window] windowNumber] context:nil subtype:0 data1:0 data2:0];
+    [self mouseMoved:event];
     
     [self setNeedsDisplay:YES];
 }
@@ -724,15 +725,12 @@
     Log3(@"drawRect finished");
 }
 
-- (void)mouseEntered:(NSEvent *)event
+- (void)setupMouseTracking
 {
-    if ( ![[self window] isMainWindow] )
-	return;
-    if ( ![[self window] isKeyWindow] )
-	return;
+    if ( ![[self window] isMainWindow] || ![[self window] isKeyWindow] )
+        return;
     
     [[self window] setAcceptsMouseMovedEvents:YES];
-    
     _mouseExited = NO;
     
     [self updateCursor];  // Necessary when you click between windows after having changed the tool mode.
@@ -740,6 +738,11 @@
     [_s setStatusMessage:[[_s selection] infoString]];
     
     [_editor.mapper resetCurveCache];
+}
+
+- (void)mouseEntered:(NSEvent *)event
+{
+    [self setupMouseTracking];
     
     //DEBUG_RS(@"mouse entered successfully");
 }
@@ -1183,7 +1186,8 @@ BOOL showWhaBam = NO;
 	[_editor.graph removeElement:toDelete];
 	
 	[self deselect];
-	[self mouseMoved:nil];	// update everything
+        NSEvent *event = [NSEvent keyEventWithType:NSEventTypeKeyUp location:[NSEvent mouseLocation] modifierFlags:0 timestamp:[NSProcessInfo processInfo].systemUptime windowNumber:[[self window] windowNumber] context:nil characters:@"⌫" charactersIgnoringModifiers:@"⌫" isARepeat:NO keyCode:46];
+	[self mouseMoved:event];	// update everything
     }
     
     else if( [_m mode] == RS_draw || [_m mode] == RS_fill ) {

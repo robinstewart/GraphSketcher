@@ -31,7 +31,10 @@
     // Shadow strength is updated with cocoa bindings
     
     // Cocoa bindings caused some havoc with the background color well: <bug://bugs/52797> (Editing Text Just After Changing the Background Color Causes a Black canvas)
-    [_backgroundColorWell setColor:[_graph backgroundColor].toColor];
+    NSColor *backgroundColor = [_graph backgroundColor].toColor;
+    if (backgroundColor != nil) {
+        [_backgroundColorWell setColor:backgroundColor];
+    }
     
     // Automatic margins checkbox is updated with cocoa bindings... to canEditWhitespace
     [self setCanEditWhitespace:![_graph autoMaintainsWhitespace]];

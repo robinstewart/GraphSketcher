@@ -97,10 +97,9 @@ OFXMLElement *SkipToNextChildElement(OFXMLCursor *cursor)
 {
     NSData *value = [self valueForKey:key];
     
-    if ([value length] == 0)
-        value = nil;
+    NSString *stringEncoding = ([value length] == 0 || value == nil) ? @"" : [value base64EncodedStringWithOptions:0];
     
-    [xmlDoc appendElement:elementName containingString:[value base64EncodedStringWithOptions:0]];
+    [xmlDoc appendElement:elementName containingString:stringEncoding];
     return value;
 }
 

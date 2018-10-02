@@ -13,6 +13,12 @@
 @synthesize color = _color;
 @synthesize opacity = _opacity;
 
+- (void)dealloc
+{
+    self.color = nil;
+    
+    [super dealloc];
+}
 
 - (void)awakeFromNib;
 {

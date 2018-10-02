@@ -120,6 +120,7 @@
     // release allocated objects
     [_penCursor release];
     [_fillCursor release];
+    self.textSnapshot = nil;
     
     self.editor = nil; // Unsubscribes KVO.
     

@@ -149,8 +149,13 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
     NSString *messageFormat = NSLocalizedStringFromTableInBundle(@"The file was written with version %1$@ while the version of %2$@ you are running understands files written by version %3$@ and older.  Loading this file may not work correctly and might lose some data.", nil, [GraphDocument bundle], @"newer file format alert message");
     NSString *message = [NSString stringWithFormat:messageFormat, [fileVersion cleanVersionString], appName, [appVersion cleanVersionString]];
     
-    NSInteger rc = NSRunAlertPanel(title, @"%@", NSLocalizedStringFromTableInBundle(@"Open File", nil, [GraphDocument bundle], @"alert panel button title"), NSLocalizedStringFromTableInBundle(@"Cancel", nil, [GraphDocument bundle], @"alert panel button"), message, nil);
-    return (rc == NSAlertDefaultReturn);
+    NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+    alert.messageText = title;
+    alert.informativeText = message;
+    [alert addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"Open File", nil, [GraphDocument bundle], @"alert panel button title")];
+    [alert addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"Cancel", nil, [GraphDocument bundle], @"alert panel button")];
+    NSModalResponse response = [alert runModal];
+    return (response == NSAlertFirstButtonReturn);
 }
 
 - (void)becomeUntitledWithType:(NSString *)docType;
@@ -463,31 +468,21 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
     NSString *alertTitle = [NSString stringWithFormat:NSLocalizedString(@"%@ has closed the connection for this LinkBack attachment.  Do you want to keep the changes?", "broken linkback connection dialog - alert text"), [link sourceApplicationName]];
     NSString *errorDescription = NSLocalizedString(@"This document has modifications that cannot be saved because %@ has closed the connection to it or exited.  You may preserve your changes by making this document untitled and severing the link, or you may close this window and abandon your changes.", "broken linkback connection dialog - alert text");
     
-    NSBeginAlertSheet(alertTitle,
-                      NSLocalizedString(@"Make Untitled", "broken linkback connection dialog - alert button"),
-                      NSLocalizedString(@"Don't Save", "broken linkback connection dialog - alert button"),
-                      nil,
-                      [self windowForSheet],
-                      self,
-                      @selector(_linkBackDidCloseSheetDidEnd:returnCode:contextInfo:),
-                      NULL,
-                      nil,
-                      errorDescription,
-                      [link sourceApplicationName]);
-    // _linkBackDidCloseSheetDidEnd:returnCode:contextInfo: will release the document when it gets called (to match the retain at the top of this method)
-
-}
-
-- (void)_linkBackDidCloseSheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
-{
-    if (returnCode == NSAlertDefaultReturn) {
-        [self setLinkBack:nil];
-        [[NSDocumentController sharedDocumentController] addDocument:self];
-        [[self windowControllers] makeObjectsPerformSelector:@selector(synchronizeWindowTitleWithDocumentName)];
-    } else  
-        [self close];
-    
-    [self autorelease];  // matches the retain in -linkBackConnectionDidClose:
+    NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+    alert.messageText = alertTitle;
+    alert.informativeText = errorDescription;
+    [alert addButtonWithTitle:NSLocalizedString(@"Make Untitled", "broken linkback connection dialog - alert button")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Don't Save", "broken linkback connection dialog - alert button")];
+    [alert beginSheetModalForWindow:[self windowForSheet] completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode == NSAlertFirstButtonReturn) {
+            [self setLinkBack:nil];
+            [[NSDocumentController sharedDocumentController] addDocument:self];
+            [[self windowControllers] makeObjectsPerformSelector:@selector(synchronizeWindowTitleWithDocumentName)];
+        } else
+            [self close];
+        
+        [self autorelease];  // matches the retain at the top of -linkBackConnectionDidClose:
+    }];
 }
 
 #pragma mark -

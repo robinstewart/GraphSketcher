@@ -51,12 +51,12 @@
 
 - (IBAction)cancelButton:(id)sender;
 {
-    [NSApp endSheet:[self window] returnCode:NSCancelButton];
+    [NSApp endSheet:[self window] returnCode:NSModalResponseCancel];
 }
 
 - (IBAction)okButton:(id)sender;
 {
-    [NSApp endSheet:[self window] returnCode:NSOKButton];
+    [NSApp endSheet:[self window] returnCode:NSModalResponseOK];
 }
 
 @end

@@ -396,10 +396,9 @@ static NSUInteger columnTypeForCell(NSString *cell) {
     }
 }
 
-// returns an array of column types
-+ (void)detectColumnTypes:(NSArray *)table intoArray:(NSInteger *)types {
+// fills int array 'types' with the determined type of each column
++ (void)detectColumnTypes:(NSArray *)table withNColumns:(NSUInteger)nmofCols intoArray:(NSInteger *)types {
     // get the number of columns
-    NSUInteger nmofCols = [RSDataImporter numberOfColumnsInTable:table];
     NSUInteger nmofTypes = RS_NM_OF_COL_TYPES;  // unknown, label, float, date
     
     // set up the result array and the voting matrix
@@ -1024,7 +1023,7 @@ static RSAxis *_shouldHideEndLabels = nil;
     
     // get the column types
     NSInteger types[nmofCols];
-    [RSDataImporter detectColumnTypes:table intoArray:types];
+    [RSDataImporter detectColumnTypes:table withNColumns:nmofCols intoArray:types];
     
     NSMutableArray *numberColumns = [NSMutableArray array];
     NSInteger firstLabelsColumn = -1;

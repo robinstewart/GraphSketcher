@@ -161,7 +161,7 @@
         
         // Notify the RSGraphView
         _graphView.editor = document.editor; // this also updates the display etc.
-        [_graphView mouseEntered:nil];
+        [_graphView setupMouseTracking];
         
         // There should be no undos registered at this point. The document reading code should disable undos while doing its thing
         [[document undoer] endRepetitiveUndo]; // do this to ensure it is really empty (and we assert that it did nothing next).
@@ -327,7 +327,7 @@
     //DEBUG_RS(@"windowDidBecomeKey");
     
     // Tell graphView to wake up.  This has to be called both here and in -windowDidBecomeMain:, because it's not consistent which method gets called first.
-    [_graphView mouseEntered:nil];
+    [_graphView setupMouseTracking];
     
     // The graphView also needs to redisplay because the selection color will stop being gray.
     [_graphView setNeedsDisplay:YES];
@@ -348,7 +348,7 @@
     [_m resetFlags];
     
     // tell graphView to wake up
-    [_graphView mouseEntered:nil];
+    [_graphView setupMouseTracking];
 }
 - (void)windowDidResignMain:(NSNotification *)note;
 {
@@ -479,7 +479,7 @@
 static BOOL inspectorsVisibleBeforeVersions = YES;
 - (void)windowWillEnterVersionBrowser:(NSNotification *)notification;
 {
-    OIInspectorRegistry *inspectorRegistry = [[NSApp delegate] inspectorRegistryForWindow:self.window];
+    OIInspectorRegistry *inspectorRegistry = [(AppController *)[NSApp delegate] inspectorRegistryForWindow:self.window];
     inspectorsVisibleBeforeVersions = [inspectorRegistry hasVisibleInspector];
     if (inspectorsVisibleBeforeVersions)
         [inspectorRegistry tabShowHidePanels];
@@ -488,7 +488,7 @@ static BOOL inspectorsVisibleBeforeVersions = YES;
 
 - (void)windowDidExitVersionBrowser:(NSNotification *)notification;
 {
-    OIInspectorRegistry *inspectorRegistry = [[NSApp delegate] inspectorRegistryForWindow:self.window];
+    OIInspectorRegistry *inspectorRegistry = [(AppController *)[NSApp delegate] inspectorRegistryForWindow:self.window];
     if (inspectorsVisibleBeforeVersions)
         [inspectorRegistry tabShowHidePanels];
 }

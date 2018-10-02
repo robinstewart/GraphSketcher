@@ -215,7 +215,7 @@
 	    }
 	    
 	    // apply formatting
-	    [[[startVertex color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace] set];
+	    [[[startVertex color] colorUsingColorSpace:OAColorSpaceRGB] set];
 	    
 	    // draw
 	    [P fill];
@@ -227,15 +227,15 @@
 	    // apply formatting
 	    if( SKETCH_TEST_MODE == 1 ) {
 		[P setLineWidth:2];
-		[[[[startVertex color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace] colorWithAlphaComponent:0.8f] set];
+		[[[[startVertex color] colorUsingColorSpace:OAColorSpaceRGB] colorWithAlphaComponent:0.8f] set];
 	    }
 	    else if( [[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"SegmentStrokesWhileDrawing"] ) {
 		[P setLineWidth:[startVertex width]];
-		[[[[startVertex color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace] colorWithAlphaComponent:0.2f] set];
+		[[[[startVertex color] colorUsingColorSpace:OAColorSpaceRGB] colorWithAlphaComponent:0.2f] set];
 	    }
 	    else {
 		[P setLineWidth:[startVertex width]];
-		[[[startVertex color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace] set];
+		[[[startVertex color] colorUsingColorSpace:OAColorSpaceRGB] set];
 	    }
 	    // draw
 	    [P stroke];

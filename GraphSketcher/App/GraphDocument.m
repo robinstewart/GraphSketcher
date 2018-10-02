@@ -288,26 +288,12 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
 }
 
 
-#if defined(MAC_OS_X_VERSION_10_7) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
 - (void)saveToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation completionHandler:(void (^)(NSError *))completionHandler;
 {
     if ([self isInAppBundle])
         return;
     
     return [super saveToURL:url ofType:typeName forSaveOperation:saveOperation completionHandler:completionHandler];
-}
-#endif
-
-- (BOOL)saveToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation error:(NSError **)outError;
-{
-    if ([self isInAppBundle]) {
-	NSDictionary *errorInfo = [NSDictionary dictionaryWithObjectsAndKeys:NSLocalizedString(@"Cannot modify bundled example graphs.", @"error description"), NSLocalizedDescriptionKey, nil];
-        if (outError != NULL)
-            *outError = [NSError errorWithDomain:RSErrorDomain code:RSBundledGraphDocument userInfo:errorInfo];
-	return NO;
-    }
-    
-    return [super saveToURL:absoluteURL ofType:typeName forSaveOperation:saveOperation error:outError];
 }
 
 

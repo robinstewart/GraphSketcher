@@ -1352,7 +1352,7 @@ BOOL showWhaBam = NO;
     [_s sendChange:self];
 }
 
-- (void)textStorageDidProcessEditing:(NSNotification *)notification;
+- (void)textStorage:(NSTextStorage *)textStorage didProcessEditing:(NSTextStorageEditActions)editedMask range:(NSRange)editedRange changeInLength:(NSInteger)delta;
 // This is called whenever the text storage changes at all, including as tentative characters are displayed when using chinese/japanese input methods. (e.g. Hiragana)
 {
     // The frame cannot be changed until after the text layout has completed (otherwise an exception is thrown).
@@ -2152,9 +2152,9 @@ BOOL showWhaBam = NO;
 	     || menuAction == @selector(toggleSubscript:) ) {
 	if( _textView ) {
 	    NSTextView *TV = (NSTextView *)[[self window] firstResponder];
-	    NSAttributedString *selectedRange = [TV attributedSubstringFromRange:[TV selectedRange]];
+            NSAttributedString *selectedText = [TV attributedSubstringForProposedRange:[TV selectedRange] actualRange:NULL];
 	    // >0 means superscript, <0 means subscript
-	    int isSuper = [[selectedRange attribute:NSSuperscriptAttributeName 
+	    int isSuper = [[selectedText attribute:NSSuperscriptAttributeName 
 					    atIndex:0 effectiveRange:NULL] intValue];
 	    if( (isSuper > 0 && menuAction == @selector(toggleSuperscript:))
 	       || (isSuper < 0 && menuAction == @selector(toggleSubscript:)) ) {
@@ -2382,7 +2382,7 @@ BOOL showWhaBam = NO;
 	    NSRange selectedRange = [TV selectedRange];
 	    if( selectedRange.length == 0 ) 
 		selectedRange = NSMakeRange([[[_s selection] attributedString] length] - 1, 1);
-	    NSAttributedString *selectedString = [TV attributedSubstringFromRange:selectedRange];
+            NSAttributedString *selectedString = [TV attributedSubstringForProposedRange:selectedRange actualRange:NULL];
 	    
 	    // >0 means superscript, <0 means subscript
 	    int isSuper = [[selectedString attribute:NSSuperscriptAttributeName 
@@ -2390,7 +2390,7 @@ BOOL showWhaBam = NO;
 	    NSFont *font = [selectedString attribute:NSFontAttributeName atIndex:0 effectiveRange:NULL];
 	    CGFloat fontSize = [font pointSize];
 	    //NSLog(@"isSuper: %d", isSuper);
-	    //CGFloat baseline = [[selectedRange attribute:NSBaselineOffsetAttributeName 
+	    //CGFloat baseline = [[selectedString attribute:NSBaselineOffsetAttributeName
 	    //								   atIndex:0 effectiveRange:NULL] doubleValue];
 	    //NSLog(@"baseline: %f", baseline);
 	    if( isSuper == 0 ) {  // should be superscripted
@@ -2415,7 +2415,7 @@ BOOL showWhaBam = NO;
 	    NSRange selectedRange = [TV selectedRange];
 	    if( selectedRange.length == 0 ) 
 		selectedRange = NSMakeRange([[[_s selection] attributedString] length] - 1, 1);
-	    NSAttributedString *selectedString = [TV attributedSubstringFromRange:selectedRange];
+	    NSAttributedString *selectedString = [TV attributedSubstringForProposedRange:selectedRange actualRange:NULL];
 	    
 	    // >0 means superscript, <0 means subscript
 	    int isSuper = [[selectedString attribute:NSSuperscriptAttributeName 
@@ -2637,14 +2637,31 @@ static ErrorBarSheet *errorBarSheet = nil;
         if (!errorBarSheet) {  // Load the error bar sheet if it hasn't been loaded yet
             errorBarSheet = [[ErrorBarSheet alloc] init];
         }
-        
-        NSMutableDictionary *contextInfo = [[NSMutableDictionary alloc] init];  // will be released in errorBarSheetDidEnd
-        [contextInfo setValue:selection forKey:@"selection"];
-        
-        if ([sender respondsToSelector:@selector(title)])
-            [contextInfo setValue:[sender title] forKey:@"undoActionName"];
 
-        [NSApp beginSheet:[errorBarSheet window] modalForWindow:[self window] modalDelegate:self didEndSelector:@selector(errorBarSheetDidEnd:returnCode:contextInfo:) contextInfo:contextInfo];
+        [[self window] beginSheet:[errorBarSheet window] completionHandler:^(NSModalResponse returnCode) {
+            
+            [[errorBarSheet window] orderOut:self];  // Necessary to actually remove the sheet from the window
+            
+            if (returnCode == NSModalResponseCancel)
+                return;
+            //else (returnCode == NSOKButton)
+            
+            RSGraphElement *result = [_graph createConstantErrorBarsWithSelection:selection posOffset:[errorBarSheet posOffset] negOffset:[errorBarSheet negOffset]];
+            if (!result) {
+                // No error bars were created for some reason.  Error message?
+                return;
+            }
+            
+            // The added error bars may have gone outside the visible graph area
+            [_editor.mapper scaleAxesForNewObjects:[result elements] importingData:NO];
+            
+            if ([sender respondsToSelector:@selector(title)]) {
+                [_editor.undoer setActionName:[sender title]];
+            }
+            [_editor.undoer endRepetitiveUndo];
+            
+            [_s setSelection:result];
+        }];
         return;
     }
     
@@ -2653,35 +2670,6 @@ static ErrorBarSheet *errorBarSheet = nil;
     [_editor.undoer endRepetitiveUndo];
     
     [_s setSelection:lines];
-}
-
-- (void)errorBarSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
-{
-    [sheet orderOut:self];  // Necessary to actually remove the sheet from the window
-
-    [(id)contextInfo autorelease];  // Was retained in makeErrorBars:
-    
-    if (returnCode == NSCancelButton) {
-        return;
-    }
-    //else (returnCode == NSOKButton)
-    
-    RSGraphElement *selection = [(NSDictionary *)contextInfo valueForKey:@"selection"];
-    RSGraphElement *result = [_graph createConstantErrorBarsWithSelection:selection posOffset:[errorBarSheet posOffset] negOffset:[errorBarSheet negOffset]];
-    if (!result) {
-        // No error bars were created for some reason.  Error message?
-        return;
-    }
-    
-    // The added error bars may have gone outside the visible graph area
-    [_editor.mapper scaleAxesForNewObjects:[result elements] importingData:NO];
-    
-    NSString *undoActionName = [(NSDictionary *)contextInfo valueForKey:@"undoActionName"];
-    if (undoActionName)
-        [_editor.undoer setActionName:undoActionName];
-    [_editor.undoer endRepetitiveUndo];
-    
-    [_s setSelection:result];
 }
 
 
@@ -2956,31 +2944,18 @@ static ErrorBarSheet *errorBarSheet = nil;
         sheet = [[DataImportOptionsSheet alloc] init];
     }
     
-    NSMutableDictionary *contextInfo = [[NSMutableDictionary alloc] init];  // will be released in sheetDidEnd
-    //[contextInfo setValue:selection forKey:@"selection"];
-    
-    if ([sender respondsToSelector:@selector(title)])
-        [contextInfo setValue:[sender title] forKey:@"undoActionName"];
-    
-    [NSApp beginSheet:[sheet window] modalForWindow:[self window] modalDelegate:self didEndSelector:@selector(dataImportOptionsSheetDidEnd:returnCode:contextInfo:) contextInfo:contextInfo];
-    return;
-}
-
-- (void)dataImportOptionsSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
-{
-    [sheet orderOut:self];  // Necessary to actually remove the sheet from the window
-    
-    [(id)contextInfo autorelease];  // Was retained in pasteWithOptions:
-    
-    if (returnCode == NSCancelButton) {
-        return;
-    }
-    //else (returnCode == NSOKButton)
-    
-    NSString *undoActionName = [(NSDictionary *)contextInfo valueForKey:@"undoActionName"];
-    if (undoActionName)
-        [_editor.undoer setActionName:undoActionName];
-    [_editor.undoer endRepetitiveUndo];
+    [[self window] beginSheet:[sheet window] completionHandler:^(NSModalResponse returnCode) {
+        [[sheet window] orderOut:self];  // Necessary to actually remove the sheet from the window
+        
+        if (returnCode == NSModalResponseCancel)
+            return;
+        //else (returnCode == NSOKButton)
+        
+        if ([sender respondsToSelector:@selector(title)]) {
+            [_editor.undoer setActionName:[sender title]];
+        }
+        [_editor.undoer endRepetitiveUndo];
+    }];
 }
 
 
@@ -3112,7 +3087,7 @@ static ErrorBarSheet *errorBarSheet = nil;
     
     [savePanel beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result)
     {
-        if (result != NSFileHandlingPanelOKButton)
+        if (result != NSModalResponseOK)
             return;
         
         [self commitEditing];

@@ -207,11 +207,15 @@
         [experimentalMenu release];
         [experimentalMenuItem release];
     }
+    
+    [super applicationWillFinishLaunching:notification];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)note
 {
     DEBUG_RS(@"ApplicationDidFinishLaunching");
+    
+    [super applicationDidFinishLaunching:note];
     
     BOOL firstTimeUser = [[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"GSFirstTimeUser"];
     if (firstTimeUser) {
@@ -238,6 +242,8 @@
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;
 {
+    [super applicationShouldTerminate:sender];
+    
     // TODO: End editing in any open documents to commit any pending changes
 
     switch ([self requestTermination]) {
@@ -254,6 +260,8 @@
 - (void)applicationWillTerminate:(NSNotification *)notification;
 {
     [self willTerminate];
+    
+    [super applicationWillTerminate:notification];
 }
 
 

@@ -268,9 +268,9 @@
 	[P lineToPoint:NSMakePoint(p.x + c, p.y - b)];
 	[P closePath];
 	
-	NSRect r = NSMakeRect(0,0,b*2,b*2);
-	r.origin = p;
-	[P rotateInFrame:r byDegrees:-10];
+	NSRect rect = NSMakeRect(0,0,b*2,b*2);
+	rect.origin = p;
+	[P rotateInFrame:rect byDegrees:-10];
     }
     
     

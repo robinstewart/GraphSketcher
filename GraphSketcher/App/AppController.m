@@ -178,26 +178,26 @@
     if ([[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"ShowExperimentalFeaturesMenu"]) {
         NSMenu *experimentalMenu = [[NSMenu alloc] initWithTitle:@"Experimental"];
         NSInteger index = -1;
-        [experimentalMenu insertItemWithTitle:@"Generate Normal Data" action:@selector(generateStandardNormalData:) keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:@"Generate Normal Data" action:NSSelectorFromString(@"generateStandardNormalData:") keyEquivalent:@"" atIndex:++index];
         
         [experimentalMenu insertItem:[NSMenuItem separatorItem] atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"Tufte Tick Marks" action:@selector(toggleTickLayoutAtData:) keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"Tufte Axis Extent" action:@selector(toggleAxesUseDataExtent:) keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"Show Data Quartiles" action:@selector(toggleAxesUseDataQuartiles:) keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:@"Tufte Tick Marks" action:NSSelectorFromString(@"toggleTickLayoutAtData:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:@"Tufte Axis Extent" action:NSSelectorFromString(@"toggleAxesUseDataExtent:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:@"Show Data Quartiles" action:NSSelectorFromString(@"toggleAxesUseDataQuartiles:") keyEquivalent:@"" atIndex:++index];
         
         [experimentalMenu insertItem:[NSMenuItem separatorItem] atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"Dotted Grid Lines" action:@selector(toggleDottedGrid:) keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:@"Dotted Grid Lines" action:NSSelectorFromString(@"toggleDottedGrid:") keyEquivalent:@"" atIndex:++index];
         
         [experimentalMenu insertItem:[NSMenuItem separatorItem] atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"y = x^2 + c" action:@selector(addEquationLine:) keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"y = x^3 + c" action:@selector(addEquationLine:) keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"y = sin(x) + c" action:@selector(addEquationLine:) keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"y = e^(-x^2) + c (Bell Curve)" action:@selector(addEquationLine:) keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"y = 1/(1 + e^-x) + c (Logistic)" action:@selector(addEquationLine:) keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:@"y = x^2 + c" action:NSSelectorFromString(@"addEquationLine:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:@"y = x^3 + c" action:NSSelectorFromString(@"addEquationLine:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:@"y = sin(x) + c" action:NSSelectorFromString(@"addEquationLine:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:@"y = e^(-x^2) + c (Bell Curve)" action:NSSelectorFromString(@"addEquationLine:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:@"y = 1/(1 + e^-x) + c (Logistic)" action:NSSelectorFromString(@"addEquationLine:") keyEquivalent:@"" atIndex:++index];
         
         [experimentalMenu insertItem:[NSMenuItem separatorItem] atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"Import and Replace Data" action:@selector(importDataSeriesReplacingCurrent:) keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"Import Data Series In Rows" action:@selector(importDataInRows:) keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:@"Import and Replace Data" action:NSSelectorFromString(@"importDataSeriesReplacingCurrent:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:@"Import Data Series In Rows" action:NSSelectorFromString(@"importDataInRows:") keyEquivalent:@"" atIndex:++index];
         
         NSMenuItem *experimentalMenuItem = [[NSMenuItem alloc] initWithTitle:@"Experimental" action:NULL keyEquivalent:@""];
         [experimentalMenuItem setImage:[NSImage imageNamed:@"experimental"]];
@@ -546,7 +546,7 @@
 	return YES;
     }
     // seems like there should be a better way, but this does the trick without requiring a major re-write.
-    else if ( action == @selector(showMessageOfTheDay:) || action == @selector(sendFeedback:) || action == @selector(openProductPageInBrowser:) || action == @selector(showAboutPanel:) || action == @selector(showPreferences:) || action == @selector(showGettingStarted:) || action == @selector(openKeyboardShortcuts:) )
+    else if ( action == @selector(showMessageOfTheDay:) || action == @selector(sendFeedback:) || action == @selector(openProductPageInBrowser:) || action == @selector(showAboutPanel:) || action == @selector(showGettingStarted:) || action == @selector(openKeyboardShortcuts:) )
     {
 	return YES;
     }

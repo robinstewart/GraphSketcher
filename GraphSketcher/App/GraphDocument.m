@@ -586,19 +586,19 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
     else if (menuAction == @selector(revertDocumentToSaved:)) {
         return ([self isDocumentEdited] && [self fileURL]);
     }
-    else if (menuAction == @selector(connectPoints:)) {
+    else if (menuAction == NSSelectorFromString(@"connectPoints:")) {
 	if ( [RSGraph hasMultipleVertices:[_s selection]] )
 	    [menuItem setTitle:NSLocalizedString(@"In Selection Order", @"Menu item")];
 	else
 	    [menuItem setTitle:NSLocalizedString(@"In Creation Order", @"Menu item")];
     }
-    else if (menuAction == @selector(bestFitLine:)) {
+    else if (menuAction == NSSelectorFromString(@"bestFitLine:")) {
 	if ( [_s selected] )
 	    [menuItem setTitle:NSLocalizedString(@"Insert Best-Fit Line for Selection", @"Menu item")];
 	else
 	    [menuItem setTitle:NSLocalizedString(@"Insert Best-Fit Line", @"Menu item")];
     }
-    else if (menuAction == @selector(histogram:)) {
+    else if (menuAction == NSSelectorFromString(@"histogram:")) {
 	if ( [_editor.graph displayHistogram] ) {
 	    //[menuItem setTitle:@"Hide Grid"];
 	    [menuItem setState:NSOnState];

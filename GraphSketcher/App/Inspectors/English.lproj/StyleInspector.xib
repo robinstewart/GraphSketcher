@@ -128,7 +128,7 @@
                     </connections>
                 </slider>
                 <textField toolTip="Font size of the selected labels, in points." verticalHuggingPriority="750" id="173">
-                    <rect key="frame" x="190" y="97" width="34" height="18"/>
+                    <rect key="frame" x="190" y="96" width="34" height="19"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <textFieldCell key="cell" scrollable="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="right" title="2" drawsBackground="YES" id="176">
                         <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="#,##0.#" negativeFormat="-#,##0.#" thousandSeparator="," id="177">
@@ -200,7 +200,7 @@
                     </connections>
                 </slider>
                 <textField toolTip="Distance between the selected objects and their labels, in points." verticalHuggingPriority="750" id="38">
-                    <rect key="frame" x="190" y="68" width="34" height="18"/>
+                    <rect key="frame" x="190" y="67" width="34" height="19"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <textFieldCell key="cell" scrollable="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="right" title="2" drawsBackground="YES" id="43">
                         <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="#,##0.#" negativeFormat="-#,##0.#" thousandSeparator="," id="44">
@@ -481,7 +481,7 @@
                     </connections>
                 </colorWell>
                 <textField toolTip="The width of the selected objects, in points." verticalHuggingPriority="750" id="17">
-                    <rect key="frame" x="190" y="418" width="34" height="18"/>
+                    <rect key="frame" x="190" y="417" width="34" height="19"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <textFieldCell key="cell" scrollable="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="right" title="2.0" drawsBackground="YES" id="90">
                         <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="#,##0.0" negativeFormat="-#,##0.0" thousandSeparator="," id="91">

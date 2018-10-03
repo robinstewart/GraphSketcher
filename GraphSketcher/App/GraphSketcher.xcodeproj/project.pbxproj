@@ -458,7 +458,7 @@
 		5F1A93F818579B9C009A1111 /* GraphSketcherModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GraphSketcherModel.xcodeproj; path = ../Model/GraphSketcherModel.xcodeproj; sourceTree = "<group>"; };
 		5F1A940018579BE7009A1111 /* GSQuickLookPlugin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GSQuickLookPlugin.xcodeproj; path = ../QuickLook/GSQuickLookPlugin.xcodeproj; sourceTree = "<group>"; };
 		5F1A940718579BF5009A1111 /* GSSpotlightPlugin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GSSpotlightPlugin.xcodeproj; path = ../Spotlight/GSSpotlightPlugin.xcodeproj; sourceTree = "<group>"; };
-		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; path = Info.plist; sourceTree = "<group>"; };
+		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* GraphSketcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraphSketcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 

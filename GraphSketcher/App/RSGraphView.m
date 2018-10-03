@@ -386,7 +386,7 @@
     [_s setStatusMessage:[[_s selection] infoString]];
     
     // update inspectors:
-    NSWindow *window = [NSApp mainWindow];
+    NSWindow *window = [[NSApplication sharedApplication] mainWindow];
     [[[AppController sharedController] inspectorRegistry] updateInspectorForWindow:window];
     
     [self setWasEditingText:NO];

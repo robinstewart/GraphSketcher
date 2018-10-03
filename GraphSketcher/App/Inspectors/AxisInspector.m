@@ -622,7 +622,7 @@ static BOOL boolFromState(NSInteger state)
 
 - (IBAction)changeGridColor:(id)sender;
 {
-    if (![[[NSApp mainWindow] firstResponder] isKindOfClass:[RSGraphView class]]) {
+    if (![[[[NSApplication sharedApplication] mainWindow] firstResponder] isKindOfClass:[RSGraphView class]]) {
         [_gridColorWell deactivate];
         return;
     }

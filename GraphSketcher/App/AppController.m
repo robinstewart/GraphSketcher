@@ -118,7 +118,7 @@
     NSError *error = nil;
     GraphDocument *document = [self documentAtPath:documentPath load:YES error:&error];
     if (!document)
-	[NSApp presentError:error];
+	[[NSApplication sharedApplication] presentError:error];
     
     [document setIsInAppBundle:YES];
     DEBUG_RS(@"Loaded '%@' from app bundle.", documentName);
@@ -138,7 +138,7 @@
     NSError *error = nil;
     GraphDocument *document = [[NSDocumentController sharedDocumentController] makeDocumentForURL:nil withContentsOfURL:documentURL ofType:RSGraphFileType error:&error];
     if (!document)
-	[NSApp presentError:error];
+	[[NSApplication sharedApplication] presentError:error];
 
     [document makeWindowControllers];
     [document showWindows];
@@ -202,7 +202,7 @@
         NSMenuItem *experimentalMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Experimental", @"Menu item") action:NULL keyEquivalent:@""];
         [experimentalMenuItem setImage:[NSImage imageNamed:@"experimental"]];
         [experimentalMenuItem setSubmenu:experimentalMenu];
-        [[NSApp mainMenu] insertItem:experimentalMenuItem atIndex:7];
+        [[[NSApplication sharedApplication] mainMenu] insertItem:experimentalMenuItem atIndex:7];
         
         [experimentalMenu release];
         [experimentalMenuItem release];
@@ -292,7 +292,7 @@
         [document makeWindowControllers];
     [document showWindows];
     
-    [NSApp activateIgnoringOtherApps:YES];
+    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }
 
 - (void)linkBackDidClose:(LinkBack*)link ;
@@ -514,7 +514,7 @@
     [[NSNotificationCenter defaultCenter] 
      postNotificationName:@"RSContextChanged" object:nil];
 
-    [[self inspectorRegistry] updateInspectorForWindow:[NSApp mainWindow]];
+    [[self inspectorRegistry] updateInspectorForWindow:[[NSApplication sharedApplication] mainWindow]];
 }
 
 

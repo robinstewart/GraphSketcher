@@ -198,7 +198,7 @@
 - (IBAction)changeBackgroundColor:(id)sender;
 // called when color well updated
 {
-    if (![[[NSApp mainWindow] firstResponder] isKindOfClass:[RSGraphView class]]) {
+    if (![[[[NSApplication sharedApplication] mainWindow] firstResponder] isKindOfClass:[RSGraphView class]]) {
         [_backgroundColorWell deactivate];
         return;
     }

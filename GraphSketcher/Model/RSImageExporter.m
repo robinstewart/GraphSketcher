@@ -13,7 +13,11 @@
 #import <OmniAppKit/OAColor.h>
 
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
-#import <OmniQuartz/OQDrawing.h>
+//#import <OmniQuartz/OQDrawing.h>
+static inline void OQFlipVerticallyInRect(CGContextRef ctx, CGRect rect)
+{   // Updates the CTM so that the lower/upper edges of the rect are swapped.
+    CGContextConcatCTM(ctx, (CGAffineTransform){ 1, 0, 0, -1, 0, 2 * rect.origin.y + rect.size.height });
+}
 #else
 #import <AppKit/NSImage.h>
 #endif

@@ -24,6 +24,12 @@ The Mac app is located inside the `App` folder; the iPad source is in the `iPad`
 
     git clone --recursive git://github.com/graphsketcher/GraphSketcher
 
+### Dependencies
+
+GraphSketcher includes the OmniGroup open source frameworks via a git submodule. To update to the latest framework code, run (in the root directory):
+
+	git submodule update --remote
+
 ### Supported Targets
 
 GraphSketcher requires iOS 7 and Mac OS X 10.8.
@@ -32,13 +38,13 @@ GraphSketcher requires iOS 7 and Mac OS X 10.8.
 
 Building GraphSketcher requires Xcode 5.1.
 
-#### GraphSketch for Mac
+#### GraphSketcher for Mac
 
 GraphSketcher for Mac is sandboxed, and thus must be signed when built. If you are enrolled in the Mac Developer Program, you may already have an appropriate code signing identity in your keychain. 
 
 If you do not have an appropriate Mac code signing identity, please refer to the [Code Signing Guide](https://developer.apple.com/library/mac/documentation/Security/Conceptual/CodeSigningGuide/Procedures/Procedures.html) for additional information.
 
-#### GraphSketch for iPad
+#### GraphSketcher for iPad
 
 To build GraphSketcher for iPad, you need an appropriate iOS code signing identity in your keychain. If you are enrolled in the iOS Developer program, you should already have an code signing identity in your keychain.
 

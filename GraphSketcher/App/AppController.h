@@ -8,12 +8,11 @@
 #import <Cocoa/Cocoa.h>
 
 #import <OmniAppKit/OAController.h>
-#import <LinkBack/LinkBack.h>
 
 @class Inspector, OIInspectorRegistry, Preferences, RSMode;
 
 
-@interface AppController : OAController <LinkBackServerDelegate>
+@interface AppController : OAController
 {
     Inspector *_inspector; // Controller object for the inspector panel
 }

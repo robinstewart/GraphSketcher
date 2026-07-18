@@ -7,6 +7,8 @@
 
 #import "RSGraphView.h"
 
+#import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
+
 #import "RSSelector.h"
 #import "RSMode.h"
 #import "RSTool.h"
@@ -58,9 +60,13 @@
 - (void)updateTrackingAreas;
 {
     [super updateTrackingAreas];
-    
-    [self removeTrackingRect:_trackingRectTag];
-    _trackingRectTag = [self addTrackingRect:[self bounds] owner:self 
+
+    // Only remove an existing tracking rect. On the first call _trackingRectTag is 0; on modern
+    // macOS removeTrackingRect: with an invalid tag trips an internal assertion (which Omni's
+    // assertion handler escalates into a crash-handler loop, appearing as a launch hang).
+    if (_trackingRectTag != 0)
+        [self removeTrackingRect:_trackingRectTag];
+    _trackingRectTag = [self addTrackingRect:[self bounds] owner:self
                                     userData:nil assumeInside:NO];
 }
 
@@ -616,8 +622,8 @@
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx
 {
     NSGraphicsContext *nsGraphicsContext;
-    nsGraphicsContext = [NSGraphicsContext graphicsContextWithGraphicsPort:ctx
-                                                                   flipped:NO];
+    nsGraphicsContext = [NSGraphicsContext graphicsContextWithCGContext:ctx
+                                                                 flipped:NO];
     [NSGraphicsContext saveGraphicsState];
     [NSGraphicsContext setCurrentContext:nsGraphicsContext];
     
@@ -1617,8 +1623,8 @@ BOOL showWhaBam = NO;
     Log1(@"RSGraphView -writeElement:toPasteboard: called");
     // Declare types
     [pb declareTypes: [NSArray arrayWithObjects:RSGraphElementPboardType,
-                       NSTabularTextPboardType,
-                       NSStringPboardType, nil] owner:self];
+                       NSPasteboardTypeTabularText,
+                       NSPasteboardTypeString, nil] owner:self];
 
     //////
     // Copy data onto the pasteboard
@@ -1640,20 +1646,20 @@ BOOL showWhaBam = NO;
         // Rich text
         NSAttributedString *attrString = [(RSTextLabel *)GE attributedString];
         NSData *rtfData = [attrString RTFFromRange:NSMakeRange(0, [attrString length]) documentAttributes:@{NSDocumentTypeDocumentAttribute: NSRTFTextDocumentType}];
-        [pb setData:rtfData forType:NSRTFPboardType];
+        [pb setData:rtfData forType:NSPasteboardTypeRTF];
         
         // Plain text
         NSString *text = [(RSTextLabel *)GE text];
-        [pb setString:text forType:NSTabularTextPboardType];
-        [pb setString:text forType:NSStringPboardType];
+        [pb setString:text forType:NSPasteboardTypeTabularText];
+        [pb setString:text forType:NSPasteboardTypeString];
         return;
     }
 
     // Tabular and string data for other graph elements
     NSString *tabularStringRep = [RSGraph tabularStringRepresentationOfPointsIn:GE];
     if (tabularStringRep) {
-        [pb setString:tabularStringRep forType:NSTabularTextPboardType];
-        [pb setString:tabularStringRep forType:NSStringPboardType];
+        [pb setString:tabularStringRep forType:NSPasteboardTypeTabularText];
+        [pb setString:tabularStringRep forType:NSPasteboardTypeString];
     }
 }
 
@@ -1706,8 +1712,8 @@ BOOL showWhaBam = NO;
 {
     NSString *type = [pb availableTypeFromArray:[NSArray arrayWithObjects:RSGraphElementPboardType,
 						 OmniDataOnlyTabularPboardType,
-						 NSTabularTextPboardType,  // prefer tabular text to plain text
-						 NSStringPboardType, nil]];
+						 NSPasteboardTypeTabularText,  // prefer tabular text to plain text
+						 NSPasteboardTypeString, nil]];
     return type;
 }
 
@@ -1750,7 +1756,7 @@ BOOL showWhaBam = NO;
     //
     // Importing data from external files
     //
-    if ([type isEqual: OmniDataOnlyTabularPboardType] || type == NSTabularTextPboardType || type == NSStringPboardType) {
+    if ([type isEqual: OmniDataOnlyTabularPboardType] || type == NSPasteboardTypeTabularText || type == NSPasteboardTypeString) {
 	// Read in the NSString from the pasteboard and attempt to parse it into vertices.  This should return an array of RSGroups.  Each group represents an imported data series.
 	
 	return [self importElementsFromString:[pb stringForType:type]];
@@ -2040,19 +2046,19 @@ BOOL showWhaBam = NO;
     
     else if (menuAction == @selector(snapToGrid:)) {
 	if ( [[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"SnapToGrid"] ) {
-	    [menuItem setState:NSOnState];
+	    [menuItem setState:NSControlStateValueOn];
 	} else {
-	    [menuItem setState:NSOffState];
+	    [menuItem setState:NSControlStateValueOff];
 	}
 	return YES;
     }
     else if (menuAction == @selector(displayGrid:)) {
 	if ( [_graph displayGrid] ) {
 	    //[menuItem setTitle:@"Hide Grid"];
-	    [menuItem setState:NSOnState];
+	    [menuItem setState:NSControlStateValueOn];
 	} else {
 	    //[menuItem setTitle:@"Display Grid"];
-	    [menuItem setState:NSOffState];
+	    [menuItem setState:NSControlStateValueOff];
 	}
 	return YES;
     }
@@ -2061,10 +2067,10 @@ BOOL showWhaBam = NO;
         NSInteger tag = [menuItem tag];  // these should correspond with the enum RSScientificNotationSetting
         
         if (tag == (NSInteger)[[_graph xAxis] scientificNotationSetting]) {
-            [menuItem setState:NSOnState];
+            [menuItem setState:NSControlStateValueOn];
         }
         else {
-            [menuItem setState:NSOffState];
+            [menuItem setState:NSControlStateValueOff];
         }
         return YES;
     }
@@ -2072,10 +2078,10 @@ BOOL showWhaBam = NO;
         NSInteger tag = [menuItem tag];  // these should correspond with the enum RSScientificNotationSetting
         
         if (tag == (NSInteger)[[_graph yAxis] scientificNotationSetting]) {
-            [menuItem setState:NSOnState];
+            [menuItem setState:NSControlStateValueOn];
         }
         else {
-            [menuItem setState:NSOffState];
+            [menuItem setState:NSControlStateValueOff];
         }
         return YES;
     }
@@ -2160,10 +2166,10 @@ BOOL showWhaBam = NO;
 	    if( (isSuper > 0 && menuAction == @selector(toggleSuperscript:))
 	       || (isSuper < 0 && menuAction == @selector(toggleSubscript:)) ) {
 		// is superscripted or subscripted
-		[menuItem setState:NSOnState];
+		[menuItem setState:NSControlStateValueOn];
 	    }
 	    else {
-		[menuItem setState:NSOffState];
+		[menuItem setState:NSControlStateValueOff];
 	    }
 	    // either way, menu item is selectable
 	    return YES;
@@ -2195,17 +2201,17 @@ BOOL showWhaBam = NO;
     }
     else if (menuAction == @selector(toggleDottedGrid:)) {
         if ([_graph xGrid].dotted) {
-            [menuItem setState:NSOnState];
+            [menuItem setState:NSControlStateValueOn];
         } else {
-            [menuItem setState:NSOffState];
+            [menuItem setState:NSControlStateValueOff];
         }
         return YES;
     }
     else if (menuAction == @selector(importDataInRows:)) {
         if ([[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"ImportDataSeriesAsRows"]) {
-            [menuItem setState:NSOnState];
+            [menuItem setState:NSControlStateValueOn];
         } else {
-            [menuItem setState:NSOffState];
+            [menuItem setState:NSControlStateValueOff];
         }
         return YES;
     }
@@ -2882,7 +2888,7 @@ static ErrorBarSheet *errorBarSheet = nil;
     NSArray *prototypes = [_graph importedDataPrototypes];
     
     NSPasteboard *pb = [NSPasteboard generalPasteboard];
-    NSString *type = [pb availableTypeFromArray:[NSArray arrayWithObjects:OmniDataOnlyTabularPboardType, NSTabularTextPboardType, NSStringPboardType, nil]];
+    NSString *type = [pb availableTypeFromArray:[NSArray arrayWithObjects:OmniDataOnlyTabularPboardType, NSPasteboardTypeTabularText, NSPasteboardTypeString, nil]];
     
     if (!type) {
         NSLog(@"A readable pasteboard type for data importing was not found.");
@@ -3072,7 +3078,9 @@ static ErrorBarSheet *errorBarSheet = nil;
 - (void)runExportPanelWithFileType:(NSString *)fileType fileTypeName:(NSString *)fileTypeName;
 {
     NSSavePanel *savePanel = [NSSavePanel savePanel];
-    [savePanel setAllowedFileTypes:[NSArray arrayWithObject:fileType]];
+    UTType *contentType = [UTType typeWithFilenameExtension:fileType];
+    if (contentType != nil)
+        [savePanel setAllowedContentTypes:[NSArray arrayWithObject:contentType]];
     [savePanel setCanSelectHiddenExtension:YES];
     [savePanel setNameFieldLabel:NSLocalizedString(@"Export as:", @"Export panel name field label")];
     
@@ -3197,65 +3205,84 @@ static NSData *imageIOData(NSData *sourceData, NSString *type)
         return nil;
     }
     
-    [self lockFocus];
-    [self drawRect:[self bounds]];
-    NSBitmapImageRep *bitmapImageRep = [[NSBitmapImageRep alloc] initWithFocusedViewRect:[self bounds]];
-    [self unlockFocus];
-    
+    NSBitmapImageRep *bitmapImageRep = [self bitmapImageRepForCachingDisplayInRect:[self bounds]];
+    [self cacheDisplayInRect:[self bounds] toBitmapImageRep:bitmapImageRep];
+
     [image addRepresentation:bitmapImageRep];
-    [bitmapImageRep release];
-    
+
     return [image autorelease];
+}
+
+// 4x is the scale used for the raster (PNG/TIFF/JPEG) representations -- on "Copy As Image" and on
+// file export. The old code captured the on-screen view at 1x via -lockFocus/
+// -initWithFocusedViewRect: (both deprecated as of macOS 10.14), which pasted/exported blurry;
+// rasterizing at 4x restores high resolution.
+#define RS_RASTER_EXPORT_SCALE 4.0
+
+// Renders the graph inside `r` to a bitmap at `scale`x the on-screen point resolution by rasterizing
+// the (vector, resolution-independent) PDF representation. Pass a non-nil backgroundColor for
+// formats without an alpha channel (JPEG); pass nil to preserve transparency (PNG/TIFF). Returns
+// an autoreleased rep (this file is non-ARC).
+- (NSBitmapImageRep *)bitmapImageRepInsideRect:(NSRect)r scale:(CGFloat)scale backgroundColor:(NSColor *)backgroundColor;
+{
+    NSPDFImageRep *pdfRep = [NSPDFImageRep imageRepWithData:[self dataWithPDFInsideRect:r]];
+
+    NSInteger pixelsWide = (NSInteger)ceil(r.size.width * scale);
+    NSInteger pixelsHigh = (NSInteger)ceil(r.size.height * scale);
+    if (pixelsWide < 1)
+        pixelsWide = 1;
+    if (pixelsHigh < 1)
+        pixelsHigh = 1;
+
+    NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
+                                                                    pixelsWide:pixelsWide
+                                                                    pixelsHigh:pixelsHigh
+                                                                 bitsPerSample:8
+                                                               samplesPerPixel:4
+                                                                      hasAlpha:YES
+                                                                      isPlanar:NO
+                                                                colorSpaceName:NSCalibratedRGBColorSpace
+                                                                   bytesPerRow:0
+                                                                  bitsPerPixel:0];
+    // Keep the logical size in points; the bitmap then has `scale`x pixel density, so drawing in
+    // point coordinates below fills the full pixel grid at high resolution.
+    [rep setSize:r.size];
+
+    NSGraphicsContext *context = [NSGraphicsContext graphicsContextWithBitmapImageRep:rep];
+    [NSGraphicsContext saveGraphicsState];
+    [NSGraphicsContext setCurrentContext:context];
+    {
+        NSRect destRect = NSMakeRect(0.0, 0.0, r.size.width, r.size.height);
+        if (backgroundColor != nil) {
+            [backgroundColor set];
+            NSRectFill(destRect);
+        }
+        [pdfRep drawInRect:destRect];
+    }
+    [NSGraphicsContext restoreGraphicsState];
+
+    return [rep autorelease];
 }
 
 - (NSData *)dataWithPNGInsideRect:(NSRect)r
 {
-    [self lockFocus];
-    [self drawRect:[self bounds]];
-    NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithFocusedViewRect:r];
-    [self unlockFocus];
-    
-    NSData *imgData = [rep representationUsingType:NSPNGFileType properties:
-		       [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:NSImageInterlaced]];
-    
-    [rep release];
-    
-    [self setNeedsDisplay:YES];
+    NSBitmapImageRep *rep = [self bitmapImageRepInsideRect:r scale:RS_RASTER_EXPORT_SCALE backgroundColor:nil];
+    NSData *imgData = [rep representationUsingType:NSBitmapImageFileTypePNG properties:@{NSImageInterlaced: @NO}];
     return imgData;
-    
-//    NSImage *image = [self bitmapImage];
-//    [self setNeedsDisplay:YES];
-//    return imageIOData([image TIFFRepresentation], @"PNG");
 }
 
 - (NSData *)dataWithJPGInsideRect:(NSRect)r
 {
-    [self lockFocus];
-    [self drawRect:[self bounds]];
-    NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithFocusedViewRect:r];
-    [self unlockFocus];
-    
-    NSData *jpegData = [rep representationUsingType:NSJPEGFileType properties:
-			[NSDictionary dictionaryWithObject:[NSNumber numberWithDouble:1] forKey:NSImageCompressionFactor]];
-    
-    [rep release];
-    
-    [self setNeedsDisplay:YES];
+    // JPEG has no alpha channel; composite onto white so transparent areas don't render as black.
+    NSBitmapImageRep *rep = [self bitmapImageRepInsideRect:r scale:RS_RASTER_EXPORT_SCALE backgroundColor:[NSColor whiteColor]];
+    NSData *jpegData = [rep representationUsingType:NSBitmapImageFileTypeJPEG properties:@{NSImageCompressionFactor: @1.0}];
     return jpegData;
 }
 
 - (NSData *)dataWithTIFFInsideRect:(NSRect)r
 {
-    [self lockFocus];
-    [self drawRect:[self bounds]];
-    NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithFocusedViewRect:r];
-    [self unlockFocus];
-    
+    NSBitmapImageRep *rep = [self bitmapImageRepInsideRect:r scale:RS_RASTER_EXPORT_SCALE backgroundColor:nil];
     NSData *tiffData = [rep TIFFRepresentation];
-    
-    [rep release];
-    
-    [self setNeedsDisplay:YES];
     return tiffData;
 }
 

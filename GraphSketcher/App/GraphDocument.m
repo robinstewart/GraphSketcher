@@ -11,7 +11,6 @@
 #import "RSGraphView.h"
 #import "RSSelector.h"
 
-#import <LinkBack/LinkBack.h>
 #import <GraphSketcherModel/OFPreference-RSExtensions.h>
 #import <GraphSketcherModel/RSGraph.h>
 #import <GraphSketcherModel/RSGraphEditor.h>
@@ -61,9 +60,7 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
     _isInAppBundle = NO;
     _isAutosaving = NO;
     _graphView = nil;  // this will be set by the windowController on awakeFromNib.
-    
-    _linkBack = nil;
-    
+
     // reset "user font"
     //[NSFont setUserFont:[[OFPreferenceWrapper sharedPreferenceWrapper] fontForKey:@"DefaultLabelFont"]];
     
@@ -299,22 +296,6 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
 
 - (void)saveDocumentWithDelegate:(id)delegate didSaveSelector:(SEL)didSaveSelector contextInfo:(void *)contextInfo;
 {
-    // If this is a LinkBack document, don't display a "save as" panel (just send the edits back to the LinkBack client).
-    if (_linkBack != nil) {
-        [self sendLinkEdit];
-        
-        // Perform the callback so that AppKit will close the window and/or do other cleanup tasks
-        //- (void)document:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo
-        if (delegate) {
-            void (*delegateImp)(id self, SEL _cmd, NSDocument *doc, BOOL didSave, void *contextInfo);
-            delegateImp = (typeof(delegateImp))[delegate methodForSelector:didSaveSelector];
-            OBASSERT(delegateImp);
-            if (delegateImp)
-                delegateImp(delegate, didSaveSelector, self, YES, contextInfo);
-        }
-        return;
-    }
-    
     [super saveDocumentWithDelegate:delegate didSaveSelector:didSaveSelector contextInfo:contextInfo];
 }
 
@@ -384,92 +365,10 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
 
 - (NSString *)displayName;
 {
-    if (_linkBack) {
-        return [NSString stringWithFormat: @"LinkBack from %@ (%@)", [_linkBack sourceName], [_linkBack sourceApplicationName]];
-    } else
-        return [super displayName];
+    return [super displayName];
 }
 
 
-
-////////////////////////////////////////////////
-#pragma mark -
-#pragma mark LinkBack
-////////////////////////////////////////////////
-
-@synthesize linkBack = _linkBack;
-- (void)setLinkBack:(LinkBack *)link;
-{
-    if (_linkBack == link)
-        return;
-    
-    if (_linkBack)
-        [_linkBack release];
-    
-    _linkBack = [link retain];
-    
-    if (!_linkBack)
-        return;
-    
-    // If there is a new, non-nil linkback link, then read its data into this document.
-    NSDictionary *linkBackData = [[link pasteboard] propertyListForType: LinkBackPboardType];
-    NSData *documentXMLData = [linkBackData linkBackAppData];
-    NSError *outError = nil;
-    [self readOGSFileFromData:documentXMLData fileName:[self displayName] error:&outError];
-}
-
-- (void)sendLinkEdit;
-{
-    NSPasteboard *pasteboard = [_linkBack pasteboard];
-    [self copyAsImageWithPasteboard:pasteboard];
-    
-    [_linkBack sendEdit];
-    
-    [self updateChangeCount: NSChangeCleared] ;
-}
-
-- (void)closeLinkBackConnection;
-{
-    if (!_linkBack)
-        return;
-    
-    [_linkBack closeLink];
-}
-
-- (void)linkBackConnectionDidClose:(LinkBack *)link;
-{
-    OBASSERT(_linkBack == link);
-    
-    [self retain];
-    [link setRepresentedObject:nil];
-    
-    // If there are no unsaved changes, simply close the linkback document.
-    if (![self isDocumentEdited]) {
-        [self close];
-        [self release];
-        return;
-    }
-    
-    // If there are unsaved changes, ask the user whether to close or convert to untitled.
-    NSString *alertTitle = [NSString stringWithFormat:NSLocalizedString(@"%@ has closed the connection for this LinkBack attachment.  Do you want to keep the changes?", "broken linkback connection dialog - alert text"), [link sourceApplicationName]];
-    NSString *errorDescription = NSLocalizedString(@"This document has modifications that cannot be saved because %@ has closed the connection to it or exited.  You may preserve your changes by making this document untitled and severing the link, or you may close this window and abandon your changes.", "broken linkback connection dialog - alert text");
-    
-    NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-    alert.messageText = alertTitle;
-    alert.informativeText = errorDescription;
-    [alert addButtonWithTitle:NSLocalizedString(@"Make Untitled", "broken linkback connection dialog - alert button")];
-    [alert addButtonWithTitle:NSLocalizedString(@"Don't Save", "broken linkback connection dialog - alert button")];
-    [alert beginSheetModalForWindow:[self windowForSheet] completionHandler:^(NSModalResponse returnCode) {
-        if (returnCode == NSAlertFirstButtonReturn) {
-            [self setLinkBack:nil];
-            [[NSDocumentController sharedDocumentController] addDocument:self];
-            [[self windowControllers] makeObjectsPerformSelector:@selector(synchronizeWindowTitleWithDocumentName)];
-        } else
-            [self close];
-        
-        [self autorelease];  // matches the retain at the top of -linkBackConnectionDidClose:
-    }];
-}
 
 #pragma mark -
 #pragma mark RSUndoerOwner
@@ -520,8 +419,8 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
     NSPrintInfo *pInfo = [self printInfo];
     [pInfo setHorizontallyCentered:YES];
     [pInfo setVerticallyCentered:YES];
-    [pInfo setHorizontalPagination:NSFitPagination];
-    [pInfo setVerticalPagination:NSFitPagination];
+    [pInfo setHorizontalPagination:NSPrintingPaginationModeFit];
+    [pInfo setVerticalPagination:NSPrintingPaginationModeFit];
     [pInfo setLeftMargin:30];
     [pInfo setRightMargin:30];
     [pInfo setTopMargin:30];
@@ -582,24 +481,24 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
     else if (menuAction == NSSelectorFromString(@"histogram:")) {
 	if ( [_editor.graph displayHistogram] ) {
 	    //[menuItem setTitle:@"Hide Grid"];
-	    [menuItem setState:NSOnState];
+	    [menuItem setState:NSControlStateValueOn];
 	} else {
 	    //[menuItem setTitle:@"Display Grid"];
-	    [menuItem setState:NSOffState];
+	    [menuItem setState:NSControlStateValueOff];
 	}
     }
     else if (menuAction == @selector(toggleContinuousSpellCheckingRS:)) {
 	if ( [[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"UseContinuousSpellChecking"] ) {
-	    [menuItem setState:NSOnState];
+	    [menuItem setState:NSControlStateValueOn];
 	} else {
-	    [menuItem setState:NSOffState];
+	    [menuItem setState:NSControlStateValueOff];
 	}
     }
     else if (menuAction == @selector(toggleWindowOpacity:)) {
 	if ( [self windowIsOpaque] )
-	    [menuItem setState:NSOffState];
+	    [menuItem setState:NSControlStateValueOff];
 	else
-	    [menuItem setState:NSOnState];
+	    [menuItem setState:NSControlStateValueOn];
     }
     // now pass request along to graphView
     return [_graphView validateMenuItem:menuItem];
@@ -701,55 +600,21 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
 
 - (IBAction)copyAsImageWithPasteboard:(NSPasteboard *)pb;
 {
-    // relevant pboard types:
-    // NSPDFPboardType, NSTIFFPboardType, NSPICTPboardType
-    
     [_graphView commitEditing];
     [_graphView setDrawingToScreen:NO];
-    
+
     NSRect r = [_graphView bounds];
-    
-    // Declare types
-    NSArray *pbTypes = [NSArray arrayWithObjects:NSPDFPboardType, kUTTypePNG, NSTIFFPboardType, nil];
-    if (LINKBACK_ENABLED) {
-        pbTypes = [pbTypes arrayByAddingObject:LinkBackPboardType];
-    }
+
+    // Offer the graph as vector PDF plus high-resolution PNG and TIFF. PDF is first so vector-aware
+    // consumers (Pages/Keynote) get the resolution-independent version; apps that only accept a
+    // raster (e.g. web apps like Google Docs) fall back to the high-res PNG/TIFF.
+    NSArray<NSPasteboardType> *pbTypes = @[NSPasteboardTypePDF, NSPasteboardTypePNG, NSPasteboardTypeTIFF];
     [pb declareTypes:pbTypes owner:_graphView];
-    
-    // Copy data to the pasteboard
-    [pb setData: [_graphView dataWithPDFInsideRect: r]
-	forType: NSPDFPboardType];
-    
-    [pb setData: [_graphView dataWithPNGInsideRect: r]
-	forType: (NSString *)kUTTypePNG];  // NSPasteboardTypePNG is defined in Mac OS X 10.6 and up
-    
-    [pb setData: [_graphView dataWithTIFFInsideRect: r]
-	forType: NSTIFFPboardType];
-    
-    // Add LinkBack data
-    if (LINKBACK_ENABLED) {
-        // Tell tools/editors to clean and update the model.
-        if (!_isAutosaving && _graphView) {
-            [_graphView commitEditing];
-            [_editor prepareForSave];
-        }
-        
-        NSRect frame = NSZeroRect;
-        if ([[self windowControllers] count])
-            frame = [[self window] frame];
-        
-        NSError *error = nil;
-        NSData *documentXMLData = [_editor.graph generateXMLOfType:RSGraphFileType frame:frame error:&error];
-        if (!documentXMLData)
-            NSLog(@"Unable to generate XML for LinkBack: %@", [error toPropertyList]);
 
+    [pb setData:[_graphView dataWithPDFInsideRect:r] forType:NSPasteboardTypePDF];
+    [pb setData:[_graphView dataWithPNGInsideRect:r] forType:NSPasteboardTypePNG];
+    [pb setData:[_graphView dataWithTIFFInsideRect:r] forType:NSPasteboardTypeTIFF];
 
-        // Even on error, we need to put something on the pasteboard for this type since we declared it.
-        [pb setPropertyList:documentXMLData ? [NSDictionary linkBackDataWithServerName:OGSLinkBackServerName appData:documentXMLData] : nil
-                    forType:LinkBackPboardType];
-    }
-    
-    // And we're done
     [_graphView setDrawingToScreen:YES];
 }
 

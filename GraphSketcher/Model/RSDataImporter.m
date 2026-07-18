@@ -37,7 +37,7 @@ static NSString *nameFromColumnType(NSInteger type) {
 #endif
 
 // Ensure that the value in the user preference is reasonable.
-static NSUInteger maximumDataSetSize() {
+static NSUInteger maximumDataSetSize(void) {
     NSInteger maxDataSetSize = [[OFPreferenceWrapper sharedPreferenceWrapper] integerForKey:@"MaximumDataSetSize"];
     
     // Make sure there's *some* limit even if prefs are messed up
@@ -166,9 +166,20 @@ static NSString *_cachedThousandsSeparator = nil;
 
 + (NSArray *)valueSeparators;
 {
-    NSArray *defaultSeparators = [[OFPreferenceWrapper sharedPreferenceWrapper] arrayForKey:@"DataFieldSeparators"];
-    
-    return [defaultSeparators arrayByAddingObject:[RSDataImporter thousandsSeparator]];
+    // Tab is the dominant delimiter for data pasted from spreadsheets, but it is MISSING from the
+    // registered DataFieldSeparators default on this build (which resolves to [space, |, ;] — a
+    // space where a tab should be). Without tab, "3/30<tab>312" never splits into columns. So
+    // always include tab, tried first. Do NOT append the thousands separator (","): in "1,234" the
+    // comma is part of the number (stripped by -unadornedString:), not a field delimiter.
+    NSMutableArray *separators = [NSMutableArray arrayWithObject:@"\t"];
+    for (NSString *configured in [[OFPreferenceWrapper sharedPreferenceWrapper] arrayForKey:@"DataFieldSeparators"]) {
+        if ([configured length] && ![separators containsObject:configured])
+            [separators addObject:configured];
+    }
+    if ([separators count] == 1) {  // preference unavailable: add sensible fallbacks
+        [separators addObjectsFromArray:[NSArray arrayWithObjects:@"|", @";", nil]];
+    }
+    return separators;
 }
 
 
@@ -298,34 +309,14 @@ static NSCharacterSet *numberAdornmentCharacterSet = nil;
 
 
 + (BOOL)isADate:(NSString *)string {
-    return NO;  //! Dates are not supported yet
-    
-//    if( [RSDataImporter dateValueOfString:string] != nil )  return YES;
-//    else  return NO;
+    // Dates are plotted via the x-axis *label* path: a date column votes as a label column, so the
+    // values plot on the y-axis at evenly-spaced positions with the dates as x-axis tick labels.
+    // This preserves paste order across year boundaries (e.g. 12/29 -> 1/5). Returning YES would
+    // route dates to the RSAxisTypeDate continuous axis, which is dormant and not yet usable.
+    return NO;
 }
-//+ (NSDate *)dateValueOfString:(NSString *)string {
-//    return [NSDate dateWithNaturalLanguageString:string locale: [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
-//}
-/*
-+ (NSDate *)dateValueOfString:(NSString *)string {
-	NSDateFormatter *formatter = [RSNumber sharedDateFormatter];
-	[formatter setTwoDigitStartDate:[NSDate date]];
-	[formatter setDateStyle:NSDateFormatterNoStyle];
-	NSDate *date;
-	NSString *error;
-	
-	return [NSDate dateWithNaturalLanguageString:string];
-	
-	if( [formatter getObjectValue:&date forString:string errorDescription:&error] ) {
-		return date;
-	}
-	else {
-		NSLog(@"Date parse error: %@", error);
-		return nil;
-	}
-	//return [formatter dateFromString:string];
-}
-*/
+
+
 
 
 
@@ -419,7 +410,7 @@ static NSUInteger columnTypeForCell(NSString *cell) {
     if( checkEnd > 30 )
 	checkEnd = 30;  // check up to 30 rows, not including header
     
-    NSUInteger rowsAnalyzed = 0;
+    __unused NSUInteger rowsAnalyzed = 0;  // only read by DEBUG_DATA_IMPORT logging
     NSUInteger i;
     for( i=checkStart; i<checkEnd; i++ ) {
 	NSArray *row = [table objectAtIndex:i];
@@ -607,7 +598,7 @@ static NSUInteger columnTypeForCell(NSString *cell) {
     
     OBASSERT(valueSeparator != nil);
     DEBUG_DATA_IMPORT(@"Chose value separator: '%@'", valueSeparator);
-    
+
     
     //
     // parse all the lines using the value separator
@@ -1035,7 +1026,7 @@ static RSAxis *_shouldHideEndLabels = nil;
             firstLabelsColumn = i;
         }
     }
-    
+
     //
     // If no numeric columns found, just paste the text as a label
     //
@@ -1153,7 +1144,35 @@ static RSAxis *_shouldHideEndLabels = nil;
             if ([xAxis max] < maxToUse)
                 [xAxis setMax:maxToUse];
         }
-	
+
+        // Scale the y-axis to fit the imported values. The block above only scales the x-axis
+        // (the counter), so large values would otherwise sit outside the default y-range and be
+        // invisible. Mirror the x-axis logic: set the range outright on an empty graph, otherwise
+        // only expand it.
+        {
+            data_p yLo = 0, yHi = 0;
+            BOOL foundValue = NO;
+            for (NSUInteger r = startRow; r < [table count]; r++) {
+                NSArray *valueRow = [table objectAtIndex:r];
+                if (xCol >= [valueRow count]) continue;
+                data_p v;
+                if (![RSDataImporter getDoubleValue:&v forString:[valueRow objectAtIndex:xCol]]) continue;
+                if (!foundValue) { yLo = yHi = v; foundValue = YES; }
+                else { if (v < yLo) yLo = v; if (v > yHi) yHi = v; }
+            }
+            if (foundValue) {
+                data_p pad = (yHi - yLo) * 0.05;
+                if (pad <= 0) pad = (yHi != 0 ? fabs(yHi) * 0.1 : 1);
+                data_p fitMin = yLo - pad, fitMax = yHi + pad;
+                if ([[graph userElements] count] == 0) {
+                    [yAxis setMin:fitMin andMax:fitMax];
+                } else {
+                    if ([yAxis min] > fitMin) [yAxis setMin:fitMin];
+                    if ([yAxis max] < fitMax) [yAxis setMax:fitMax];
+                }
+            }
+        }
+
 	RSGroup *group = [[[RSGroup alloc] initWithGraph:graph identifier:nil elements:series] autorelease];
 	[vertices addObject:group];
     }
@@ -1172,7 +1191,7 @@ static RSAxis *_shouldHideEndLabels = nil;
 		[RSDataImporter labelTitleOfAxis:yAxis fromTable:table headerRow:(startRow - 1) column:yCol forGraph:graph];
 	    }
 	}
-	
+
 	// Special case for two number columns and at least one text column: use the text column as point labels.
 	BOOL pointLabelsColumn = -1;
         if ([yColumns count] == 1 && firstLabelsColumn >= 0 && [[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"ImportTextColumnAsPointLabels"]) {
@@ -1201,8 +1220,8 @@ static RSAxis *_shouldHideEndLabels = nil;
     // Warn if skipped incomplete rows
     //
     self.warning = [RSDataImporter dataSkippedMessageWithNumberImported:nmofVertices numberSkipped:_skippedRows];
-    
-    
+
+
     //
     // Finally, returns an array of RSGroups. Each group contains all vertices in a data series.
     ///

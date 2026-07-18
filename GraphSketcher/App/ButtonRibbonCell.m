@@ -26,8 +26,8 @@ static NSShadow *WhiteShadow = nil;
 static CGShadingRef CreateShadingWithGrays(float lightGray, float darkGray)
 {
     OARGBAColorPair *colorPair = malloc(sizeof(OARGBAColorPair));
-    NSColor *lighterColor = [[NSColor colorWithCalibratedWhite:lightGray alpha:1] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-    NSColor *darkerColor = [[NSColor colorWithCalibratedWhite:darkGray alpha:1] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+    NSColor *lighterColor = [[NSColor colorWithCalibratedWhite:lightGray alpha:1] colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]];
+    NSColor *darkerColor = [[NSColor colorWithCalibratedWhite:darkGray alpha:1] colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]];
     OAFillRGBAColorPair(colorPair, lighterColor, darkerColor);
     
     static const CGFloat domainAndRange[8] = {0, 1, 0, 1, 0, 1, 0, 1};
@@ -105,7 +105,7 @@ static CGShadingRef CreateShadingWithGrays(float lightGray, float darkGray)
     
     // Turn on a shadow
     NSRect result;
-    CGContextRef ctx = [[NSGraphicsContext currentContext] graphicsPort];
+    CGContextRef ctx = [[NSGraphicsContext currentContext] CGContext];
     CGContextSaveGState(ctx); {
         [WhiteShadow set];
         result = [super drawTitle:title withFrame:frame inView:controlView];
@@ -149,10 +149,10 @@ static void _appendPath(CGContextRef ctx, NSRect frame, ButtonRibbonCellPosition
         drawPressed = [self isHighlighted];
     } else {
         // We are in the radio matrix
-        drawPressed = ([self state] == NSOnState) || [self isHighlighted];
+        drawPressed = ([self state] == NSControlStateValueOn) || [self isHighlighted];
     }
     
-    CGContextRef ctx = [[NSGraphicsContext currentContext] graphicsPort];
+    CGContextRef ctx = [[NSGraphicsContext currentContext] CGContext];
 
     // Draw the right shading
     CGShadingRef shading;

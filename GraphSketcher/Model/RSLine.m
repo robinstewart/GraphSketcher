@@ -293,11 +293,16 @@ RSConnectType defaultConnectMethod(void)
 }
 
 - (NSArray *)connectedElements {
-    //NSMutableArray *A = [NSMutableArray arrayWithObjects:_v1, _v2, _label, nil];
-    // The above list works because if _label is nil the list will just end there!!
-    //if (_label) [A addObject:_label];
-    //return A;
-    return [NSArray arrayWithObjects:[self startVertex], [self endVertex], _label, nil];
+    NSMutableArray *connected = [NSMutableArray array];
+    RSVertex *startVertex = [self startVertex];
+    if (startVertex)
+        [connected addObject:startVertex];
+    RSVertex *endVertex = [self endVertex];
+    if (endVertex)
+        [connected addObject:endVertex];
+    if (_label)
+        [connected addObject:_label];
+    return connected;
 }
 
 - (BOOL)canBeDetached;

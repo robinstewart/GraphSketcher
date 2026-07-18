@@ -256,7 +256,6 @@ static char * displayf(NSInteger start, NSInteger stop, CGFloat *array) {
 + (CGFloat)tangentFrom:(NSInteger)start to:(NSInteger)end xValues:(CGFloat *)xvals yValues:(CGFloat *)yvals {
     // Adapted from [RSFitLine updateParameters] //
     CGFloat sumx = 0, sumy = 0, sumxy = 0, sumxx = 0;
-    CGFloat sumyy = 0;//, sx2 = 0, sy2 = 0;
     CGFloat n;	// converted from an NSInteger
     CGFloat denom;
     CGFloat _m;
@@ -280,7 +279,6 @@ static char * displayf(NSInteger start, NSInteger stop, CGFloat *array) {
 	sumy += p.y;
 	sumxy += p.x*p.y;
 	sumxx += p.x*p.x;
-	sumyy += p.y*p.y;
     }
     
     // Formula from Kirby's sheet:

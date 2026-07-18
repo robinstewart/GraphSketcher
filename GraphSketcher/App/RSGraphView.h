@@ -11,6 +11,8 @@
 
 #import <OmniInspector/OIInspectableControllerProtocol.h>
 
+@class NSToolbarItem;
+
 #import <GraphSketcherModel/RSGraph.h> // RSModelUpdateRequirement
 
 @class RSUndoer, RSDataMapper, RSGraphRenderer, RSTextLabel, RSGraphElement, RSGraphEditor;
@@ -146,6 +148,13 @@
 - (IBAction)toggleTickLayoutAtData:(id)sender;
 - (IBAction)importDataSeriesReplacingCurrent:(id)sender;
 
+
+// Editor, color/font panel, and toolbar plumbing. Declared here so the deprecated NSObject informal-category declarations (NSEditor, NSColorChanging, NSFontChanging, NSToolbarItemValidation) aren't the governing ones.
+- (BOOL)commitEditing;
+- (void)discardEditing;
+- (void)changeColor:(id)sender;
+- (void)changeFont:(id)sender;
+- (BOOL)validateToolbarItem:(NSToolbarItem *)item;
 
 // Exporting
 - (void)runExportPanelWithFileType:(NSString *)fileType fileTypeName:(NSString *)fileTypeName;

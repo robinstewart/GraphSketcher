@@ -45,7 +45,9 @@ static NSString *defaultTabStopStringCache;
 
 static NSString *defaultTabStopString(void)
 {
-    static NSString *defaultTabStopStringCache = nil;
+    // Use the file-scoped defaultTabStopStringCache (declared above and also read by
+    // -setTabStops:... below). A local static of the same name previously shadowed it, so the
+    // file-scoped cache was never populated.
     if (!defaultTabStopStringCache)
         defaultTabStopStringCache = [[OSStyle stringForTabStops:defaultTabStops()] copy];
     return defaultTabStopStringCache;

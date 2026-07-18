@@ -44,7 +44,7 @@ static CGFloat nearestPixelIfEnabled(CGFloat f) {
     return f;
 }
 
-static OAColor *baseSelectionColor() {
+static OAColor *baseSelectionColor(void) {
     OAColor *selectionColor = [[OAColor selectedTextBackgroundColor] colorUsingColorSpace:OAColorSpaceRGB];
     selectionColor = [OAColor colorWithHue:[selectionColor hueComponent]
                                 saturation:[selectionColor saturationComponent] * 2
@@ -228,7 +228,7 @@ void RSAppendShapeToBezierPath(NSBezierPath *P, CGPoint p, NSInteger shape, CGFl
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
         P.usesEvenOddFillRule = YES;
 #else
-        [P setWindingRule:NSEvenOddWindingRule];
+        [P setWindingRule:NSWindingRuleEvenOdd];
 #endif
         
         // old method
@@ -1809,7 +1809,7 @@ void RSAppendShapeToBezierPath(NSBezierPath *P, CGPoint p, NSInteger shape, CGFl
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
     [P setLineJoinStyle:kCGLineJoinRound];
 #else
-    [P setLineJoinStyle:NSRoundLineJoinStyle];
+    [P setLineJoinStyle:NSLineJoinStyleRound];
 #endif
     
     return P;
@@ -1882,7 +1882,7 @@ void RSAppendShapeToBezierPath(NSBezierPath *P, CGPoint p, NSInteger shape, CGFl
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
             [P setLineJoinStyle:kCGLineJoinRound];
 #else
-            [P setLineJoinStyle:NSRoundLineJoinStyle];
+            [P setLineJoinStyle:NSLineJoinStyleRound];
 #endif
 	}
 	
@@ -1949,7 +1949,7 @@ void RSAppendShapeToBezierPath(NSBezierPath *P, CGPoint p, NSInteger shape, CGFl
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
         P.lineCapStyle = kCGLineCapRound;
 #else
-	[P setLineCapStyle:NSRoundLineCapStyle];  // new in OGS
+	[P setLineCapStyle:NSLineCapStyleRound];  // new in OGS
 #endif
     }
     
@@ -2020,7 +2020,7 @@ void RSAppendShapeToBezierPath(NSBezierPath *P, CGPoint p, NSInteger shape, CGFl
 //      controlPoint1:CGPointMake(cp.x - uw.x + u.x*g - u2.x*g1, cp.y - uw.y + u.y*g - u2.y*g1)
 //      controlPoint2:CGPointMake(cp.x - uw.x - u.x*g - u2.x*g1, cp.y - uw.y - u.y*g - u2.y*g1)];
 //    
-//    [P setLineCapStyle:NSRoundLineCapStyle];
+//    [P setLineCapStyle:NSLineCapStyleRound];
 //    return P;
 //}
 //- (NSBezierPath *)pathForCurvePointFromLine:(RSLine *)L atTime:(CGFloat)t width:(CGFloat)w {
@@ -2075,7 +2075,7 @@ void RSAppendShapeToBezierPath(NSBezierPath *P, CGPoint p, NSInteger shape, CGFl
 //      controlPoint1:CGPointMake(cp.x - uw.x + u.x*g - u2.x*g1, cp.y - uw.y + u.y*g - u2.y*g1)
 //      controlPoint2:CGPointMake(cp.x - uw.x - u.x*g - u2.x*g1, cp.y - uw.y - u.y*g - u2.y*g1)];
 //    
-//    [P setLineCapStyle:NSRoundLineCapStyle];
+//    [P setLineCapStyle:NSLineCapStyleRound];
 //    return P;
 //}
 
@@ -2471,7 +2471,7 @@ static void appendTick(NSBezierPath *path, int axisOrientation, CGFloat p, CGFlo
     }
     
     CGPoint p, t, b; // current working points
-    NSUInteger count = 0;
+    __unused NSUInteger count = 0;  // only read by (commented-out) DEBUG_RS logging
     
     // Adjust for the width of the grid lines
     CGFloat adj = width/2.0f;
@@ -2847,7 +2847,7 @@ static void appendTick(NSBezierPath *path, int axisOrientation, CGFloat p, CGFlo
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
         [P setLineCapStyle:kCGLineCapRound];
 #else
-	[P setLineCapStyle:NSRoundLineCapStyle];
+	[P setLineCapStyle:NSLineCapStyleRound];
 #endif
 	[P stroke];
     }
@@ -2867,7 +2867,7 @@ static void appendTick(NSBezierPath *path, int axisOrientation, CGFloat p, CGFlo
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
             [P setLineCapStyle:kCGLineCapRound];
 #else
-            [P setLineCapStyle:NSRoundLineCapStyle];
+            [P setLineCapStyle:NSLineCapStyleRound];
 #endif
             [P stroke];
         } else {
@@ -3325,7 +3325,7 @@ static void appendTick(NSBezierPath *path, int axisOrientation, CGFloat p, CGFlo
         // AXES //
 	else if ( [obj isKindOfClass:[RSAxis class]] ) {
 	    P = [self pathFromAxis:(RSAxis *)obj width:[obj width] disableTicks:YES];
-            P.lineCapStyle = kCGLineCapSquare;
+            P.lineCapStyle = NSLineCapStyleSquare;
 	    newWidth = [obj width] + (RS_SELECTION_RINGS * RS_SELECTION_BORDER_WIDTH * 2);
 	    
 	    CGFloat alpha = RS_SELECTION_STARTING_ALPHA;

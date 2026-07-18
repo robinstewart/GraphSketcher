@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,7 +12,6 @@
 		0007DFA20F990D440074EDCD /* ungroupIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 0007DFA10F990D440074EDCD /* ungroupIcon.tiff */; };
 		0007DFA60F990DDF0074EDCD /* lockIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 0007DFA40F990DDF0074EDCD /* lockIcon.tiff */; };
 		0007DFA70F990DDF0074EDCD /* unlockIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 0007DFA50F990DDF0074EDCD /* unlockIcon.tiff */; };
-		00098921102A61C100D5B559 /* LinkBack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00098920102A61C100D5B559 /* LinkBack.framework */; };
 		000D19870EDB207D00383C12 /* RSFillTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 000D19860EDB207D00383C12 /* RSFillTool.m */; };
 		000F12620F6AD171001BBCEB /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 000F12600F6AD171001BBCEB /* Credits.html */; };
 		000F14130F6B2481001BBCEB /* inspectorIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 000F14120F6B2481001BBCEB /* inspectorIcon.tiff */; };
@@ -157,10 +156,14 @@
 		5F1A942B1857AE62009A1111 /* OmniBase.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 34874C220EA7D5380012BB56 /* OmniBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5F1A942C1857AE62009A1111 /* OmniFoundation.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 34874C240EA7D5380012BB56 /* OmniFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5F1A942D1857AE62009A1111 /* OmniUnzip.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 003A17910FC376DD0055EE51 /* OmniUnzip.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		5F1A942E1857AE62009A1111 /* LinkBack.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 00098920102A61C100D5B559 /* LinkBack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5F1A942F1857AE62009A1111 /* OmniQuartz.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 34830833111A7C54000BEB55 /* OmniQuartz.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
+		A1C00E6F2FEE110500B606AA /* QuickLookThumbnailing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1C00E6E2FEE110500B606AA /* QuickLookThumbnailing.framework */; };
+		A1C00E712FEE110500B606AA /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1C00E702FEE110500B606AA /* Quartz.framework */; };
+		A1C00E792FEE110500B606AA /* GraphSketcherThumbnail.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A1C00E6D2FEE110500B606AA /* GraphSketcherThumbnail.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A1C00E842FEE113700B606AA /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1C00E702FEE110500B606AA /* Quartz.framework */; };
+		A1C00E922FEE113700B606AA /* GraphSketcherPreview.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A1C00E832FEE113700B606AA /* GraphSketcherPreview.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -206,6 +209,20 @@
 			remoteGlobalIDString = 8D57630D048677EA00EA77CD;
 			remoteInfo = GSSpotlightPlugin;
 		};
+		A1C00E772FEE110500B606AA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1C00E6C2FEE110500B606AA;
+			remoteInfo = GraphSketcherThumbnail;
+		};
+		A1C00E902FEE113700B606AA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1C00E822FEE113700B606AA;
+			remoteInfo = GraphSketcherPreview;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -243,10 +260,21 @@
 				5F1A942B1857AE62009A1111 /* OmniBase.framework in Copy Frameworks */,
 				5F1A942C1857AE62009A1111 /* OmniFoundation.framework in Copy Frameworks */,
 				5F1A942D1857AE62009A1111 /* OmniUnzip.framework in Copy Frameworks */,
-				5F1A942E1857AE62009A1111 /* LinkBack.framework in Copy Frameworks */,
 				5F1A942F1857AE62009A1111 /* OmniQuartz.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1C00E7A2FEE110500B606AA /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A1C00E792FEE110500B606AA /* GraphSketcherThumbnail.appex in Embed Foundation Extensions */,
+				A1C00E922FEE113700B606AA /* GraphSketcherPreview.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -257,7 +285,6 @@
 		0007DFA10F990D440074EDCD /* ungroupIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ungroupIcon.tiff; sourceTree = "<group>"; };
 		0007DFA40F990DDF0074EDCD /* lockIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = lockIcon.tiff; sourceTree = "<group>"; };
 		0007DFA50F990DDF0074EDCD /* unlockIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = unlockIcon.tiff; sourceTree = "<group>"; };
-		00098920102A61C100D5B559 /* LinkBack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LinkBack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		000D19850EDB207D00383C12 /* RSFillTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSFillTool.h; sourceTree = "<group>"; };
 		000D19860EDB207D00383C12 /* RSFillTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSFillTool.m; sourceTree = "<group>"; };
 		000F12610F6AD171001BBCEB /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = English; path = English.lproj/Credits.html; sourceTree = "<group>"; };
@@ -460,7 +487,33 @@
 		5F1A940718579BF5009A1111 /* GSSpotlightPlugin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GSSpotlightPlugin.xcodeproj; path = ../Spotlight/GSSpotlightPlugin.xcodeproj; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* GraphSketcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraphSketcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1C00E6D2FEE110500B606AA /* GraphSketcherThumbnail.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = GraphSketcherThumbnail.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1C00E6E2FEE110500B606AA /* QuickLookThumbnailing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLookThumbnailing.framework; path = System/Library/Frameworks/QuickLookThumbnailing.framework; sourceTree = SDKROOT; };
+		A1C00E702FEE110500B606AA /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		A1C00E832FEE113700B606AA /* GraphSketcherPreview.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = GraphSketcherPreview.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A1C00E7D2FEE110500B606AA /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = A1C00E6C2FEE110500B606AA /* GraphSketcherThumbnail */;
+		};
+		A1C00E932FEE113700B606AA /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = A1C00E822FEE113700B606AA /* GraphSketcherPreview */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A1C00E722FEE110500B606AA /* GraphSketcherThumbnail */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (A1C00E7D2FEE110500B606AA /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = GraphSketcherThumbnail; sourceTree = "<group>"; };
+		A1C00E852FEE113700B606AA /* GraphSketcherPreview */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (A1C00E932FEE113700B606AA /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = GraphSketcherPreview; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		8D15AC330486D014006FF6A4 /* Frameworks */ = {
@@ -476,9 +529,25 @@
 				009094E80EF096FA00350081 /* OmniInspector.framework in Frameworks */,
 				003A17920FC376DD0055EE51 /* OmniUnzip.framework in Frameworks */,
 				00644C740FDF1F1B00F19586 /* QuartzCore.framework in Frameworks */,
-				00098921102A61C100D5B559 /* LinkBack.framework in Frameworks */,
 				34830834111A7C54000BEB55 /* OmniQuartz.framework in Frameworks */,
 				3402C1FC111A87370046638B /* GraphSketcherModel.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1C00E6A2FEE110500B606AA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1C00E6F2FEE110500B606AA /* QuickLookThumbnailing.framework in Frameworks */,
+				A1C00E712FEE110500B606AA /* Quartz.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1C00E802FEE113700B606AA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1C00E842FEE113700B606AA /* Quartz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -778,7 +847,6 @@
 				34874C220EA7D5380012BB56 /* OmniBase.framework */,
 				34874C240EA7D5380012BB56 /* OmniFoundation.framework */,
 				003A17910FC376DD0055EE51 /* OmniUnzip.framework */,
-				00098920102A61C100D5B559 /* LinkBack.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
 				00D6B4320D4D399300DD5CFA /* SystemConfiguration.framework */,
 				0097A8510ED4C01000413A12 /* Carbon.framework */,
@@ -802,6 +870,8 @@
 			isa = PBXGroup;
 			children = (
 				8D15AC370486D014006FF6A4 /* GraphSketcher.app */,
+				A1C00E6D2FEE110500B606AA /* GraphSketcherThumbnail.appex */,
+				A1C00E832FEE113700B606AA /* GraphSketcherPreview.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -814,6 +884,8 @@
 				2A37F4AFFDCFA73011CA2CEA /* Other Sources */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
 				5F1A940618579BE9009A1111 /* Dependencies */,
+				A1C00E722FEE110500B606AA /* GraphSketcherThumbnail */,
+				A1C00E852FEE113700B606AA /* GraphSketcherPreview */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
 			);
@@ -871,6 +943,8 @@
 			isa = PBXGroup;
 			children = (
 				1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */,
+				A1C00E6E2FEE110500B606AA /* QuickLookThumbnailing.framework */,
+				A1C00E702FEE110500B606AA /* Quartz.framework */,
 				1058C7A8FEA54F5311CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -924,6 +998,7 @@
 				0047D76B0FCCA36700659F6D /* Copy QuickLook */,
 				0047D7950FCCA51900659F6D /* Copy Spotlight */,
 				5F1A94271857AE4A009A1111 /* Copy Frameworks */,
+				A1C00E7A2FEE110500B606AA /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -931,12 +1006,58 @@
 				5F1A93FF18579BA3009A1111 /* PBXTargetDependency */,
 				5F1A940F18579C06009A1111 /* PBXTargetDependency */,
 				5F1A941118579C06009A1111 /* PBXTargetDependency */,
+				A1C00E782FEE110500B606AA /* PBXTargetDependency */,
+				A1C00E912FEE113700B606AA /* PBXTargetDependency */,
 			);
 			name = GraphSketcher;
 			productInstallPath = "$(HOME)/Applications";
 			productName = OmniGraphSketcher;
 			productReference = 8D15AC370486D014006FF6A4 /* GraphSketcher.app */;
 			productType = "com.apple.product-type.application";
+		};
+		A1C00E6C2FEE110500B606AA /* GraphSketcherThumbnail */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1C00E7E2FEE110500B606AA /* Build configuration list for PBXNativeTarget "GraphSketcherThumbnail" */;
+			buildPhases = (
+				A1C00E692FEE110500B606AA /* Sources */,
+				A1C00E6A2FEE110500B606AA /* Frameworks */,
+				A1C00E6B2FEE110500B606AA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A1C00E722FEE110500B606AA /* GraphSketcherThumbnail */,
+			);
+			name = GraphSketcherThumbnail;
+			packageProductDependencies = (
+			);
+			productName = GraphSketcherThumbnail;
+			productReference = A1C00E6D2FEE110500B606AA /* GraphSketcherThumbnail.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		A1C00E822FEE113700B606AA /* GraphSketcherPreview */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1C00E942FEE113700B606AA /* Build configuration list for PBXNativeTarget "GraphSketcherPreview" */;
+			buildPhases = (
+				A1C00E7F2FEE113700B606AA /* Sources */,
+				A1C00E802FEE113700B606AA /* Frameworks */,
+				A1C00E812FEE113700B606AA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A1C00E852FEE113700B606AA /* GraphSketcherPreview */,
+			);
+			name = GraphSketcherPreview;
+			packageProductDependencies = (
+			);
+			productName = GraphSketcherPreview;
+			productReference = A1C00E832FEE113700B606AA /* GraphSketcherPreview.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -945,6 +1066,14 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1000;
+				TargetAttributes = {
+					A1C00E6C2FEE110500B606AA = {
+						CreatedOnToolsVersion = 26.5;
+					};
+					A1C00E822FEE113700B606AA = {
+						CreatedOnToolsVersion = 26.5;
+					};
+				};
 			};
 			buildConfigurationList = C05733CB08A9546B00998B17 /* Build configuration list for PBXProject "GraphSketcher" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -955,6 +1084,7 @@
 				Japanese,
 				French,
 				German,
+				Base,
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Graph Sketcher */;
 			projectDirPath = "";
@@ -975,6 +1105,8 @@
 			projectRoot = "";
 			targets = (
 				8D15AC270486D014006FF6A4 /* GraphSketcher */,
+				A1C00E6C2FEE110500B606AA /* GraphSketcherThumbnail */,
+				A1C00E822FEE113700B606AA /* GraphSketcherPreview */,
 			);
 		};
 /* End PBXProject section */
@@ -1117,11 +1249,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A1C00E6B2FEE110500B606AA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1C00E812FEE113700B606AA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		4D16A75F1742C9AD00960CFB /* Copy Library Resources */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -1171,6 +1318,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A1C00E692FEE110500B606AA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1C00E7F2FEE113700B606AA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1188,6 +1349,16 @@
 			isa = PBXTargetDependency;
 			name = GSSpotlightPlugin;
 			targetProxy = 5F1A941018579C06009A1111 /* PBXContainerItemProxy */;
+		};
+		A1C00E782FEE110500B606AA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1C00E6C2FEE110500B606AA /* GraphSketcherThumbnail */;
+			targetProxy = A1C00E772FEE110500B606AA /* PBXContainerItemProxy */;
+		};
+		A1C00E912FEE113700B606AA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1C00E822FEE113700B606AA /* GraphSketcherPreview */;
+			targetProxy = A1C00E902FEE113700B606AA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1307,11 +1478,322 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A1C00E7B2FEE110500B606AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 46;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GraphSketcherThumbnail/Info.plist;
+				GCC_PREFIX_HEADER = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				INFOPLIST_KEY_CFBundleDisplayName = GraphSketcherThumbnail;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 2.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.graphsketcher.GraphSketcher.GraphSketcherThumbnail;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		A1C00E7C2FEE110500B606AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 46;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GraphSketcherThumbnail/Info.plist;
+				GCC_PREFIX_HEADER = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				INFOPLIST_KEY_CFBundleDisplayName = GraphSketcherThumbnail;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 2.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.graphsketcher.GraphSketcher.GraphSketcherThumbnail;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		A1C00E952FEE113700B606AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 46;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GraphSketcherPreview/Info.plist;
+				GCC_PREFIX_HEADER = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				INFOPLIST_KEY_CFBundleDisplayName = GraphSketcherPreview;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 2.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.graphsketcher.GraphSketcher.GraphSketcherPreview;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		A1C00E962FEE113700B606AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 46;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GraphSketcherPreview/Info.plist;
+				GCC_PREFIX_HEADER = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				INFOPLIST_KEY_CFBundleDisplayName = GraphSketcherPreview;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 2.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.graphsketcher.GraphSketcher.GraphSketcherPreview;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
 		C05733C808A9546B00998B17 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 00BB84050EA7C66800A9D91D /* Omni-Application-Debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "$(OMNI_BUNDLE_IDENTIFIER).entitlements";
+				ENABLE_DEBUG_DYLIB = NO;
 				HEADER_SEARCH_PATHS = (
 					$PROJECT_DERIVED_FILE_DIR,
 					/usr/include/libxml2,
@@ -1360,6 +1842,7 @@
 			baseConfigurationReference = 00BB84140EA7C66800A9D91D /* Omni-Global-Debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				LM_SKIP_METADATA_EXTRACTION = YES;
 			};
 			name = Debug;
 		};
@@ -1368,12 +1851,31 @@
 			baseConfigurationReference = 00BB84150EA7C66800A9D91D /* Omni-Global-Release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				LM_SKIP_METADATA_EXTRACTION = YES;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A1C00E7E2FEE110500B606AA /* Build configuration list for PBXNativeTarget "GraphSketcherThumbnail" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1C00E7B2FEE110500B606AA /* Debug */,
+				A1C00E7C2FEE110500B606AA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1C00E942FEE113700B606AA /* Build configuration list for PBXNativeTarget "GraphSketcherPreview" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1C00E952FEE113700B606AA /* Debug */,
+				A1C00E962FEE113700B606AA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C05733C708A9546B00998B17 /* Build configuration list for PBXNativeTarget "GraphSketcher" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

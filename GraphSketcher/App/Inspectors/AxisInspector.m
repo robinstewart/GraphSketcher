@@ -61,12 +61,12 @@ static RSAxisPlacement placementFromTag(NSInteger tag)
 
 static NSInteger stateFromBool(BOOL flag)
 {
-    if (flag)  return NSOnState;
-    else  return NSOffState;
+    if (flag)  return NSControlStateValueOn;
+    else  return NSControlStateValueOff;
 }
 static BOOL boolFromState(NSInteger state)
 {
-    if (state == NSOffState)
+    if (state == NSControlStateValueOff)
 	return NO;
     else
 	return YES;
@@ -107,7 +107,7 @@ static BOOL boolFromState(NSInteger state)
     
     menuItem = [menu addItemWithTitle:NSLocalizedString(@"Scientific Notation", @"Axis inspector scientific notation pop-up menu item") action:NULL keyEquivalent:@""];
     [menuItem setEnabled:NO];
-    [menuItem setState:NSOffState];
+    [menuItem setState:NSControlStateValueOff];
     [menuItem setTarget:self];
     
     [menu addItem:[NSMenuItem separatorItem]];
@@ -133,15 +133,15 @@ static BOOL boolFromState(NSInteger state)
 	[_axisPlacementXMatrix selectCellAtRow:-1 column:-1]; // clears the selection
 	[_axisPlacementYMatrix selectCellAtRow:-1 column:-1];
 	
-	[_displayAxisTitleX setState:NSOffState];
-	[_displayAxisTitleY setState:NSOffState];
-	[_displayAxisTickMarksX setState:NSOffState];
-	[_displayAxisTickMarksY setState:NSOffState];
-	[_displayAxisTickLabelsX setState:NSOffState];
-	[_displayAxisTickLabelsY setState:NSOffState];
+	[_displayAxisTitleX setState:NSControlStateValueOff];
+	[_displayAxisTitleY setState:NSControlStateValueOff];
+	[_displayAxisTickMarksX setState:NSControlStateValueOff];
+	[_displayAxisTickMarksY setState:NSControlStateValueOff];
+	[_displayAxisTickLabelsX setState:NSControlStateValueOff];
+	[_displayAxisTickLabelsY setState:NSControlStateValueOff];
 	
-	[_displayGridX setState:NSOffState];
-	[_displayGridY setState:NSOffState];
+	[_displayGridX setState:NSControlStateValueOff];
+	[_displayGridY setState:NSControlStateValueOff];
 	
 	[_gridColorWell setColor:[NSColor whiteColor]];
 	
@@ -224,13 +224,13 @@ static BOOL boolFromState(NSInteger state)
 //    // individual axis settings if an axis or axis element is selected
 //    if (axis) {
 //	// set axis display checkboxes:
-//	if ( [axis displayAxis] )  [displayAxis setState:NSOnState];
-//	else  [displayAxis setState:NSOffState];
+//	if ( [axis displayAxis] )  [displayAxis setState:NSControlStateValueOn];
+//	else  [displayAxis setState:NSControlStateValueOff];
 //    }
 //    // if no axis is selected, apply to both axes
 //    else {
-//	if ( [_graph displayAxes] )  [displayAxis setState:NSOnState];
-//	else  [displayAxis setState:NSOffState];
+//	if ( [_graph displayAxes] )  [displayAxis setState:NSControlStateValueOn];
+//	else  [displayAxis setState:NSControlStateValueOff];
 //	[displayAxis setTitle:@"Axes"];
 //    }
     

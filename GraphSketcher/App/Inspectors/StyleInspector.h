@@ -88,5 +88,7 @@
 - (IBAction)changeX1:(id)sender;
 - (IBAction)changeY1:(id)sender;
 
+// NSControl editing notification. Declared here so the deprecated NSObject informal-category declaration isn't the governing one.
+- (void)controlTextDidChange:(NSNotification *)note;
 
 @end

@@ -253,7 +253,7 @@
     [xmlDoc setAttribute:@"min" double:[self min]];
     [xmlDoc setAttribute:@"max" double:[self max]];
     [xmlDoc setAttribute:@"userModifiedRange" string:stringFromBool([self userModifiedRange])];
-    [xmlDoc setAttribute:@"scale" string:nameFromAxisType(_axisType)];
+    [xmlDoc setAttribute:@"scale" string:nameFromAxisType((int)_axisType)];
     [xmlDoc setAttribute:@"width" real:(float)[self width]];
     if (_shape)
 	[xmlDoc setAttribute:@"end-shape" string:nameFromShape(_shape)];

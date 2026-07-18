@@ -234,7 +234,7 @@ OSStyleAttributeBeginRegistration
 #if !defined(TARGET_OS_IPHONE) || !TARGET_OS_IPHONE
     // The base selection color; the actual rendered colors may be algorithmically generated from this.
     OSSelectionColorStyleAttribute = [[OSColorStyleAttribute alloc] initWithKey:@"selection-color"
-                                                                    defaultValue:[NSColor alternateSelectedControlColor]];
+                                                                    defaultValue:[NSColor selectedContentBackgroundColor]];
     ASSIGN_NAMES(OSSelectionColorStyleAttribute, NSLocalizedStringFromTableInBundle(@"interface", @"OmniStyle", bundle, "style attribute or group name"), NSLocalizedStringFromTableInBundle(@"selection color", @"OmniStyle", bundle, "style attribute or group name"));
     [OSStyleAttributeRegistry registerStyleAttribute:OSSelectionColorStyleAttribute];
 #endif

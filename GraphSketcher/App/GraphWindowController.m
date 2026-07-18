@@ -245,7 +245,12 @@
 - (void)windowDidLoad;
 {
     [super windowDidLoad];
-    
+
+    // Show the toolbar in its own row below the title (the pre-macOS 11 layout). Modern macOS
+    // otherwise defaults to the unified style, which places the toolbar buttons inline to the
+    // right of the document title.
+    [[self window] setToolbarStyle:NSWindowToolbarStyleExpanded];
+
     DEBUG_RS(@"windowDidLoad");
     //[[[self document] undoer] setEnabled:NO];
     
@@ -432,7 +437,6 @@
     
     [self saveGraphFrame];
     
-    [[self document] closeLinkBackConnection];
     
     // Unregister KVO, etc.
     [self documentGraphDidChange:nil];

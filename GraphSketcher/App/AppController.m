@@ -170,10 +170,11 @@
 
 - (void)applicationWillFinishLaunching:(NSNotification *)notification;
 {
-    [NSColor setIgnoresAlpha:NO];
-    
-    [[OFController sharedController] didInitialize];
-    
+    // Show opacity controls in the color panel (replaces the deprecated [NSColor setIgnoresAlpha:NO]).
+    [[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
+
+    // -[OAController applicationWillFinishLaunching:] (called via super below) invokes -didInitialize for us.
+
     // Add a menu of experimental features if the preference for it is turned on.
     if ([[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"ShowExperimentalFeaturesMenu"]) {
         NSMenu *experimentalMenu = [[NSMenu alloc] initWithTitle:NSLocalizedString(@"Experimental", @"Menu item")];
@@ -227,84 +228,27 @@
     }
     
     [self checkMessageOfTheDay];
-    
-    [self startedRunning];
-    
-    if (LINKBACK_ENABLED) {
-        [LinkBack publishServerWithName:OGSLinkBackServerName bundleIdentifier:@"com.graphsketcher.GraphSketcher" delegate:self];
-        [LinkBack publishServerWithName:OGSLinkBackServerName bundleIdentifier:@"com.graphsketcher.GraphSketcher.MacAppStore" delegate:self];
-    }
-    
-    
+
+    // -[OAController applicationDidFinishLaunching:] (called via super above) invokes -startedRunning for us.
+
     // I'm going to turn this off because it appears to be fixing a 10.4 bug, and I'd rather not force users' computers to rebuild metadata unnecessarily.
     //RebuildSpotlightIndexIfNewerMetadataImporter();
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;
 {
-    [super applicationShouldTerminate:sender];
-    
     // TODO: End editing in any open documents to commit any pending changes
 
-    switch ([self requestTermination]) {
-        case OFControllerTerminateCancel:
-            return NSTerminateCancel;
-        case OFControllerTerminateLater:
-            return NSTerminateLater;
-        case OFControllerTerminateNow:
-        default:
-	    return NSTerminateNow;
-    }
+    // -[OAController applicationShouldTerminate:] invokes -requestTermination and maps the reply.
+    return [super applicationShouldTerminate:sender];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification;
 {
-    [self willTerminate];
-    
+    // -[OAController applicationWillTerminate:] invokes -willTerminate for us.
     [super applicationWillTerminate:notification];
 }
 
-
-
-/////////////////////////////////////////
-#pragma mark -
-#pragma mark LinkBackServerDelegate protocol
-/////////////////////////////////////////
-
-- (void)linkBackClientDidRequestEdit:(LinkBack*)link ;
-// When a client requests an edit of your application data, your server delegate will receive the -linkBackClientDidRequestEdit: message.  The object passed in is an instance of the LinkBack class.  This represents a single connection between the client and the server application.  You should respond to this message by either opening the data for editing or by automatically refreshing the data.
-{
-    // Much of this copied from OmniGraffle's LiveLinkHelper
-    GraphDocument *document = [link representedObject];
-    if (document == nil) {
-        NSError *errBuf = nil;
-        document = [[NSDocumentController sharedDocumentController] openUntitledDocumentAndDisplay:NO error:&errBuf];
-        if (!document) {
-            // LinkBack doesn't support NSError returns, but it's DO, so it should handle exceptions
-            [[NSException exceptionWithName:NSGenericException reason:[errBuf localizedDescription] userInfo:[NSDictionary dictionaryWithObject:errBuf forKey:@"NSError"]] raise];
-        }
-        [link setRepresentedObject:document];
-        [document setLinkBack:link];
-    }
-    
-    // display the document
-    if (![[document windowControllers] count])
-        [document makeWindowControllers];
-    [document showWindows];
-    
-    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
-}
-
-- (void)linkBackDidClose:(LinkBack*)link ;
-{
-    GraphDocument *document = [link representedObject];
-    if ([document linkBack] == link) {
-        [document linkBackConnectionDidClose:link];
-    } else {
-        OBASSERT_NOT_REACHED("Got linkBackDidClose: from a link that we don't think is open");
-        [link setRepresentedObject:nil];
-    }
-}
 
 
 /////////////////////////////////////////
@@ -459,8 +403,9 @@
 
 - (IBAction)openKeyboardShortcuts:(id)sender;
 {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"GraphSketcher Keyboard Shortcuts" ofType:@"pdf"];
-    [[NSWorkspace sharedWorkspace] openFile:path];// withApplication:@"Preview"];
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"GraphSketcher Keyboard Shortcuts" withExtension:@"pdf"];
+    if (url != nil)
+        [[NSWorkspace sharedWorkspace] openURL:url];
 }
 
 - (IBAction)importData:(id)sender;
@@ -546,9 +491,9 @@
     }
     else if (action == @selector(demoPenMode:)) {
 	if ( [[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"DrawCurvedLines"] ) {
-	    [menuItem setState:NSOnState];
+	    [menuItem setState:NSControlStateValueOn];
 	} else {
-	    [menuItem setState:NSOffState];
+	    [menuItem setState:NSControlStateValueOff];
 	}
 	
 	return YES;

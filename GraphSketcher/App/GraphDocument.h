@@ -9,9 +9,6 @@
 #import <GraphSketcherModel/RSGraphEditorDelegate.h>
 #import <GraphSketcherModel/RSUndoerOwner.h>
 
-#define LINKBACK_ENABLED YES
-#define OGSLinkBackServerName @"OmniGraphSketcher"
-
 #define WINDOW_TITLE_HEIGHT 18
 #define WINDOW_BOTTOM_BAR_HEIGHT 20
 
@@ -30,7 +27,7 @@ typedef enum _RSErrorCodes {
 
 extern NSString *RSErrorDomain;
 
-@class RSGraphEditor, RSGraphView, RSGraph, RSSelector, RSUndoer, LinkBack;
+@class RSGraphEditor, RSGraphView, RSGraph, RSSelector, RSUndoer;
 
 @interface GraphDocument : OADocument <RSGraphEditorDelegate, RSUndoerOwner>
 {
@@ -41,20 +38,13 @@ extern NSString *RSErrorDomain;
     RSUndoer *_u;   // The Undo management object for this document
     
     NSMutableArray *_addedElements;  // Keeps track of graph elements brought back during an undo/redo operation
-    
-    LinkBack *_linkBack;
-    
+
     BOOL _isFromFile;
     BOOL _isInAppBundle;
     BOOL _isAutosaving;
 }
 
 
-// LinkBack
-@property(nonatomic,retain) LinkBack *linkBack;
-- (void)sendLinkEdit;
-- (void)closeLinkBackConnection;
-- (void)linkBackConnectionDidClose:(LinkBack *)link;
 - (IBAction)copyAsImageWithPasteboard:(NSPasteboard *)pb;
 
 

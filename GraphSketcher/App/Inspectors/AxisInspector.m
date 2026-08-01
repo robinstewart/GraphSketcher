@@ -61,12 +61,12 @@ static RSAxisPlacement placementFromTag(NSInteger tag)
 
 static NSInteger stateFromBool(BOOL flag)
 {
-    if (flag)  return NSOnState;
-    else  return NSOffState;
+    if (flag)  return NSControlStateValueOn;
+    else  return NSControlStateValueOff;
 }
 static BOOL boolFromState(NSInteger state)
 {
-    if (state == NSOffState)
+    if (state == NSControlStateValueOff)
 	return NO;
     else
 	return YES;
@@ -107,7 +107,7 @@ static BOOL boolFromState(NSInteger state)
     
     menuItem = [menu addItemWithTitle:NSLocalizedString(@"Scientific Notation", @"Axis inspector scientific notation pop-up menu item") action:NULL keyEquivalent:@""];
     [menuItem setEnabled:NO];
-    [menuItem setState:NSOffState];
+    [menuItem setState:NSControlStateValueOff];
     [menuItem setTarget:self];
     
     [menu addItem:[NSMenuItem separatorItem]];
@@ -133,15 +133,15 @@ static BOOL boolFromState(NSInteger state)
 	[_axisPlacementXMatrix selectCellAtRow:-1 column:-1]; // clears the selection
 	[_axisPlacementYMatrix selectCellAtRow:-1 column:-1];
 	
-	[_displayAxisTitleX setState:NSOffState];
-	[_displayAxisTitleY setState:NSOffState];
-	[_displayAxisTickMarksX setState:NSOffState];
-	[_displayAxisTickMarksY setState:NSOffState];
-	[_displayAxisTickLabelsX setState:NSOffState];
-	[_displayAxisTickLabelsY setState:NSOffState];
+	[_displayAxisTitleX setState:NSControlStateValueOff];
+	[_displayAxisTitleY setState:NSControlStateValueOff];
+	[_displayAxisTickMarksX setState:NSControlStateValueOff];
+	[_displayAxisTickMarksY setState:NSControlStateValueOff];
+	[_displayAxisTickLabelsX setState:NSControlStateValueOff];
+	[_displayAxisTickLabelsY setState:NSControlStateValueOff];
 	
-	[_displayGridX setState:NSOffState];
-	[_displayGridY setState:NSOffState];
+	[_displayGridX setState:NSControlStateValueOff];
+	[_displayGridY setState:NSControlStateValueOff];
 	
 	[_gridColorWell setColor:[NSColor whiteColor]];
 	
@@ -166,10 +166,10 @@ static BOOL boolFromState(NSInteger state)
 //    [[_graph yAxis] configureInspectorNumberFormatter:[_rangeYMinField formatter]];
 //    [[_graph yAxis] configureInspectorNumberFormatter:[_rangeYMaxField formatter]];
     
-    [_rangeXMinField setStringValue:[xAxis formattedDataValue:[xAxis min]]];
-    [_rangeXMaxField setStringValue:[xAxis formattedDataValue:[xAxis max]]];
-    [_rangeYMinField setStringValue:[yAxis formattedDataValue:[yAxis min]]];
-    [_rangeYMaxField setStringValue:[yAxis formattedDataValue:[yAxis max]]];
+    [_rangeXMinField setStringValue:[xAxis inspectorFormattedDataValue:[xAxis min]]];
+    [_rangeXMaxField setStringValue:[xAxis inspectorFormattedDataValue:[xAxis max]]];
+    [_rangeYMinField setStringValue:[yAxis inspectorFormattedDataValue:[yAxis min]]];
+    [_rangeYMaxField setStringValue:[yAxis inspectorFormattedDataValue:[yAxis max]]];
     
     [_axisPlacementXMatrix selectCellWithTag:tagFromPlacementOfAxis(xAxis)];
     [_axisPlacementYMatrix selectCellWithTag:tagFromPlacementOfAxis(yAxis)];
@@ -192,7 +192,7 @@ static BOOL boolFromState(NSInteger state)
         [_axisTickSpacingX setEnabled:NO];
         [_axisTickSpacingXLabel setTextColor:[NSColor disabledControlTextColor]];
     } else {
-        [_axisTickSpacingX setStringValue:[xAxis formattedDataValue:[xAxis spacing]]];
+        [_axisTickSpacingX setStringValue:[xAxis inspectorFormattedDataValue:[xAxis spacing]]];
         [_axisTickSpacingX setEnabled:YES];
         [_axisTickSpacingXLabel setTextColor:[NSColor controlTextColor]];
     }
@@ -202,7 +202,7 @@ static BOOL boolFromState(NSInteger state)
         [_axisTickSpacingY setEnabled:NO];
         [_axisTickSpacingYLabel setTextColor:[NSColor disabledControlTextColor]];
     } else {
-        [_axisTickSpacingY setStringValue:[yAxis formattedDataValue:[yAxis spacing]]];
+        [_axisTickSpacingY setStringValue:[yAxis inspectorFormattedDataValue:[yAxis spacing]]];
         [_axisTickSpacingY setEnabled:YES];
         [_axisTickSpacingYLabel setTextColor:[NSColor controlTextColor]];
     }
@@ -224,13 +224,13 @@ static BOOL boolFromState(NSInteger state)
 //    // individual axis settings if an axis or axis element is selected
 //    if (axis) {
 //	// set axis display checkboxes:
-//	if ( [axis displayAxis] )  [displayAxis setState:NSOnState];
-//	else  [displayAxis setState:NSOffState];
+//	if ( [axis displayAxis] )  [displayAxis setState:NSControlStateValueOn];
+//	else  [displayAxis setState:NSControlStateValueOff];
 //    }
 //    // if no axis is selected, apply to both axes
 //    else {
-//	if ( [_graph displayAxes] )  [displayAxis setState:NSOnState];
-//	else  [displayAxis setState:NSOffState];
+//	if ( [_graph displayAxes] )  [displayAxis setState:NSControlStateValueOn];
+//	else  [displayAxis setState:NSControlStateValueOff];
 //	[displayAxis setTitle:@"Axes"];
 //    }
     
@@ -435,7 +435,11 @@ static BOOL boolFromState(NSInteger state)
 {
     RSGraph *graph = [_document graph];
     RSAxis *axis = [graph xAxis];
-    data_p value = [axis dataValueFromFormat:[sender stringValue]];
+    data_p value;
+    if (![axis getInspectorDataValue:&value fromFormat:[sender stringValue]]) {
+        [self updateDisplay];  // unparseable: put the real value back instead of storing a zero
+        return;
+    }
     
     [graph setMin:value forAxis:axis];
     
@@ -446,7 +450,11 @@ static BOOL boolFromState(NSInteger state)
 {
     RSGraph *graph = [_document graph];
     RSAxis *axis = [graph xAxis];
-    data_p value = [axis dataValueFromFormat:[sender stringValue]];
+    data_p value;
+    if (![axis getInspectorDataValue:&value fromFormat:[sender stringValue]]) {
+        [self updateDisplay];  // unparseable: put the real value back instead of storing a zero
+        return;
+    }
     
     [graph setMax:value forAxis:axis];
     
@@ -457,7 +465,11 @@ static BOOL boolFromState(NSInteger state)
 {
     RSGraph *graph = [_document graph];
     RSAxis *axis = [graph yAxis];
-    data_p value = [axis dataValueFromFormat:[sender stringValue]];
+    data_p value;
+    if (![axis getInspectorDataValue:&value fromFormat:[sender stringValue]]) {
+        [self updateDisplay];  // unparseable: put the real value back instead of storing a zero
+        return;
+    }
     
     [graph setMin:value forAxis:axis];
     
@@ -468,7 +480,11 @@ static BOOL boolFromState(NSInteger state)
 {
     RSGraph *graph = [_document graph];
     RSAxis *axis = [graph yAxis];
-    data_p value = [axis dataValueFromFormat:[sender stringValue]];
+    data_p value;
+    if (![axis getInspectorDataValue:&value fromFormat:[sender stringValue]]) {
+        [self updateDisplay];  // unparseable: put the real value back instead of storing a zero
+        return;
+    }
     
     [graph setMax:value forAxis:axis];
     
@@ -564,7 +580,11 @@ static BOOL boolFromState(NSInteger state)
     else
 	axis = [graph yAxis];
     
-    data_p value = [axis dataValueFromFormat:[sender stringValue]];
+    data_p value;
+    if (![axis getInspectorDataValue:&value fromFormat:[sender stringValue]]) {
+        [self updateDisplay];  // unparseable: put the real value back instead of storing a zero
+        return;
+    }
     
     // Don't set the user spacing if the entered value is the same as the default and no user spacing has been set previously.  <bug:///71064>
     if (![axis userSpacing] && value == [axis spacing])

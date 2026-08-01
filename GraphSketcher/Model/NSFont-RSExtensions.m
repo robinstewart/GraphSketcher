@@ -13,11 +13,8 @@ RCS_ID("$Header$");
 
 @implementation NSFont (RSExtensions)
 
-- (NSFont *)fontWithSize:(CGFloat)pointSize;
-{
-    NSFontDescriptor *descriptor = [self fontDescriptor];
-    return [NSFont fontWithDescriptor:descriptor size:pointSize];
-}
+// -fontWithSize: removed: modern NSFont provides it natively with the same descriptor-preserving
+// behavior, and a category override of a framework method is undefined (and warns under clang 21).
 
 - (CGFloat)lineHeight;
 {

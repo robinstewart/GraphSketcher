@@ -671,7 +671,7 @@
 	    if ([[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"SegmentStrokesWhileDrawing"]) {
 		[self drawSegmentedStrokeUsingStartVertex:_firstClickElement];
 	    }
-            NSColor *lineColor = [[[OFPreferenceWrapper sharedPreferenceWrapper] colorForKey:@"DefaultLineColor"] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+            NSColor *lineColor = [[[OFPreferenceWrapper sharedPreferenceWrapper] colorForKey:@"DefaultLineColor"] colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]];
 	    [self drawRawStrokeUsingWidth:[[OFPreferenceWrapper sharedPreferenceWrapper] floatForKey:@"DefaultLineWidth"]
                                     color:[lineColor colorWithAlphaComponent:0.618f]];
 	}

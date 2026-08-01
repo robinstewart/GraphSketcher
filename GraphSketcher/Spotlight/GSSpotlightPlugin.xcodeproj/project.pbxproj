@@ -511,7 +511,6 @@
 				8D57630F048677EA00EA77CD /* Resources */,
 				8D576311048677EA00EA77CD /* Sources */,
 				8D576313048677EA00EA77CD /* Frameworks */,
-				8D576315048677EA00EA77CD /* Rez */,
 			);
 			buildRules = (
 			);
@@ -745,16 +744,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXRezBuildPhase section */
-		8D576315048677EA00EA77CD /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXRezBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		8D576311048677EA00EA77CD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -841,6 +830,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 00445FCC0FCF124E00DC1307 /* Omni-Global-Debug.xcconfig */;
 			buildSettings = {
+				LM_SKIP_METADATA_EXTRACTION = YES;
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				WARNING_CFLAGS = "$(inherited) -w";
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Debug;
@@ -849,6 +841,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 00445FCD0FCF124E00DC1307 /* Omni-Global-Release.xcconfig */;
 			buildSettings = {
+				LM_SKIP_METADATA_EXTRACTION = YES;
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				WARNING_CFLAGS = "$(inherited) -w";
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Release;

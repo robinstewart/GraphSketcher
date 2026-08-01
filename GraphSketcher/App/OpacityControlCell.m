@@ -39,12 +39,12 @@
     
     NSBezierPath *path = [NSBezierPath bezierPathWithRect:frame];
     
-    [[[_color colorUsingColorSpaceName:NSCalibratedRGBColorSpace] colorWithAlphaComponent:_opacity] set];
+    [[[_color colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]] colorWithAlphaComponent:_opacity] set];
     [path fill];
     
 //    float brightness = [[_color colorUsingColorSpaceName:NSCalibratedRGBColorSpace] brightnessComponent];
     
-    [[[[_color colorUsingColorSpaceName:NSCalibratedRGBColorSpace] blendedColorWithFraction:0.2f ofColor:[NSColor blackColor]] colorWithAlphaComponent:_opacity*1.2f] set];
+    [[[[_color colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]] blendedColorWithFraction:0.2f ofColor:[NSColor blackColor]] colorWithAlphaComponent:_opacity*1.2f] set];
     [path setLineWidth:2];
     [path stroke];
     

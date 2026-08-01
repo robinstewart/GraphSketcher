@@ -7,6 +7,8 @@
 
 #import "RSMode.h"
 
+#include <wctype.h>
+
 #import "RSModifyTool.h"
 #import "RSDrawTool.h"
 #import "RSFillTool.h"
@@ -18,9 +20,8 @@
 static NSUInteger modeFromChar(unichar theChar)
 {
     // If shift key is down, event characters are in uppercase.  Convert to lowercase for proper comparison.  <bug://bugs/56347>
-    if (!islower(theChar)) {
-        theChar = tolower(theChar);
-    }
+    // (towlower handles the full unichar range; tolower is only defined for unsigned char/EOF.)
+    theChar = (unichar)towlower(theChar);
     
     switch (theChar) {
 	case RS_HOTKEY_DRAW:

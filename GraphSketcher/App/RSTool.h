@@ -63,6 +63,10 @@
 - (void)insertNewline:(id)sender;
 
 
+// Editing. These mirror the NSEditor methods; declared here so the deprecated NSObject(NSEditor) informal category isn't the governing declaration.
+- (void)discardEditing;
+- (BOOL)commitEditing;
+
 // Actions
 - (void)drawPhaseAtBeginning;
 - (void)drawPhaseWithShadows;

@@ -269,7 +269,7 @@ static inline void OQFlipVerticallyInRect(CGContextRef ctx, CGRect rect)
     
     CGImageRef cgimage = [self imageFromGraph];
     NSBitmapImageRep *bitmapRep = [[NSBitmapImageRep alloc] initWithCGImage:cgimage];
-    NSData *imgData = [bitmapRep representationUsingType:NSPNGFileType properties:
+    NSData *imgData = [bitmapRep representationUsingType:NSBitmapImageFileTypePNG properties:
 		       [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:NSImageInterlaced]];
     [bitmapRep release];
     return imgData;

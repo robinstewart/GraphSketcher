@@ -73,7 +73,7 @@ RCS_ID("$Header$");
         return [_defaultValue copy];
     }
     
-    if ([NSString isEmptyString:plist])
+    if (plist == nil || [NSString isEmptyString:plist])
         return [_defaultValue copy];
 
     // NSURL is really unforgiving; other attributes raise on invalid values.  Not sure if that is a good choice going forward.  Instead it would be good to have a 'OFWarningBuffer' class that we could add warnings to.

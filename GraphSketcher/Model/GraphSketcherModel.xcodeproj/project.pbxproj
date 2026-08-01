@@ -943,6 +943,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 34F8AFD1111A856D0054644D /* Omni-Framework-Debug.xcconfig */;
 			buildSettings = {
+				DEFINES_MODULE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(value)",
 					$SDKROOT/usr/include/libxml2,
@@ -958,6 +959,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 34F8AFD2111A856D0054644D /* Omni-Framework-Release.xcconfig */;
 			buildSettings = {
+				DEFINES_MODULE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(value)",
 					$SDKROOT/usr/include/libxml2,

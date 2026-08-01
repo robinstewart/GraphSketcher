@@ -41,11 +41,13 @@
 
 - (void)_setUnfinishedPointValue:(id)value forColumn:(id)columnKey;
 {
+    // Leave the coordinate undefined if the text isn't a number, rather than reading it as zero and
+    // creating a point on the axis.
     if ([columnKey isEqualToString:@"positionx"]) {
-	_unfinishedPoint.x = [[_graph xAxis] dataValueFromFormat:value];
+	[[_graph xAxis] getInspectorDataValue:&_unfinishedPoint.x fromFormat:value];
     }
     else if ([columnKey isEqualToString:@"positiony"]) {
-	_unfinishedPoint.y = [[_graph yAxis] dataValueFromFormat:value];
+	[[_graph yAxis] getInspectorDataValue:&_unfinishedPoint.y fromFormat:value];
     }
 }
 
@@ -402,13 +404,17 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
 							      action:@"setPosition" 
 							       state:NSValueFromDataPoint([V position])
 								name:newUndoName];
+            // The cells are displayed with -inspectorFormattedDataValue:, so they have to be read back
+            // with its counterpart; the tick label parser rounds to -significantDigits and returns zero
+            // for a string carrying a grouping separator it isn't currently expecting.
+            data_p value;
             if ([identifier isEqualToString:@"positionx"]) {
-                data_p value = [[_graph xAxis] dataValueFromFormat:anObject];
-                [V setPositionx:value];
+                if ([[_graph xAxis] getInspectorDataValue:&value fromFormat:anObject])
+                    [V setPositionx:value];
             }
             else if ([identifier isEqualToString:@"positiony"]) {
-                data_p value = [[_graph yAxis] dataValueFromFormat:anObject];
-                [V setPositiony:value];
+                if ([[_graph yAxis] getInspectorDataValue:&value fromFormat:anObject])
+                    [V setPositiony:value];
             }
 	    //NSLog(@"vertex has value: (%f,%f); object is: %@", [V positionx], [V positiony], anObject);
 	    [_s autoScaleIfWanted];

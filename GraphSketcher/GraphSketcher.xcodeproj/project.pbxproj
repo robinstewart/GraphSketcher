@@ -265,6 +265,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING = YES;
 				PRODUCT_NAME = ALL;
 			};
 			name = Debug;
@@ -273,6 +274,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING = YES;
 				PRODUCT_NAME = ALL;
 			};
 			name = Release;

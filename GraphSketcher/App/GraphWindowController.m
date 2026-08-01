@@ -117,17 +117,22 @@
     // Clean up old graph, if it exists
     if (_graph) {
         NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-        
+
+        // Detach the view from the editor while the editor is still valid.  This is the counterpart of
+        // the assignment below, and -windowWillClose: gets here before the document is deallocated, so
+        // the tools (which hold the editor's mapper/renderer/graph without retaining them) are released
+        // before -[GraphDocument dealloc] invalidates the editor out from under them.
+        _graphView.editor = nil;
+
         // Clear out KVO in the inspector panels
         [[[AppController sharedController] inspectorRegistry] clearInspectionSet];
-        
+
         // KVO
         [_graph removeObserver:self forKeyPath:@"canvasSize"];
         [_graph removeObserver:self forKeyPath:@"whitespace"];
-        
+
         [pool release];
-        
-        //[_graphView setGraph:nil];
+
         [_graph release];
     }
     
@@ -245,7 +250,12 @@
 - (void)windowDidLoad;
 {
     [super windowDidLoad];
-    
+
+    // Show the toolbar in its own row below the title (the pre-macOS 11 layout). Modern macOS
+    // otherwise defaults to the unified style, which places the toolbar buttons inline to the
+    // right of the document title.
+    [[self window] setToolbarStyle:NSWindowToolbarStyleExpanded];
+
     DEBUG_RS(@"windowDidLoad");
     //[[[self document] undoer] setEnabled:NO];
     
@@ -432,7 +442,6 @@
     
     [self saveGraphFrame];
     
-    [[self document] closeLinkBackConnection];
     
     // Unregister KVO, etc.
     [self documentGraphDidChange:nil];

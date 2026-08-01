@@ -820,6 +820,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 001FD6D20FCC98DC00FC3ADB /* Omni-Global-Debug.xcconfig */;
 			buildSettings = {
+				LM_SKIP_METADATA_EXTRACTION = YES;
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				WARNING_CFLAGS = "$(inherited) -w";
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Debug;
@@ -828,6 +831,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 001FD6D30FCC98DC00FC3ADB /* Omni-Global-Release.xcconfig */;
 			buildSettings = {
+				LM_SKIP_METADATA_EXTRACTION = YES;
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				WARNING_CFLAGS = "$(inherited) -w";
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Release;

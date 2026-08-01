@@ -239,6 +239,7 @@ RSScientificNotationSetting scientificNotationSettingFromName(NSString *name);
 - (NSString *)formattedDataValue:(data_p)value;
 - (NSString *)inspectorFormattedDataValue:(data_p)value;
 - (data_p)dataValueFromFormat:(NSString *)format;
+- (BOOL)getInspectorDataValue:(data_p *)outValue fromFormat:(NSString *)format;
 - (NSAttributedString *)formatExponentsInString:(NSAttributedString *)original;
 
 

@@ -823,7 +823,7 @@ static RSGraphElement *_arrowElement(RSGraphElement *obj)
     
     NSMutableArray *newVertices = [NSMutableArray array];
     
-    NSUInteger count = 0;
+    __unused NSUInteger count = 0;  // only read by DEBUG_RS logging
     data_p tick = DBL_MAX;
     for (NSNumber *number in tickArray) {
         data_p oldTick = tick;

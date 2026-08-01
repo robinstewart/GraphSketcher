@@ -2274,6 +2274,39 @@ RSScientificNotationSetting scientificNotationSettingFromName(NSString *name)
     return [number doubleValue];
 }
 
+- (BOOL)getInspectorDataValue:(data_p *)outValue fromFormat:(NSString *)format;
+// The parse counterpart of -inspectorFormattedDataValue:, for editable fields.  The tick label pair gets
+// two things wrong here.  -dataValueFromFormat: rounds to -significantDigits, so it rewrites what the
+// user typed.  And both of them inherit whatever grouping-separator state
+// -configureNumberFormatter:forValue: last left on the shared formatter, so a string this very formatter
+// produced a moment ago ("20,000") can fail to parse -- which used to reach the model as a silent 0,
+// courtesy of -[NSNumber doubleValue] on nil.
+//
+// Returns NO, leaving *outValue untouched, when the text isn't a number at all, so that callers can
+// decline to write rather than store a zero.
+{
+    NSNumberFormatter *formatter = [self inspectorNumberFormatter];
+
+    // Always accept grouping separators while parsing: a formatter with grouping on reads both "20000"
+    // and "20,000", so the result no longer depends on what happened to be formatted last.
+    BOOL usesGrouping = [formatter usesGroupingSeparator];
+    if (!usesGrouping)
+        [formatter setUsesGroupingSeparator:YES];
+
+    NSNumber *number = [formatter numberFromString:format];
+
+    if (!usesGrouping)
+        [formatter setUsesGroupingSeparator:usesGrouping];
+
+    if (number == nil)
+        return NO;
+
+    if (outValue)
+        *outValue = [number doubleValue];
+
+    return YES;
+}
+
 
 
 static NSDateFormatter *tickFormatterDates = nil;

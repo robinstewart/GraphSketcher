@@ -11,7 +11,8 @@
 
 @interface NSFont (RSExtensions)
 
-- (NSFont *)fontWithSize:(CGFloat)pointSize;
+// -fontWithSize: is now provided natively by NSFont (same descriptor-preserving behavior), so the
+// former category implementation was removed to avoid overriding the framework method.
 - (CGFloat)lineHeight;
 
 @end

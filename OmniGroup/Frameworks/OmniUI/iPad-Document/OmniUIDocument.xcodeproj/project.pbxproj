@@ -32,12 +32,8 @@
 		2755CCFC1794B39600F3785A /* OUIDocumentPickerHomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2755CCFA1794B39600F3785A /* OUIDocumentPickerHomeScreenViewController.m */; };
 		2792C23617B6E53700CBB64A /* OUIDocumentPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 2792C23417B6E53700CBB64A /* OUIDocumentPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2792C23717B6E53700CBB64A /* OUIDocumentPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2792C23517B6E53700CBB64A /* OUIDocumentPicker.m */; };
-		27AD126417D7E1D200758C67 /* OmniUIDocumentImages.h in Headers */ = {isa = PBXBuildFile; fileRef = 27AD126317D7E1D200758C67 /* OmniUIDocumentImages.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		27AD126617D7E2B700758C67 /* OmniUIDocumentImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 27AD126517D7E2B700758C67 /* OmniUIDocumentImages.m */; };
 		27AD136517DA53F800758C67 /* OUIMenuItemFolder.png in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27AD136317DA53DA00758C67 /* OUIMenuItemFolder.png */; };
 		27AD136617DA53F800758C67 /* OUIMenuItemFolder@2x.png in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27AD136417DA53DA00758C67 /* OUIMenuItemFolder@2x.png */; };
-		27BA615117D148BB00DD4B3D /* OUIMenuItemConvertToFile.png in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27BA613917D13BD900DD4B3D /* OUIMenuItemConvertToFile.png */; };
-		27BA615217D148BB00DD4B3D /* OUIMenuItemConvertToFile@2x.png in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27BA613A17D13BD900DD4B3D /* OUIMenuItemConvertToFile@2x.png */; };
 		27BA615317D148BB00DD4B3D /* OUIMenuItemDocument.png in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27BA613B17D13BD900DD4B3D /* OUIMenuItemDocument.png */; };
 		27BA615417D148BB00DD4B3D /* OUIMenuItemDocument@2x.png in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27BA613C17D13BD900DD4B3D /* OUIMenuItemDocument@2x.png */; };
 		27BA615517D148BB00DD4B3D /* OUIMenuItemExportToWebDAV.png in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27BA613D17D13BD900DD4B3D /* OUIMenuItemExportToWebDAV.png */; };
@@ -58,8 +54,6 @@
 		27BA616417D148C600DD4B3D /* OUIMenuItemSendToMail@2x.png in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27BA614C17D13BD900DD4B3D /* OUIMenuItemSendToMail@2x.png */; };
 		27BA616517D148C600DD4B3D /* OUIMenuItemStencil.png in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27BA614D17D13BD900DD4B3D /* OUIMenuItemStencil.png */; };
 		27BA616617D148C600DD4B3D /* OUIMenuItemStencil@2x.png in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27BA614E17D13BD900DD4B3D /* OUIMenuItemStencil@2x.png */; };
-		27BA616717D148C600DD4B3D /* OUIMenuItemTemplate.png in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27BA614F17D13BD900DD4B3D /* OUIMenuItemTemplate.png */; };
-		27BA616817D148C600DD4B3D /* OUIMenuItemTemplate@2x.png in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27BA615017D13BD900DD4B3D /* OUIMenuItemTemplate@2x.png */; };
 		27BA616F17D1504C00DD4B3D /* OUIMenuItemSendToPhotos.png in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27BA616B17D14FCE00DD4B3D /* OUIMenuItemSendToPhotos.png */; };
 		27BA617017D1504C00DD4B3D /* OUIMenuItemSendToPhotos@2x.png in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27BA616C17D14FCE00DD4B3D /* OUIMenuItemSendToPhotos@2x.png */; };
 		27BA617117D1505500DD4B3D /* OUIMenuItemCopyAsImage.png in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27BA616917D14FCE00DD4B3D /* OUIMenuItemCopyAsImage.png */; };
@@ -218,8 +212,6 @@
 				230FEFA117FB48BA0081F754 /* OUITextField-ClearButton@2x.png in Copy Resources */,
 				343190FA17DBE1C20089BDD6 /* OUIServerAccountValidationSuccess.png in Copy Resources */,
 				343190FB17DBE1C20089BDD6 /* OUIServerAccountValidationSuccess@2x.png in Copy Resources */,
-				27BA615117D148BB00DD4B3D /* OUIMenuItemConvertToFile.png in Copy Resources */,
-				27BA615217D148BB00DD4B3D /* OUIMenuItemConvertToFile@2x.png in Copy Resources */,
 				27BA617117D1505500DD4B3D /* OUIMenuItemCopyAsImage.png in Copy Resources */,
 				27BA617217D1505500DD4B3D /* OUIMenuItemCopyAsImage@2x.png in Copy Resources */,
 				27BA615317D148BB00DD4B3D /* OUIMenuItemDocument.png in Copy Resources */,
@@ -248,8 +240,6 @@
 				27BA617017D1504C00DD4B3D /* OUIMenuItemSendToPhotos@2x.png in Copy Resources */,
 				27BA616517D148C600DD4B3D /* OUIMenuItemStencil.png in Copy Resources */,
 				27BA616617D148C600DD4B3D /* OUIMenuItemStencil@2x.png in Copy Resources */,
-				27BA616717D148C600DD4B3D /* OUIMenuItemTemplate.png in Copy Resources */,
-				27BA616817D148C600DD4B3D /* OUIMenuItemTemplate@2x.png in Copy Resources */,
 				6C660BB217BD496E00950C60 /* OUIDocumentPickerBackgroundTile.png in Copy Resources */,
 				4A815C0B17CD63B700D669AF /* OUIDocumentPickerBackgroundTile@2x.png in Copy Resources */,
 				6CBFA83C17B5739600B822CE /* OUIDocumentPickerHomeScreenCell.xib in Copy Resources */,
@@ -355,12 +345,8 @@
 		2755CCFA1794B39600F3785A /* OUIDocumentPickerHomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OUIDocumentPickerHomeScreenViewController.m; path = DocumentBrowser/OUIDocumentPickerHomeScreenViewController.m; sourceTree = SOURCE_ROOT; };
 		2792C23417B6E53700CBB64A /* OUIDocumentPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OUIDocumentPicker.h; sourceTree = SOURCE_ROOT; };
 		2792C23517B6E53700CBB64A /* OUIDocumentPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OUIDocumentPicker.m; sourceTree = SOURCE_ROOT; };
-		27AD126317D7E1D200758C67 /* OmniUIDocumentImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OmniUIDocumentImages.h; sourceTree = "<group>"; };
-		27AD126517D7E2B700758C67 /* OmniUIDocumentImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OmniUIDocumentImages.m; sourceTree = "<group>"; };
 		27AD136317DA53DA00758C67 /* OUIMenuItemFolder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OUIMenuItemFolder.png; sourceTree = "<group>"; };
 		27AD136417DA53DA00758C67 /* OUIMenuItemFolder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OUIMenuItemFolder@2x.png"; sourceTree = "<group>"; };
-		27BA613917D13BD900DD4B3D /* OUIMenuItemConvertToFile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OUIMenuItemConvertToFile.png; sourceTree = "<group>"; };
-		27BA613A17D13BD900DD4B3D /* OUIMenuItemConvertToFile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OUIMenuItemConvertToFile@2x.png"; sourceTree = "<group>"; };
 		27BA613B17D13BD900DD4B3D /* OUIMenuItemDocument.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OUIMenuItemDocument.png; sourceTree = "<group>"; };
 		27BA613C17D13BD900DD4B3D /* OUIMenuItemDocument@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OUIMenuItemDocument@2x.png"; sourceTree = "<group>"; };
 		27BA613D17D13BD900DD4B3D /* OUIMenuItemExportToWebDAV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OUIMenuItemExportToWebDAV.png; sourceTree = "<group>"; };
@@ -381,8 +367,6 @@
 		27BA614C17D13BD900DD4B3D /* OUIMenuItemSendToMail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OUIMenuItemSendToMail@2x.png"; sourceTree = "<group>"; };
 		27BA614D17D13BD900DD4B3D /* OUIMenuItemStencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OUIMenuItemStencil.png; sourceTree = "<group>"; };
 		27BA614E17D13BD900DD4B3D /* OUIMenuItemStencil@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OUIMenuItemStencil@2x.png"; sourceTree = "<group>"; };
-		27BA614F17D13BD900DD4B3D /* OUIMenuItemTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OUIMenuItemTemplate.png; sourceTree = "<group>"; };
-		27BA615017D13BD900DD4B3D /* OUIMenuItemTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OUIMenuItemTemplate@2x.png"; sourceTree = "<group>"; };
 		27BA616917D14FCE00DD4B3D /* OUIMenuItemCopyAsImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OUIMenuItemCopyAsImage.png; sourceTree = "<group>"; };
 		27BA616A17D14FCE00DD4B3D /* OUIMenuItemCopyAsImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OUIMenuItemCopyAsImage@2x.png"; sourceTree = "<group>"; };
 		27BA616B17D14FCE00DD4B3D /* OUIMenuItemSendToPhotos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OUIMenuItemSendToPhotos.png; sourceTree = "<group>"; };
@@ -609,8 +593,6 @@
 			children = (
 				230FEF9E17FB48990081F754 /* OUITextField-ClearButton.png */,
 				230FEF9F17FB48990081F754 /* OUITextField-ClearButton@2x.png */,
-				27AD126317D7E1D200758C67 /* OmniUIDocumentImages.h */,
-				27AD126517D7E2B700758C67 /* OmniUIDocumentImages.m */,
 				4ABDA3F11733F80400369B3C /* OmniPresenceConfigDocumentIcon-128.png */,
 				4ABDA3F21733F80400369B3C /* OmniPresenceConfigDocumentIcon-128@2x.png */,
 				4ABDA3EF1733F80400369B3C /* OmniPresenceConfigDocumentIcon-32.png */,
@@ -664,8 +646,6 @@
 				23C9E26717455C27001982D6 /* OUIGenericWebDAV@2x.png */,
 				3424E579167823E50019328E /* OUIGreenPlusButton.png */,
 				3424E57A167823E50019328E /* OUIGreenPlusButton@2x.png */,
-				27BA613917D13BD900DD4B3D /* OUIMenuItemConvertToFile.png */,
-				27BA613A17D13BD900DD4B3D /* OUIMenuItemConvertToFile@2x.png */,
 				27BA616917D14FCE00DD4B3D /* OUIMenuItemCopyAsImage.png */,
 				27BA616A17D14FCE00DD4B3D /* OUIMenuItemCopyAsImage@2x.png */,
 				27BA613B17D13BD900DD4B3D /* OUIMenuItemDocument.png */,
@@ -694,8 +674,6 @@
 				27BA616C17D14FCE00DD4B3D /* OUIMenuItemSendToPhotos@2x.png */,
 				27BA614D17D13BD900DD4B3D /* OUIMenuItemStencil.png */,
 				27BA614E17D13BD900DD4B3D /* OUIMenuItemStencil@2x.png */,
-				27BA614F17D13BD900DD4B3D /* OUIMenuItemTemplate.png */,
-				27BA615017D13BD900DD4B3D /* OUIMenuItemTemplate@2x.png */,
 				3424E585167823E50019328E /* OUIPDF.png */,
 				3424E586167823E50019328E /* OUIPDF@2x.png */,
 				3424E587167823E50019328E /* OUIPNG.png */,
@@ -1014,7 +992,6 @@
 				6CAD884E17D7BA1300B4519E /* OUIDocumentHomeScreenAnimator.h in Headers */,
 				3424E56416781EDE0019328E /* OUIDocumentPickerDelegate.h in Headers */,
 				3424E56616781F210019328E /* OUIDocumentParameters.h in Headers */,
-				27AD126417D7E1D200758C67 /* OmniUIDocumentImages.h in Headers */,
 				3424E56916781FDC0019328E /* OUISheetNavigationController.h in Headers */,
 				6C660BAF17BD321500950C60 /* OUIDocumentOpenAnimator.h in Headers */,
 				6C1FCE9417C68DBA00504B6C /* OUIDocumentTemplateAnimator.h in Headers */,
@@ -1142,7 +1119,6 @@
 				3424E56A16781FDC0019328E /* OUISheetNavigationController.m in Sources */,
 				3424E56E167820280019328E /* OUIToolbarTitleButton.m in Sources */,
 				3441607B16B0BC5E00E917F5 /* OUIServerAccountValidationViewController.m in Sources */,
-				27AD126617D7E2B700758C67 /* OmniUIDocumentImages.m in Sources */,
 				3452DDDE16C213E5001164A6 /* OUIDocumentInbox.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

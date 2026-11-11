@@ -20,7 +20,6 @@
 #import <OmniBase/OBPostLoader.h>
 #endif
 #import <OmniBase/OBUtilities.h>
-#import <OmniBase/OBLogger.h>
 
 #import <OmniBase/NSException-OBExtensions.h>
 #import <OmniBase/NSError-OBExtensions.h>

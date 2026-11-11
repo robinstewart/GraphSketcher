@@ -72,7 +72,9 @@ This method makes several passes, each time invoking a different selector.  On t
         [self _becomingMultiThreaded:nil];
 
 #ifdef OMNI_ASSERTIONS_ON
-    OBPerformRuntimeChecks();
+    // The runtime checks walk every class in every loaded framework, which provokes +initialize / +resolveInstanceMethod: on arbitrary system classes. On current macOS that corrupts LaunchServices state and crashes at launch, so only run them on request.
+    if (getenv("OBPerformRuntimeChecks"))
+        OBPerformRuntimeChecks();
 #endif
 }
 

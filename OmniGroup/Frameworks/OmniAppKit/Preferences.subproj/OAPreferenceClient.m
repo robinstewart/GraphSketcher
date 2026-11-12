@@ -12,7 +12,6 @@
 #import <OmniBase/OmniBase.h>
 #import <OmniFoundation/OmniFoundation.h>
 
-#import <OmniAppKit/NSBundle-OAExtensions.h>
 #import <OmniAppKit/OAPreferenceController.h>
 #import <OmniAppKit/OAPreferenceClientRecord.h>
 

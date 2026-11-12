@@ -37,8 +37,6 @@
 		34E20FE11193153900ECA875 /* OUZipLinkMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 424182910F44BAF00029B4DA /* OUZipLinkMember.m */; };
 		34E20FE21193153C00ECA875 /* OUZipMember.h in Headers */ = {isa = PBXBuildFile; fileRef = 424182920F44BAF00029B4DA /* OUZipMember.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		34E20FE31193153D00ECA875 /* OUZipMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 424182930F44BAF00029B4DA /* OUZipMember.m */; };
-		34E20FE41193153F00ECA875 /* OUZipRawFileMember.h in Headers */ = {isa = PBXBuildFile; fileRef = 424182940F44BAF00029B4DA /* OUZipRawFileMember.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		34E20FE51193154000ECA875 /* OUZipRawFileMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 424182950F44BAF00029B4DA /* OUZipRawFileMember.m */; };
 		4241822E0F44B55E0029B4DA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4241822D0F44B55E0029B4DA /* libz.dylib */; };
 		424182530F44B7930029B4DA /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 424182440F44B7930029B4DA /* ioapi.c */; };
 		4241825C0F44B7930029B4DA /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 4241824D0F44B7930029B4DA /* unzip.c */; };
@@ -57,8 +55,6 @@
 		4241829D0F44BAF00029B4DA /* OUZipLinkMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 424182910F44BAF00029B4DA /* OUZipLinkMember.m */; };
 		4241829E0F44BAF00029B4DA /* OUZipMember.h in Headers */ = {isa = PBXBuildFile; fileRef = 424182920F44BAF00029B4DA /* OUZipMember.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4241829F0F44BAF00029B4DA /* OUZipMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 424182930F44BAF00029B4DA /* OUZipMember.m */; };
-		424182A00F44BAF00029B4DA /* OUZipRawFileMember.h in Headers */ = {isa = PBXBuildFile; fileRef = 424182940F44BAF00029B4DA /* OUZipRawFileMember.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		424182A10F44BAF00029B4DA /* OUZipRawFileMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 424182950F44BAF00029B4DA /* OUZipRawFileMember.m */; };
 		424182A30F44BBD70029B4DA /* OmniFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 424182A20F44BBD70029B4DA /* OmniFoundation.framework */; };
 		4241834D0F44C9390029B4DA /* OUErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = 4241834B0F44C9390029B4DA /* OUErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4241834E0F44C9390029B4DA /* OUErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 4241834C0F44C9390029B4DA /* OUErrors.m */; };
@@ -120,13 +116,7 @@
 		424182430F44B7930029B4DA /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
 		424182440F44B7930029B4DA /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
 		424182450F44B7930029B4DA /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
-		424182460F44B7930029B4DA /* iowin32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iowin32.c; sourceTree = "<group>"; };
-		424182470F44B7930029B4DA /* iowin32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iowin32.h; sourceTree = "<group>"; };
 		424182480F44B7930029B4DA /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		424182490F44B7930029B4DA /* miniunz.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = miniunz.c; sourceTree = "<group>"; };
-		4241824A0F44B7930029B4DA /* minizip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = minizip.c; sourceTree = "<group>"; };
-		4241824B0F44B7930029B4DA /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
-		4241824C0F44B7930029B4DA /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
 		4241824D0F44B7930029B4DA /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
 		4241824E0F44B7930029B4DA /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
 		4241824F0F44B7930029B4DA /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
@@ -145,8 +135,6 @@
 		424182910F44BAF00029B4DA /* OUZipLinkMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OUZipLinkMember.m; sourceTree = "<group>"; };
 		424182920F44BAF00029B4DA /* OUZipMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OUZipMember.h; sourceTree = "<group>"; };
 		424182930F44BAF00029B4DA /* OUZipMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OUZipMember.m; sourceTree = "<group>"; };
-		424182940F44BAF00029B4DA /* OUZipRawFileMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OUZipRawFileMember.h; sourceTree = "<group>"; };
-		424182950F44BAF00029B4DA /* OUZipRawFileMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OUZipRawFileMember.m; sourceTree = "<group>"; };
 		424182A20F44BBD70029B4DA /* OmniFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OmniFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4241834B0F44C9390029B4DA /* OUErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OUErrors.h; sourceTree = "<group>"; };
 		4241834C0F44C9390029B4DA /* OUErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OUErrors.m; sourceTree = "<group>"; };
@@ -301,13 +289,7 @@
 				424182430F44B7930029B4DA /* crypt.h */,
 				424182440F44B7930029B4DA /* ioapi.c */,
 				424182450F44B7930029B4DA /* ioapi.h */,
-				424182460F44B7930029B4DA /* iowin32.c */,
-				424182470F44B7930029B4DA /* iowin32.h */,
 				424182480F44B7930029B4DA /* Makefile */,
-				424182490F44B7930029B4DA /* miniunz.c */,
-				4241824A0F44B7930029B4DA /* minizip.c */,
-				4241824B0F44B7930029B4DA /* mztools.c */,
-				4241824C0F44B7930029B4DA /* mztools.h */,
 				4241824D0F44B7930029B4DA /* unzip.c */,
 				4241824E0F44B7930029B4DA /* unzip.h */,
 				4241824F0F44B7930029B4DA /* zip.c */,
@@ -341,8 +323,6 @@
 				424182910F44BAF00029B4DA /* OUZipLinkMember.m */,
 				424182920F44BAF00029B4DA /* OUZipMember.h */,
 				424182930F44BAF00029B4DA /* OUZipMember.m */,
-				424182940F44BAF00029B4DA /* OUZipRawFileMember.h */,
-				424182950F44BAF00029B4DA /* OUZipRawFileMember.m */,
 			);
 			name = Zip;
 			sourceTree = "<group>";
@@ -407,7 +387,6 @@
 				34E20FDE1193153300ECA875 /* OUZipFileMember.h in Headers */,
 				34E20FE01193153900ECA875 /* OUZipLinkMember.h in Headers */,
 				34E20FE21193153C00ECA875 /* OUZipMember.h in Headers */,
-				34E20FE41193153F00ECA875 /* OUZipRawFileMember.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,7 +401,6 @@
 				4241829A0F44BAF00029B4DA /* OUZipFileMember.h in Headers */,
 				4241829C0F44BAF00029B4DA /* OUZipLinkMember.h in Headers */,
 				4241829E0F44BAF00029B4DA /* OUZipMember.h in Headers */,
-				424182A00F44BAF00029B4DA /* OUZipRawFileMember.h in Headers */,
 				4241834D0F44C9390029B4DA /* OUErrors.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -538,7 +516,6 @@
 				34E20FDF1193153300ECA875 /* OUZipFileMember.m in Sources */,
 				34E20FE11193153900ECA875 /* OUZipLinkMember.m in Sources */,
 				34E20FE31193153D00ECA875 /* OUZipMember.m in Sources */,
-				34E20FE51193154000ECA875 /* OUZipRawFileMember.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,7 +533,6 @@
 				4241829B0F44BAF00029B4DA /* OUZipFileMember.m in Sources */,
 				4241829D0F44BAF00029B4DA /* OUZipLinkMember.m in Sources */,
 				4241829F0F44BAF00029B4DA /* OUZipMember.m in Sources */,
-				424182A10F44BAF00029B4DA /* OUZipRawFileMember.m in Sources */,
 				4241834E0F44C9390029B4DA /* OUErrors.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

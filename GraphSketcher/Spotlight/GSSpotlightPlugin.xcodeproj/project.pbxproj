@@ -232,13 +232,7 @@
 		0044600B0FCF12B500DC1307 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
 		0044600C0FCF12B500DC1307 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
 		0044600D0FCF12B500DC1307 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
-		0044600E0FCF12B500DC1307 /* iowin32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iowin32.c; sourceTree = "<group>"; };
-		0044600F0FCF12B500DC1307 /* iowin32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iowin32.h; sourceTree = "<group>"; };
 		004460100FCF12B500DC1307 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		004460110FCF12B500DC1307 /* miniunz.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = miniunz.c; sourceTree = "<group>"; };
-		004460120FCF12B500DC1307 /* minizip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = minizip.c; sourceTree = "<group>"; };
-		004460130FCF12B500DC1307 /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
-		004460140FCF12B500DC1307 /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
 		004460150FCF12B500DC1307 /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
 		004460160FCF12B500DC1307 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
 		004460170FCF12B500DC1307 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
@@ -360,13 +354,7 @@
 				0044600B0FCF12B500DC1307 /* crypt.h */,
 				0044600C0FCF12B500DC1307 /* ioapi.c */,
 				0044600D0FCF12B500DC1307 /* ioapi.h */,
-				0044600E0FCF12B500DC1307 /* iowin32.c */,
-				0044600F0FCF12B500DC1307 /* iowin32.h */,
 				004460100FCF12B500DC1307 /* Makefile */,
-				004460110FCF12B500DC1307 /* miniunz.c */,
-				004460120FCF12B500DC1307 /* minizip.c */,
-				004460130FCF12B500DC1307 /* mztools.c */,
-				004460140FCF12B500DC1307 /* mztools.h */,
 				004460150FCF12B500DC1307 /* unzip.c */,
 				004460160FCF12B500DC1307 /* unzip.h */,
 				004460170FCF12B500DC1307 /* zip.c */,

@@ -21,7 +21,6 @@
 
 #if !defined(TARGET_OS_IPHONE) || !TARGET_OS_IPHONE
 #import <AppKit/AppKit.h>
-#import <OmniAppKit/NSFontManager-OAExtensions.h>
 //#import "OSStyledTextStorage.h"
 #else
 #import <OmniQuartz/OQColor.h>

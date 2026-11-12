@@ -16,8 +16,6 @@
 #import <OmniFoundation/OFErrors.h>
 #import <OmniFoundation/OFEnumNameTable.h>
 #import <OmniFoundation/OFExtent.h>
-#import <OmniFoundation/OFHTTPState.h>
-#import <OmniFoundation/OFHTTPStateMachine.h>
 #import <OmniFoundation/OFKnownKeyDictionaryTemplate.h>
 #import <OmniFoundation/OFMultiValueDictionary.h>
 #import <OmniFoundation/OFMutableKnownKeyDictionary.h>
@@ -26,43 +24,28 @@
 #import <OmniFoundation/OFPoint.h>
 #import <OmniFoundation/OFPreference.h>
 #import <OmniFoundation/OFRandom.h>
-#import <OmniFoundation/OFRationalNumber.h>
-#import <OmniFoundation/OFReadWriteFileBuffer.h>
 #import <OmniFoundation/OFRegularExpressionMatch.h>
 #import <OmniFoundation/OFRelativeDateFormatter.h>
 #import <OmniFoundation/OFRelativeDateParser.h>
 #import <OmniFoundation/OFStringDecoder.h>
 #import <OmniFoundation/OFStringScanner.h>
 #import <OmniFoundation/OFSyncClient.h>
-#import <OmniFoundation/OFTimeSpanFormatter.h>
-#import <OmniFoundation/OFTimeSpan.h>
 #import <OmniFoundation/OFUtilities.h>
 #import <OmniFoundation/OFVersionNumber.h>
 #import <OmniFoundation/OFWeakReference.h>
 #if !defined(TARGET_OS_IPHONE) || !TARGET_OS_IPHONE
-    #import <OmniFoundation/OFBTree.h>
-    #import <OmniFoundation/OFBulkBlockPool.h>
     #import <OmniFoundation/OFBundledClass.h>
-    #import <OmniFoundation/OFByteSet.h>
-    #import <OmniFoundation/OFCharacterScanner-OFTrie.h>
     #import <OmniFoundation/OFController.h>
-    #import <OmniFoundation/OFDataCursor.h>
     #import <OmniFoundation/OFDedicatedThreadScheduler.h>
-    #import <OmniFoundation/OFDelayedEvent.h>
     #import <OmniFoundation/OFGeometry.h>
     #import <OmniFoundation/OFInvocation.h>
     #import <OmniFoundation/OFMessageQueue.h>
     #import <OmniFoundation/OFMessageQueuePriorityProtocol.h>
     #import <OmniFoundation/OFObject-Queue.h>
     #import <OmniFoundation/OFQueueProcessor.h>
-    #import <OmniFoundation/OFReadWriteLock.h>
     #import <OmniFoundation/OFRunLoopQueueProcessor.h>
     #import <OmniFoundation/OFScheduledEvent.h>
     #import <OmniFoundation/OFScheduler.h>
-    #import <OmniFoundation/OFSignature.h>
-    #import <OmniFoundation/OFTrie.h>
-    #import <OmniFoundation/OFTrieBucket.h>
-    #import <OmniFoundation/OFTrieNode.h>
 #endif
 
 
@@ -78,14 +61,10 @@
 #import <OmniFoundation/OFXMLString.h>
 #import <OmniFoundation/OFXMLUnparsedElement.h>
 #if !defined(TARGET_OS_IPHONE) || !TARGET_OS_IPHONE
-    #import <OmniFoundation/OFXMLReader.h>
 #endif
 
 // AppleScript
 #if !defined(TARGET_OS_IPHONE) || !TARGET_OS_IPHONE
-    #import <OmniFoundation/OFAddScriptCommand.h>
-    #import <OmniFoundation/OFRemoveScriptCommand.h>
-    #import <OmniFoundation/OFScriptPlaceholder.h>
 #endif
 
 // Formatters
@@ -100,7 +79,6 @@
 #import <OmniFoundation/NSDictionary-OFExtensions.h>
 #import <OmniFoundation/NSFileCoordinator-OFExtensions.h>
 #import <OmniFoundation/NSIndexSet-OFExtensions.h>
-#import <OmniFoundation/NSInvocation-OFExtensions.h>
 #import <OmniFoundation/NSMutableArray-OFExtensions.h>
 #import <OmniFoundation/NSMutableAttributedString-OFExtensions.h>
 #import <OmniFoundation/NSMutableDictionary-OFExtensions.h>
@@ -117,17 +95,12 @@
 #import <OmniFoundation/NSUserDefaults-OFExtensions.h>
 #import <OmniFoundation/NSURL-OFExtensions.h>
 #if !defined(TARGET_OS_IPHONE) || !TARGET_OS_IPHONE
-    #import <OmniFoundation/NSBundle-OFExtensions.h>
-    #import <OmniFoundation/NSCalendarDate-OFExtensions.h>
     #import <OmniFoundation/NSComparisonPredicate-OFExtensions.h>
     #import <OmniFoundation/NSData-OFExtensions.h>
     #import <OmniFoundation/NSException-OFExtensions.h>
     #import <OmniFoundation/NSFileManager-OFExtensions.h>
-    #import <OmniFoundation/NSMutableData-OFExtensions.h>
-    #import <OmniFoundation/NSNotificationCenter-OFExtensions.h>
     #import <OmniFoundation/NSObject-OFAppleScriptExtensions.h>
     #import <OmniFoundation/NSProcessInfo-OFExtensions.h>
-    #import <OmniFoundation/NSScanner-OFExtensions.h>
     #import <OmniFoundation/NSScriptCommand-OFExtensions.h>
     #import <OmniFoundation/NSThread-OFExtensions.h>
 #endif

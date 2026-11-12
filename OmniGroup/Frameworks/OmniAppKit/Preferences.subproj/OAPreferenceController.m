@@ -13,9 +13,7 @@
 #import <OmniFoundation/OmniFoundation.h>
 
 #import "OAApplication.h"
-#import "NSBundle-OAExtensions.h"
 #import "NSImage-OAExtensions.h"
-#import "NSToolbar-OAExtensions.h"
 #import "NSView-OAExtensions.h"
 #import "OAPreferenceClient.h"
 #import "OAPreferenceClientRecord.h"

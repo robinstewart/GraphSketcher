@@ -199,13 +199,7 @@
 		001FD6A40FCC988B00FC3ADB /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
 		001FD6A50FCC988B00FC3ADB /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
 		001FD6A60FCC988B00FC3ADB /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
-		001FD6A70FCC988B00FC3ADB /* iowin32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iowin32.c; sourceTree = "<group>"; };
-		001FD6A80FCC988B00FC3ADB /* iowin32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iowin32.h; sourceTree = "<group>"; };
 		001FD6A90FCC988B00FC3ADB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		001FD6AA0FCC988B00FC3ADB /* miniunz.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = miniunz.c; sourceTree = "<group>"; };
-		001FD6AB0FCC988B00FC3ADB /* minizip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = minizip.c; sourceTree = "<group>"; };
-		001FD6AC0FCC988B00FC3ADB /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
-		001FD6AD0FCC988B00FC3ADB /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
 		001FD6AE0FCC988B00FC3ADB /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
 		001FD6AF0FCC988B00FC3ADB /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
 		001FD6B00FCC988B00FC3ADB /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
@@ -306,13 +300,7 @@
 				001FD6A40FCC988B00FC3ADB /* crypt.h */,
 				001FD6A50FCC988B00FC3ADB /* ioapi.c */,
 				001FD6A60FCC988B00FC3ADB /* ioapi.h */,
-				001FD6A70FCC988B00FC3ADB /* iowin32.c */,
-				001FD6A80FCC988B00FC3ADB /* iowin32.h */,
 				001FD6A90FCC988B00FC3ADB /* Makefile */,
-				001FD6AA0FCC988B00FC3ADB /* miniunz.c */,
-				001FD6AB0FCC988B00FC3ADB /* minizip.c */,
-				001FD6AC0FCC988B00FC3ADB /* mztools.c */,
-				001FD6AD0FCC988B00FC3ADB /* mztools.h */,
 				001FD6AE0FCC988B00FC3ADB /* unzip.c */,
 				001FD6AF0FCC988B00FC3ADB /* unzip.h */,
 				001FD6B00FCC988B00FC3ADB /* zip.c */,

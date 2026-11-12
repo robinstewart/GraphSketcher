@@ -12,7 +12,6 @@
 
 #if !defined(TARGET_OS_IPHONE) || !TARGET_OS_IPHONE
 #import <AppKit/NSDragging.h> // For NSDragOperation
-#import <OmniFoundation/OFAddScriptCommand.h>
 #endif
 
 extern BOOL OAFontDescriptorIsInterestedInStyleAttributeKey(NSString *key);

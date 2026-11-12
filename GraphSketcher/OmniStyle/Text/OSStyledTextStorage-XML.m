@@ -16,7 +16,6 @@
 #import <OmniFoundation/OFXMLDocument.h>
 #import <OmniFoundation/OFXMLElement.h>
 #import <OmniFoundation/OFXMLQName.h>
-#import <OmniFoundation/OFXMLReader.h>
 #import <OmniFoundation/OFXMLString.h>
 #import <OmniAppKit/OATextAttributes.h>
 

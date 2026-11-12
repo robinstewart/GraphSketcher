@@ -15,5 +15,4 @@
     #import <AppKit/AppKit.h>
     #import <OmniBase/OmniBase.h>
     #import <OmniFoundation/OmniFoundation.h>
-    #import <OmniAppKit/OAUtilities.h>
 #endif

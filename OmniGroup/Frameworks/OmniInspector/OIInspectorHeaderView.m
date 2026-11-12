@@ -10,7 +10,6 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 #import <OmniAppKit/NSImage-OAExtensions.h>
-#import <OmniAppKit/OAAquaButton.h>
 #import <OmniAppKit/NSAttributedString-OAExtensions.h>
 #import <OmniFoundation/OmniFoundation.h>
 #import <OmniBase/OmniBase.h>

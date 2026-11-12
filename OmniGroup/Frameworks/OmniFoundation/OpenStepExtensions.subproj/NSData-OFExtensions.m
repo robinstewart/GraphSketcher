@@ -13,13 +13,11 @@
 #import <OmniFoundation/CFPropertyList-OFExtensions.h>
 #import <OmniFoundation/OFErrors.h>
 #import <OmniFoundation/NSFileManager-OFExtensions.h>
-#import <OmniFoundation/NSMutableData-OFExtensions.h>
 #import <OmniFoundation/NSObject-OFExtensions.h>
 #import <OmniFoundation/NSString-OFExtensions.h>
 #import <OmniFoundation/OFDataBuffer.h>
 #import <OmniFoundation/OFRandom.h>
 
-#import <OmniFoundation/NSBundle-OFExtensions.h>
 #import <OmniBase/NSError-OBExtensions.h>
 #import <poll.h>
 

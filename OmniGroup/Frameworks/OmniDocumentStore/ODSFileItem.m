@@ -13,7 +13,6 @@
 #import <OmniDocumentStore/ODSScope-Subclass.h>
 #import <OmniFoundation/NSString-OFPathExtensions.h>
 #import <OmniFoundation/NSURL-OFExtensions.h>
-#import <OmniFoundation/OFFilePresenterEdits.h>
 #import <OmniFoundation/OFUTI.h>
 
 #import "ODSFileItem-Internal.h"

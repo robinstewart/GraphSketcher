@@ -10,7 +10,6 @@
 #import <OmniFoundation/NSAttributedString-OFExtensions.h>
 #import <OmniFoundation/NSMutableAttributedString-OFExtensions.h>
 #import <OmniAppKit/OATextAttributes.h>
-#import <OmniAppKit/OATextAttachmentCell.h>
 #import <OmniAppKit/OATextStorage.h>
 #import <OmniAppKit/NSAttributedString-OAExtensions.h>
 #import <OmniAppKit/NSLayoutManager-OAExtensions.h>

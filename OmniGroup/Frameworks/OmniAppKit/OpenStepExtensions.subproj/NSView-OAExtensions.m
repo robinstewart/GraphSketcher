@@ -14,7 +14,6 @@
 #import <OmniBase/macros.h>
 #import <OmniFoundation/OmniFoundation.h>
 
-#import <OmniAppKit/NSFont-OAExtensions.h>
 #import <OmniAppKit/NSApplication-OAExtensions.h>
 
 RCS_ID("$Id$")

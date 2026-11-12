@@ -11,7 +11,6 @@
 #import <OmniFoundation/OmniFoundation.h>
 #import <OmniBase/OmniBase.h>
 
-#import "OAAquaButton.h"
 #import "OAScriptToolbarHelper.h"
 #import "OAToolbar.h"
 #import "OAToolbarItem.h"

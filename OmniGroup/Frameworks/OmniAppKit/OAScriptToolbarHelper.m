@@ -15,7 +15,6 @@
 #import <OmniFoundation/OmniFoundation.h>
 
 #import "NSImage-OAExtensions.h"
-#import "NSToolbar-OAExtensions.h"
 #import "NSFileManager-OAExtensions.h"
 #import "OAApplication.h"
 #import "OAToolbarItem.h"

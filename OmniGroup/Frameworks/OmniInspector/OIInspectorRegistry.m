@@ -11,7 +11,6 @@
 #import <AppKit/AppKit.h>
 #import <OmniBase/OmniBase.h>
 #import <OmniFoundation/OmniFoundation.h>
-#import <OmniAppKit/NSBundle-OAExtensions.h>
 #import <OmniAppKit/NSWindow-OAExtensions.h>
 #import <OmniAppKit/OAApplication.h>
 #import <OmniAppKit/OAWindowCascade.h>

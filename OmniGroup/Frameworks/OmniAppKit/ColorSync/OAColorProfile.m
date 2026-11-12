@@ -15,7 +15,6 @@
 #import <OmniFoundation/OmniFoundation.h>
 #import <OmniBase/assertions.h>
 #import <OmniAppKit/OAFeatures.h>
-#import "OAColorProfile-Deprecated.h"
 
 RCS_ID("$Id$");
 

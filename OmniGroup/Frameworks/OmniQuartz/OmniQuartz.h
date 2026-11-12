@@ -11,16 +11,11 @@
 
 // Mac-only
 #if !defined(TARGET_OS_IPHONE) || !TARGET_OS_IPHONE
-#import <OmniQuartz/OQTargetAnimation.h>
 
 #import <OmniQuartz/CIColor-OQExtensions.h>
-#import <OmniQuartz/CIContext-OQExtensions.h>
-#import <OmniQuartz/NSView-OQExtensions.h>
-#import <OmniQuartz/OQGradient.h>
 #endif
 
 
-#import <OmniQuartz/OQContentAnimatingLayer.h>
 
 #import <OmniQuartz/CALayer-OQExtensions.h>
 #import <OmniQuartz/OQColor.h>

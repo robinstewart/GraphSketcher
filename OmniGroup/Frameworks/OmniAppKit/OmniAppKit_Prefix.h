@@ -20,7 +20,6 @@
 #import <OmniFoundation/OmniFoundation.h>
 
 // Import just a few commonly used headers from OmniAppKit itself
-#import "OAUtilities.h"
 #import "OAFindControllerTargetProtocol.h"
 
 #endif // __OBJC__

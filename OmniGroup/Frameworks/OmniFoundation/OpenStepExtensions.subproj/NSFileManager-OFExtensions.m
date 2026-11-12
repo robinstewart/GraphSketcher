@@ -14,7 +14,6 @@
 
 #import <OmniFoundation/CFPropertyList-OFExtensions.h>
 #import <OmniFoundation/NSArray-OFExtensions.h>
-#import <OmniFoundation/NSBundle-OFExtensions.h>
 #import <OmniFoundation/NSDictionary-OFExtensions.h>
 #import <OmniFoundation/NSProcessInfo-OFExtensions.h>
 #import <OmniFoundation/NSString-OFExtensions.h>

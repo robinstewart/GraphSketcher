@@ -23,7 +23,6 @@
 #import <OmniFoundation/NSDictionary-OFExtensions.h>
 #import <OmniFoundation/NSFileManager-OFSimpleExtensions.h>
 #import <OmniFoundation/NSFileManager-OFSimpleExtensions.h>
-#import <OmniFoundation/NSInvocation-OFExtensions.h>
 #import <OmniFoundation/NSMutableArray-OFExtensions.h>
 #import <OmniFoundation/NSSet-OFExtensions.h>
 #import <OmniFoundation/OFBinding.h>

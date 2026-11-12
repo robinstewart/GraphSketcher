@@ -6,7 +6,6 @@
 // <http://www.omnigroup.com/developer/sourcecode/sourcelicense/>.
 
 #import <OmniAppKit/OAViewPicker.h>
-#import <OmniAppKit/OATrackingLoop.h>
 
 RCS_ID("$Id$");
 

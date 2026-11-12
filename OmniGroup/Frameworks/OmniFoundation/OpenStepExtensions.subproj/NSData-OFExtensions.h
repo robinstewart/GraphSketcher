@@ -16,7 +16,6 @@
 #import <OmniFoundation/NSData-OFEncoding.h>
 #import <OmniFoundation/NSData-OFCompression.h>
 #import <OmniFoundation/NSData-OFSignature.h>
-#import <OmniFoundation/OFFilterProcess.h>
 
 @interface NSData (OFExtensions)
 

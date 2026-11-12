@@ -8,7 +8,6 @@
 
 #import "NSColor-ColorSyncExtensions.h"
 #import "OAColorProfile.h"
-#import "NSImage-ColorSyncExtensions.h"
 
 #import <OmniAppKit/OAFeatures.h>
 #import <AppKit/AppKit.h>

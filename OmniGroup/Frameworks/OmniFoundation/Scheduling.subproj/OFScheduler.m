@@ -17,7 +17,6 @@
 #import <OmniFoundation/NSThread-OFExtensions.h>
 
 #import <OmniFoundation/OFChildScheduler.h>
-#import <OmniFoundation/OFRunLoopScheduler.h>
 
 RCS_ID("$Id$")
 

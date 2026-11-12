@@ -1,0 +1,3 @@
+# Build output and generated analysis data; recreate with the steps in README.md
+work/
+__pycache__/

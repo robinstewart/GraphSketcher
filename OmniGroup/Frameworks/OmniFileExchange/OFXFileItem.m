@@ -14,7 +14,6 @@
 #import <OmniFoundation/NSFileCoordinator-OFExtensions.h>
 #import <OmniFoundation/NSFileManager-OFSimpleExtensions.h>
 #import <OmniFoundation/NSFileManager-OFTemporaryPath.h>
-#import <OmniFoundation/OFFilePresenterEdits.h>
 #import <OmniFoundation/OFXMLIdentifier.h>
 
 #import "OFXConnection.h"

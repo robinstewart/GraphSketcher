@@ -327,27 +327,33 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
 // New file format XML importer
 // (See useful similar code in OmniOutliner/OOXMLImporter.m)
 {
-    RSGraph *graph = [RSGraph graphFromData:data fileName:fileName type:RSGraphFileType undoer:_u error:outError];
-    if (!graph)
+    RSUndoer *undoer = [(RSUndoer *)[RSUndoer alloc] initWithOwner:self];
+    RSGraph *graph = [RSGraph graphFromData:data fileName:fileName type:RSGraphFileType undoer:undoer error:outError];
+    if (!graph) {
+        [undoer invalidate];
+        [undoer release];
         return NO;
+    }
 
     _isFromFile = YES;
 
-    [self _resetEditor];
-    assert(_editor == nil);
-    _editor = [[RSGraphEditor alloc] initWithGraph:graph undoer:_u];
-    _editor.delegate = self;
-    _graphView.editor = _editor;
+    [self _installEditorForGraph:graph undoer:undoer];
+    [undoer release];
 
     return YES;
 }
 
-- (void)_resetEditor;
+- (void)_installEditorForGraph:(RSGraph *)graph undoer:(RSUndoer *)undoer;
+// Tears down the current editor and undoer, then installs a new editor for the given graph. The graph must have been created with the given undoer, so that the graph and the editor (the undoer's target) share it.
 {
+    OBPRECONDITION(graph);
+    OBPRECONDITION(undoer);
+    OBPRECONDITION([graph undoer] == undoer);
+
     _graphView.editor = nil;
 
     [[self undoManager] removeAllActions];
-    
+
     [_u invalidate];
     [_u release];
     _u = nil;
@@ -356,27 +362,30 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
     [_editor release];
     _editor = nil;
 
-    _u = [(RSUndoer *)[RSUndoer alloc] initWithOwner:self];
+    _u = [undoer retain];
+    _editor = [[RSGraphEditor alloc] initWithGraph:graph undoer:_u];
+    _editor.delegate = self;
+    _graphView.editor = _editor;
 }
 
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError;
 // This method also gets called on "revert to saved"
 {
-    [self _resetEditor];
-
     assert(![typeName isEqual:@"com.robinstewart.graphdocument"]); // This type is no longer in our CFBundleDocumentTypes because it's not portable to 64-bit where @encode(NSPoint) is now "{CGPoint=dd}" rather than "{_NSPoint=ff}".
 
-    RSGraph *graph = [RSGraph graphFromURL:absoluteURL type:typeName undoer:_u error:outError];
-    if (!graph)
+    // Build the graph with a fresh undoer, which the new editor will also use. (Previously the graph was built with an undoer that was then replaced, leaving the graph's add/remove-element undo actions registered against a nil target.)
+    RSUndoer *undoer = [(RSUndoer *)[RSUndoer alloc] initWithOwner:self];
+    RSGraph *graph = [RSGraph graphFromURL:absoluteURL type:typeName undoer:undoer error:outError];
+    if (!graph) {
+        [undoer invalidate];
+        [undoer release];
         return NO;
+    }
 
     _isFromFile = YES;
 
-    [self _resetEditor];
-    assert(_editor == nil);
-    _editor = [[RSGraphEditor alloc] initWithGraph:graph undoer:_u];
-    _editor.delegate = self;
-    _graphView.editor = _editor;
+    [self _installEditorForGraph:graph undoer:undoer];
+    [undoer release];
     
     return YES;
 }

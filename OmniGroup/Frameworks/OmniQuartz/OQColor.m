@@ -1038,7 +1038,24 @@ static OQColor *_colorWithCGColorRef(CGColorRef cgColor)
         [toConvert getWhite:&white alpha:&alpha];
         return [OSWhiteColorCreate(white, alpha) autorelease];
     }
-    
+
+    // Colors from the modern color panel (sRGB, Display P3, Generic RGB, Gray Gamma 2.2, etc.) report NSCustomColorSpace. Convert them rather than falling through to black. Note that the generic RGB/gray color spaces are the same as the calibrated RGB/white color spaces used by -toColor, and alpha is preserved by the conversion.
+    if ([[color colorSpace] colorSpaceModel] == NSColorSpaceModelGray) {
+        NSColor *gray = [color colorUsingColorSpace:[NSColorSpace genericGrayColorSpace]];
+        if (gray) {
+            CGFloat white, alpha;
+            [gray getWhite:&white alpha:&alpha];
+            return [OSWhiteColorCreate(white, alpha) autorelease];
+        }
+    }
+
+    NSColor *rgb = [color colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]];
+    if (rgb) {
+        OQLinearRGBA rgba;
+        [rgb getRed:&rgba.r green:&rgba.g blue:&rgba.b alpha:&rgba.a];
+        return [OSRGBAColorCreate(rgba) autorelease];
+    }
+
     OBASSERT_NOT_REACHED("Unknown color space");
     return [OQColor blackColor];
 }

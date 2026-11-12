@@ -141,27 +141,34 @@
         [_graph addObserver:self forKeyPath:@"canvasSize" options:NSKeyValueObservingOptionNew context:NULL];
         [_graph addObserver:self forKeyPath:@"whitespace" options:NSKeyValueObservingOptionNew context:NULL];
         
-        // Set window position
-        // default "shouldCascadeWindows" is YES
-        if ([document isFromFile]) {
-            // Assume that if there is a non-zero point set, the graph wants it.
-            if (!NSEqualPoints(_graph.frameOrigin, NSZeroPoint))
-                [self setShouldCascadeWindows:NO];
+        // Setting up the window and canvas size is not a user action, so don't register undo for it (e.g. -setCanvasSize: below would otherwise register an undo action for new documents).
+        NSUndoManager *undoManager = [document undoManager];
+        [undoManager disableUndoRegistration];
+        @try {
+            // Set window position
+            // default "shouldCascadeWindows" is YES
+            if ([document isFromFile]) {
+                // Assume that if there is a non-zero point set, the graph wants it.
+                if (!NSEqualPoints(_graph.frameOrigin, NSZeroPoint))
+                    [self setShouldCascadeWindows:NO];
 
-            [window setFrameOrigin:_graph.frameOrigin];
-        }
-        else  // new, blank document
-        {
-            [window setFrameFromString:[[OFPreferenceWrapper sharedPreferenceWrapper] objectForKey:@"LastFrameString"]];
-            [_graph setCanvasSize:[_graphView bounds].size];
-        }
+                [window setFrameOrigin:_graph.frameOrigin];
+            }
+            else  // new, blank document
+            {
+                [window setFrameFromString:[[OFPreferenceWrapper sharedPreferenceWrapper] objectForKey:@"LastFrameString"]];
+                [_graph setCanvasSize:[_graphView bounds].size];
+            }
         
-        // Set window size according to the graph's canvas size
-        [self updateWindowSize];
+            // Set window size according to the graph's canvas size
+            [self updateWindowSize];
         
-        // Notify the RSGraphView
-        _graphView.editor = document.editor; // this also updates the display etc.
-        [_graphView setupMouseTracking];
+            // Notify the RSGraphView
+            _graphView.editor = document.editor; // this also updates the display etc.
+            [_graphView setupMouseTracking];
+        } @finally {
+            [undoManager enableUndoRegistration];
+        }
         
         // There should be no undos registered at this point. The document reading code should disable undos while doing its thing
         [[document undoer] endRepetitiveUndo]; // do this to ensure it is really empty (and we assert that it did nothing next).

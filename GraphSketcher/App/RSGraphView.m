@@ -60,7 +60,8 @@
 {
     [super updateTrackingAreas];
     
-    [self removeTrackingRect:_trackingRectTag];
+    if (_trackingRectTag != 0)
+        [self removeTrackingRect:_trackingRectTag];
     _trackingRectTag = [self addTrackingRect:[self bounds] owner:self 
                                     userData:nil assumeInside:NO];
 }

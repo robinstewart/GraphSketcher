@@ -903,7 +903,7 @@ static BOOL _validateForAssociatingStyles(OSStyle *self, OSStyle *style, NSError
 - (void)addListener:(id <OSStyleListener>)listener;
 /*" Adds the argument as a new listener for the receiving style.  It is an error for the same listener to be added twice.  This does not retain the listener, so the listener must remove itself before being deallocated. "*/
 {
-    OBPRECONDITION(!listener); // Check for nil will raise below
+    OBPRECONDITION(listener); // Check for nil will raise below
     OBINVARIANT([self _checkInvariants]);
 
     //NSLog(@"%@ add listener %@", [self shortDescription], [(id)listener shortDescription]);
@@ -952,7 +952,7 @@ static BOOL _validateForAssociatingStyles(OSStyle *self, OSStyle *style, NSError
 - (void)removeListener:(id <OSStyleListener>)listener;
 /*" Adds the argument as a new listener for the receiving style.  It is an error to remove a listener that wasn't subscribed. "*/
 {
-    OBPRECONDITION(!listener); // Use -setOwner:containerKey: instead.  Check for nil will raise below
+    OBPRECONDITION(listener); // Use -setOwner:containerKey: instead.  Check for nil will raise below
     
     // Fixing this is hard since we need to make sure all styles are deallocated before the containing document's OSStyleContext is invalidated.
     OBINVARIANT([_context isInvalidated] || [self _checkInvariants]);

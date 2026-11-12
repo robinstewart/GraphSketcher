@@ -13,7 +13,7 @@
 #endif
 
 
-#if 1 && defined(DEBUG_robin)
+#if 0 && defined(DEBUG_robin)
 #define DEBUG_RS(format, ...) NSLog((format), ## __VA_ARGS__)
 #else
 #define DEBUG_RS(format, ...)

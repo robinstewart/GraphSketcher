@@ -475,7 +475,12 @@
         // reflect user's continuous spell checking preference
         BOOL useSpell = [[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"UseContinuousSpellChecking"];
         [fieldEditor setContinuousSpellCheckingEnabled:useSpell];
-        
+
+        // Turn off Math Results completion: it isn't wanted for graph labels (e.g. "y = 2x+1"), and every selection change otherwise sends a candidate request to TextInputUI, which logs "containerToPush is nil..." when there is no result.
+        if (@available(macOS 15.0, *)) {
+            fieldEditor.mathExpressionCompletionType = NSTextInputTraitTypeNo;
+        }
+
         _textLabelFieldEditor = fieldEditor;
     }
     

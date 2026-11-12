@@ -46,7 +46,7 @@ extern NSString *RSErrorDomain;
     
     BOOL _isFromFile;
     BOOL _isInAppBundle;
-    BOOL _isAutosaving;
+    NSRect _windowFrameForSaving;  // Recorded on the main thread before each save, because autosaves are written on a background thread
 }
 
 

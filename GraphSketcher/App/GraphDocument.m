@@ -59,7 +59,6 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
     
     _isFromFile = NO;
     _isInAppBundle = NO;
-    _isAutosaving = NO;
     _graphView = nil;  // this will be set by the windowController on awakeFromNib.
     
     _linkBack = nil;
@@ -174,9 +173,15 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
     return YES;
 }
 
+static BOOL _isAutosaveOperation(NSSaveOperationType saveOperation)
+{
+    return saveOperation == NSAutosaveInPlaceOperation || saveOperation == NSAutosaveElsewhereOperation || saveOperation == NSAutosaveAsOperation;
+}
+
 - (BOOL)canAsynchronouslyWriteToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation;
 {
-    return YES;
+    // Explicit saves draw the graph view to make a QuickLook preview, which must happen on the main thread. Autosaves only touch the model, so they can be written on a background thread.
+    return _isAutosaveOperation(saveOperation);
 }
 
 - (BOOL)isDocumentEdited;
@@ -222,18 +227,15 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
 //        return NO;
 //    }
 
-- (BOOL)writeToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError;
+- (BOOL)writeToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation originalContentsURL:(NSURL *)absoluteOriginalContentsURL error:(NSError **)outError;
+// Autosaves call this on a background thread (see -canAsynchronouslyWriteToURL:...), so it must not touch views or windows when autosaving. Editing was committed and the window frame recorded on the main thread in -saveToURL:ofType:forSaveOperation:completionHandler:.
 {
-    // Tell tools/editors to clean and update the model.
-    if (!_isAutosaving && _graphView) {
-        [_graphView commitEditing];
-        [_editor prepareForSave];
-    }
-    
+    BOOL isAutosaving = _isAutosaveOperation(saveOperation);
+
     // If autosaving, don't waste time with a zip archive.
     // Also don't use a zip archive if the relevant preference is set.
     NSData *previewPDFData = nil;
-    if (!_isAutosaving && ![[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"SaveFilesAsPlainXML"]) {
+    if (!isAutosaving && ![[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"SaveFilesAsPlainXML"]) {
         // Generate a Quicklook preview and add it to the zip archive
         if (!_graphView) {
             // This happens if we are upgrading a legacy graph file
@@ -241,59 +243,42 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
             //return NO;
         }
         else if ( [[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"IncludeQuicklookPreview"] ) {
+            OBASSERT([NSThread isMainThread]);
             previewPDFData = [_graphView dataWithPDFInsideRect:[_graphView bounds]];
         }
     }
-    
-    NSRect frame = NSZeroRect;
-    if ([[self windowControllers] count])  // this will be false during upgrading of a legacy file
-        frame = [[self window] frame];
-    
-    NSData *xmlData = [_editor.graph generateXMLOfType:typeName frame:frame error:outError];
+
+    NSData *xmlData = [_editor.graph generateXMLOfType:typeName frame:_windowFrameForSaving error:outError];
     if (!xmlData) {
         if (outError != NULL)
             OBASSERT(*outError);
         return NO;
     }
     
-    // Now that we have all the data ready for writing, we should do the rest off the main thread.
-#if defined(MAC_OS_X_VERSION_10_7) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
+    // Now that we have all the data ready for writing, the main thread can carry on while the file is written.
     [self unblockUserInteraction];
-#endif
-    
-    BOOL result = [_editor.graph writeToURL:absoluteURL generatedXMLData:xmlData previewPDFData:previewPDFData error:outError];
-    
-    //sleep(5);
-    return result;
-}
 
-
-- (void)autosaveDocumentWithDelegate:(id)delegate didAutosaveSelector:(SEL)didAutosaveSelector contextInfo:(void *)contextInfo;
-// Autosave documentation is at: http://developer.apple.com/documentation/Cocoa/Conceptual/Documents/Articles/Autosaving.html#//apple_ref/doc/uid/TP40003276
-{
-    if ([self isInAppBundle])
-        return;
-    
-#ifdef DEBUG
-    NSDate *startTime = [NSDate date];
-#endif
-    
-    _isAutosaving = YES;
-    [super autosaveDocumentWithDelegate:delegate didAutosaveSelector:didAutosaveSelector contextInfo:contextInfo];
-    _isAutosaving = NO;
-    
-#ifdef DEBUG
-    NSLog(@"Autosave elapsed time: %f", [startTime timeIntervalSinceNow]);
-#endif
+    return [_editor.graph writeToURL:absoluteURL generatedXMLData:xmlData previewPDFData:previewPDFData error:outError];
 }
 
 
 - (void)saveToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation completionHandler:(void (^)(NSError *))completionHandler;
+// Every save and autosave comes through here on the main thread, before any writing begins.
 {
     if ([self isInAppBundle])
         return;
-    
-    return [super saveToURL:url ofType:typeName forSaveOperation:saveOperation completionHandler:completionHandler];
+
+    // Tell tools/editors to clean and update the model. Skip this when autosaving so that it doesn't interrupt label editing.
+    if (!_isAutosaveOperation(saveOperation) && _graphView) {
+        [_graphView commitEditing];
+        [_editor prepareForSave];
+    }
+
+    _windowFrameForSaving = NSZeroRect;
+    if ([[self windowControllers] count])  // this will be false during upgrading of a legacy file
+        _windowFrameForSaving = [[self window] frame];
+
+    [super saveToURL:url ofType:typeName forSaveOperation:saveOperation completionHandler:completionHandler];
 }
 
 
@@ -738,7 +723,7 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
     // Add LinkBack data
     if (LINKBACK_ENABLED) {
         // Tell tools/editors to clean and update the model.
-        if (!_isAutosaving && _graphView) {
+        if (_graphView) {
             [_graphView commitEditing];
             [_editor prepareForSave];
         }

@@ -11,7 +11,6 @@
 
 @interface NSFont (RSExtensions)
 
-- (NSFont *)fontWithSize:(CGFloat)pointSize;
 - (CGFloat)lineHeight;
 
 @end

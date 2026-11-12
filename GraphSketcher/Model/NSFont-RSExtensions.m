@@ -13,12 +13,6 @@ RCS_ID("$Header$");
 
 @implementation NSFont (RSExtensions)
 
-- (NSFont *)fontWithSize:(CGFloat)pointSize;
-{
-    NSFontDescriptor *descriptor = [self fontDescriptor];
-    return [NSFont fontWithDescriptor:descriptor size:pointSize];
-}
-
 - (CGFloat)lineHeight;
 {
     static NSLayoutManager *layoutManager = nil;

@@ -704,7 +704,7 @@ static BOOL _isAutosaveOperation(NSSaveOperationType saveOperation)
     NSRect r = [_graphView bounds];
     
     // Declare types
-    NSArray *pbTypes = [NSArray arrayWithObjects:NSPDFPboardType, kUTTypePNG, NSTIFFPboardType, nil];
+    NSArray *pbTypes = [NSArray arrayWithObjects:NSPasteboardTypePDF, NSPasteboardTypePNG, NSPasteboardTypeTIFF, nil];
     if (LINKBACK_ENABLED) {
         pbTypes = [pbTypes arrayByAddingObject:LinkBackPboardType];
     }
@@ -712,13 +712,13 @@ static BOOL _isAutosaveOperation(NSSaveOperationType saveOperation)
     
     // Copy data to the pasteboard
     [pb setData: [_graphView dataWithPDFInsideRect: r]
-	forType: NSPDFPboardType];
+        forType: NSPasteboardTypePDF];
     
     [pb setData: [_graphView dataWithPNGInsideRect: r]
-	forType: (NSString *)kUTTypePNG];  // NSPasteboardTypePNG is defined in Mac OS X 10.6 and up
+	forType: (NSString *)NSPasteboardTypePNG];
     
     [pb setData: [_graphView dataWithTIFFInsideRect: r]
-	forType: NSTIFFPboardType];
+        forType: NSPasteboardTypeTIFF];
     
     // Add LinkBack data
     if (LINKBACK_ENABLED) {

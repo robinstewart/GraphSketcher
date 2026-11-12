@@ -1174,7 +1174,7 @@ static RSAxis *_shouldHideEndLabels = nil;
 	}
 	
 	// Special case for two number columns and at least one text column: use the text column as point labels.
-	BOOL pointLabelsColumn = -1;
+	NSInteger pointLabelsColumn = -1;
         if ([yColumns count] == 1 && firstLabelsColumn >= 0 && [[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"ImportTextColumnAsPointLabels"]) {
 	    DEBUG_DATA_IMPORT(@"Using column %ld as point labels.", firstLabelsColumn);
 	    pointLabelsColumn = firstLabelsColumn;

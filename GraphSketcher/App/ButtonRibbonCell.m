@@ -26,8 +26,8 @@ static NSShadow *WhiteShadow = nil;
 static CGShadingRef CreateShadingWithGrays(float lightGray, float darkGray)
 {
     OQRGBAColorPair *colorPair = malloc(sizeof(OQRGBAColorPair));
-    NSColor *lighterColor = [[NSColor colorWithCalibratedWhite:lightGray alpha:1] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-    NSColor *darkerColor = [[NSColor colorWithCalibratedWhite:darkGray alpha:1] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+    NSColor *lighterColor = [[NSColor colorWithCalibratedWhite:lightGray alpha:1] colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]];
+    NSColor *darkerColor = [[NSColor colorWithCalibratedWhite:darkGray alpha:1] colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]];
     OQFillRGBAColorPair(colorPair, lighterColor, darkerColor);
     
     static const CGFloat domainAndRange[8] = {0, 1, 0, 1, 0, 1, 0, 1};

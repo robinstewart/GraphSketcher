@@ -1644,8 +1644,8 @@ BOOL showWhaBam = NO;
     Log1(@"RSGraphView -writeElement:toPasteboard: called");
     // Declare types
     [pb declareTypes: [NSArray arrayWithObjects:RSGraphElementPboardType,
-                       NSTabularTextPboardType,
-                       NSStringPboardType, nil] owner:self];
+                       NSPasteboardTypeTabularText,
+                       NSPasteboardTypeString, nil] owner:self];
 
     //////
     // Copy data onto the pasteboard
@@ -1667,20 +1667,20 @@ BOOL showWhaBam = NO;
         // Rich text
         NSAttributedString *attrString = [(RSTextLabel *)GE attributedString];
         NSData *rtfData = [attrString RTFFromRange:NSMakeRange(0, [attrString length]) documentAttributes:@{NSDocumentTypeDocumentAttribute: NSRTFTextDocumentType}];
-        [pb setData:rtfData forType:NSRTFPboardType];
+        [pb setData:rtfData forType:NSPasteboardTypeRTF];
         
         // Plain text
         NSString *text = [(RSTextLabel *)GE text];
-        [pb setString:text forType:NSTabularTextPboardType];
-        [pb setString:text forType:NSStringPboardType];
+        [pb setString:text forType:NSPasteboardTypeTabularText];
+        [pb setString:text forType:NSPasteboardTypeString];
         return;
     }
 
     // Tabular and string data for other graph elements
     NSString *tabularStringRep = [RSGraph tabularStringRepresentationOfPointsIn:GE];
     if (tabularStringRep) {
-        [pb setString:tabularStringRep forType:NSTabularTextPboardType];
-        [pb setString:tabularStringRep forType:NSStringPboardType];
+        [pb setString:tabularStringRep forType:NSPasteboardTypeTabularText];
+        [pb setString:tabularStringRep forType:NSPasteboardTypeString];
     }
 }
 
@@ -1733,8 +1733,8 @@ BOOL showWhaBam = NO;
 {
     NSString *type = [pb availableTypeFromArray:[NSArray arrayWithObjects:RSGraphElementPboardType,
 						 OmniDataOnlyTabularPboardType,
-						 NSTabularTextPboardType,  // prefer tabular text to plain text
-						 NSStringPboardType, nil]];
+                                                 NSPasteboardTypeTabularText,  // prefer tabular text to plain text
+                                                 NSPasteboardTypeString, nil]];
     return type;
 }
 
@@ -1777,7 +1777,7 @@ BOOL showWhaBam = NO;
     //
     // Importing data from external files
     //
-    if ([type isEqual: OmniDataOnlyTabularPboardType] || type == NSTabularTextPboardType || type == NSStringPboardType) {
+    if ([type isEqual: OmniDataOnlyTabularPboardType] || type == NSPasteboardTypeTabularText || type == NSPasteboardTypeString) {
 	// Read in the NSString from the pasteboard and attempt to parse it into vertices.  This should return an array of RSGroups.  Each group represents an imported data series.
 	
 	return [self importElementsFromString:[pb stringForType:type]];
@@ -2909,7 +2909,7 @@ static ErrorBarSheet *errorBarSheet = nil;
     NSArray *prototypes = [_graph importedDataPrototypes];
     
     NSPasteboard *pb = [NSPasteboard generalPasteboard];
-    NSString *type = [pb availableTypeFromArray:[NSArray arrayWithObjects:OmniDataOnlyTabularPboardType, NSTabularTextPboardType, NSStringPboardType, nil]];
+    NSString *type = [pb availableTypeFromArray:[NSArray arrayWithObjects:OmniDataOnlyTabularPboardType, NSPasteboardTypeTabularText, NSPasteboardTypeString, nil]];
     
     if (!type) {
         NSLog(@"A readable pasteboard type for data importing was not found.");

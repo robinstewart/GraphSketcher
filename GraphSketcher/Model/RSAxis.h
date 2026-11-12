@@ -63,8 +63,8 @@ NSString *nameFromExtent(RSAxisExtent extent);
 RSAxisExtent extentFromName(NSString *name);
 NSString *nameFromTickLayout(RSAxisTickLayout tickLayout);
 RSAxisTickLayout tickLayoutFromName(NSString *name);
-NSString *nameFromAxisType(int axisType);
-int axisTypeFromName(NSString *name);
+NSString *nameFromAxisType(RSAxisType axisType);
+RSAxisType axisTypeFromName(NSString *name);
 NSString *nameFromScientificNotationSetting(RSScientificNotationSetting setting);
 RSScientificNotationSetting scientificNotationSettingFromName(NSString *name);
 

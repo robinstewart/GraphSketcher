@@ -150,7 +150,7 @@ RSAxisTickLayout tickLayoutFromName(NSString *name)
     return RSAxisTickLayoutSimple;
 }
 
-NSString *nameFromAxisType(int axisType)
+NSString *nameFromAxisType(RSAxisType axisType)
 {
     if (axisType == RSAxisTypeLinear) {
         return @"linear";
@@ -163,7 +163,7 @@ NSString *nameFromAxisType(int axisType)
     return @"linear";
 }
 
-int axisTypeFromName(NSString *name)
+RSAxisType axisTypeFromName(NSString *name)
 {
     if ([name isEqualToString:@"linear"]) {
         return RSAxisTypeLinear;

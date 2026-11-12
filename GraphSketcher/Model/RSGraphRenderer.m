@@ -3325,7 +3325,11 @@ static void appendTick(NSBezierPath *path, int axisOrientation, CGFloat p, CGFlo
         // AXES //
 	else if ( [obj isKindOfClass:[RSAxis class]] ) {
 	    P = [self pathFromAxis:(RSAxis *)obj width:[obj width] disableTicks:YES];
+#if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
             P.lineCapStyle = kCGLineCapSquare;
+#else
+            P.lineCapStyle = NSLineCapStyleSquare;
+#endif
 	    newWidth = [obj width] + (RS_SELECTION_RINGS * RS_SELECTION_BORDER_WIDTH * 2);
 	    
 	    CGFloat alpha = RS_SELECTION_STARTING_ALPHA;

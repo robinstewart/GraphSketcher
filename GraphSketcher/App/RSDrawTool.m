@@ -215,7 +215,7 @@
 	    }
 	    
 	    // apply formatting
-	    [[[startVertex color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace] set];
+	    [[[startVertex color] colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]] set];
 	    
 	    // draw
 	    [P fill];
@@ -227,15 +227,15 @@
 	    // apply formatting
 	    if( SKETCH_TEST_MODE == 1 ) {
 		[P setLineWidth:2];
-		[[[[startVertex color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace] colorWithAlphaComponent:0.8f] set];
+		[[[[startVertex color] colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]] colorWithAlphaComponent:0.8f] set];
 	    }
 	    else if( [[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"SegmentStrokesWhileDrawing"] ) {
 		[P setLineWidth:[startVertex width]];
-		[[[[startVertex color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace] colorWithAlphaComponent:0.2f] set];
+		[[[[startVertex color] colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]] colorWithAlphaComponent:0.2f] set];
 	    }
 	    else {
 		[P setLineWidth:[startVertex width]];
-		[[[startVertex color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace] set];
+		[[[startVertex color] colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]] set];
 	    }
 	    // draw
 	    [P stroke];
@@ -671,7 +671,7 @@
 	    if ([[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"SegmentStrokesWhileDrawing"]) {
 		[self drawSegmentedStrokeUsingStartVertex:_firstClickElement];
 	    }
-            NSColor *lineColor = [[[OFPreferenceWrapper sharedPreferenceWrapper] colorForKey:@"DefaultLineColor"] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+            NSColor *lineColor = [[[OFPreferenceWrapper sharedPreferenceWrapper] colorForKey:@"DefaultLineColor"] colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]];
 	    [self drawRawStrokeUsingWidth:[[OFPreferenceWrapper sharedPreferenceWrapper] floatForKey:@"DefaultLineWidth"]
                                     color:[lineColor colorWithAlphaComponent:0.618f]];
 	}

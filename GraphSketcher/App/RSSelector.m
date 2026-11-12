@@ -100,7 +100,7 @@
         Log3(@"RSSelector sending notification RSContextChanged (to class %@)", _context);
         [nc postNotificationName:@"RSContextChanged" object:nil];
     
-        NSWindow *window = [NSApp mainWindow];
+        NSWindow *window = [[NSApplication sharedApplication] mainWindow];
         [[[AppController sharedController] inspectorRegistry] updateInspectorForWindow:window];
     }
 }
@@ -126,7 +126,7 @@
     if ( object == nil )  object = [self selection];  // hahaha!
     [nc postNotificationName:@"RSSelectionChanged" object:object];
     
-    NSWindow *window = [NSApp mainWindow];
+    NSWindow *window = [[NSApplication sharedApplication] mainWindow];
     [[[AppController sharedController] inspectorRegistry] updateInspectorForWindow:window];
 }
 

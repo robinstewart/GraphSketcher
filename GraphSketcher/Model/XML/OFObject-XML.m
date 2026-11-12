@@ -97,10 +97,9 @@ OFXMLElement *SkipToNextChildElement(OFXMLCursor *cursor)
 {
     NSData *value = [self valueForKey:key];
     
-    if ([value length] == 0)
-        value = nil;
+    NSString *stringEncoding = ([value length] == 0 || value == nil) ? @"" : [value base64EncodedStringWithOptions:0];
     
-    [xmlDoc appendElement:elementName containingString:[value base64String]];
+    [xmlDoc appendElement:elementName containingString:stringEncoding];
     return value;
 }
 
@@ -194,7 +193,7 @@ OFXMLElement *SkipToNextChildElement(OFXMLCursor *cursor)
 - (NSNumber *)writeOptionalIntegerNumber:(NSString *)key document:(OFXMLDocument *)xmlDoc elementName:(NSString *)elementName;
 {
     NSNumber *value = [self valueForKey:key];
-    if (!value)
+    if (value == nil)
         return nil;
     int scalar = [value intValue];
     if (scalar != 0)
@@ -205,7 +204,7 @@ OFXMLElement *SkipToNextChildElement(OFXMLCursor *cursor)
 - (NSNumber *)writeRequiredIntegerNumber:(NSString *)key document:(OFXMLDocument *)xmlDoc elementName:(NSString *)elementName;
 {
     NSNumber *value = [self valueForKey:key];
-    OBASSERT(value);
+    OBASSERT(value != nil);
     int scalar = [value intValue]; // write zero if absent
     [xmlDoc appendElement:elementName containingInteger:scalar];
     return value;

@@ -317,7 +317,7 @@ NSString *messageForCanvasSize(CGSize size)
         NSArray *vertexCluster = [first vertexCluster];
         for (RSVertex *V in [(RSGroup *)GE elements]) {
             if (![V isKindOfClass:[RSVertex class]])
-                return NO;
+                return nil;
             if (![vertexCluster containsObjectIdenticalTo:V]) {
                 return nil;
             }
@@ -1199,6 +1199,7 @@ static int data_value_comparison(const void *aPtr, const void *bPtr) {
     
     [_bgColor release];
     [_IPs release];
+    [_idPasteMap release];
     
     [super dealloc];
 }

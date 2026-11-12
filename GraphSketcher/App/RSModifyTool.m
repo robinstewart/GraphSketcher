@@ -545,6 +545,7 @@
 {
     [_movers release];
     [_vertexCluster release];
+    self.originalSelection = nil;
     
     [super dealloc];
 }

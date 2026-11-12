@@ -1935,7 +1935,7 @@ RSScientificNotationSetting scientificNotationSettingFromName(NSString *name)
     //NSDate *maxDate = [NSDate dateWithTimeIntervalSinceReferenceDate:max];
     
     NSDateComponents *oneSpacingUnit = [[[NSDateComponents alloc] init] autorelease];
-    NSUInteger unitFlags = 0;// = NSEraCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSUInteger unitFlags = 0;// = NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSMinuteCalendarUnit | NSSecondCalendarUnit;
     
     if( range > 3*365.2422*24*60*60 ) {  // > 3 years
         data_p spacing = 365.2422*24*60*60;  // years
@@ -1946,22 +1946,22 @@ RSScientificNotationSetting scientificNotationSettingFromName(NSString *name)
         
         // Space by month
         [oneSpacingUnit setMonth:1];
-        unitFlags = NSEraCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit;
+        unitFlags = NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth;
     }
 //    else if( range > 35*24*60*60 ) {  // > 35 days
 //        //spacing = 7*24*60*60;  // weeks
 //        [oneSpacingUnit setWeek:1];
-//        unitFlags = NSEraCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit;
+//        unitFlags = NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSWeekCalendarUnit;
 //    }
     else if( range > 3*24*60*60 ) {  // > 3 days
         //spacing = 24*60*60;  // days
         [oneSpacingUnit setDay:1];
-        unitFlags = NSEraCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+        unitFlags = NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
     }
     else if( range > 12*60*60 ) {  // > 12 hours
         //spacing = 60*60;  // hours
         [oneSpacingUnit setHour:1];
-        unitFlags = NSEraCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit;
+        unitFlags = NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour;
     }
     else if( range > 10*60 ) {  // > 10 minutes
         //spacing = 60;  // minutes

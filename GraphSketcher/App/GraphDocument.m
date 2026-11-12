@@ -149,8 +149,13 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
     NSString *messageFormat = NSLocalizedStringFromTableInBundle(@"The file was written with version %1$@ while the version of %2$@ you are running understands files written by version %3$@ and older.  Loading this file may not work correctly and might lose some data.", nil, [GraphDocument bundle], @"newer file format alert message");
     NSString *message = [NSString stringWithFormat:messageFormat, [fileVersion cleanVersionString], appName, [appVersion cleanVersionString]];
     
-    NSInteger rc = NSRunAlertPanel(title, @"%@", NSLocalizedStringFromTableInBundle(@"Open File", nil, [GraphDocument bundle], @"alert panel button title"), NSLocalizedStringFromTableInBundle(@"Cancel", nil, [GraphDocument bundle], @"alert panel button"), message, nil);
-    return (rc == NSAlertDefaultReturn);
+    NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+    alert.messageText = title;
+    alert.informativeText = message;
+    [alert addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"Open File", nil, [GraphDocument bundle], @"alert panel button title")];
+    [alert addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"Cancel", nil, [GraphDocument bundle], @"alert panel button")];
+    NSModalResponse response = [alert runModal];
+    return (response == NSAlertFirstButtonReturn);
 }
 
 - (void)becomeUntitledWithType:(NSString *)docType;
@@ -283,26 +288,12 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
 }
 
 
-#if defined(MAC_OS_X_VERSION_10_7) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
 - (void)saveToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation completionHandler:(void (^)(NSError *))completionHandler;
 {
     if ([self isInAppBundle])
         return;
     
     return [super saveToURL:url ofType:typeName forSaveOperation:saveOperation completionHandler:completionHandler];
-}
-#endif
-
-- (BOOL)saveToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation error:(NSError **)outError;
-{
-    if ([self isInAppBundle]) {
-	NSDictionary *errorInfo = [NSDictionary dictionaryWithObjectsAndKeys:NSLocalizedString(@"Cannot modify bundled example graphs.", @"error description"), NSLocalizedDescriptionKey, nil];
-        if (outError != NULL)
-            *outError = [NSError errorWithDomain:RSErrorDomain code:RSBundledGraphDocument userInfo:errorInfo];
-	return NO;
-    }
-    
-    return [super saveToURL:absoluteURL ofType:typeName forSaveOperation:saveOperation error:outError];
 }
 
 
@@ -463,31 +454,21 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
     NSString *alertTitle = [NSString stringWithFormat:NSLocalizedString(@"%@ has closed the connection for this LinkBack attachment.  Do you want to keep the changes?", "broken linkback connection dialog - alert text"), [link sourceApplicationName]];
     NSString *errorDescription = NSLocalizedString(@"This document has modifications that cannot be saved because %@ has closed the connection to it or exited.  You may preserve your changes by making this document untitled and severing the link, or you may close this window and abandon your changes.", "broken linkback connection dialog - alert text");
     
-    NSBeginAlertSheet(alertTitle,
-                      NSLocalizedString(@"Make Untitled", "broken linkback connection dialog - alert button"),
-                      NSLocalizedString(@"Don't Save", "broken linkback connection dialog - alert button"),
-                      nil,
-                      [self windowForSheet],
-                      self,
-                      @selector(_linkBackDidCloseSheetDidEnd:returnCode:contextInfo:),
-                      NULL,
-                      nil,
-                      errorDescription,
-                      [link sourceApplicationName]);
-    // _linkBackDidCloseSheetDidEnd:returnCode:contextInfo: will release the document when it gets called (to match the retain at the top of this method)
-
-}
-
-- (void)_linkBackDidCloseSheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
-{
-    if (returnCode == NSAlertDefaultReturn) {
-        [self setLinkBack:nil];
-        [[NSDocumentController sharedDocumentController] addDocument:self];
-        [[self windowControllers] makeObjectsPerformSelector:@selector(synchronizeWindowTitleWithDocumentName)];
-    } else  
-        [self close];
-    
-    [self autorelease];  // matches the retain in -linkBackConnectionDidClose:
+    NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+    alert.messageText = alertTitle;
+    alert.informativeText = errorDescription;
+    [alert addButtonWithTitle:NSLocalizedString(@"Make Untitled", "broken linkback connection dialog - alert button")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Don't Save", "broken linkback connection dialog - alert button")];
+    [alert beginSheetModalForWindow:[self windowForSheet] completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode == NSAlertFirstButtonReturn) {
+            [self setLinkBack:nil];
+            [[NSDocumentController sharedDocumentController] addDocument:self];
+            [[self windowControllers] makeObjectsPerformSelector:@selector(synchronizeWindowTitleWithDocumentName)];
+        } else
+            [self close];
+        
+        [self autorelease];  // matches the retain at the top of -linkBackConnectionDidClose:
+    }];
 }
 
 #pragma mark -
@@ -586,19 +567,19 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
     else if (menuAction == @selector(revertDocumentToSaved:)) {
         return ([self isDocumentEdited] && [self fileURL]);
     }
-    else if (menuAction == @selector(connectPoints:)) {
+    else if (menuAction == NSSelectorFromString(@"connectPoints:")) {
 	if ( [RSGraph hasMultipleVertices:[_s selection]] )
 	    [menuItem setTitle:NSLocalizedString(@"In Selection Order", @"Menu item")];
 	else
 	    [menuItem setTitle:NSLocalizedString(@"In Creation Order", @"Menu item")];
     }
-    else if (menuAction == @selector(bestFitLine:)) {
+    else if (menuAction == NSSelectorFromString(@"bestFitLine:")) {
 	if ( [_s selected] )
 	    [menuItem setTitle:NSLocalizedString(@"Insert Best-Fit Line for Selection", @"Menu item")];
 	else
 	    [menuItem setTitle:NSLocalizedString(@"Insert Best-Fit Line", @"Menu item")];
     }
-    else if (menuAction == @selector(histogram:)) {
+    else if (menuAction == NSSelectorFromString(@"histogram:")) {
 	if ( [_editor.graph displayHistogram] ) {
 	    //[menuItem setTitle:@"Hide Grid"];
 	    [menuItem setState:NSOnState];

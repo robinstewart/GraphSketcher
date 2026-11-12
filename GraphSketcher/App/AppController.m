@@ -141,7 +141,7 @@ static id _replacement_keyBindingState(id self, SEL _cmd)
     NSError *error = nil;
     GraphDocument *document = [self documentAtPath:documentPath load:YES error:&error];
     if (!document)
-	[NSApp presentError:error];
+	[[NSApplication sharedApplication] presentError:error];
     
     [document setIsInAppBundle:YES];
     DEBUG_RS(@"Loaded '%@' from app bundle.", documentName);
@@ -161,7 +161,7 @@ static id _replacement_keyBindingState(id self, SEL _cmd)
     NSError *error = nil;
     GraphDocument *document = [[NSDocumentController sharedDocumentController] makeDocumentForURL:nil withContentsOfURL:documentURL ofType:RSGraphFileType error:&error];
     if (!document)
-	[NSApp presentError:error];
+	[[NSApplication sharedApplication] presentError:error];
 
     [document makeWindowControllers];
     [document showWindows];
@@ -199,33 +199,33 @@ static id _replacement_keyBindingState(id self, SEL _cmd)
     
     // Add a menu of experimental features if the preference for it is turned on.
     if ([[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"ShowExperimentalFeaturesMenu"]) {
-        NSMenu *experimentalMenu = [[NSMenu alloc] initWithTitle:@"Experimental"];
+        NSMenu *experimentalMenu = [[NSMenu alloc] initWithTitle:NSLocalizedString(@"Experimental", @"Menu item")];
         NSInteger index = -1;
-        [experimentalMenu insertItemWithTitle:@"Generate Normal Data" action:@selector(generateStandardNormalData:) keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"Generate Normal Data", @"Menu item") action:NSSelectorFromString(@"generateStandardNormalData:") keyEquivalent:@"" atIndex:++index];
         
         [experimentalMenu insertItem:[NSMenuItem separatorItem] atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"Tufte Tick Marks" action:@selector(toggleTickLayoutAtData:) keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"Tufte Axis Extent" action:@selector(toggleAxesUseDataExtent:) keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"Show Data Quartiles" action:@selector(toggleAxesUseDataQuartiles:) keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"Tufte Tick Marks", @"Menu item") action:NSSelectorFromString(@"toggleTickLayoutAtData:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"Tufte Axis Extent", @"Menu item") action:NSSelectorFromString(@"toggleAxesUseDataExtent:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"Show Data Quartiles", @"Menu item") action:NSSelectorFromString(@"toggleAxesUseDataQuartiles:") keyEquivalent:@"" atIndex:++index];
         
         [experimentalMenu insertItem:[NSMenuItem separatorItem] atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"Dotted Grid Lines" action:@selector(toggleDottedGrid:) keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"Dotted Grid Lines", @"Menu item") action:NSSelectorFromString(@"toggleDottedGrid:") keyEquivalent:@"" atIndex:++index];
         
         [experimentalMenu insertItem:[NSMenuItem separatorItem] atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"y = x^2 + c" action:@selector(addEquationLine:) keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"y = x^3 + c" action:@selector(addEquationLine:) keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"y = sin(x) + c" action:@selector(addEquationLine:) keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"y = e^(-x^2) + c (Bell Curve)" action:@selector(addEquationLine:) keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"y = 1/(1 + e^-x) + c (Logistic)" action:@selector(addEquationLine:) keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"y = x^2 + c", @"Menu item") action:NSSelectorFromString(@"addEquationLine:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"y = x^3 + c", @"Menu item") action:NSSelectorFromString(@"addEquationLine:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"y = sin(x) + c", @"Menu item") action:NSSelectorFromString(@"addEquationLine:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"y = e^(-x^2) + c (Bell Curve)", @"Menu item") action:NSSelectorFromString(@"addEquationLine:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"y = 1/(1 + e^-x) + c (Logistic)", @"Menu item") action:NSSelectorFromString(@"addEquationLine:") keyEquivalent:@"" atIndex:++index];
         
         [experimentalMenu insertItem:[NSMenuItem separatorItem] atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"Import and Replace Data" action:@selector(importDataSeriesReplacingCurrent:) keyEquivalent:@"" atIndex:++index];
-        [experimentalMenu insertItemWithTitle:@"Import Data Series In Rows" action:@selector(importDataInRows:) keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"Import and Replace Data", @"Menu item") action:NSSelectorFromString(@"importDataSeriesReplacingCurrent:") keyEquivalent:@"" atIndex:++index];
+        [experimentalMenu insertItemWithTitle:NSLocalizedString(@"Import Data Series In Rows", @"Menu item") action:NSSelectorFromString(@"importDataInRows:") keyEquivalent:@"" atIndex:++index];
         
-        NSMenuItem *experimentalMenuItem = [[NSMenuItem alloc] initWithTitle:@"Experimental" action:NULL keyEquivalent:@""];
+        NSMenuItem *experimentalMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Experimental", @"Menu item") action:NULL keyEquivalent:@""];
         [experimentalMenuItem setImage:[NSImage imageNamed:@"experimental"]];
         [experimentalMenuItem setSubmenu:experimentalMenu];
-        [[NSApp mainMenu] insertItem:experimentalMenuItem atIndex:7];
+        [[[NSApplication sharedApplication] mainMenu] insertItem:experimentalMenuItem atIndex:7];
         
         [experimentalMenu release];
         [experimentalMenuItem release];
@@ -307,7 +307,7 @@ static id _replacement_keyBindingState(id self, SEL _cmd)
         [document makeWindowControllers];
     [document showWindows];
     
-    [NSApp activateIgnoringOtherApps:YES];
+    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }
 
 - (void)linkBackDidClose:(LinkBack*)link ;
@@ -486,7 +486,7 @@ static id _replacement_keyBindingState(id self, SEL _cmd)
     [alert setInformativeText:NSLocalizedStringFromTable(@"To import and plot data from a spreadsheet, database, or text file, copy (⌘C) the data and paste it (⌘V) directly onto your graph.\n\nThe data must be in columns. If you include column headers, they will automatically be interpreted as axis titles. If the first column is descriptive labels, each label will be associated with the data point that follows.", @"DataImporter", @"Alert explaining how to import data")];
     [alert addButtonWithTitle:NSLocalizedStringFromTable(@"Okay", @"DataImporter", @"Alert explaining how to import data")];
     [alert setShowsHelp:YES];
-    [alert setHelpAnchor:@"importdata"];
+    [alert setHelpAnchor:NSLocalizedStringFromTable(@"importdata", @"DataImporter", @"Help anchor name")];
     
     [alert runModal];
     [alert release];
@@ -529,7 +529,7 @@ static id _replacement_keyBindingState(id self, SEL _cmd)
     [[NSNotificationCenter defaultCenter] 
      postNotificationName:@"RSContextChanged" object:nil];
 
-    [[self inspectorRegistry] updateInspectorForWindow:[NSApp mainWindow]];
+    [[self inspectorRegistry] updateInspectorForWindow:[[NSApplication sharedApplication] mainWindow]];
 }
 
 
@@ -569,7 +569,7 @@ static id _replacement_keyBindingState(id self, SEL _cmd)
 	return YES;
     }
     // seems like there should be a better way, but this does the trick without requiring a major re-write.
-    else if ( action == @selector(showMessageOfTheDay:) || action == @selector(sendFeedback:) || action == @selector(openProductPageInBrowser:) || action == @selector(showAboutPanel:) || action == @selector(showPreferences:) || action == @selector(showGettingStarted:) || action == @selector(openKeyboardShortcuts:) )
+    else if ( action == @selector(showMessageOfTheDay:) || action == @selector(sendFeedback:) || action == @selector(openProductPageInBrowser:) || action == @selector(showAboutPanel:) || action == @selector(showGettingStarted:) || action == @selector(openKeyboardShortcuts:) )
     {
 	return YES;
     }

@@ -278,7 +278,7 @@ CGFloat* matrixMultiplyWithBSBInv(CGFloat* p, CGFloat* r, CGFloat t1, CGFloat t2
 // Writes into segs[0] through segs[n] inclusive (segs must be n+1 long)
 + (void)interpolatingSplineBezierSegmentsFromPoints:(CGPoint[])p length:(NSInteger)n putInto:(CGPoint[][3])segs;
 {
-    if(n==0)
+    if(n<=0)
         return;
     //
     // This algorithm is taken from the Graphics Gems I (1990) article: 

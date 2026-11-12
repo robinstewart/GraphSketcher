@@ -194,7 +194,7 @@
         [P appendTickAtPoint:p width:w height:b];
 	// rotate if necessary
 	if( rotation ) {
-	    CGRect r = CGRectMake(0,0,b,b);
+	    r = CGRectMake(0,0,b,b);
 	    r.origin = p;
 	    [P rotateInFrame:r byDegrees:rotation];
 	}
@@ -326,7 +326,7 @@
             CGFloat height = 20;
             CGPoint p = [mapper convertToViewCoords:self.position];
             CGRect rect = CGRectMake(p.x - width/2, p.y - height/2, width, height);
-            NSBezierPath *P = [NSBezierPath bezierPathWithRect:rect];
+            P = [NSBezierPath bezierPathWithRect:rect];
             [P setLineWidth:newWidth];
             [selectionColor set];
             [P stroke];

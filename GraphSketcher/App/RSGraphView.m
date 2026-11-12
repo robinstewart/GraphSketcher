@@ -37,6 +37,7 @@
 #import <GraphSketcherModel/RSGraph-XML.h>  // for object copy/paste
 
 #import <OmniInspector/OIInspectorRegistry.h>
+#import <OmniInspector/OIInspectionSet.h>
 #import <OmniQuartz/OQColor.h>
 #import <OmniAppKit/OAFontDescriptor.h>
 
@@ -120,6 +121,7 @@
     // release allocated objects
     [_penCursor release];
     [_fillCursor release];
+    self.textSnapshot = nil;
     
     self.editor = nil; // Unsubscribes KVO.
     
@@ -297,7 +299,7 @@
     // and other things are done there.
     [_editor updateBounds:[self bounds]];
     
-    [self mouseEntered:nil];
+    [self setupMouseTracking];
 }
 
 
@@ -385,13 +387,14 @@
     [_s setStatusMessage:[[_s selection] infoString]];
     
     // update inspectors:
-    NSWindow *window = [NSApp mainWindow];
+    NSWindow *window = [[NSApplication sharedApplication] mainWindow];
     [[[AppController sharedController] inspectorRegistry] updateInspectorForWindow:window];
     
     [self setWasEditingText:NO];
     
     // Go through the mouseMoved code path with the new tool to initialize it properly:
-    [self mouseMoved:nil];
+    NSEvent *event = [NSEvent otherEventWithType:NSEventTypeApplicationDefined location:[NSEvent mouseLocation] modifierFlags:0 timestamp:[NSProcessInfo processInfo].systemUptime windowNumber:[[self window] windowNumber] context:nil subtype:0 data1:0 data2:0];
+    [self mouseMoved:event];
     
     [self setNeedsDisplay:YES];
 }
@@ -725,15 +728,12 @@
     Log3(@"drawRect finished");
 }
 
-- (void)mouseEntered:(NSEvent *)event
+- (void)setupMouseTracking
 {
-    if ( ![[self window] isMainWindow] )
-	return;
-    if ( ![[self window] isKeyWindow] )
-	return;
+    if ( ![[self window] isMainWindow] || ![[self window] isKeyWindow] )
+        return;
     
     [[self window] setAcceptsMouseMovedEvents:YES];
-    
     _mouseExited = NO;
     
     [self updateCursor];  // Necessary when you click between windows after having changed the tool mode.
@@ -741,6 +741,11 @@
     [_s setStatusMessage:[[_s selection] infoString]];
     
     [_editor.mapper resetCurveCache];
+}
+
+- (void)mouseEntered:(NSEvent *)event
+{
+    [self setupMouseTracking];
     
     //DEBUG_RS(@"mouse entered successfully");
 }
@@ -871,7 +876,7 @@ BOOL showWhaBam = NO;
 {
     NSString *chars = [event charactersIgnoringModifiers];
     
-    if (![chars length] || ([event modifierFlags] & (NSCommandKeyMask|NSAlternateKeyMask|NSControlKeyMask)))
+    if (![chars length] || ([event modifierFlags] & (NSEventModifierFlagCommand|NSEventModifierFlagOption|NSEventModifierFlagControl)))
         return NO;
     
     unichar theChar = [chars characterAtIndex:0];
@@ -1184,7 +1189,8 @@ BOOL showWhaBam = NO;
 	[_editor.graph removeElement:toDelete];
 	
 	[self deselect];
-	[self mouseMoved:nil];	// update everything
+        NSEvent *event = [NSEvent keyEventWithType:NSEventTypeKeyUp location:[NSEvent mouseLocation] modifierFlags:0 timestamp:[NSProcessInfo processInfo].systemUptime windowNumber:[[self window] windowNumber] context:nil characters:@"⌫" charactersIgnoringModifiers:@"⌫" isARepeat:NO keyCode:46];
+	[self mouseMoved:event];	// update everything
     }
     
     else if( [_m mode] == RS_draw || [_m mode] == RS_fill ) {
@@ -1348,7 +1354,7 @@ BOOL showWhaBam = NO;
     [_s sendChange:self];
 }
 
-- (void)textStorageDidProcessEditing:(NSNotification *)notification;
+- (void)textStorage:(NSTextStorage *)textStorage didProcessEditing:(NSTextStorageEditActions)editedMask range:(NSRange)editedRange changeInLength:(NSInteger)delta;
 // This is called whenever the text storage changes at all, including as tentative characters are displayed when using chinese/japanese input methods. (e.g. Hiragana)
 {
     // The frame cannot be changed until after the text layout has completed (otherwise an exception is thrown).
@@ -1659,7 +1665,7 @@ BOOL showWhaBam = NO;
     if ( [GE isKindOfClass:[RSTextLabel class]] ) {
         // Rich text
         NSAttributedString *attrString = [(RSTextLabel *)GE attributedString];
-        NSData *rtfData = [attrString RTFFromRange:NSMakeRange(0, [attrString length]) documentAttributes:nil];
+        NSData *rtfData = [attrString RTFFromRange:NSMakeRange(0, [attrString length]) documentAttributes:@{NSDocumentTypeDocumentAttribute: NSRTFTextDocumentType}];
         [pb setData:rtfData forType:NSRTFPboardType];
         
         // Plain text
@@ -2173,9 +2179,9 @@ BOOL showWhaBam = NO;
 	     || menuAction == @selector(toggleSubscript:) ) {
 	if( _textView ) {
 	    NSTextView *TV = (NSTextView *)[[self window] firstResponder];
-	    NSAttributedString *selectedRange = [TV attributedSubstringFromRange:[TV selectedRange]];
+            NSAttributedString *selectedText = [TV attributedSubstringForProposedRange:[TV selectedRange] actualRange:NULL];
 	    // >0 means superscript, <0 means subscript
-	    int isSuper = [[selectedRange attribute:NSSuperscriptAttributeName 
+	    int isSuper = [[selectedText attribute:NSSuperscriptAttributeName 
 					    atIndex:0 effectiveRange:NULL] intValue];
 	    if( (isSuper > 0 && menuAction == @selector(toggleSuperscript:))
 	       || (isSuper < 0 && menuAction == @selector(toggleSubscript:)) ) {
@@ -2403,7 +2409,7 @@ BOOL showWhaBam = NO;
 	    NSRange selectedRange = [TV selectedRange];
 	    if( selectedRange.length == 0 ) 
 		selectedRange = NSMakeRange([[[_s selection] attributedString] length] - 1, 1);
-	    NSAttributedString *selectedString = [TV attributedSubstringFromRange:selectedRange];
+            NSAttributedString *selectedString = [TV attributedSubstringForProposedRange:selectedRange actualRange:NULL];
 	    
 	    // >0 means superscript, <0 means subscript
 	    int isSuper = [[selectedString attribute:NSSuperscriptAttributeName 
@@ -2411,7 +2417,7 @@ BOOL showWhaBam = NO;
 	    NSFont *font = [selectedString attribute:NSFontAttributeName atIndex:0 effectiveRange:NULL];
 	    CGFloat fontSize = [font pointSize];
 	    //NSLog(@"isSuper: %d", isSuper);
-	    //CGFloat baseline = [[selectedRange attribute:NSBaselineOffsetAttributeName 
+	    //CGFloat baseline = [[selectedString attribute:NSBaselineOffsetAttributeName
 	    //								   atIndex:0 effectiveRange:NULL] doubleValue];
 	    //NSLog(@"baseline: %f", baseline);
 	    if( isSuper == 0 ) {  // should be superscripted
@@ -2436,7 +2442,7 @@ BOOL showWhaBam = NO;
 	    NSRange selectedRange = [TV selectedRange];
 	    if( selectedRange.length == 0 ) 
 		selectedRange = NSMakeRange([[[_s selection] attributedString] length] - 1, 1);
-	    NSAttributedString *selectedString = [TV attributedSubstringFromRange:selectedRange];
+	    NSAttributedString *selectedString = [TV attributedSubstringForProposedRange:selectedRange actualRange:NULL];
 	    
 	    // >0 means superscript, <0 means subscript
 	    int isSuper = [[selectedString attribute:NSSuperscriptAttributeName 
@@ -2658,14 +2664,31 @@ static ErrorBarSheet *errorBarSheet = nil;
         if (!errorBarSheet) {  // Load the error bar sheet if it hasn't been loaded yet
             errorBarSheet = [[ErrorBarSheet alloc] init];
         }
-        
-        NSMutableDictionary *contextInfo = [[NSMutableDictionary alloc] init];  // will be released in errorBarSheetDidEnd
-        [contextInfo setValue:selection forKey:@"selection"];
-        
-        if ([sender respondsToSelector:@selector(title)])
-            [contextInfo setValue:[sender title] forKey:@"undoActionName"];
 
-        [NSApp beginSheet:[errorBarSheet window] modalForWindow:[self window] modalDelegate:self didEndSelector:@selector(errorBarSheetDidEnd:returnCode:contextInfo:) contextInfo:contextInfo];
+        [[self window] beginSheet:[errorBarSheet window] completionHandler:^(NSModalResponse returnCode) {
+            
+            [[errorBarSheet window] orderOut:self];  // Necessary to actually remove the sheet from the window
+            
+            if (returnCode == NSModalResponseCancel)
+                return;
+            //else (returnCode == NSOKButton)
+            
+            RSGraphElement *result = [_graph createConstantErrorBarsWithSelection:selection posOffset:[errorBarSheet posOffset] negOffset:[errorBarSheet negOffset]];
+            if (!result) {
+                // No error bars were created for some reason.  Error message?
+                return;
+            }
+            
+            // The added error bars may have gone outside the visible graph area
+            [_editor.mapper scaleAxesForNewObjects:[result elements] importingData:NO];
+            
+            if ([sender respondsToSelector:@selector(title)]) {
+                [_editor.undoer setActionName:[sender title]];
+            }
+            [_editor.undoer endRepetitiveUndo];
+            
+            [_s setSelection:result];
+        }];
         return;
     }
     
@@ -2674,35 +2697,6 @@ static ErrorBarSheet *errorBarSheet = nil;
     [_editor.undoer endRepetitiveUndo];
     
     [_s setSelection:lines];
-}
-
-- (void)errorBarSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
-{
-    [sheet orderOut:self];  // Necessary to actually remove the sheet from the window
-
-    [(id)contextInfo autorelease];  // Was retained in makeErrorBars:
-    
-    if (returnCode == NSCancelButton) {
-        return;
-    }
-    //else (returnCode == NSOKButton)
-    
-    RSGraphElement *selection = [(NSDictionary *)contextInfo valueForKey:@"selection"];
-    RSGraphElement *result = [_graph createConstantErrorBarsWithSelection:selection posOffset:[errorBarSheet posOffset] negOffset:[errorBarSheet negOffset]];
-    if (!result) {
-        // No error bars were created for some reason.  Error message?
-        return;
-    }
-    
-    // The added error bars may have gone outside the visible graph area
-    [_editor.mapper scaleAxesForNewObjects:[result elements] importingData:NO];
-    
-    NSString *undoActionName = [(NSDictionary *)contextInfo valueForKey:@"undoActionName"];
-    if (undoActionName)
-        [_editor.undoer setActionName:undoActionName];
-    [_editor.undoer endRepetitiveUndo];
-    
-    [_s setSelection:result];
 }
 
 
@@ -2977,31 +2971,18 @@ static ErrorBarSheet *errorBarSheet = nil;
         sheet = [[DataImportOptionsSheet alloc] init];
     }
     
-    NSMutableDictionary *contextInfo = [[NSMutableDictionary alloc] init];  // will be released in sheetDidEnd
-    //[contextInfo setValue:selection forKey:@"selection"];
-    
-    if ([sender respondsToSelector:@selector(title)])
-        [contextInfo setValue:[sender title] forKey:@"undoActionName"];
-    
-    [NSApp beginSheet:[sheet window] modalForWindow:[self window] modalDelegate:self didEndSelector:@selector(dataImportOptionsSheetDidEnd:returnCode:contextInfo:) contextInfo:contextInfo];
-    return;
-}
-
-- (void)dataImportOptionsSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
-{
-    [sheet orderOut:self];  // Necessary to actually remove the sheet from the window
-    
-    [(id)contextInfo autorelease];  // Was retained in pasteWithOptions:
-    
-    if (returnCode == NSCancelButton) {
-        return;
-    }
-    //else (returnCode == NSOKButton)
-    
-    NSString *undoActionName = [(NSDictionary *)contextInfo valueForKey:@"undoActionName"];
-    if (undoActionName)
-        [_editor.undoer setActionName:undoActionName];
-    [_editor.undoer endRepetitiveUndo];
+    [[self window] beginSheet:[sheet window] completionHandler:^(NSModalResponse returnCode) {
+        [[sheet window] orderOut:self];  // Necessary to actually remove the sheet from the window
+        
+        if (returnCode == NSModalResponseCancel)
+            return;
+        //else (returnCode == NSOKButton)
+        
+        if ([sender respondsToSelector:@selector(title)]) {
+            [_editor.undoer setActionName:[sender title]];
+        }
+        [_editor.undoer endRepetitiveUndo];
+    }];
 }
 
 
@@ -3096,7 +3077,7 @@ static ErrorBarSheet *errorBarSheet = nil;
     
     if (sel == @selector(copyAsImage:)) {
 	if (showWhaBam) {
-	    [item setLabel:@"Wha-BAM!"];
+	    [item setLabel:NSLocalizedString(@"Wha-BAM!", @"Toolbar label")];
 	}
 	else {
 	    [item setLabel:NSLocalizedString(@"Copy As Image", @"Toolbar label")];
@@ -3133,7 +3114,7 @@ static ErrorBarSheet *errorBarSheet = nil;
     
     [savePanel beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result)
     {
-        if (result != NSFileHandlingPanelOKButton)
+        if (result != NSModalResponseOK)
             return;
         
         [self commitEditing];

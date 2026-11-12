@@ -239,24 +239,24 @@ static NSUInteger dashStyleFromName(NSString *name)
 	NSLog(@"%s: Element %@ at cursor path %@ has unknown value '%@' for attribute 'method'.", __PRETTY_FUNCTION__, _identifier, [cursor currentPath], methodString);
     }
     
-    NSString *idref;
+    NSString *versionIDRef;
     BOOL needResetEndpoints = NO;
-    if ( (idref = [element attributeNamed:@"v1"]) ) {
-	_v1 = [[_graph objectForIdentifier:idref] retain];
+    if ( (versionIDRef = [element attributeNamed:@"v1"]) ) {
+        _v1 = [[_graph objectForIdentifier:versionIDRef] retain];
     }
     else {
-	//NSLog(@"%s: Element %@ at cursor path %@ is missing attribute 'v1'", __PRETTY_FUNCTION__, element, [cursor currentPath]);
-	_v1 = [[RSVertex alloc] initWithGraph:_graph];
-	needResetEndpoints = YES;
+        //NSLog(@"%s: Element %@ at cursor path %@ is missing attribute 'v1'", __PRETTY_FUNCTION__, element, [cursor currentPath]);
+        _v1 = [[RSVertex alloc] initWithGraph:_graph];
+        needResetEndpoints = YES;
     }
     [_v1 addParent:self];
-    if ( (idref = [element attributeNamed:@"v2"]) ) {
-	_v2 = [[_graph objectForIdentifier:idref] retain];
+    if ( (versionIDRef = [element attributeNamed:@"v2"]) ) {
+        _v2 = [[_graph objectForIdentifier:versionIDRef] retain];
     }
     else {
-	//NSLog(@"%s: Element %@ at cursor path %@ is missing attribute 'v2'", __PRETTY_FUNCTION__, element, [cursor currentPath]);
-	_v2 = [[RSVertex alloc] initWithGraph:_graph];
-	needResetEndpoints = YES;
+        //NSLog(@"%s: Element %@ at cursor path %@ is missing attribute 'v2'", __PRETTY_FUNCTION__, element, [cursor currentPath]);
+        _v2 = [[RSVertex alloc] initWithGraph:_graph];
+        needResetEndpoints = YES;
     }
     [_v2 addParent:self];
 

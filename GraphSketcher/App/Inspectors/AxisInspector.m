@@ -214,7 +214,10 @@ static BOOL boolFromState(NSInteger state)
     [_gridWidthField setDoubleValue:[_graph gridWidth]];
     [_gridWidthStepper setDoubleValue:[_graph gridWidth]];
     
-    [_gridColorWell setColor:[_graph gridColor].toColor];
+    NSColor *gridColor = [_graph gridColor].toColor;
+    if (gridColor != nil) {
+        [_gridColorWell setColor:gridColor];
+    }
     
     
 // For future reference if we decide to go back to this type of behavior
@@ -619,7 +622,7 @@ static BOOL boolFromState(NSInteger state)
 
 - (IBAction)changeGridColor:(id)sender;
 {
-    if (![[[NSApp mainWindow] firstResponder] isKindOfClass:[RSGraphView class]]) {
+    if (![[[[NSApplication sharedApplication] mainWindow] firstResponder] isKindOfClass:[RSGraphView class]]) {
         [_gridColorWell deactivate];
         return;
     }

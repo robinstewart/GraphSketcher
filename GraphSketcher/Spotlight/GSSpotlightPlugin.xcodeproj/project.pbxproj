@@ -498,7 +498,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 1000;
 			};
 			buildConfigurationList = 70138C880896BE9A00968C2F /* Build configuration list for PBXProject "GSSpotlightPlugin" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -766,6 +766,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_PREPROCESS = YES;
 				OMNI_BUNDLE_IDENTIFIER = com.graphsketcher.GraphSketcher.mdimporter;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(OMNI_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = GSSpotlightPlugin;
 				WRAPPER_EXTENSION = mdimporter;
 			};
@@ -779,6 +780,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_PREPROCESS = YES;
 				OMNI_BUNDLE_IDENTIFIER = com.graphsketcher.GraphSketcher.mdimporter;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(OMNI_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = GSSpotlightPlugin;
 				WRAPPER_EXTENSION = mdimporter;
 			};
@@ -788,6 +790,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 00445FCC0FCF124E00DC1307 /* Omni-Global-Debug.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Debug;
 		};
@@ -795,6 +798,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 00445FCD0FCF124E00DC1307 /* Omni-Global-Release.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Release;
 		};

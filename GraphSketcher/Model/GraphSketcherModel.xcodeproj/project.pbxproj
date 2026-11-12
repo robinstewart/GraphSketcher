@@ -786,7 +786,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 1000;
 			};
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "GraphSketcherModel" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -941,6 +941,7 @@
 				);
 				INFOPLIST_FILE = Info.plist;
 				OMNI_BUNDLE_IDENTIFIER = com.graphsketcher.GraphSketcherModel;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(OMNI_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = GraphSketcherModel;
 			};
 			name = Debug;
@@ -955,6 +956,7 @@
 				);
 				INFOPLIST_FILE = Info.plist;
 				OMNI_BUNDLE_IDENTIFIER = com.graphsketcher.GraphSketcherModel;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(OMNI_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = GraphSketcherModel;
 			};
 			name = Release;
@@ -963,6 +965,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 34F8AFD7111A856D0054644D /* Omni-Global-Debug.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Debug;
 		};
@@ -970,6 +973,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 34F8AFD8111A856D0054644D /* Omni-Global-Release.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Release;
 		};

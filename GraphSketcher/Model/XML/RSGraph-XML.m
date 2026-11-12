@@ -243,7 +243,7 @@ static BOOL _isGraphDocumentType(NSString *typeName)
             if (outError != NULL)
                 *outError = [[NSError errorWithDomain:NSCocoaErrorDomain code:NSUserCancelledError userInfo:nil] retain];
             
-            return NO;
+            return nil;
         }
         
         // Read in the xml elements above the main "graph" elements.
@@ -379,7 +379,7 @@ static NSString * const PreviewFileName = @"preview.pdf";
 	osName = [[UIDevice currentDevice] systemName];
 	model = [[UIDevice currentDevice] model];
 #else
-	osName = [[NSProcessInfo processInfo] operatingSystemName];
+        osName = @"NSMACHOperatingSystem";//[[NSProcessInfo processInfo] operatingSystemName];
 	int name[] = {CTL_HW, HW_MODEL};
 	model = stringForSysctlName(name, 2);
 #endif
@@ -892,7 +892,7 @@ static NSInteger verticesFirstSort(id obj1, id obj2, void *context)
     }
 }
 
-+ (NSData *)archivedDataWithRootObject:(RSGraphElement *)GE graphID:(NSString *)graphID error:(NSError **)outError;
++ (NSData *)archivedDataWithRootObject:(RSGraphElement *)rootGE graphID:(NSString *)graphID error:(NSError **)outError;
 {
     if (outError)
         *outError = nil;
@@ -906,7 +906,7 @@ static NSInteger verticesFirstSort(id obj1, id obj2, void *context)
     
     // Compile array of elements that must be archived
     NSMutableArray *result = [NSMutableArray array];
-    [RSGraph _appendElementAndChildren:[GE elements] toArray:result];
+    [RSGraph _appendElementAndChildren:[rootGE elements] toArray:result];
     [RSGraph _appendGroupsToArray:result];
     
     // Start creating XML

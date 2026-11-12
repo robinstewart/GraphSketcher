@@ -32,18 +32,18 @@
 ///////////
 
 + (BOOL)commandKeyIsDown:(NSUInteger)modifierFlags {
-    if ( modifierFlags & NSCommandKeyMask )
+    if ( modifierFlags & NSEventModifierFlagCommand )
 	return YES;
     else  return NO;
 }
 + (BOOL)shiftKeyIsDown:(NSUInteger)modifierFlags {
-    if ( modifierFlags & NSShiftKeyMask )
+    if ( modifierFlags & NSEventModifierFlagShift )
 	return YES;
     else  return NO;
 }
 + (BOOL)shouldStraighten:(NSUInteger)modifierFlags {
-    if ( modifierFlags & NSShiftKeyMask )  return YES;
-    if ( modifierFlags & NSCommandKeyMask )  return YES;
+    if ( modifierFlags & NSEventModifierFlagShift )  return YES;
+    if ( modifierFlags & NSEventModifierFlagCommand )  return YES;
     // if got this far
     return NO;
 }
@@ -201,7 +201,7 @@
     NSPoint locationInWindow;
     
     NSEventType type = [event type];
-    if (type == NSLeftMouseDown || type == NSLeftMouseUp || type == NSRightMouseDown || type == NSRightMouseUp || type == NSMouseMoved || type == NSLeftMouseDragged || type == NSRightMouseDragged || type == NSMouseEntered) {
+    if (type == NSEventTypeLeftMouseDown || type == NSEventTypeLeftMouseUp || type == NSEventTypeRightMouseDown || type == NSEventTypeRightMouseUp || type == NSEventTypeMouseMoved || type == NSEventTypeLeftMouseDragged || type == NSEventTypeRightMouseDragged || type == NSEventTypeMouseEntered) {
         OBASSERT([event window]);
         locationInWindow = [event locationInWindow];
     }
@@ -227,7 +227,7 @@
 }
 - (void)mouseDragged:(NSEvent *)event;
 {
-    if ( [event type] == NSLeftMouseDragged ) {
+    if ( [event type] == NSEventTypeLeftMouseDragged ) {
 	_viewMouseDraggedPoint = [_view convertPoint:[event locationInWindow] fromView:nil];
 	_mouseDraggedPoint = [_mapper convertToDataCoords:_viewMouseDraggedPoint];
     }

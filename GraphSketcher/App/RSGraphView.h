@@ -75,6 +75,7 @@
 - (void)setDrawingToScreen:(BOOL)flag;
 - (RSTool *)currentTool;
 - (void)windowDidResize;
+- (void)setupMouseTracking;
 
 
 // Notifications:

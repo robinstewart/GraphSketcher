@@ -391,7 +391,6 @@ static char * displayf(NSInteger start, NSInteger stop, CGFloat *array) {
     
     // Calculate some values that will be useful:
     NSInteger len = [stroke count];
-    CGFloat pi = (CGFloat)M_PI;
     CGFloat stroke_x[len+1];
     CGFloat stroke_y[len+1];
     CGFloat stroke_t[len+1];
@@ -421,7 +420,7 @@ static char * displayf(NSInteger start, NSInteger stop, CGFloat *array) {
     // 1. Construct array of the cumulative arc lengths between each pair of
     // consecutive sampled points.
     d = 0;
-    CGFloat arcLength[len];
+    CGFloat arcLength[len + 1];
     arcLength[1] = 0;
     for( i=2; i<=len; i++ ) {
 	x = stroke_x[i] - stroke_x[i-1];
@@ -434,7 +433,7 @@ static char * displayf(NSInteger start, NSInteger stop, CGFloat *array) {
     //
     // 2. Construct array of smoothed pen speeds at each point.
     // "centered finite difference":
-    CGFloat rawPenSpeed[len];
+    CGFloat rawPenSpeed[len + 1];
     for( i=2; i<=(len - 1); i++ ) {
 	rawPenSpeed[i] = (arcLength[i+1] - arcLength[i-1]) / (stroke_t[i+1] - stroke_t[i-1]);
     }
@@ -445,7 +444,7 @@ static char * displayf(NSInteger start, NSInteger stop, CGFloat *array) {
     displayf(1, 5, rawPenSpeed);
     
     // "simple smoothing filter":
-    CGFloat penSpeed[len];
+    CGFloat penSpeed[len + 1];
     NSInteger win_start, win_end;
     //CGFloat temp;
     for( i=1; i<=len; i++ ) {
@@ -465,7 +464,7 @@ static char * displayf(NSInteger start, NSInteger stop, CGFloat *array) {
     
     //
     // 3. Construct array of tangents (slopes) at each point
-    CGFloat slopes[len];
+    CGFloat slopes[len + 1];
     for( i=1; i<=len; i++ ) {
 	// (tangent function is 0-indexed)
 	win_start = maxf(1, i - TANGENT_WINDOW);
@@ -480,28 +479,28 @@ static char * displayf(NSInteger start, NSInteger stop, CGFloat *array) {
     //
     // 4. Compute curvature: change in orientation (angle) over change in
     // position.
-    CGFloat arctans[len];
+    CGFloat arctans[len + 1];
     for( i=1; i<=len; i++ ) {
 	arctans[i] = atan(slopes[i]);
     }
     // correct for discontinuity problem:
-    CGFloat angles[len];
+    CGFloat angles[len + 1];
     CGFloat adjust = 0;
     angles[1] = arctans[1];
     for( i=2; i<=len; i++ ) {
-	if( fabs(arctans[i] - arctans[i-1]) > fabs(arctans[i] - pi - arctans[i-1]) )
-	    adjust = adjust - pi;
-	else if( fabs(arctans[i] - arctans[i-1]) > fabs(arctans[i] + pi - arctans[i-1]) )
-	    adjust = adjust + pi;
+	if( fabs(arctans[i] - arctans[i-1]) > fabs(arctans[i] - M_PI - arctans[i-1]) )
+	    adjust = adjust - M_PI;
+	else if( fabs(arctans[i] - arctans[i-1]) > fabs(arctans[i] + M_PI - arctans[i-1]) )
+	    adjust = adjust + M_PI;
 	angles[i] = arctans[i] + adjust;
     }
     // compute the derivative using another least squares line fit:
-    CGFloat curvatures[len];
+    CGFloat curvatures[len + 1];
     for( i=2; i<len; i++ ) {
 	win_start = maxf(2, i - DERIVATIVE_WINDOW);
 	win_end = minf(len, i + DERIVATIVE_WINDOW);
 	curvatures[i] = [RSFreehandStroke tangentFrom:win_start to:win_end xValues:arcLength yValues:angles];
-	curvatures[i] = curvatures[i]*180/pi;  // convert from radians/pixel to degrees/pixel:
+	curvatures[i] = curvatures[i]*180/M_PI;  // convert from radians/pixel to degrees/pixel:
     }
     curvatures[1] = 0;  // this is arbitrary (but unimportant)
     LogP(@"curvatures:");
@@ -560,6 +559,7 @@ static char * displayf(NSInteger start, NSInteger stop, CGFloat *array) {
     end = [signSegs count] + 2;
     //
     NSInteger index[end + 1];
+    NSInteger curIndex;
     //
     CGFloat curveRatio[end + 1];
     BOOL recurse = YES;
@@ -570,7 +570,8 @@ static char * displayf(NSInteger start, NSInteger stop, CGFloat *array) {
         end = [signSegs count] + 2;
         index[0] = 1;
         for( i=1; i<(end - 1); i++ ) {
-            index[i] = [[signSegs objectAtIndex:i-1] intValue];
+            curIndex = [[signSegs objectAtIndex:i-1] intValue];
+            index[i] = MAX(1, MIN(len, curIndex));
         }
         index[end - 1] = len;
         newSignSegs = [NSMutableArray array];

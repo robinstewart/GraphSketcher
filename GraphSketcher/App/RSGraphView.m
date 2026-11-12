@@ -3141,11 +3141,22 @@ static ErrorBarSheet *errorBarSheet = nil;
         }
         else {
             NSLog(@"Export failed; export type was not supported!");
-            return;
         }
-        [data writeToURL:[savePanel URL] atomically:YES];
         
         [self setDrawingToScreen:YES];
+        
+        NSError *error = nil;
+        BOOL success = NO;
+        if (data) {
+            success = [data writeToURL:[savePanel URL] options:NSDataWritingAtomic error:&error];
+        } else {
+            error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteUnknownError userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:NSLocalizedString(@"The graph could not be rendered as %@.", @"Export error description"), fileTypeName] forKey:NSLocalizedDescriptionKey]];
+        }
+
+        if (!success) {
+            NSLog(@"Export to %@ failed: %@", [savePanel URL], error);
+            [self presentError:error modalForWindow:[self window] delegate:nil didPresentSelector:NULL contextInfo:NULL];
+        }
     }];
     
 }
@@ -3224,28 +3235,31 @@ static NSData *imageIOData(NSData *sourceData, NSString *type)
         return nil;
     }
     
-    [self lockFocus];
-    [self drawRect:[self bounds]];
-    NSBitmapImageRep *bitmapImageRep = [[NSBitmapImageRep alloc] initWithFocusedViewRect:[self bounds]];
-    [self unlockFocus];
-    
-    [image addRepresentation:bitmapImageRep];
-    [bitmapImageRep release];
+    NSBitmapImageRep *bitmapImageRep = [self bitmapImageRepInsideRect:[self bounds]];
+    if (bitmapImageRep)
+        [image addRepresentation:bitmapImageRep];
     
     return [image autorelease];
 }
 
+// Renders the view into an offscreen bitmap (at the window's backing scale). This replaces -[NSBitmapImageRep initWithFocusedViewRect:], which returns nil for layer-backed views on modern macOS because there is no window backing store to read from.
+- (NSBitmapImageRep *)bitmapImageRepInsideRect:(NSRect)r;
+{
+    NSBitmapImageRep *rep = [self bitmapImageRepForCachingDisplayInRect:r];
+    if (!rep) {
+        NSLog(@"Unable to create a bitmap for rect %@", NSStringFromRect(r));
+        return nil;
+    }
+    [self cacheDisplayInRect:r toBitmapImageRep:rep];
+    return rep;
+}
+
 - (NSData *)dataWithPNGInsideRect:(NSRect)r
 {
-    [self lockFocus];
-    [self drawRect:[self bounds]];
-    NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithFocusedViewRect:r];
-    [self unlockFocus];
+    NSBitmapImageRep *rep = [self bitmapImageRepInsideRect:r];
     
     NSData *imgData = [rep representationUsingType:NSBitmapImageFileTypePNG properties:
 		       [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:NSImageInterlaced]];
-    
-    [rep release];
     
     [self setNeedsDisplay:YES];
     return imgData;
@@ -3257,15 +3271,10 @@ static NSData *imageIOData(NSData *sourceData, NSString *type)
 
 - (NSData *)dataWithJPGInsideRect:(NSRect)r
 {
-    [self lockFocus];
-    [self drawRect:[self bounds]];
-    NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithFocusedViewRect:r];
-    [self unlockFocus];
+    NSBitmapImageRep *rep = [self bitmapImageRepInsideRect:r];
     
     NSData *jpegData = [rep representationUsingType:NSBitmapImageFileTypeJPEG properties:
 			[NSDictionary dictionaryWithObject:[NSNumber numberWithDouble:1] forKey:NSImageCompressionFactor]];
-    
-    [rep release];
     
     [self setNeedsDisplay:YES];
     return jpegData;
@@ -3273,14 +3282,9 @@ static NSData *imageIOData(NSData *sourceData, NSString *type)
 
 - (NSData *)dataWithTIFFInsideRect:(NSRect)r
 {
-    [self lockFocus];
-    [self drawRect:[self bounds]];
-    NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithFocusedViewRect:r];
-    [self unlockFocus];
+    NSBitmapImageRep *rep = [self bitmapImageRepInsideRect:r];
     
     NSData *tiffData = [rep TIFFRepresentation];
-    
-    [rep release];
     
     [self setNeedsDisplay:YES];
     return tiffData;

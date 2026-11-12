@@ -11,7 +11,6 @@
 		3403FDB10A25117800395CC8 /* CIColor-OQExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3403FDAF0A25117800395CC8 /* CIColor-OQExtensions.m */; };
 		343C98BC117623F900CE0910 /* OQColor-Archiving.h in Headers */ = {isa = PBXBuildFile; fileRef = 343C98BA117623F900CE0910 /* OQColor-Archiving.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		343C98BD117623F900CE0910 /* OQColor-Archiving.m in Sources */ = {isa = PBXBuildFile; fileRef = 343C98BB117623F900CE0910 /* OQColor-Archiving.m */; };
-		344EEC180A06ABF500AC6AA0 /* OQAlphaScaleFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 344EEC150A06ABF500AC6AA0 /* OQAlphaScaleFilter.cikernel */; };
 		345613D8119319A700E7D187 /* CALayer-OQExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 34CEA14910465F710016EC37 /* CALayer-OQExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		345613D9119319A800E7D187 /* CALayer-OQExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 34CEA14A10465F710016EC37 /* CALayer-OQExtensions.m */; };
 		345613DA119319AE00E7D187 /* OQColor-Archiving.h in Headers */ = {isa = PBXBuildFile; fileRef = 343C98BA117623F900CE0910 /* OQColor-Archiving.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,7 +62,6 @@
 		3403FDAF0A25117800395CC8 /* CIColor-OQExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CIColor-OQExtensions.m"; sourceTree = "<group>"; };
 		343C98BA117623F900CE0910 /* OQColor-Archiving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OQColor-Archiving.h"; sourceTree = "<group>"; };
 		343C98BB117623F900CE0910 /* OQColor-Archiving.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OQColor-Archiving.m"; sourceTree = "<group>"; };
-		344EEC150A06ABF500AC6AA0 /* OQAlphaScaleFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = OQAlphaScaleFilter.cikernel; sourceTree = "<group>"; };
 		345613B61193195A00E7D187 /* Omni-Application-Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Omni-Application-Common.xcconfig"; sourceTree = "<group>"; };
 		345613B71193195A00E7D187 /* Omni-Bundle-Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Omni-Bundle-Common.xcconfig"; sourceTree = "<group>"; };
 		345613B81193195A00E7D187 /* Omni-Framework-Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Omni-Framework-Common.xcconfig"; sourceTree = "<group>"; };
@@ -244,7 +242,6 @@
 				34ABA7C21056F973007202DA /* OQColor.m */,
 				343C98BA117623F900CE0910 /* OQColor-Archiving.h */,
 				343C98BB117623F900CE0910 /* OQColor-Archiving.m */,
-				344EEC150A06ABF500AC6AA0 /* OQAlphaScaleFilter.cikernel */,
 				343E50721046EF3B003EF9CD /* Layers */,
 			);
 			name = Classes;
@@ -394,7 +391,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */,
-				344EEC180A06ABF500AC6AA0 /* OQAlphaScaleFilter.cikernel in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

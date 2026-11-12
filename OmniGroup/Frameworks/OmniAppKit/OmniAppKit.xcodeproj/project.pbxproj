@@ -34,7 +34,6 @@
 		34275D1E13981621003F28F5 /* OAFeatures.h in Headers */ = {isa = PBXBuildFile; fileRef = 34275D1C13981621003F28F5 /* OAFeatures.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		342B41170A4C6B62002BFC4B /* NSWindowController-OAExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 342B41150A4C6B62002BFC4B /* NSWindowController-OAExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		342B41180A4C6B62002BFC4B /* NSWindowController-OAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 342B41160A4C6B62002BFC4B /* NSWindowController-OAExtensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		342D1D8F16C9584100692117 /* OAFindPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 342D1D8D16C9584100692117 /* OAFindPanel.xib */; };
 		3434792F11923BAE007D0CE5 /* NSFileWrapper-OAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 340DD56009AD38E900E8A437 /* NSFileWrapper-OAExtensions.m */; };
 		3434793011923BAF007D0CE5 /* NSFileWrapper-OAExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 340DD55F09AD38E900E8A437 /* NSFileWrapper-OAExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		34471AC109D31320004C9DBA /* OAConstructionTimeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 34471ABF09D31320004C9DBA /* OAConstructionTimeView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -62,14 +61,10 @@
 		34F0990209322B800001D0D5 /* OAAboutPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34F0990009322B800001D0D5 /* OAAboutPanelController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34F0995809322EA30001D0D5 /* OAAboutPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34F0995709322EA30001D0D5 /* OAAboutPanel.xib */; };
 		3EF5F1BF19104DEF0072ED90 /* OAWebPageViewerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EF5F1BE191049DD0072ED90 /* OAWebPageViewerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		496D40E014D7458D00F264B6 /* OADefaultSettingIndicatorCircleXOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 496D40DE14D7458D00F264B6 /* OADefaultSettingIndicatorCircleXOff.png */; };
-		496D40E114D7458D00F264B6 /* OADefaultSettingIndicatorCircleXOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 496D40DF14D7458D00F264B6 /* OADefaultSettingIndicatorCircleXOn.png */; };
 		4A5F17B3172772F5001A60E5 /* OAWebPageViewer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A5F17B0172772F5001A60E5 /* OAWebPageViewer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A5F17B4172772F5001A60E5 /* OAWebPageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A5F17B1172772F5001A60E5 /* OAWebPageViewer.m */; };
 		4A5F17B5172772F5001A60E5 /* OAWebPageViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A5F17B2172772F5001A60E5 /* OAWebPageViewer.xib */; };
 		4A5F17B71727772C001A60E5 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5F17B61727772C001A60E5 /* WebKit.framework */; };
-		4A785F8B0B040E5500B513F3 /* smallcalendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A785F8A0B040E5500B513F3 /* smallcalendar.png */; };
-		4AA05CC70B0414F400EDED39 /* OAPopupDatePicker.nib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA05CC60B0414F400EDED39 /* OAPopupDatePicker.nib */; };
 		4AA1E67C08AA764600E2FF6B /* OAInternetConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 683A0C790033CCD0CD999A52 /* OAInternetConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4AA1E67E08AA764600E2FF6B /* NSColor-ColorSyncExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CBB57E50416D63300E7FE1C /* NSColor-ColorSyncExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4AA1E68008AA764600E2FF6B /* OAColorProfile.h in Headers */ = {isa = PBXBuildFile; fileRef = F5AC9DBB032D12E201B4A65D /* OAColorProfile.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -118,24 +113,10 @@
 		4AA1E70108AA764600E2FF6B /* OAToolbarItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 34001C4A00325FDBC697A13D /* OAToolbarItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4AA1E70508AA764600E2FF6B /* OAWindowCascade.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CF02C24FF1319B8C697A12F /* OAWindowCascade.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4AA1E70608AA764600E2FF6B /* OAZoomableViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 00E51F99FE8AB2E911C9CC38 /* OAZoomableViewProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4AA1E71A08AA764600E2FF6B /* OAAction.png in Resources */ = {isa = PBXBuildFile; fileRef = E20CCE8D058021200097A12E /* OAAction.png */; };
-		4AA1E71B08AA764600E2FF6B /* OABackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CCB227F004327677F000001 /* OABackArrow.png */; };
-		4AA1E71E08AA764600E2FF6B /* OAForwardArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CCB227E004327677F000001 /* OAForwardArrow.png */; };
-		4AA1E72008AA764600E2FF6B /* OAMiniAction.png in Resources */ = {isa = PBXBuildFile; fileRef = 344A49C7055FD29B0097A113 /* OAMiniAction.png */; };
-		4AA1E72108AA764600E2FF6B /* OAMiniAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = 344A49C6055FD29B0097A113 /* OAMiniAdd.png */; };
-		4AA1E72208AA764600E2FF6B /* OAMiniRemove.png in Resources */ = {isa = PBXBuildFile; fileRef = 344A49C8055FD29B0097A113 /* OAMiniRemove.png */; };
 		4AA1E72308AA764600E2FF6B /* Classic Crayons.clr in Resources */ = {isa = PBXBuildFile; fileRef = 7F549877041FECFE0097A14E /* Classic Crayons.clr */; };
 		4AA1E72508AA764600E2FF6B /* OAPreferencesNextButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 66CD438101325EB10097A13E /* OAPreferencesNextButton.png */; };
 		4AA1E72608AA764600E2FF6B /* OAPreferencesPreviousButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 66CD438201325EB10097A13E /* OAPreferencesPreviousButton.png */; };
 		4AA1E72908AA764600E2FF6B /* OACautionIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D0E8F7703FBA2F90097A138 /* OACautionIcon.png */; };
-		4AA1E72B08AA764600E2FF6B /* OADefaultSettingIndicatorOff.png in Resources */ = {isa = PBXBuildFile; fileRef = B584AFEA058A7A5D0097A10E /* OADefaultSettingIndicatorOff.png */; };
-		4AA1E72C08AA764600E2FF6B /* OADefaultSettingIndicatorOn.png in Resources */ = {isa = PBXBuildFile; fileRef = B584AFEC058A7A5D0097A10E /* OADefaultSettingIndicatorOn.png */; };
-		4AA1E73008AA764600E2FF6B /* OALeftArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 312A98BC008EFFB6C697A14B /* OALeftArrow.png */; };
-		4AA1E73108AA764600E2FF6B /* OALeftArrowPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 312A98BD008EFFB6C697A14B /* OALeftArrowPressed.png */; };
-		4AA1E73208AA764600E2FF6B /* OARightArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 312A98BE008EFFB6C697A14B /* OARightArrow.png */; };
-		4AA1E73308AA764600E2FF6B /* OARightArrowPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 312A98BF008EFFB6C697A14B /* OARightArrowPressed.png */; };
-		4AA1E75808AA764600E2FF6B /* namedColors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00E51F0DFE8AB2E911C9CC38 /* namedColors.plist */; };
-		4AA1E76108AA764600E2FF6B /* CharsetCategories.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2D7993406DD0F730097A11C /* CharsetCategories.plist */; };
 		4AA1E76908AA764600E2FF6B /* OAInternetConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 683A0C7A0033CCD0CD999A52 /* OAInternetConfig.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4AA1E76B08AA764600E2FF6B /* NSColor-ColorSyncExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBB57E60416D63300E7FE1C /* NSColor-ColorSyncExtensions.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations -fno-objc-arc"; }; };
 		4AA1E76D08AA764600E2FF6B /* OAColorProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = F5AC9DBC032D12E201B4A65D /* OAColorProfile.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations -fno-objc-arc"; }; };
@@ -185,8 +166,6 @@
 		4AA1E7F108AA764600E2FF6B /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6389AAFCFFFFF4BBC697A14E /* ApplicationServices.framework */; };
 		4AA1E7F208AA764600E2FF6B /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B27335FFDDE12711CB17EA /* Carbon.framework */; };
 		4AE460D911D20CA800215084 /* OSAKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE460D811D20CA800215084 /* OSAKit.framework */; };
-		4D7B031B16A9DA80006FA95D /* OADefaultSettingIndicatorCircleXOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D7B031916A9DA7F006FA95D /* OADefaultSettingIndicatorCircleXOff@2x.png */; };
-		4D7B031C16A9DA80006FA95D /* OADefaultSettingIndicatorCircleXOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D7B031A16A9DA80006FA95D /* OADefaultSettingIndicatorCircleXOn@2x.png */; };
 		50A5C89608C5505500B1C5E4 /* NSEvent-OAExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 50A5C89408C5505500B1C5E4 /* NSEvent-OAExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		50A5C89708C5505500B1C5E4 /* NSEvent-OAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A5C89508C5505500B1C5E4 /* NSEvent-OAExtensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5F25681B1606CBE5008265EA /* Automator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F25681A1606CBE5008265EA /* Automator.framework */; };
@@ -200,12 +179,7 @@
 		A25653B80ADDBFB400A2A25B /* OAControlTextColorTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = A25653B60ADDBFB400A2A25B /* OAControlTextColorTransformer.h */; };
 		A25653B90ADDBFB400A2A25B /* OAControlTextColorTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = A25653B70ADDBFB400A2A25B /* OAControlTextColorTransformer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A2BB56380C9753BD00274A08 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BB56370C9753BD00274A08 /* QuartzCore.framework */; };
-		E234124E1718D0D80009F48E /* OAAction@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E234124D1718D0D80009F48E /* OAAction@2x.png */; };
 		E2B8A8D815BE016E00B5F26B /* OAPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2B8A8D615BE016E00B5F26B /* OAPreferences.xib */; };
-		E2B8AA1115BE06F300B5F26B /* OALeftArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E2B8AA0D15BE06F300B5F26B /* OALeftArrow@2x.png */; };
-		E2B8AA1215BE06F300B5F26B /* OALeftArrowPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E2B8AA0E15BE06F300B5F26B /* OALeftArrowPressed@2x.png */; };
-		E2B8AA1315BE06F300B5F26B /* OARightArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E2B8AA0F15BE06F300B5F26B /* OARightArrow@2x.png */; };
-		E2B8AA1415BE06F300B5F26B /* OARightArrowPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E2B8AA1015BE06F300B5F26B /* OARightArrowPressed@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -223,7 +197,6 @@
 		00E51EFFFE8AB2E911C9CC38 /* OAApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAApplication.h; sourceTree = SOURCE_ROOT; };
 		00E51F03FE8AB2E911C9CC38 /* OAFindControllerTargetProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAFindControllerTargetProtocol.h; sourceTree = "<group>"; };
 		00E51F07FE8AB2E911C9CC38 /* OmniAppKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OmniAppKit.h; sourceTree = "<group>"; };
-		00E51F0DFE8AB2E911C9CC38 /* namedColors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = namedColors.plist; sourceTree = SOURCE_ROOT; };
 		00E51F1FFE8AB2E911C9CC38 /* NSApplication-OAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication-OAExtensions.m"; sourceTree = "<group>"; };
 		00E51F20FE8AB2E911C9CC38 /* NSAttributedString-OAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString-OAExtensions.m"; sourceTree = "<group>"; };
 		00E51F24FE8AB2E911C9CC38 /* NSControl-OAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSControl-OAExtensions.m"; sourceTree = "<group>"; };
@@ -267,8 +240,6 @@
 		0145F2A9FFAFE867C697A15C /* NSColor-OAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSColor-OAExtensions.h"; sourceTree = "<group>"; };
 		01563696FFE9F5FAC697A14E /* OAPreferencesIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAPreferencesIconView.h; sourceTree = "<group>"; };
 		01563697FFE9F5FAC697A14E /* OAPreferencesIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAPreferencesIconView.m; sourceTree = "<group>"; };
-		0CCB227E004327677F000001 /* OAForwardArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OAForwardArrow.png; sourceTree = "<group>"; };
-		0CCB227F004327677F000001 /* OABackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OABackArrow.png; sourceTree = "<group>"; };
 		0CF02C24FF1319B8C697A12F /* OAWindowCascade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAWindowCascade.h; sourceTree = "<group>"; };
 		0CF02C25FF1319B8C697A12F /* OAWindowCascade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAWindowCascade.m; sourceTree = "<group>"; };
 		137CBE6F011899AF7F000001 /* OAFindPattern.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAFindPattern.h; sourceTree = "<group>"; };
@@ -289,10 +260,6 @@
 		27AC122C15BA295400B726A7 /* NSView-OALayerBackedFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView-OALayerBackedFix.m"; sourceTree = "<group>"; };
 		2EAA6AE5FF476391C697A12F /* NSTableView-OAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTableView-OAExtensions.h"; sourceTree = "<group>"; };
 		2EAA6AE6FF476391C697A12F /* NSTableView-OAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTableView-OAExtensions.m"; sourceTree = "<group>"; };
-		312A98BC008EFFB6C697A14B /* OALeftArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OALeftArrow.png; sourceTree = "<group>"; };
-		312A98BD008EFFB6C697A14B /* OALeftArrowPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OALeftArrowPressed.png; sourceTree = "<group>"; };
-		312A98BE008EFFB6C697A14B /* OARightArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OARightArrow.png; sourceTree = "<group>"; };
-		312A98BF008EFFB6C697A14B /* OARightArrowPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OARightArrowPressed.png; sourceTree = "<group>"; };
 		34001C4A00325FDBC697A13D /* OAToolbarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAToolbarItem.h; sourceTree = "<group>"; };
 		34001C4B00325FDBC697A13D /* OAToolbarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAToolbarItem.m; sourceTree = "<group>"; };
 		3401161411E516C10016ADB3 /* OATextStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OATextStorage.h; sourceTree = "<group>"; };
@@ -308,7 +275,6 @@
 		34275D1C13981621003F28F5 /* OAFeatures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAFeatures.h; sourceTree = "<group>"; };
 		342B41150A4C6B62002BFC4B /* NSWindowController-OAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindowController-OAExtensions.h"; sourceTree = "<group>"; };
 		342B41160A4C6B62002BFC4B /* NSWindowController-OAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindowController-OAExtensions.m"; sourceTree = "<group>"; };
-		342D1D8E16C9584100692117 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/OAFindPanel.xib; sourceTree = "<group>"; };
 		3434791511923B54007D0CE5 /* libOmniAppKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOmniAppKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3434791A11923B69007D0CE5 /* Omni-Library-Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Omni-Library-Common.xcconfig"; sourceTree = "<group>"; };
 		3434791B11923B69007D0CE5 /* Omni-Library-Coverage.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Omni-Library-Coverage.xcconfig"; sourceTree = "<group>"; };
@@ -328,9 +294,6 @@
 		34471AC009D31320004C9DBA /* OAConstructionTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAConstructionTimeView.m; sourceTree = "<group>"; };
 		34476AE306DF790B0097A113 /* OAToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAToolbar.h; sourceTree = "<group>"; };
 		34476AE406DF790B0097A113 /* OAToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAToolbar.m; sourceTree = "<group>"; };
-		344A49C6055FD29B0097A113 /* OAMiniAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OAMiniAdd.png; sourceTree = "<group>"; };
-		344A49C7055FD29B0097A113 /* OAMiniAction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OAMiniAction.png; sourceTree = "<group>"; };
-		344A49C8055FD29B0097A113 /* OAMiniRemove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OAMiniRemove.png; sourceTree = "<group>"; };
 		344B4A6D0537177D0097A113 /* ExtendedText.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ExtendedText.sdef; sourceTree = "<group>"; };
 		344B6E4712A4D3DC00D876CD /* OATextAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OATextAttachment.h; sourceTree = "<group>"; };
 		34508D64050FA8C30097A113 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -353,16 +316,12 @@
 		3EF5F1BE191049DD0072ED90 /* OAWebPageViewerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAWebPageViewerDelegate.h; sourceTree = "<group>"; };
 		3F411EA1036D27330297A14E /* NSBezierPath-OAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBezierPath-OAExtensions.h"; sourceTree = "<group>"; };
 		3F411EA2036D27330297A14E /* NSBezierPath-OAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBezierPath-OAExtensions.m"; sourceTree = "<group>"; };
-		496D40DE14D7458D00F264B6 /* OADefaultSettingIndicatorCircleXOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OADefaultSettingIndicatorCircleXOff.png; sourceTree = "<group>"; };
-		496D40DF14D7458D00F264B6 /* OADefaultSettingIndicatorCircleXOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OADefaultSettingIndicatorCircleXOn.png; sourceTree = "<group>"; };
 		4A04B9CB047BFCE40097A149 /* OASheetRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OASheetRequest.h; sourceTree = "<group>"; };
 		4A04B9CC047BFCE40097A149 /* OASheetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OASheetRequest.m; sourceTree = "<group>"; };
 		4A5F17B0172772F5001A60E5 /* OAWebPageViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAWebPageViewer.h; sourceTree = "<group>"; };
 		4A5F17B1172772F5001A60E5 /* OAWebPageViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAWebPageViewer.m; sourceTree = "<group>"; };
 		4A5F17B2172772F5001A60E5 /* OAWebPageViewer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OAWebPageViewer.xib; sourceTree = "<group>"; };
 		4A5F17B61727772C001A60E5 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
-		4A785F5F0B040CAE00B513F3 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/OAPopupDatePicker.nib; sourceTree = "<group>"; };
-		4A785F8A0B040E5500B513F3 /* smallcalendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smallcalendar.png; sourceTree = "<group>"; };
 		4A9FDD370655955D0097A149 /* OAController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAController.h; sourceTree = "<group>"; };
 		4A9FDD380655955D0097A149 /* OAController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAController.m; sourceTree = "<group>"; };
 		4AA1E7F908AA764600E2FF6B /* OmniAppKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OmniAppKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -384,8 +343,6 @@
 		4AB8F09C08AD0A0600DBB061 /* Omni-Global-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Omni-Global-Debug.xcconfig"; sourceTree = "<group>"; };
 		4AB8F09D08AD0A0600DBB061 /* Omni-Global-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Omni-Global-Release.xcconfig"; sourceTree = "<group>"; };
 		4AE460D811D20CA800215084 /* OSAKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSAKit.framework; path = /System/Library/Frameworks/OSAKit.framework; sourceTree = "<absolute>"; };
-		4D7B031916A9DA7F006FA95D /* OADefaultSettingIndicatorCircleXOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OADefaultSettingIndicatorCircleXOff@2x.png"; sourceTree = "<group>"; };
-		4D7B031A16A9DA80006FA95D /* OADefaultSettingIndicatorCircleXOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OADefaultSettingIndicatorCircleXOn@2x.png"; sourceTree = "<group>"; };
 		50A5C89408C5505500B1C5E4 /* NSEvent-OAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = "NSEvent-OAExtensions.h"; sourceTree = "<group>"; };
 		50A5C89508C5505500B1C5E4 /* NSEvent-OAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = "NSEvent-OAExtensions.m"; sourceTree = "<group>"; };
 		5F25681A1606CBE5008265EA /* Automator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Automator.framework; path = System/Library/Frameworks/Automator.framework; sourceTree = SDKROOT; };
@@ -417,19 +374,10 @@
 		A25653B60ADDBFB400A2A25B /* OAControlTextColorTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAControlTextColorTransformer.h; sourceTree = "<group>"; };
 		A25653B70ADDBFB400A2A25B /* OAControlTextColorTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAControlTextColorTransformer.m; sourceTree = "<group>"; };
 		A2BB56370C9753BD00274A08 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
-		B584AFEA058A7A5D0097A10E /* OADefaultSettingIndicatorOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OADefaultSettingIndicatorOff.png; sourceTree = "<group>"; };
-		B584AFEC058A7A5D0097A10E /* OADefaultSettingIndicatorOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OADefaultSettingIndicatorOn.png; sourceTree = "<group>"; };
 		B594F4B70516718E0097A10E /* NSTableView-OAColumnConfigurationExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTableView-OAColumnConfigurationExtensions.h"; sourceTree = "<group>"; };
 		B594F4B80516718E0097A10E /* NSTableView-OAColumnConfigurationExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTableView-OAColumnConfigurationExtensions.m"; sourceTree = "<group>"; };
 		BF94281F062222D400B83989 /* Info.plist */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; path = Info.plist; sourceTree = "<group>"; };
-		E20CCE8D058021200097A12E /* OAAction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OAAction.png; sourceTree = "<group>"; };
-		E234124D1718D0D80009F48E /* OAAction@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OAAction@2x.png"; sourceTree = "<group>"; };
 		E2B8A8D715BE016E00B5F26B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/OAPreferences.xib; sourceTree = "<group>"; };
-		E2B8AA0D15BE06F300B5F26B /* OALeftArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OALeftArrow@2x.png"; sourceTree = "<group>"; };
-		E2B8AA0E15BE06F300B5F26B /* OALeftArrowPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OALeftArrowPressed@2x.png"; sourceTree = "<group>"; };
-		E2B8AA0F15BE06F300B5F26B /* OARightArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OARightArrow@2x.png"; sourceTree = "<group>"; };
-		E2B8AA1015BE06F300B5F26B /* OARightArrowPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OARightArrowPressed@2x.png"; sourceTree = "<group>"; };
-		E2D7993506DD0F730097A11C /* CharsetCategories.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist; name = CharsetCategories.plist; path = en.lproj/CharsetCategories.plist; sourceTree = SOURCE_ROOT; };
 		F07B9A0D022AB6663897A113 /* NSToolbarItem-OAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSToolbarItem-OAExtensions.h"; sourceTree = "<group>"; };
 		F07B9A0E022AB6663897A113 /* NSToolbarItem-OAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSToolbarItem-OAExtensions.m"; sourceTree = "<group>"; };
 		F500F43B0204C91901648025 /* NSFileManager-OAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager-OAExtensions.h"; sourceTree = "<group>"; };
@@ -595,14 +543,7 @@
 		0CCB22770043258C7F000001 /* General-Use Images */ = {
 			isa = PBXGroup;
 			children = (
-				E20CCE8D058021200097A12E /* OAAction.png */,
-				E234124D1718D0D80009F48E /* OAAction@2x.png */,
-				0CCB227F004327677F000001 /* OABackArrow.png */,
-				0CCB227E004327677F000001 /* OAForwardArrow.png */,
 				272023F215C06D7D0089BC49 /* OAInfoTemplate.pdf */,
-				344A49C7055FD29B0097A113 /* OAMiniAction.png */,
-				344A49C6055FD29B0097A113 /* OAMiniAdd.png */,
-				344A49C8055FD29B0097A113 /* OAMiniRemove.png */,
 			);
 			name = "General-Use Images";
 			sourceTree = "<group>";
@@ -731,7 +672,6 @@
 				4A785F5C0B040C4200B513F3 /* Date Picker */,
 				B584AFE5058A7A1E0097A10E /* Default Setting Indicator */,
 				E2D79E9206DD62F30097A11C /* HierarchicalPopUpController */,
-				00E51F0DFE8AB2E911C9CC38 /* namedColors.plist */,
 				34471ABF09D31320004C9DBA /* OAConstructionTimeView.h */,
 				34471AC009D31320004C9DBA /* OAConstructionTimeView.m */,
 				34E46E9B0CDEB7330066E943 /* OAFlippedView.h */,
@@ -833,14 +773,6 @@
 		3FDA413C020970130297A14E /* CalendarView */ = {
 			isa = PBXGroup;
 			children = (
-				312A98BC008EFFB6C697A14B /* OALeftArrow.png */,
-				E2B8AA0D15BE06F300B5F26B /* OALeftArrow@2x.png */,
-				312A98BD008EFFB6C697A14B /* OALeftArrowPressed.png */,
-				E2B8AA0E15BE06F300B5F26B /* OALeftArrowPressed@2x.png */,
-				312A98BE008EFFB6C697A14B /* OARightArrow.png */,
-				E2B8AA0F15BE06F300B5F26B /* OARightArrow@2x.png */,
-				312A98BF008EFFB6C697A14B /* OARightArrowPressed.png */,
-				E2B8AA1015BE06F300B5F26B /* OARightArrowPressed@2x.png */,
 			);
 			name = CalendarView;
 			sourceTree = "<group>";
@@ -1099,8 +1031,6 @@
 		4A785F5C0B040C4200B513F3 /* Date Picker */ = {
 			isa = PBXGroup;
 			children = (
-				4A785F8A0B040E5500B513F3 /* smallcalendar.png */,
-				4AA05CC60B0414F400EDED39 /* OAPopupDatePicker.nib */,
 			);
 			name = "Date Picker";
 			sourceTree = "<group>";
@@ -1187,7 +1117,6 @@
 		4FEF31EAFF191F02CD999A53 /* Find */ = {
 			isa = PBXGroup;
 			children = (
-				342D1D8D16C9584100692117 /* OAFindPanel.xib */,
 				00E51F03FE8AB2E911C9CC38 /* OAFindControllerTargetProtocol.h */,
 				137CBE6F011899AF7F000001 /* OAFindPattern.h */,
 				137CBE70011899AF7F000001 /* OAFindPattern.m */,
@@ -1276,12 +1205,6 @@
 		B584AFF0058A7A620097A10E /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				496D40DE14D7458D00F264B6 /* OADefaultSettingIndicatorCircleXOff.png */,
-				4D7B031916A9DA7F006FA95D /* OADefaultSettingIndicatorCircleXOff@2x.png */,
-				496D40DF14D7458D00F264B6 /* OADefaultSettingIndicatorCircleXOn.png */,
-				4D7B031A16A9DA80006FA95D /* OADefaultSettingIndicatorCircleXOn@2x.png */,
-				B584AFEA058A7A5D0097A10E /* OADefaultSettingIndicatorOff.png */,
-				B584AFEC058A7A5D0097A10E /* OADefaultSettingIndicatorOn.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -1303,7 +1226,6 @@
 		E2D79E9206DD62F30097A11C /* HierarchicalPopUpController */ = {
 			isa = PBXGroup;
 			children = (
-				E2D7993406DD0F730097A11C /* CharsetCategories.plist */,
 			);
 			name = HierarchicalPopUpController;
 			sourceTree = "<group>";
@@ -1493,44 +1415,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AA1E71A08AA764600E2FF6B /* OAAction.png in Resources */,
-				4AA1E71B08AA764600E2FF6B /* OABackArrow.png in Resources */,
-				4AA1E71E08AA764600E2FF6B /* OAForwardArrow.png in Resources */,
-				4AA1E72008AA764600E2FF6B /* OAMiniAction.png in Resources */,
-				4AA1E72108AA764600E2FF6B /* OAMiniAdd.png in Resources */,
-				4AA1E72208AA764600E2FF6B /* OAMiniRemove.png in Resources */,
 				4AA1E72308AA764600E2FF6B /* Classic Crayons.clr in Resources */,
 				4AA1E72508AA764600E2FF6B /* OAPreferencesNextButton.png in Resources */,
 				4AA1E72608AA764600E2FF6B /* OAPreferencesPreviousButton.png in Resources */,
 				4AA1E72908AA764600E2FF6B /* OACautionIcon.png in Resources */,
-				4AA1E72B08AA764600E2FF6B /* OADefaultSettingIndicatorOff.png in Resources */,
-				4AA1E72C08AA764600E2FF6B /* OADefaultSettingIndicatorOn.png in Resources */,
-				4AA1E73008AA764600E2FF6B /* OALeftArrow.png in Resources */,
-				4AA1E73108AA764600E2FF6B /* OALeftArrowPressed.png in Resources */,
-				4AA1E73208AA764600E2FF6B /* OARightArrow.png in Resources */,
-				4AA1E73308AA764600E2FF6B /* OARightArrowPressed.png in Resources */,
-				4AA1E75808AA764600E2FF6B /* namedColors.plist in Resources */,
-				4AA1E76108AA764600E2FF6B /* CharsetCategories.plist in Resources */,
 				34F0995809322EA30001D0D5 /* OAAboutPanel.xib in Resources */,
-				4AA05CC70B0414F400EDED39 /* OAPopupDatePicker.nib in Resources */,
-				4A785F8B0B040E5500B513F3 /* smallcalendar.png in Resources */,
 				008AB54C14032D67001F29CD /* OADropDownTriangle.png in Resources */,
-				496D40E014D7458D00F264B6 /* OADefaultSettingIndicatorCircleXOff.png in Resources */,
-				496D40E114D7458D00F264B6 /* OADefaultSettingIndicatorCircleXOn.png in Resources */,
 				272023F315C06D7D0089BC49 /* OAInfoTemplate.pdf in Resources */,
 				E2B8A8D815BE016E00B5F26B /* OAPreferences.xib in Resources */,
-				E2B8AA1115BE06F300B5F26B /* OALeftArrow@2x.png in Resources */,
-				E2B8AA1215BE06F300B5F26B /* OALeftArrowPressed@2x.png in Resources */,
-				E2B8AA1315BE06F300B5F26B /* OARightArrow@2x.png in Resources */,
-				E2B8AA1415BE06F300B5F26B /* OARightArrowPressed@2x.png in Resources */,
 				5F92995C16A50A9300AA4D18 /* OAScriptIconTemplate.png in Resources */,
 				5F92995D16A50A9300AA4D18 /* OAScriptIconTemplate@2x.png in Resources */,
 				5F92996116A50A9C00AA4D18 /* OAAutomatorWorkflowIconTemplate.png in Resources */,
 				5F92996216A50A9C00AA4D18 /* OAAutomatorWorkflowIconTemplate@2x.png in Resources */,
-				4D7B031B16A9DA80006FA95D /* OADefaultSettingIndicatorCircleXOff@2x.png in Resources */,
-				4D7B031C16A9DA80006FA95D /* OADefaultSettingIndicatorCircleXOn@2x.png in Resources */,
-				342D1D8F16C9584100692117 /* OAFindPanel.xib in Resources */,
-				E234124E1718D0D80009F48E /* OAAction@2x.png in Resources */,
 				4A5F17B5172772F5001A60E5 /* OAWebPageViewer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1646,22 +1542,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		342D1D8D16C9584100692117 /* OAFindPanel.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				342D1D8E16C9584100692117 /* en */,
-			);
-			name = OAFindPanel.xib;
-			sourceTree = "<group>";
-		};
-		4AA05CC60B0414F400EDED39 /* OAPopupDatePicker.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4A785F5F0B040CAE00B513F3 /* en */,
-			);
-			name = OAPopupDatePicker.nib;
-			sourceTree = "<group>";
-		};
 		7F549877041FECFE0097A14E /* Classic Crayons.clr */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1676,14 +1556,6 @@
 				E2B8A8D715BE016E00B5F26B /* en */,
 			);
 			name = OAPreferences.xib;
-			sourceTree = "<group>";
-		};
-		E2D7993406DD0F730097A11C /* CharsetCategories.plist */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E2D7993506DD0F730097A11C /* CharsetCategories.plist */,
-			);
-			name = CharsetCategories.plist;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -50,6 +50,9 @@ The iPad build does not finish. Two files fail to compile with current Xcode (`O
 | `autoonly.py`, `autocheck.py` | Files that are reachable only through a load-time hook (`+didLoad`, `+performPosing`, constructors). |
 | `plan_deletion.py` | Decides which files can go with `#import` removals only, checking both the Mac and iPad graphs. Writes `work/delete_list.json`. |
 | `apply_deletion.py [--dry-run]` | Deletes those files, their Xcode project entries and the `#import` lines. |
+| `resources.py` | Lists every non-source file under `OmniGroup/Frameworks` and which source, nib or plist mentions its name. Writes `work/resources.json`. |
+| `resources_dynamic.py` | For the unmentioned ones, flags names that a format string or string fragment in the code could build at run time. Writes `work/resource_candidates.json`; review the flags by hand. |
+| `apply_deletion.py --resources [--dry-run]` | Deletes the files in `work/resource_delete_list.json` and their Xcode project entries. |
 
 Two hand-maintained inputs:
 

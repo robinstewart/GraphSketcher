@@ -27,7 +27,18 @@ Verified after the deletion:
 - The Mac workspace builds clean from an empty build folder, and the app launches without mentioning any deleted class in its log.
 - The iPad workspace fails in exactly the same four steps as before the deletion (two source files that don't compile with current Xcode, two resource steps). Sixteen fewer files compile, and no remaining object file refers to a symbol or category method that was deleted.
 
-Not done: a hands-on smoke test of the Mac app (see the end of this file), and resource files that belonged to deleted classes, such as `OAFindPanel.xib` and `OAPopupDatePicker.nib`, are still in place.
+**Unused resources are also removed** (2026-11-11): 67 files that no remaining source file, nib, storyboard or plist names. No code or other resource was edited; only the files' Xcode project entries went.
+
+- OmniAppKit (27): `OAFindPanel.xib`, `OAPopupDatePicker.nib`, `CharsetCategories.plist`, `namedColors.plist`, and 23 images (`OAAction`, `OABackArrow`, `OAForwardArrow`, `OAHelpDownIcon`, `OAMini*`, `OADefaultSettingIndicator*`, `OALeftArrow*`, `OARightArrow*`, `smallcalendar`).
+- OmniInspector (6): `ColorsInfo.png`, `FontsInfo.png`, `OIHeaderCap-Ice*`, `OIHeaderWash-Ice*`.
+- OmniQuartz (1): `OQAlphaScaleFilter.cikernel`.
+- OmniUI, iPad only (33): images such as `OUIExport*Badge`, `OUIPDF`, `OUIPNG`, `OUIMenuItemAbout`, `OUIMenuItemSync`.
+
+Kept although no source names them literally: `OITitlebar*`, `OIWindowSmallCloseBox*` and `OmniPresenceToolbarIconAnimation-*`, whose names are built with format strings. Also left alone: the `.sdef`/`.scriptSuite` scripting definitions (Cocoa loads them by convention), strings tables, and files that are not app resources (SFMT's documentation and test vectors, unit-test Info.plists, the `.ym`/`.rl` grammar sources, licences).
+
+After this the Mac workspace again builds clean and launches with the same log as before, and the iPad build fails in the same steps as before.
+
+Not done: a hands-on smoke test of the Mac app (see the end of this file).
 
 The scripts that produced all of this are in this folder; see [README.md](README.md).
 

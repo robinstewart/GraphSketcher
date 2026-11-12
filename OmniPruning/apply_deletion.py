@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Apply work/delete_list.json: remove each file from disk, from every .xcodeproj that
 references it, and delete the #import lines listed in work/import_hits.json.
-Run plan_deletion.py first. Pass --dry-run to only print what would happen."""
-import json, os, re, subprocess, glob, sys
+Run plan_deletion.py first. Pass --dry-run to only print what would happen.
+With --resources, apply work/resource_delete_list.json instead (no #import edits)."""
+import json, os, re, subprocess, glob, sys, shutil
 HERE = os.path.dirname(os.path.abspath(__file__)); W = os.path.join(HERE, "work"); REPO = os.path.dirname(HERE)
 DRY = "--dry-run" in sys.argv
-delete = set(json.load(open(os.path.join(W, "delete_list.json"))))
-hits = json.load(open(os.path.join(W, "import_hits.json")))
+RES = "--resources" in sys.argv
+delete = set(json.load(open(os.path.join(W, "resource_delete_list.json" if RES else "delete_list.json"))))
+hits = [] if RES else json.load(open(os.path.join(W, "import_hits.json")))
 
 # 1. project files
 for proj in sorted(set(glob.glob(REPO + "/OmniGroup/**/*.xcodeproj", recursive=True) + glob.glob(REPO + "/GraphSketcher/**/*.xcodeproj", recursive=True))):
@@ -26,14 +28,23 @@ for proj in sorted(set(glob.glob(REPO + "/OmniGroup/**/*.xcodeproj", recursive=T
         if o.get("isa") == "PBXFileReference":
             fp = path_of(oid)
             if not fp.startswith("$") and os.path.relpath(fp, REPO) in delete: ids.add(oid)
+    # a localized-resource group whose every variant is deleted goes too
+    ids |= {oid for oid, o in objs.items() if o.get("isa") == "PBXVariantGroup" and o["children"] and set(o["children"]) <= ids}
     ids |= {oid for oid, o in objs.items() if o.get("isa") == "PBXBuildFile" and o.get("fileRef") in ids}
     if not ids: continue
-    out, removed = [], 0
+    out, removed, skipping = [], 0, False
     for line in open(pb, encoding="utf-8"):
+        if skipping:
+            removed += 1; skipping = line.rstrip() != "\t\t};"; continue
         m = re.match(r"\s*([0-9A-F]{24})\b", line)
         if m and m.group(1) in ids:
-            assert line.rstrip().endswith(("};", ",")), "multi-line pbxproj entry: " + line
-            removed += 1; continue
+            removed += 1
+            if line.rstrip().endswith("= {"):
+                assert objs[m.group(1)]["isa"] == "PBXVariantGroup", line
+                skipping = True
+            else:
+                assert line.rstrip().endswith(("};", ",")), "multi-line pbxproj entry: " + line
+            continue
         out.append(line)
     print(f"{os.path.relpath(proj, REPO)}: {len(ids)} objects, {removed} lines removed")
     if not DRY: open(pb, "w", encoding="utf-8").write("".join(out))
@@ -51,5 +62,6 @@ print(f"{len(hits)} #import lines removed from {len(byfile)} files")
 
 # 3. files
 for f in sorted(delete):
-    if not DRY: os.remove(os.path.join(REPO, f))
+    p = os.path.join(REPO, f)
+    if not DRY: shutil.rmtree(p) if os.path.isdir(p) else os.remove(p)
 print(f"{len(delete)} files deleted")

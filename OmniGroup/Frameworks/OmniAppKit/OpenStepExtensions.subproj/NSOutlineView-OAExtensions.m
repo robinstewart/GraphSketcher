@@ -184,13 +184,13 @@ RCS_ID("$Id$")
     
     switch (character) {
         case NSLeftArrowFunctionKey:
-            if (modifierFlags & NSAlternateKeyMask) {
+            if (modifierFlags & NSEventModifierFlagOption) {
                 [self _collapseItems:[self selectedItems] andChildren:YES];
                 return YES;
             }
             break;
         case NSRightArrowFunctionKey:
-            if (modifierFlags & NSAlternateKeyMask) {
+            if (modifierFlags & NSEventModifierFlagOption) {
                 [self _expandItems:[self selectedItems] andChildren:YES];
                 return YES;
             }

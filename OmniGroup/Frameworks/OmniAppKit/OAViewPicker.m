@@ -61,12 +61,11 @@ static OAViewPicker *ActivePicker;
 
 - (instancetype)_initWithParentWindow:(NSWindow *)window;
 {
-    if (!(self = [super initWithContentRect:[window frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO]))
+    if (!(self = [super initWithContentRect:[window frame] styleMask:NSWindowStyleMaskBorderless backing:NSBackingStoreBuffered defer:NO]))
         return nil;
     
     [self setOpaque:NO];
     [self setBackgroundColor:[NSColor clearColor]];
-    [self setOneShot:YES];
     [self setReleasedWhenClosed:NO];
     [self setAcceptsMouseMovedEvents:YES];
     [self setIgnoresMouseEvents:NO];

@@ -43,7 +43,7 @@ static void initializeDepressionImages(void)
         highlightStyle = newHighlightStyle;
         if (highlightStyle == OITabMatrixDepressionHighlightStyle)
             initializeDepressionImages();
-        [self setNeedsDisplay];
+        [self setNeedsDisplay:YES];
     }
 }
 
@@ -125,7 +125,7 @@ static void initializeDepressionImages(void)
         id object = [defaults objectForKey: @"com.apple.mouse.doubleClickThreshold"];
         if (object && [object floatValue] < 0.25f)
             doubleClickTime = [object floatValue];
-        NSEvent *nextEvent = [[self window] nextEventMatchingMask:NSLeftMouseDownMask untilDate:[NSDate dateWithTimeIntervalSinceNow:doubleClickTime] inMode:NSEventTrackingRunLoopMode dequeue:YES];
+        NSEvent *nextEvent = [[self window] nextEventMatchingMask:NSEventMaskLeftMouseDown untilDate:[NSDate dateWithTimeIntervalSinceNow:doubleClickTime] inMode:NSEventTrackingRunLoopMode dequeue:YES];
         if (nextEvent)
             event = nextEvent;
     }
@@ -183,15 +183,15 @@ static void initializeDepressionImages(void)
             CGFloat fraction = 0.7f;
             [plasticDepression drawFlippedInRect:stretchRect
                                         fromRect:(NSRect){{depressionLeftMargin, 0}, {imageSize.width-depressionLeftMargin-depressionRightMargin, imageSize.height}}
-                                       operation:NSCompositePlusDarker
+                                       operation:NSCompositingOperationPlusDarker
                                         fraction:fraction];
             [plasticDepression drawFlippedInRect:(NSRect){{NSMinX(contiguousFrameRect), contiguousFrameRect.origin.y}, {depressionLeftMargin, contiguousFrameRect.size.height}}
                                         fromRect:(NSRect){{0, 0}, {depressionLeftMargin, imageSize.height}}
-                                       operation:NSCompositePlusDarker
+                                       operation:NSCompositingOperationPlusDarker
                                         fraction:fraction];
             [plasticDepression drawFlippedInRect:(NSRect){{NSMaxX(contiguousFrameRect)-depressionRightMargin, contiguousFrameRect.origin.y}, {depressionRightMargin, contiguousFrameRect.size.height}}
                                         fromRect:(NSRect){{imageSize.width-depressionRightMargin, 0}, {depressionRightMargin, imageSize.height}}
-                                       operation:NSCompositePlusDarker
+                                       operation:NSCompositingOperationPlusDarker
                                         fraction:fraction];
         }
     } else {
@@ -227,7 +227,7 @@ static void initializeDepressionImages(void)
 
 - (BOOL)performKeyEquivalent:(NSEvent *)theEvent;
 {
-    if ([theEvent type] != NSKeyDown)
+    if ([theEvent type] != NSEventTypeKeyDown)
         return NO;
     
     NSString *fullString = [NSString stringForKeyEquivalent:[theEvent charactersIgnoringModifiers] andModifierMask:[theEvent modifierFlags]];

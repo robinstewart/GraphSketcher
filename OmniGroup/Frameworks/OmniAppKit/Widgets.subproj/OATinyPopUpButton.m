@@ -61,7 +61,7 @@ RCS_ID("$Id$");
         imageRect.origin.x = floor((bounds.size.width - imageSize.width)/2);
         imageRect.origin.y = /*bounds.size.height - imageSize.height - */ TINY_TRIANGLE_BOTTOM_PADDING;
         
-        [dropDownImage drawFlippedInRect:imageRect operation:NSCompositeSourceOver];
+        [dropDownImage drawFlippedInRect:imageRect operation:NSCompositingOperationSourceOver];
     }
 }
 

@@ -129,7 +129,7 @@ RCS_ID("$Id$");
 
 - (void)modifierFlagsChanged:(NSNotification *)note;
 {
-    BOOL optionDown = ([[note object] modifierFlags] & NSAlternateKeyMask) ? YES : NO;
+    BOOL optionDown = ([[note object] modifierFlags] & NSEventModifierFlagOption) ? YES : NO;
 
     if (optionDown != inOptionKeyState) {
         if ([self optionKeyImage])

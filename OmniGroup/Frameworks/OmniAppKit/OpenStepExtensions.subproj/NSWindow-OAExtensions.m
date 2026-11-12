@@ -236,7 +236,7 @@ static BOOL displayIfNeededBlocksInProgress = NO;
 
     // We assume here that both Quartz and CG have the same idea about the height (Y-extent) of the main screen; we should check whether this holds in 10.5 with resolution-independent UI.
     
-    NSPoint cocoaScreenCoordinates = [self convertBaseToScreen:windowPoint];
+    NSPoint cocoaScreenCoordinates = [self convertPointToScreen:windowPoint];
     CGRect mainScreenSize = CGDisplayBounds(CGMainDisplayID());
     
     // It's the main screen, so we expect its origin to be at the global origin. If that's not true, our conversion will presumably fail...

@@ -283,7 +283,7 @@ static CFMutableDataRef makeRFC1952MemberHeader(time_t modtime,
         NSUInteger length = [filename_bytes length];
         OBASSERT(length < INT_MAX);
         
-        [filename_bytes getBytes:header];
+        [filename_bytes getBytes:header length:length];
         header[length] = (char)0;
         headerCRC = crc32(headerCRC, header, (int)length+1);
         header += length+1;
@@ -294,7 +294,7 @@ static CFMutableDataRef makeRFC1952MemberHeader(time_t modtime,
         NSUInteger length = [comment_bytes length];
         OBASSERT(length < INT_MAX);
 
-        [comment_bytes getBytes:header];
+        [comment_bytes getBytes:header length:length];
         header[length] = (char)0;
         headerCRC = crc32(headerCRC, header, (int)length+1);
         header += length+1;

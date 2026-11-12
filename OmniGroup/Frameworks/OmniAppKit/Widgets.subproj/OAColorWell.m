@@ -140,7 +140,7 @@ NSString * const OAColorWellDidDeactivate = @"OAColorWellDidDeactivate";
     [openPanel setAllowedFileTypes:[NSImage imageTypes]];
 
     // Not using a sheet since this will typically be run from an inspector.  If you want to convert this to a sheet, make sure to check whether you are in an inspector (probably easiest to add a new action and factor the method guts out into a private method).
-    if ([openPanel runModal] == NSFileHandlingPanelOKButton) {
+    if ([openPanel runModal] == NSModalResponseOK) {
         NSURL *url = [openPanel URL];
         NSImage *image = [[[NSImage alloc] initWithContentsOfURL:url] autorelease];
         if (!image) {

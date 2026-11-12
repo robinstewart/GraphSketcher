@@ -46,7 +46,7 @@ static NSCalendar *CurrentCalendar = nil;
 
 static NSDate *_day(NSDate *date)
 {
-    NSDateComponents *components = [CurrentCalendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+    NSDateComponents *components = [CurrentCalendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
     return [CurrentCalendar dateFromComponents:components];
 }
 

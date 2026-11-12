@@ -195,7 +195,7 @@ static id (*original_setSize)(id self, SEL _cmd, NSSize size);
                 sourceImage = defaultImage;
                 break;
         }
-        [sourceImage drawInRect:dstRect fromRect:srcRect operation:NSCompositeSourceOver fraction:1.0 respectFlipped:NO hints:nil];
+        [sourceImage drawInRect:dstRect fromRect:srcRect operation:NSCompositingOperationSourceOver fraction:1.0 respectFlipped:NO hints:nil];
         return YES;
     }];
 
@@ -314,7 +314,7 @@ static NSDictionary *titleFontAttributes;
     NSRectFill(NSMakeRect(0, 0, totalSize.width, totalSize.height));
 
     // Draw icon
-    [image compositeToPoint:NSMakePoint(0.0f, totalSize.height - (CGFloat)rint(totalSize.height / 2.0f + imageSize.height / 2.0f)) operation:NSCompositeSourceOver];
+    [image compositeToPoint:NSMakePoint(0.0f, totalSize.height - (CGFloat)rint(totalSize.height / 2.0f + imageSize.height / 2.0f)) operation:NSCompositingOperationSourceOver];
     
     // Draw box around title
     titleBox.origin.x = imageSize.width + X_SPACE_BETWEEN_ICON_AND_TEXT_BOX;
@@ -340,9 +340,9 @@ static NSDictionary *titleFontAttributes;
     NSImage *image = [self copy];
     NSImage *tintedImage = [NSImage imageWithSize:self.size flipped:NO drawingHandler:^BOOL(NSRect dstRect) {
         NSRect srcRect = { .origin = NSZeroPoint, .size = image.size };
-        [image drawInRect:dstRect fromRect:srcRect operation:NSCompositeSourceOver fraction:1.0 respectFlipped:NO hints:nil];
+        [image drawInRect:dstRect fromRect:srcRect operation:NSCompositingOperationSourceOver fraction:1.0 respectFlipped:NO hints:nil];
         [tintColor set];
-        NSRectFillUsingOperation(dstRect, NSCompositeSourceIn);
+        NSRectFillUsingOperation(dstRect, NSCompositingOperationSourceIn);
         return YES;
     }];
     
@@ -361,7 +361,7 @@ static NSDictionary *titleFontAttributes;
      Two, to deal with the crackheaded behavior of NSCachedImageRep (RADAR #4985046) where it snaps its drawing bounds to integer coordinates *in the current user space*. This means that if your coordinate system is scaled from the default you get screwy results (OBS #35894).
      */
         
-    context = [[NSGraphicsContext currentContext] graphicsPort];
+    context = [[NSGraphicsContext currentContext] CGContext];
     CGContextSaveGState(context); {
         CGContextTranslateCTM(context, NSMinX(rect), NSMaxY(rect));
         if (sourceRect.size.width == 0 && sourceRect.size.height == 0)
@@ -386,7 +386,7 @@ static NSDictionary *titleFontAttributes;
         transformedSize = [flipTransform transformSize:rect.size];
         [flipTransform concat];
         transformedRect = NSMakeRect(transformedPoint.x, transformedPoint.y + transformedSize.height, transformedSize.width, -transformedSize.height);
-        [anImage drawInRect:transformedRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+        [anImage drawInRect:transformedRect fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1.0];
         [flipTransform concat];
         [flipTransform release];
      */
@@ -473,7 +473,7 @@ static NSDictionary *titleFontAttributes;
     NSGraphicsContext *currentContext = [NSGraphicsContext currentContext];
     NSImageInterpolation savedInterpolation = [currentContext imageInterpolation];
     [currentContext setImageInterpolation:NSImageInterpolationHigh];
-    [self drawInRect:NSMakeRect(0.0f, 0.0f, aSize.width, aSize.height) fromRect:(NSRect){ { 0, 0 }, [self size] } operation:NSCompositeSourceOver fraction:1.0f];
+    [self drawInRect:NSMakeRect(0.0f, 0.0f, aSize.width, aSize.height) fromRect:(NSRect){ { 0, 0 }, [self size] } operation:NSCompositingOperationSourceOver fraction:1.0f];
     [currentContext setImageInterpolation:savedInterpolation];
     [scaledImage unlockFocus];
     return scaledImage;
@@ -549,7 +549,7 @@ static NSDictionary *titleFontAttributes;
         [newImage lockFocus]; {
             [backgroundColor ? backgroundColor : [NSColor clearColor] set];
             NSRectFill(imageBounds);
-            [self drawInRect:imageBounds fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
+            [self drawInRect:imageBounds fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1.0f];
             bitmapImageRep = [[NSBitmapImageRep alloc] initWithFocusedViewRect:imageBounds];
         } [newImage unlockFocus];
     }
@@ -636,12 +636,12 @@ static NSDictionary *titleFontAttributes;
 {
     NSBitmapImageRep *bitmapImageRep = (id)[self imageRepOfClass:[NSBitmapImageRep class]];
     if (bitmapImageRep)
-        return [bitmapImageRep representationUsingType:NSPNGFileType properties:nil];
+        return [bitmapImageRep representationUsingType:NSBitmapImageFileTypePNG properties:nil];
     
     // This will log CG errors if there is just a "NSCGImageSnapshotRep", which is what you get if you've drawn into an image via -lockFocus.
 #if 0
     // Not sure what this does with there are multiples.  Does it write multi-resolution TIFF? What does it do for PNG?
-    NSData *result = [NSBitmapImageRep representationOfImageRepsInArray:[self representations] usingType:NSPNGFileType properties:nil];
+    NSData *result = [NSBitmapImageRep representationOfImageRepsInArray:[self representations] usingType:NSBitmapImageFileTypePNG properties:nil];
     if (result)
         return result;
 #endif
@@ -694,8 +694,8 @@ static NSDictionary *titleFontAttributes;
     [largeImage lockFocus];
     {
         [[contentImage imageRepOfSize:ICON_SIZE_LARGE] drawInRect:bounds];
-        [contentMask drawInRect:bounds fromRect:NSZeroRect operation:NSCompositeDestinationIn fraction:1.0f];
-        [templateImage drawInRect:bounds fromRect:NSZeroRect operation:NSCompositeDestinationAtop fraction:1.0f];
+        [contentMask drawInRect:bounds fromRect:NSZeroRect operation:NSCompositingOperationDestinationIn fraction:1.0f];
+        [templateImage drawInRect:bounds fromRect:NSZeroRect operation:NSCompositingOperationDestinationAtop fraction:1.0f];
     }
     [largeImage unlockFocus];
 
@@ -704,8 +704,8 @@ static NSDictionary *titleFontAttributes;
     [smallImage lockFocus];
     {
         [[contentImage imageRepOfSize:ICON_SIZE_SMALL] drawInRect:bounds];
-        [contentMask drawInRect:bounds fromRect:NSZeroRect operation:NSCompositeDestinationIn fraction:1.0f];
-        [templateImage drawInRect:bounds fromRect:NSZeroRect operation:NSCompositeDestinationAtop fraction:1.0f];
+        [contentMask drawInRect:bounds fromRect:NSZeroRect operation:NSCompositingOperationDestinationIn fraction:1.0f];
+        [templateImage drawInRect:bounds fromRect:NSZeroRect operation:NSCompositingOperationDestinationAtop fraction:1.0f];
     }
     [smallImage unlockFocus];
 
@@ -714,8 +714,8 @@ static NSDictionary *titleFontAttributes;
     [tinyImage lockFocus];
     {
         [[contentImage imageRepOfSize:ICON_SIZE_TINY] drawInRect:bounds];
-        [contentMask drawInRect:bounds fromRect:NSZeroRect operation:NSCompositeDestinationIn fraction:1.0f];
-        [templateImage drawInRect:bounds fromRect:NSZeroRect operation:NSCompositeDestinationAtop fraction:1.0f];
+        [contentMask drawInRect:bounds fromRect:NSZeroRect operation:NSCompositingOperationDestinationIn fraction:1.0f];
+        [templateImage drawInRect:bounds fromRect:NSZeroRect operation:NSCompositingOperationDestinationAtop fraction:1.0f];
     }
     [tinyImage unlockFocus];
 
@@ -831,10 +831,10 @@ static void setupTintTable(void)
     CGLayerRef imageLayer = [ctxt createCGLayerWithSize:(CGSize){mySize.width, mySize.height} info:NULL];
     CGContextRef layerContext = CGLayerGetContext(imageLayer);
     CGContextScaleCTM(layerContext, scale, scale);
-    [NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithGraphicsPort:layerContext flipped:NO]];
+    [NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithCGContext:layerContext flipped:NO]];
     [self drawAtPoint:(NSPoint){0, 0}
              fromRect:(NSRect){{0, 0}, [self size]}
-            operation:NSCompositeCopy
+            operation:NSCompositingOperationCopy
              fraction:1.0f];
     [NSGraphicsContext restoreGraphicsState];
     

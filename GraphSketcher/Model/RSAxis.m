@@ -1935,7 +1935,7 @@ RSScientificNotationSetting scientificNotationSettingFromName(NSString *name)
     //NSDate *maxDate = [NSDate dateWithTimeIntervalSinceReferenceDate:max];
     
     NSDateComponents *oneSpacingUnit = [[[NSDateComponents alloc] init] autorelease];
-    NSUInteger unitFlags = 0;// = NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSUInteger unitFlags = 0;// = NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
     
     if( range > 3*365.2422*24*60*60 ) {  // > 3 years
         data_p spacing = 365.2422*24*60*60;  // years

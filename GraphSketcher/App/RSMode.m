@@ -111,14 +111,14 @@ static NSUInteger modeFromChar(unichar theChar)
     _modifierFlags = [event modifierFlags];
 }
 
-//NSAlphaShiftKeyMask - Set if Caps Lock key is pressed.
+//NSEventModifierFlagCapsLock - Set if Caps Lock key is pressed.
 //NSEventModifierFlagShift - Set if Shift key is pressed.
 //NSEventModifierFlagControl - Set if Control key is pressed.
 //NSEventModifierFlagOption - Set if Option or Alternate key is pressed.
 //NSEventModifierFlagCommand - Set if Command key is pressed.
-//NSNumericPadKeyMask - Set if any key in the numeric keypad is pressed.
+//NSEventModifierFlagNumericPad - Set if any key in the numeric keypad is pressed.
 //NSHelpKeyMask - Set if the Help key is pressed.
-//NSFunctionKeyMask - Set if any function key is pressed.
+//NSEventModifierFlagFunction - Set if any function key is pressed.
 
 
 

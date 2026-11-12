@@ -256,7 +256,7 @@
 	t = NSMakePoint(p.x - b, p.y - b*d);
 	[P curveToPoint:NSMakePoint(p.x - b, p.y) controlPoint1:s controlPoint2:t];
 	//[P closePath];
-	[P setWindingRule:NSEvenOddWindingRule];
+	[P setWindingRule:NSWindingRuleEvenOdd];
     }
     else if ( shape == RS_TICKMARK ) {
 	b = 5*w/2; // the "big" dimension
@@ -452,8 +452,8 @@
 {
     //NSInteger styleIndex = [obj shape];
     if (![obj canHaveArrows]) {
-	[_leftArrowCheckBox setState:NSOffState];
-	[_rightArrowCheckBox setState:NSOffState];
+	[_leftArrowCheckBox setState:NSControlStateValueOff];
+	[_rightArrowCheckBox setState:NSControlStateValueOff];
 	[_arrowGraphic setImage:[NSImage imageNamed:@"arrowEndsDisabled"]];
 	return;
     }
@@ -462,8 +462,8 @@
     [_arrowGraphic setImage:[NSImage imageNamed:@"arrowEndsEnabled"]];
     
     RSGraphEditor *editor = self.editor;
-    [_leftArrowCheckBox setState:[editor hasMinArrow:obj] ? NSOnState : NSOffState];
-    [_rightArrowCheckBox setState:[editor hasMaxArrow:obj] ? NSOnState : NSOffState];
+    [_leftArrowCheckBox setState:[editor hasMinArrow:obj] ? NSControlStateValueOn : NSControlStateValueOff];
+    [_rightArrowCheckBox setState:[editor hasMaxArrow:obj] ? NSControlStateValueOn : NSControlStateValueOff];
 }
 
 
@@ -655,8 +655,8 @@
 	[_widthField setStringValue:@""];
 	[_labelField setStringValue:@""];
 	
-	[_leftArrowCheckBox setState:NSOffState];
-	[_rightArrowCheckBox setState:NSOffState];
+	[_leftArrowCheckBox setState:NSControlStateValueOff];
+	[_rightArrowCheckBox setState:NSControlStateValueOff];
 	
 	// The OAControlTextColorTransformer doesn't seem to be getting called by cocoa bindings when the selection is nil.
 	[_labelText setTextColor:[NSColor disabledControlTextColor]];
@@ -1153,14 +1153,14 @@
 
 - (NSInteger)_arrowShapeIndexFromControls;
 {
-    if( [_leftArrowCheckBox state] == NSOffState ) {
-	if( [_rightArrowCheckBox state] == NSOffState ) {
+    if( [_leftArrowCheckBox state] == NSControlStateValueOff ) {
+	if( [_rightArrowCheckBox state] == NSControlStateValueOff ) {
 	    return RS_NONE;
 	}
 	else  return RS_RIGHT_ARROW;
     }
     else {
-	if( [_rightArrowCheckBox state] == NSOffState ) {
+	if( [_rightArrowCheckBox state] == NSControlStateValueOff ) {
 	    return RS_LEFT_ARROW;
 	}
 	else  return RS_BOTH_ARROW;

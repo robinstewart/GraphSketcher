@@ -880,7 +880,7 @@ static NSString *OIWorkspaceOrderPboardType = @"OIWorkspaceOrder";
     [[_editWorkspaceTable window] endEditingFor:nil];
     
     NSAlert *deleteAlert = [[NSAlert alloc] init];
-    [deleteAlert setAlertStyle:NSWarningAlertStyle];
+    [deleteAlert setAlertStyle:NSAlertStyleWarning];
     [deleteAlert addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"OK", @"OmniInspector", [OIInspectorRegistry bundle], @"delete workspace OK")];
     [deleteAlert addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"Cancel", @"OmniInspector", [OIInspectorRegistry bundle], @"delete workspace Cancel")];
     

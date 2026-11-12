@@ -426,7 +426,7 @@ static NSString *windowFrameSaveName = @"Preferences";
 
 - (IBAction)restoreDefaults:(id)sender;
 {
-    if (([[NSApp currentEvent] modifierFlags] & NSAlternateKeyMask) && ([[NSApp currentEvent] modifierFlags] & NSShiftKeyMask)) {
+    if (([[NSApp currentEvent] modifierFlags] & NSEventModifierFlagOption) && ([[NSApp currentEvent] modifierFlags] & NSEventModifierFlagShift)) {
         // warn & wipe the entire defaults domain
         NSString *mainPrompt, *secondaryPrompt, *defaultButton, *otherButton;
         NSBundle *bundle;
@@ -437,7 +437,7 @@ static NSString *windowFrameSaveName = @"Preferences";
         defaultButton = NSLocalizedStringFromTableInBundle(@"Reset", @"OmniAppKit", bundle, "alert panel button");
         otherButton = NSLocalizedStringFromTableInBundle(@"Cancel", @"OmniAppKit", bundle, "alert panel button");
         NSBeginAlertSheet(mainPrompt, defaultButton, otherButton, nil, _window, self, NULL, @selector(_restoreDefaultsSheetDidEnd:returnCode:contextInfo:), @"RestoreEverything", @"%@", secondaryPrompt);
-    } else if ([[NSApp currentEvent] modifierFlags] & NSAlternateKeyMask) {
+    } else if ([[NSApp currentEvent] modifierFlags] & NSEventModifierFlagOption) {
         // warn & wipe all prefs shown in the panel
         NSString *mainPrompt, *secondaryPrompt, *defaultButton, *otherButton;
         NSBundle *bundle;
@@ -685,7 +685,7 @@ static NSString *windowFrameSaveName = @"Preferences";
         [categoryHeaderTextField setSelectable:NO];
         [categoryHeaderTextField setTextColor:[NSColor controlTextColor]];
         [categoryHeaderTextField setFont:[NSFont boldSystemFontOfSize:[NSFont systemFontSize]]];
-        [categoryHeaderTextField setAlignment:NSLeftTextAlignment];
+        [categoryHeaderTextField setAlignment:NSTextAlignmentLeft];
         [categoryHeaderTextField setStringValue:[[self class] _localizedCategoryNameForCategoryName:categoryName]];
         [categoryHeaderTextField sizeToFit];
         [showAllIconsView addSubview:categoryHeaderTextField];
@@ -821,7 +821,7 @@ static NSString *windowFrameSaveName = @"Preferences";
 
 - (void)_modifierFlagsChanged:(NSNotification *)note;
 {
-    BOOL optionDown = ([[note object] modifierFlags] & NSAlternateKeyMask) ? YES : NO;
+    BOOL optionDown = ([[note object] modifierFlags] & NSEventModifierFlagOption) ? YES : NO;
     NSButton *returnToOriginalValuesButton = self.returnToOriginalValuesButton;
 
     if (optionDown) {

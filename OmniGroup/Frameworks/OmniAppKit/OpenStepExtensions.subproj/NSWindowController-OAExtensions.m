@@ -73,12 +73,12 @@ static BOOL LongOperationIndicatorEnabledForWindow(NSWindow *window)
     if (!(self = [super initWithFrame:frame]))
         return nil;
 
-    if (progressStyle == NSProgressIndicatorBarStyle) {
+    if (progressStyle == NSProgressIndicatorStyleBar) {
         _progressIndicator = [[NSProgressIndicator alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, 200.0f, 16.0f)];
         [_progressIndicator setIndeterminate:NO];
         [_progressIndicator setControlSize:controlSize];
         [_progressIndicator setUsesThreadedAnimation:YES];
-        [_progressIndicator setStyle:NSProgressIndicatorBarStyle];
+        [_progressIndicator setStyle:NSProgressIndicatorStyleBar];
         [_progressIndicator sizeToFit];
         [_progressIndicator setControlTint:NSClearControlTint];
         [_progressIndicator setMinValue:0.0];
@@ -86,12 +86,12 @@ static BOOL LongOperationIndicatorEnabledForWindow(NSWindow *window)
         [_progressIndicator setFrameOrigin:(NSPoint){BORDER_WIDTH + BORDER_GAP, BORDER_WIDTH + BORDER_GAP}];
         [self addSubview:_progressIndicator];
     } else {
-        OBASSERT(progressStyle == NSProgressIndicatorSpinningStyle); // It's the only other style!
+        OBASSERT(progressStyle == NSProgressIndicatorStyleSpinning); // It's the only other style!
         _progressIndicator = [[NSProgressIndicator alloc] initWithFrame:NSMakeRect(0,0,10,10)];
         [_progressIndicator setIndeterminate:YES];
         [_progressIndicator setControlSize:controlSize];
         [_progressIndicator setUsesThreadedAnimation:YES];
-        [_progressIndicator setStyle:NSProgressIndicatorSpinningStyle];
+        [_progressIndicator setStyle:NSProgressIndicatorStyleSpinning];
         [_progressIndicator sizeToFit];
         [_progressIndicator setControlTint:NSClearControlTint];
         [_progressIndicator setFrameOrigin:(NSPoint){BORDER_WIDTH + BORDER_GAP, BORDER_WIDTH + BORDER_GAP}];
@@ -99,7 +99,7 @@ static BOOL LongOperationIndicatorEnabledForWindow(NSWindow *window)
     }
 
     CGFloat fontSize;
-    if (controlSize == NSSmallControlSize)
+    if (controlSize == NSControlSizeSmall)
         fontSize = [NSFont smallSystemFontSize];
     else
         fontSize = [NSFont systemFontSize];
@@ -154,7 +154,7 @@ static BOOL LongOperationIndicatorEnabledForWindow(NSWindow *window)
     NSRect progressIndicatorFrame = _progressIndicator ? [_progressIndicator frame] : NSZeroRect; // Make clang happy; we know it isn't nil.
     NSRect documentWindowRect = [documentWindow frame];
 
-    if ([_progressIndicator style] == NSProgressIndicatorBarStyle) {
+    if ([_progressIndicator style] == NSProgressIndicatorStyleBar) {
         indicatorRect.size.width  = BORDER_WIDTH + BORDER_GAP + MAX(progressIndicatorFrame.size.width, stringSize.width) + BORDER_GAP + 2*BORDER_GAP + BORDER_WIDTH;
         indicatorRect.size.height = BORDER_WIDTH + BORDER_GAP + progressIndicatorFrame.size.height + BORDER_GAP + stringSize.height + BORDER_GAP + BORDER_WIDTH;
         indicatorRect.origin.x = NSMinX(documentWindowRect) + (CGFloat)floor((NSWidth(documentWindowRect) - indicatorRect.size.width) / 2.0f);
@@ -191,13 +191,13 @@ static BOOL LongOperationIndicatorEnabledForWindow(NSWindow *window)
     NSRect bounds = [self bounds];
 
     [[NSColor clearColor] set];
-    NSRectFillUsingOperation(bounds, NSCompositeCopy);
+    NSRectFillUsingOperation(bounds, NSCompositingOperationCopy);
     
     {
         // We are going to stroke aw well as fill.  That means that the rect we are going to stroke needs to be on a pixel center.
         NSRect rect = NSInsetRect(bounds, 0.5f, 0.5f);
         
-        CGContextRef ctx = [[NSGraphicsContext currentContext] graphicsPort];
+        CGContextRef ctx = [[NSGraphicsContext currentContext] CGContext];
 
         // Append rounded rect
         float radius = 7.0f;
@@ -251,7 +251,7 @@ enum {
 - (void)drawRect:(NSRect)r;
 {
     [[NSColor clearColor] set];
-    NSRectFillUsingOperation(r, NSCompositeCopy);
+    NSRectFillUsingOperation(r, NSCompositingOperationCopy);
 }
 @end
 
@@ -285,7 +285,7 @@ static NSWindow *RootlessProgressWindow = nil;
 
     if (!operationWindow) {
         indicatorView = [[_OALongOperationIndicatorView alloc] initWithFrame:NSZeroRect controlSize:controlSize progressStyle:progressStyle];
-        operationWindow = [[NSPanel alloc] initWithContentRect:NSZeroRect styleMask:NSBorderlessWindowMask backing:[documentWindow backingType] defer:NO];
+        operationWindow = [[NSPanel alloc] initWithContentRect:NSZeroRect styleMask:NSWindowStyleMaskBorderless backing:[documentWindow backingType] defer:NO];
         [operationWindow setReleasedWhenClosed:NO]; // We'll manage this manually
 
         if ([operationWindow respondsToSelector:@selector(setCollectionBehavior:)])
@@ -334,7 +334,7 @@ static NSWindow *RootlessProgressWindow = nil;
     if (RootlessProgressWindow == nil) {
         // We don't know how long of a message the caller will want to put in our fake document window...
         NSRect contentRect = NSMakeRect(0, 0, 200, 100);
-        NSWindow *window = [[[NSPanel alloc] initWithContentRect:contentRect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO] autorelease];
+        NSWindow *window = [[[NSPanel alloc] initWithContentRect:contentRect styleMask:NSWindowStyleMaskBorderless backing:NSBackingStoreBuffered defer:NO] autorelease];
         [window setReleasedWhenClosed:NO]; // We'll manage this manually
         [window setLevel:NSFloatingWindowLevel]; // Float above normal windows. This also triggers NSWindowCollectionBehaviorTransient on 10.6.
         
@@ -362,12 +362,12 @@ static NSWindow *RootlessProgressWindow = nil;
 
 + (NSWindow *)startingLongOperation:(NSString *)operationDescription controlSize:(NSControlSize)controlSize;
 {
-    return [self startingLongOperation:operationDescription controlSize:controlSize progressStyle:NSProgressIndicatorSpinningStyle automaticallyEnds:YES];
+    return [self startingLongOperation:operationDescription controlSize:controlSize progressStyle:NSProgressIndicatorStyleSpinning automaticallyEnds:YES];
 }
 
 + (void)startingLongOperation:(NSString *)operationDescription controlSize:(NSControlSize)controlSize inWindow:(NSWindow *)documentWindow automaticallyEnds:(BOOL)shouldAutomaticallyEnd;
 {
-    [self startingLongOperation:operationDescription controlSize:controlSize progressStyle:NSProgressIndicatorSpinningStyle inWindow:documentWindow automaticallyEnds:shouldAutomaticallyEnd];
+    [self startingLongOperation:operationDescription controlSize:controlSize progressStyle:NSProgressIndicatorStyleSpinning inWindow:documentWindow automaticallyEnds:shouldAutomaticallyEnd];
 }
 
 + (void)continuingLongOperation:(NSString *)operationStatus;
@@ -455,7 +455,7 @@ static NSWindow *RootlessProgressWindow = nil;
     if (!LongOperationIndicatorEnabledForWindow(nil))
         return;
 
-    [[self class] startingLongOperation:operationDescription controlSize:NSSmallControlSize inWindow:[self window] automaticallyEnds:YES];
+    [[self class] startingLongOperation:operationDescription controlSize:NSControlSizeSmall inWindow:[self window] automaticallyEnds:YES];
 }
 
 @end

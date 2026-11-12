@@ -95,7 +95,7 @@ static void (*original_setFrameSize)(id self, SEL _cmd, NSSize newSize);
 
 + (void)drawRoundedRect:(NSRect)rect cornerRadius:(CGFloat)radius color:(NSColor *)color isFilled:(BOOL)isFilled;
 {
-    CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
+    CGContextRef context = [[NSGraphicsContext currentContext] CGContext];
     [color set];
 
     CGContextBeginPath(context);
@@ -491,12 +491,12 @@ static unsigned int scrollEntriesCount = 0;
     NSPoint eventLocation;
     NSRect slopRect;
 
-    OBPRECONDITION([event type] == NSLeftMouseDown);
+    OBPRECONDITION([event type] == NSEventTypeLeftMouseDown);
 
     currentEvent = [NSApp currentEvent];
     if (currentEvent != event) {
         // We've already processed this once, let's try to return the same answer as before.  (This lets you call this method more than once for the same event without it pausing to wait for a whole new set of drag / mouse up events.)
-        return [currentEvent type] == NSLeftMouseDragged;
+        return [currentEvent type] == NSEventTypeLeftMouseDragged;
     }
 
     eventLocation = [event locationInWindow];
@@ -505,12 +505,12 @@ static unsigned int scrollEntriesCount = 0;
     while (1) {
         NSEvent *nextEvent;
 
-        nextEvent = [NSApp nextEventMatchingMask:NSLeftMouseDraggedMask | NSLeftMouseUpMask untilDate:timeoutDate inMode:NSEventTrackingRunLoopMode dequeue:YES];
+        nextEvent = [NSApp nextEventMatchingMask:NSEventMaskLeftMouseDragged | NSEventMaskLeftMouseUp untilDate:timeoutDate inMode:NSEventTrackingRunLoopMode dequeue:YES];
         if (finalEventPointer != NULL)
             *finalEventPointer = nextEvent;
         if (nextEvent == nil) { // Timeout date reached
             return NO;
-        } else if ([nextEvent type] == NSLeftMouseUp) {
+        } else if ([nextEvent type] == NSEventTypeLeftMouseUp) {
             return NO;
         } else if (!NSMouseInRect([nextEvent locationInWindow], slopRect, NO)) {
             return YES;
@@ -725,7 +725,7 @@ unsigned int NSViewMaxDebugDepth = 10;
 }
 
 // [TAB] I believe this is a false positive?
-#pragma clang diagnostic push ignored 
+#pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
 - (NSString *)description;
 {

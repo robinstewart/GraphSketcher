@@ -258,12 +258,12 @@ static NSArray *flagsChangedRunLoopModes;
 
     NS_DURING {
         switch ([event type]) {
-            case NSSystemDefined:
+            case NSEventTypeSystemDefined:
                 if ([event subtype] == OASystemDefinedEvent_MouseButtonsChangedSubType)
                     [self processMouseButtonsChangedEvent:event];
                 [super sendEvent:event];
                 break;
-            case NSFlagsChanged:
+            case NSEventTypeFlagsChanged:
                 [super sendEvent:event];
                 [[NSNotificationCenter defaultCenter] postNotificationName:OAFlagsChangedNotification object:event];
                 if (!flagsChangedRunLoopModes)
@@ -276,10 +276,10 @@ static NSArray *flagsChangedRunLoopModes;
                                                            coalesceMask:NSNotificationCoalescingOnName
                                                                forModes:flagsChangedRunLoopModes];
                 break;
-            case NSLeftMouseDown:
+            case NSEventTypeLeftMouseDown:
             {
                 NSUInteger modifierFlags = [event modifierFlags];
-                BOOL justControlDown = (modifierFlags & NSControlKeyMask) && !(modifierFlags & NSShiftKeyMask) && !(modifierFlags & NSCommandKeyMask) && !(modifierFlags & NSAlternateKeyMask);
+                BOOL justControlDown = (modifierFlags & NSEventModifierFlagControl) && !(modifierFlags & NSEventModifierFlagShift) && !(modifierFlags & NSEventModifierFlagCommand) && !(modifierFlags & NSEventModifierFlagOption);
                 
                 if (justControlDown) {
                     NSView *contentView = [[event window] contentView];
@@ -295,10 +295,10 @@ static NSArray *flagsChangedRunLoopModes;
                 break;
             }
 #ifdef OMNI_ASSERTIONS_ON
-            case NSKeyDown:
+            case NSEventTypeKeyDown:
                 if ([[event charactersIgnoringModifiers] isEqualToString:@"\033"] && [OAViewPicker cancelActivePicker]) {
                     break;
-                } else if ([[event charactersIgnoringModifiers] isEqualToString:@"V"] && [event checkForAllModifierFlags:NSControlKeyMask|NSCommandKeyMask|NSAlternateKeyMask|NSShiftKeyMask without:0]) {
+                } else if ([[event charactersIgnoringModifiers] isEqualToString:@"V"] && [event checkForAllModifierFlags:NSEventModifierFlagControl|NSEventModifierFlagCommand|NSEventModifierFlagOption|NSEventModifierFlagShift without:0]) {
                     NSUInteger windowNumberUnderMouse = [NSWindow windowNumberAtPoint:[NSEvent mouseLocation] belowWindowWithWindowNumber:0];
                     if (windowNumberUnderMouse) {
                         NSWindow *window = [self windowWithWindowNumber:windowNumberUnderMouse];

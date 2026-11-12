@@ -67,8 +67,8 @@ NSString *TabTitleDidChangeNotification = @"TabTitleDidChange";
 - (void)setIsPinned:(BOOL)newValue;
 {
     // If we get pinned, make sure we are turned on
-    if (newValue && ([self state] != NSOnState)) {
-        [self setState:NSOnState];
+    if (newValue && ([self state] != NSControlStateValueOn)) {
+        [self setState:NSControlStateValueOn];
     }
     
     isPinned = newValue;    // Set our state to On before turning on pinning, so that we're always in a consistent state (can't be pinned and not on)
@@ -133,10 +133,10 @@ NSString *TabTitleDidChangeNotification = @"TabTitleDidChange";
     [dimmedImage lockFocus];
     NSRect fooRect = NSMakeRect(0,0,[dimmedImage size].width, [dimmedImage size].height);
     NSRectFillUsingOperation(fooRect, NSCompositeClear);
-    [[self image] drawFlippedInRect:fooRect operation:NSCompositeSourceOver];
+    [[self image] drawFlippedInRect:fooRect operation:NSCompositingOperationSourceOver];
     [[NSColor colorWithCalibratedWhite:0.1 alpha:0.5] set];
-    NSRectFillUsingOperation(fooRect, NSCompositeSourceOver);
-    [[self image] drawFlippedInRect:fooRect operation:NSCompositeDestinationIn];
+    NSRectFillUsingOperation(fooRect, NSCompositingOperationSourceOver);
+    [[self image] drawFlippedInRect:fooRect operation:NSCompositingOperationDestinationIn];
     [dimmedImage unlockFocus];
 #else /* USE_CORE_IMAGE */
     [self _deriveImages];
@@ -166,7 +166,7 @@ NSString *TabTitleDidChangeNotification = @"TabTitleDidChange";
         NSImage *image = [NSImage imageNamed:@"OITabLock.pdf" inBundle:OMNI_BUNDLE];
         NSSize imageSize = image.size;
         NSPoint point = NSMakePoint(NSMaxX(cellFrame) - imageSize.width - 3.0f, NSMaxY(cellFrame) - imageSize.height - 2.0f);
-        [image drawFlippedInRect:(NSRect){point, imageSize} operation:NSCompositeSourceOver];
+        [image drawFlippedInRect:(NSRect){point, imageSize} operation:NSCompositingOperationSourceOver];
     }
     
     return;
@@ -254,7 +254,7 @@ NSString *TabTitleDidChangeNotification = @"TabTitleDidChange";
     }
     [_imageCell setEnabled:!dimmed];
     [_imageCell setImage:image];
-    [_imageCell setBackgroundStyle:(drawHighlighted ? NSBackgroundStyleLight : NSBackgroundStyleRaised)]; // Kind of interested in using NSBackgroundStyleLowered instead of NSBackgroundStyleLight when highlighted, but drawing after first click is delayed due to OITabMatrix looking for a second click, and the delay in the redraw was much more obvious (and flashy on single clicks) when the highlighted effect was so much more dramatic. Strangely, the very first click, if on the first tab and it's already selected (or some similar context), doesn't have this delay, but I didn't research that.
+    [_imageCell setBackgroundStyle:(drawHighlighted ? NSBackgroundStyleNormal : NSBackgroundStyleRaised)]; // Kind of interested in using NSBackgroundStyleLowered instead of NSBackgroundStyleNormal when highlighted, but drawing after first click is delayed due to OITabMatrix looking for a second click, and the delay in the redraw was much more obvious (and flashy on single clicks) when the highlighted effect was so much more dramatic. Strangely, the very first click, if on the first tab and it's already selected (or some similar context), doesn't have this delay, but I didn't research that.
     [_imageCell drawInteriorWithFrame:cellFrame inView:controlView];
 }
 

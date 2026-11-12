@@ -107,7 +107,7 @@ static BOOL _zipError(id self, const char *func, int err, NSError **outError)
     if (date == nil)
         date = [NSDate date];
 
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:date];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:date];
     
     zip_fileinfo info;
     memset(&info, 0, sizeof(info));

@@ -41,7 +41,7 @@ extern NSString * const OAInfoTemplateImageName;
 
 + (NSImage *)draggingIconWithTitle:(NSString *)title andImage:(NSImage *)image;
 
-/** Returns an image tinted with the passed in color, using NSCompositeSourceIn (R = S*Da), where S is the tintColor and Da is the alpha values in the image represented by self. This allows the tintColor to have an alpha value that survives into the result.
+/** Returns an image tinted with the passed in color, using NSCompositingOperationSourceIn (R = S*Da), where S is the tintColor and Da is the alpha values in the image represented by self. This allows the tintColor to have an alpha value that survives into the result.
  */
 - (NSImage *)imageByTintingWithColor:(NSColor *)tintColor;
 

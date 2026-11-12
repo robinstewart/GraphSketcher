@@ -541,11 +541,11 @@ RCS_ID("$Id$")
     BOOL isVisible = [_weak_inspectorController isExpanded] && [_weak_inspectorController isVisible];
     
     if  (!isVisible) {
-        [item setState:NSOffState];
+        [item setState:NSControlStateValueOff];
     } else if ([item action] == @selector(switchToInspector:)) {
 	// one of our tabs
 	OIInspectorTabController *tab = [item representedObject];
-	[item setState:[tab isVisible] ? NSOnState : NSOffState];
+	[item setState:[tab isVisible] ? NSControlStateValueOn : NSControlStateValueOff];
     }
     return YES;
 }

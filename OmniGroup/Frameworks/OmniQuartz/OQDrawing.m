@@ -23,7 +23,7 @@ void OQSetPatternColorReferencePoint(CGPoint point, NSView *view)
 {
     CGPoint refPoint = [view convertPoint:point toView:nil];
     CGSize phase = (CGSize){refPoint.x, refPoint.y};
-    CGContextSetPatternPhase([[NSGraphicsContext currentContext] graphicsPort], phase);
+    CGContextSetPatternPhase([[NSGraphicsContext currentContext] CGContext], phase);
 }
 #endif
 

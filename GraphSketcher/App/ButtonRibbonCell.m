@@ -105,7 +105,7 @@ static CGShadingRef CreateShadingWithGrays(float lightGray, float darkGray)
     
     // Turn on a shadow
     NSRect result;
-    CGContextRef ctx = [[NSGraphicsContext currentContext] graphicsPort];
+    CGContextRef ctx = [[NSGraphicsContext currentContext] CGContext];
     CGContextSaveGState(ctx); {
         [WhiteShadow set];
         result = [super drawTitle:title withFrame:frame inView:controlView];
@@ -149,10 +149,10 @@ static void _appendPath(CGContextRef ctx, NSRect frame, ButtonRibbonCellPosition
         drawPressed = [self isHighlighted];
     } else {
         // We are in the radio matrix
-        drawPressed = ([self state] == NSOnState) || [self isHighlighted];
+        drawPressed = ([self state] == NSControlStateValueOn) || [self isHighlighted];
     }
     
-    CGContextRef ctx = [[NSGraphicsContext currentContext] graphicsPort];
+    CGContextRef ctx = [[NSGraphicsContext currentContext] CGContext];
 
     // Draw the right shading
     CGShadingRef shading;

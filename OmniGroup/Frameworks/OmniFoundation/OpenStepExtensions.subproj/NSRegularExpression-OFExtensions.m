@@ -38,12 +38,12 @@ RCS_ID("$Id$")
 - (NSTextCheckingResult *)exactMatchInString:(NSString *)string;
 {
     if (!string)
-        return NO;
+        return nil;
     
     NSRange fullRange = NSMakeRange(0, [string length]);
     NSTextCheckingResult *result = [self firstMatchInString:string options:0 range:fullRange];
     if (!result)
-        return NO;
+        return nil;
     
     if (!NSEqualRanges(result.range, fullRange))
         return nil;

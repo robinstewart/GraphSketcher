@@ -27,7 +27,7 @@
 
     // AppKit has no typedef for the enum
     #define OAUnderlineStyle NSUInteger
-    #define OAUnderlineByWordMask NSUnderlineByWordMask
+    #define OAUnderlineByWordMask NSUnderlineStyleByWord
 
     #define OASuperscriptAttributeName NSSuperscriptAttributeName
 

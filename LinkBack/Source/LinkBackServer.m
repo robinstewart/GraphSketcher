@@ -212,8 +212,8 @@ static void LinkBackRunAppNotFoundPanel(NSString* appName, NSURL* url)
     if (ret != nil)
         return ret;
 
-	// Try to connect
-	ret = [NSConnection rootProxyForConnectionWithRegisteredName: serverName host: nil] ;
+    // Try to connect
+    ret = [NSConnection rootProxyForConnectionWithRegisteredName: serverName host: nil] ;
 	BOOL connect = YES ;
 
     // if launchIfNeeded, and the connection was not available, try to launch.

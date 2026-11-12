@@ -551,13 +551,13 @@ NSString *attributeTagString(NSDictionary *effectiveAttributes)
         drawPoint.y = NSMinY(rectangle);
         switch (alignment) {
             default:
-            case NSLeftTextAlignment:
+            case NSTextAlignmentLeft:
                 drawPoint.x = NSMinX(rectangle);
                 break;
-            case NSCenterTextAlignment:
+            case NSTextAlignmentCenter:
                 drawPoint.x = NSMidX(rectangle) - lineSize.width / 2.0f;
                 break;
-            case NSRightTextAlignment:
+            case NSTextAlignmentRight:
                 drawPoint.x = NSMaxX(rectangle) - lineSize.width;
                 break;
         }

@@ -103,9 +103,9 @@ static void checkDeprecatedSelector(Class documentSubclass, Class documentClass,
 {
     NSWindowController *windowController = [self frontWindowController];
     if (windowController)
-        [NSWindowController startingLongOperation:operationName controlSize:NSSmallControlSize inWindow:[windowController window] automaticallyEnds:shouldAutomaticallyEnd];
+        [NSWindowController startingLongOperation:operationName controlSize:NSControlSizeSmall inWindow:[windowController window] automaticallyEnds:shouldAutomaticallyEnd];
     else
-        [NSWindowController startingLongOperation:operationName controlSize:NSSmallControlSize];
+        [NSWindowController startingLongOperation:operationName controlSize:NSControlSizeSmall];
 }
 
 - (void)continuingLongOperation:(NSString *)operationStatus;

@@ -561,9 +561,9 @@ static id _replacement_keyBindingState(id self, SEL _cmd)
     }
     else if (action == @selector(demoPenMode:)) {
 	if ( [[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"DrawCurvedLines"] ) {
-	    [menuItem setState:NSOnState];
+	    [menuItem setState:NSControlStateValueOn];
 	} else {
-	    [menuItem setState:NSOffState];
+	    [menuItem setState:NSControlStateValueOff];
 	}
 	
 	return YES;

@@ -459,7 +459,7 @@ static BOOL ofGet4CCFromNSData(NSData *d, uint32_t *v)
     } buf;
     
     if ([d length] == 4) {
-        [d getBytes:buf.c];
+        [d getBytes:buf.c length:4];
         *v = CFSwapInt32BigToHost(buf.i);
         return YES;
     } else {

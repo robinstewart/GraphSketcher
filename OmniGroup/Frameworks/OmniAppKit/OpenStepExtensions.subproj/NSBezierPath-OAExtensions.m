@@ -156,7 +156,7 @@ static struct pointInfo getLinePoint(const NSPoint *a, CGFloat position) {
     
     if (i == 0) {
         element = [self elementAtIndex:i associatedPoints:points];
-        if (element == NSMoveToBezierPathElement)
+        if (element == NSBezierPathElementMoveTo)
             return points[0];
         else
             [NSException raise:NSInternalInconsistencyException format:@"Segment %ld has no currentpoint", i];
@@ -164,11 +164,11 @@ static struct pointInfo getLinePoint(const NSPoint *a, CGFloat position) {
     
     element = [self elementAtIndex:i-1 associatedPoints:points];
     switch(element) {
-        case NSCurveToBezierPathElement:
+        case NSBezierPathElementCurveTo:
             return points[2];
-        case NSMoveToBezierPathElement:
+        case NSBezierPathElementMoveTo:
             return points[0];
-        case NSLineToBezierPathElement:
+        case NSBezierPathElementLineTo:
             return points[0];
         default:
             [NSException raise:NSInternalInconsistencyException format:@"Segment %ld has no currentpoint", i];
@@ -196,17 +196,17 @@ static struct pointInfo getLinePoint(const NSPoint *a, CGFloat position) {
         NSString *currentSegmentString = nil;
 
         switch(element) {
-            case NSMoveToBezierPathElement:
+            case NSBezierPathElementMoveTo:
                 currentPoint = points[0];
                 if (NSEqualPoints(firstPoint, unlikelyPoint))
                     firstPoint = currentPoint;
                 break;
-            case NSClosePathBezierPathElement:
-            case NSLineToBezierPathElement: {
+            case NSBezierPathElementClosePath:
+            case NSBezierPathElementLineTo: {
                 NSString *firstPointString, *lastPointString;
 
                 NSPoint lineToPoint;
-                if (element == NSClosePathBezierPathElement)
+                if (element == NSBezierPathElementClosePath)
                     lineToPoint = firstPoint;
                 else
                     lineToPoint = points[0];
@@ -221,7 +221,7 @@ static struct pointInfo getLinePoint(const NSPoint *a, CGFloat position) {
                 currentPoint = lineToPoint;
                 break;
             }
-            case NSCurveToBezierPathElement: {
+            case NSBezierPathElementCurveTo: {
                 NSString *firstPointString, *lastPointString;
                 NSString *controlPoint1String, *controlPoint2String;
                 NSComparisonResult comparisonResult;
@@ -265,7 +265,7 @@ static struct pointInfo getLinePoint(const NSPoint *a, CGFloat position) {
         return NO;
 
     NSBezierPathElement element = [self elementAtIndex:0 associatedPoints:points];
-    if (element != NSMoveToBezierPathElement) {
+    if (element != NSBezierPathElementMoveTo) {
         return NO;  // must start with a moveTo
     }
 
@@ -275,14 +275,14 @@ static struct pointInfo getLinePoint(const NSPoint *a, CGFloat position) {
     for(i=1;i<count;i++) {
         NSBezierPathElement element = [self elementAtIndex:i associatedPoints:points];
         switch(element) {
-            case NSMoveToBezierPathElement:
+            case NSBezierPathElementMoveTo:
                 currentPoint = points[0];
                 if (needANewStartPoint) {
                     startPoint = currentPoint;
                     needANewStartPoint = NO;
                 }
                 break;
-            case NSClosePathBezierPathElement:
+            case NSBezierPathElementClosePath:
                 _parameterizeLine(line, currentPoint,startPoint);
                 if (_straightLineIntersectsRect(line, rect)) {
                     return YES;
@@ -290,14 +290,14 @@ static struct pointInfo getLinePoint(const NSPoint *a, CGFloat position) {
                 currentPoint = startPoint;
                 needANewStartPoint = YES;
                 break;
-            case NSLineToBezierPathElement:
+            case NSBezierPathElementLineTo:
                 _parameterizeLine(line, currentPoint,points[0]);
                 if (_straightLineIntersectsRect(line, rect)){
                     return YES;
                 }
                 currentPoint = points[0];
                 break;
-            case NSCurveToBezierPathElement: {
+            case NSBezierPathElementCurveTo: {
                 _parameterizeCurve(curve, currentPoint, points[2], points[0], points[1]);
                 if (_curvedLineIntersectsRect(curve, rect, [self lineWidth]+1)) {
                     return YES;
@@ -362,12 +362,12 @@ static void copyIntersection(OABezierPathIntersection *buf, const struct interse
         unsigned intersectionsFound, intersectionIndex;
         
         switch(iter.what) {
-            case NSClosePathBezierPathElement:
-            case NSLineToBezierPathElement:
+            case NSBezierPathElementClosePath:
+            case NSBezierPathElementLineTo:
                 _parameterizeLine(elementCoefficients, iter.points[0], iter.points[1]);
                 intersectionsFound = intersectionsBetweenLineAndLine(elementCoefficients, lineCoefficients, intersections);
                 break;
-            case NSCurveToBezierPathElement:
+            case NSBezierPathElementCurveTo:
                 _parameterizeCurve(elementCoefficients, iter.points[0], iter.points[3], iter.points[1], iter.points[2]);
                 intersectionsFound = intersectionsBetweenCurveAndLine(elementCoefficients, lineCoefficients, intersections);
                 break;
@@ -408,15 +408,15 @@ static void copyIntersection(OABezierPathIntersection *buf, const struct interse
 static void parameterizeSubpathElement(struct subpathWalkingState *st, NSPoint elementCoefficients[4])
 {
     switch(st->what) {
-        case NSClosePathBezierPathElement:
-        case NSLineToBezierPathElement:
+        case NSBezierPathElementClosePath:
+        case NSBezierPathElementLineTo:
             _parameterizeLine(elementCoefficients, st->points[0], st->points[1]);
             elementCoefficients[2].x = 0;
             elementCoefficients[2].y = 0;
             elementCoefficients[3].x = 0;
             elementCoefficients[3].y = 0;
             break;
-        case NSCurveToBezierPathElement:
+        case NSBezierPathElementCurveTo:
             _parameterizeCurve(elementCoefficients, st->points[0], st->points[3], st->points[1], st->points[2]);
             break;
         default:
@@ -483,21 +483,21 @@ static BOOL subsequent(struct OABezierPathIntersectionHalf *one, struct OABezier
                 continue;
             } else if (self == other && selfIter.currentElt == otherIter.currentElt) {
                 // Only curvetos can self-intersect
-                if (selfIter.what == NSCurveToBezierPathElement) {
+                if (selfIter.what == NSBezierPathElementCurveTo) {
                     intersectionsFound = intersectionsBetweenCurveAndSelf(elementCoefficients, segmentIntersections);
                 } else {
                     intersectionsFound = 0;
                 }
             } else switch(selfIter.what) {  // This is the usual case
-                case NSClosePathBezierPathElement:
-                case NSLineToBezierPathElement:
+                case NSBezierPathElementClosePath:
+                case NSBezierPathElementLineTo:
                     switch(otherIter.what) {
-                        case NSClosePathBezierPathElement:
-                        case NSLineToBezierPathElement:
+                        case NSBezierPathElementClosePath:
+                        case NSBezierPathElementLineTo:
                             _parameterizeLine(otherElementCoefficients, otherIter.points[0], otherIter.points[1]);
                             intersectionsFound = intersectionsBetweenLineAndLine(elementCoefficients, otherElementCoefficients, segmentIntersections);
                             break;
-                        case NSCurveToBezierPathElement:
+                        case NSBezierPathElementCurveTo:
                             _parameterizeCurve(otherElementCoefficients, otherIter.points[0], otherIter.points[3], otherIter.points[1], otherIter.points[2]);
                             intersectionsFound = intersectionsBetweenCurveAndLine(otherElementCoefficients, elementCoefficients, segmentIntersections);
                             for(intersectionIndex = 0; intersectionIndex < intersectionsFound; intersectionIndex++)
@@ -509,14 +509,14 @@ static BOOL subsequent(struct OABezierPathIntersectionHalf *one, struct OABezier
                             break;
                     }
                     break;
-                case NSCurveToBezierPathElement:
+                case NSBezierPathElementCurveTo:
                     switch(otherIter.what) {
-                        case NSClosePathBezierPathElement:
-                        case NSLineToBezierPathElement:
+                        case NSBezierPathElementClosePath:
+                        case NSBezierPathElementLineTo:
                             _parameterizeLine(otherElementCoefficients, otherIter.points[0], otherIter.points[1]);
                             intersectionsFound = intersectionsBetweenCurveAndLine(elementCoefficients, otherElementCoefficients, segmentIntersections);
                             break;
-                        case NSCurveToBezierPathElement:
+                        case NSBezierPathElementCurveTo:
                             _parameterizeCurve(otherElementCoefficients, otherIter.points[0], otherIter.points[3], otherIter.points[1], otherIter.points[2]);
                             intersectionsFound = intersectionsBetweenCurveAndCurve(elementCoefficients, otherElementCoefficients, segmentIntersections);
                             break;
@@ -606,8 +606,8 @@ static BOOL subsequent(struct OABezierPathIntersectionHalf *one, struct OABezier
     if (initializeSubpathWalkingState(&cursor, self, 0, YES)) {
         while(nextSubpathElement(&cursor)) {
             switch(cursor.what) {
-                case NSClosePathBezierPathElement:
-                case NSLineToBezierPathElement:
+                case NSBezierPathElementClosePath:
+                case NSBezierPathElementLineTo:
                     if ((cursor.points[0].y <= point.y || cursor.points[1].y <= point.y) &&
                         (cursor.points[0].y > point.y || cursor.points[1].y > point.y) &&
                         (cursor.points[0].x <= point.x || cursor.points[1].x <= point.x)) {
@@ -624,7 +624,7 @@ static BOOL subsequent(struct OABezierPathIntersectionHalf *one, struct OABezier
                         hitCount ++;
                     }
                     break;
-                case NSCurveToBezierPathElement:
+                case NSBezierPathElementCurveTo:
                 {
                     BOOL above=NO, below=NO;
                     CGFloat leastX, greatestX;
@@ -709,7 +709,7 @@ static BOOL subsequent(struct OABezierPathIntersectionHalf *one, struct OABezier
         
     NSBezierPathElement element = [self elementAtIndex:0 associatedPoints:points];
 
-    if (element != NSMoveToBezierPathElement) 
+    if (element != NSBezierPathElementMoveTo) 
         return NO;  // must start with a moveTo
 
     _parameterizeLine(lineCoefficients,lineStart,lineEnd);
@@ -722,14 +722,14 @@ static BOOL subsequent(struct OABezierPathIntersectionHalf *one, struct OABezier
 
         element = [self elementAtIndex:i associatedPoints:points];
         switch(element) {
-            case NSMoveToBezierPathElement:
+            case NSBezierPathElementMoveTo:
                 currentPoint = points[0];
                 if (needANewStartPoint) {
                     startPoint = currentPoint;
                     needANewStartPoint = NO;
                 }
                 break;
-            case NSClosePathBezierPathElement:
+            case NSBezierPathElementClosePath:
                 _parameterizeLine(segmentCoefficients,currentPoint,startPoint);
                 if ([self _straightLineIntersection:&currentLength time:&ignored segment:segmentCoefficients line:lineCoefficients]) {
                     if (currentLength < minimumLength) {
@@ -739,7 +739,7 @@ static BOOL subsequent(struct OABezierPathIntersectionHalf *one, struct OABezier
                 currentPoint = startPoint;
                 needANewStartPoint = YES;
                 break;
-            case NSLineToBezierPathElement:
+            case NSBezierPathElementLineTo:
                 _parameterizeLine(segmentCoefficients, currentPoint, points[0]);
                 if ([self _straightLineIntersection:&currentLength time:&ignored segment:segmentCoefficients line:lineCoefficients]) {
                     if (currentLength < minimumLength) {
@@ -748,7 +748,7 @@ static BOOL subsequent(struct OABezierPathIntersectionHalf *one, struct OABezier
                 }
                 currentPoint = points[0];
                 break;
-            case NSCurveToBezierPathElement:
+            case NSBezierPathElementCurveTo:
                 _parameterizeCurve(curveCoefficients, currentPoint, points[2], points[0], points[1]);
                 if ([self _curvedIntersection:&currentLength time:&ignored curve:curveCoefficients line:lineCoefficients]) {
                     if (currentLength < minimumLength) {
@@ -814,7 +814,7 @@ void splitBezierCurveTo(const NSPoint *c, CGFloat t, NSPoint *l, NSPoint *r)
         return 0;
     
     NSBezierPathElement element = [self elementAtIndex:0 associatedPoints:points];
-    if (element != NSMoveToBezierPathElement) {
+    if (element != NSBezierPathElementMoveTo) {
         return 0;  // must start with a moveTo
     }
     
@@ -830,27 +830,27 @@ void splitBezierCurveTo(const NSPoint *c, CGFloat t, NSPoint *l, NSPoint *r)
             return i;
         }
         switch(element) {
-            case NSMoveToBezierPathElement:
+            case NSBezierPathElementMoveTo:
                 currentPoint = points[0];
                 if (needANewStartPoint) {
                     startPoint = currentPoint;
                     needANewStartPoint = NO;
                 }
                 break;
-            case NSClosePathBezierPathElement:
+            case NSBezierPathElementClosePath:
                 if ([self _straightLineHit:currentPoint :startPoint :point :position padding:padding]){
                     return i;
                 }
                 currentPoint = startPoint;
                 needANewStartPoint = YES;
                 break;
-            case NSLineToBezierPathElement:
+            case NSBezierPathElementLineTo:
                 if ([self _straightLineHit:currentPoint :points[0] :point :position padding:padding]){
                     return i;
                 }
                 currentPoint = points[0];
                 break;
-            case NSCurveToBezierPathElement:
+            case NSBezierPathElementCurveTo:
                 if ([self _curvedLineHit:point startPoint:currentPoint endPoint:points[2] controlPoint1:points[0] controlPoint2:points[1] position:position padding:padding]) {
                     return i;
                 }
@@ -1012,7 +1012,7 @@ void splitBezierCurveTo(const NSPoint *c, CGFloat t, NSPoint *l, NSPoint *r)
     startPoint = [self _endPointForSegment:segment];
     element = [self elementAtIndex:segment+1 associatedPoints:points];
     switch(element) {
-        case NSClosePathBezierPathElement:
+        case NSBezierPathElementClosePath:
         {
             NSInteger past = segment;
             [self elementAtIndex:0 associatedPoints:points];
@@ -1021,9 +1021,9 @@ void splitBezierCurveTo(const NSPoint *c, CGFloat t, NSPoint *l, NSPoint *r)
                 // Back up until we find the last closepath
                 // then step forward to hopefully find a moveto
                 element = [self elementAtIndex:past associatedPoints:points];
-                if (element == NSClosePathBezierPathElement) {
+                if (element == NSBezierPathElementClosePath) {
                     element = [self elementAtIndex:past+1 associatedPoints:points];
-                    if (element == NSMoveToBezierPathElement)
+                    if (element == NSBezierPathElementMoveTo)
                         bezierEndPoint = points[0];
                     break;
                 }
@@ -1031,12 +1031,12 @@ void splitBezierCurveTo(const NSPoint *c, CGFloat t, NSPoint *l, NSPoint *r)
             _parameterizeLine(coefficients,startPoint,bezierEndPoint);
             return getLinePoint(coefficients, segmentPosition);
         }
-        case NSMoveToBezierPathElement:// PENDING: should probably skip this one
-        case NSLineToBezierPathElement: {
+        case NSBezierPathElementMoveTo:// PENDING: should probably skip this one
+        case NSBezierPathElementLineTo: {
             _parameterizeLine(coefficients,startPoint,points[0]);
             return getLinePoint(coefficients, segmentPosition);
         }
-        case NSCurveToBezierPathElement: {
+        case NSBezierPathElementCurveTo: {
             _parameterizeCurve(coefficients, startPoint, points[2], points[0], points[1]);
             return getCurvePoint(coefficients, segmentPosition);
         }
@@ -1059,9 +1059,9 @@ void splitBezierCurveTo(const NSPoint *c, CGFloat t, NSPoint *l, NSPoint *r)
     element = [self elementAtIndex:pos.segment associatedPoints:points];
     if (pos.parameter > (1-EPSILON)) {
         switch(element) {
-            case NSCurveToBezierPathElement: return points[2];
-            case NSLineToBezierPathElement: return points[0];
-            case NSMoveToBezierPathElement: return points[0];
+            case NSBezierPathElementCurveTo: return points[2];
+            case NSBezierPathElementLineTo: return points[0];
+            case NSBezierPathElementMoveTo: return points[0];
             default: /* Else, fall through */ ;
         }
     }
@@ -1070,24 +1070,24 @@ void splitBezierCurveTo(const NSPoint *c, CGFloat t, NSPoint *l, NSPoint *r)
     NSPoint coefficients[4];
 
     switch(element) {
-        case NSClosePathBezierPathElement:
+        case NSBezierPathElementClosePath:
         {
             NSInteger past = pos.segment;
             while(past--) {
                 element = [self elementAtIndex:past associatedPoints:points];
-                if (element == NSMoveToBezierPathElement)
+                if (element == NSBezierPathElementMoveTo)
                     break;
             }
-            if (element != NSMoveToBezierPathElement)
+            if (element != NSBezierPathElementMoveTo)
                 [NSException raise:NSInternalInconsistencyException format:@"Segment %ld has no preceding moveto", pos.segment];
             /* FALL THROUGH to lineto cxase */
         }
-        case NSMoveToBezierPathElement:// PENDING: should probably skip this one
-        case NSLineToBezierPathElement: {
+        case NSBezierPathElementMoveTo:// PENDING: should probably skip this one
+        case NSBezierPathElementLineTo: {
             _parameterizeLine(coefficients,startPoint,points[0]);
             return getLinePoint(coefficients, (CGFloat)pos.parameter).pt;
         }
-        case NSCurveToBezierPathElement: {
+        case NSBezierPathElementCurveTo: {
             _parameterizeCurve(coefficients, startPoint, points[2], points[0], points[1]);
             return getCurvePoint(coefficients, (CGFloat)pos.parameter).pt;
         }
@@ -1201,10 +1201,10 @@ static struct lengthAndParameter arcLength_l(const NSPoint *V, double maxLength,
 static double subpathElementLength(struct subpathWalkingState *iter, double errorBudget)
 {
     switch(iter->what) {
-        case NSClosePathBezierPathElement:
-        case NSLineToBezierPathElement:
+        case NSBezierPathElementClosePath:
+        case NSBezierPathElementLineTo:
             return linelength(iter->points[0], iter->points[1]);
-        case NSCurveToBezierPathElement:
+        case NSBezierPathElementCurveTo:
             return arclength(iter->points, errorBudget);
         default:
             OBASSERT_NOT_REACHED("Unexpected Bezier path element");
@@ -1243,11 +1243,11 @@ static double subpathElementLength(struct subpathWalkingState *iter, double erro
         if (cursor.currentElt == seg) {
             if (parameter > 0) {
                 switch(cursor.what) {
-                    case NSClosePathBezierPathElement:
-                    case NSLineToBezierPathElement:
+                    case NSBezierPathElementClosePath:
+                    case NSBezierPathElementLineTo:
                         partialLength += parameter * linelength(cursor.points[0], cursor.points[1]);
                         break;
-                    case NSCurveToBezierPathElement: {
+                    case NSBezierPathElementCurveTo: {
                         NSPoint before[4], after[4];
                         splitBezierCurveTo(cursor.points, (CGFloat)parameter, before, after);
                         partialLength += arclength(before, totalErrorBudget / cursor.elementCount);
@@ -1339,11 +1339,11 @@ static double subpathElementLength(struct subpathWalkingState *iter, double erro
     
     double foundParameter;
     switch(cursor.what) {
-        case NSClosePathBezierPathElement:
-        case NSLineToBezierPathElement:
+        case NSBezierPathElementClosePath:
+        case NSBezierPathElementLineTo:
             foundParameter = position / linelength(cursor.points[0], cursor.points[1]);
             break;
-        case NSCurveToBezierPathElement:
+        case NSBezierPathElementCurveTo:
             foundParameter = arcLength_l(cursor.points, position, totalErrorBudget / cursor.elementCount).parameter;
             break;
         default:
@@ -1386,9 +1386,9 @@ static int compareFloat(const void *a_, const void *b_)
     for(elementIndex = 0; elementIndex < elementCount; elementIndex ++) {
         NSPoint points[3];
         NSBezierPathElement elt = [self elementAtIndex:elementIndex associatedPoints:points];
-        if (elt == NSMoveToBezierPathElement || elt == NSLineToBezierPathElement)
+        if (elt == NSBezierPathElementMoveTo || elt == NSBezierPathElementLineTo)
             yCoordinates[coordinateCount ++] = points[0].y;
-        else if (elt == NSCurveToBezierPathElement)
+        else if (elt == NSBezierPathElementCurveTo)
             yCoordinates[coordinateCount ++] = points[2].y;
         /* Else, a closepath --- ignore, since its y-coordinate would be a duplicate of some moveto's y-coordinate */
     }
@@ -1460,18 +1460,18 @@ static int compareFloat(const void *a_, const void *b_)
         NSBezierPathElement element = [self elementAtIndex:i associatedPoints:points];
         
         switch(element) {
-            case NSMoveToBezierPathElement:
+            case NSBezierPathElementMoveTo:
                 [segment setObject:NSStringFromPoint(points[0]) forKey:@"point"];
                 [segment setObject:@"MOVETO" forKey:@"element"];
                 break;
-            case NSClosePathBezierPathElement:
+            case NSBezierPathElementClosePath:
                 [segment setObject:@"CLOSE" forKey:@"element"];
                 break;
-            case NSLineToBezierPathElement:
+            case NSBezierPathElementLineTo:
                 [segment setObject:NSStringFromPoint(points[0]) forKey:@"point"];
                 [segment setObject:@"LINETO" forKey:@"element"];
                 break;
-            case NSCurveToBezierPathElement:
+            case NSBezierPathElementCurveTo:
                 [segment setObject:NSStringFromPoint(points[2]) forKey:@"point"];
                 [segment setObject:NSStringFromPoint(points[0]) forKey:@"control1"];
                 [segment setObject:NSStringFromPoint(points[1]) forKey:@"control2"];
@@ -1543,19 +1543,19 @@ static int compareFloat(const void *a_, const void *b_)
             return NO;
         
         switch (element) {
-            case NSMoveToBezierPathElement:
+            case NSBezierPathElementMoveTo:
                 if (!NSEqualPoints(points[0], otherPoints[0]))
                      return NO;
                 break;
-            case NSLineToBezierPathElement:
+            case NSBezierPathElementLineTo:
                 if (!NSEqualPoints(points[0], otherPoints[0]))
                     return NO;
                 break;
-            case NSCurveToBezierPathElement:
+            case NSBezierPathElementCurveTo:
                 if (!NSEqualPoints(points[0], otherPoints[0]) || !NSEqualPoints(points[1], otherPoints[1]) || !NSEqualPoints(points[2], otherPoints[2]))
                     return NO;
                 break;
-            case NSClosePathBezierPathElement:
+            case NSBezierPathElementClosePath:
                 break;
         }
     }
@@ -1586,19 +1586,19 @@ static inline NSUInteger _threeBitsForPoint(NSPoint point)
         NSBezierPathElement element = [self elementAtIndex:elementIndex associatedPoints:points];
 
         switch (element) {
-            case NSMoveToBezierPathElement:
+            case NSBezierPathElementMoveTo:
                 hashValue = _spinLeft(hashValue, 2);
                 hashValue ^= 0;
                 hashValue = _spinLeft(hashValue, 3);
                 hashValue ^= _threeBitsForPoint(points[0]);
                 break;
-            case NSLineToBezierPathElement:
+            case NSBezierPathElementLineTo:
                 hashValue = _spinLeft(hashValue, 2);
                 hashValue ^= 1;
                 hashValue = _spinLeft(hashValue, 3);
                 hashValue ^= _threeBitsForPoint(points[0]);
                 break;
-            case NSCurveToBezierPathElement:
+            case NSBezierPathElementCurveTo:
                 hashValue = _spinLeft(hashValue, 2);
                 hashValue ^= 2;
                 hashValue = _spinLeft(hashValue, 3);
@@ -1608,7 +1608,7 @@ static inline NSUInteger _threeBitsForPoint(NSPoint point)
                 hashValue = _spinLeft(hashValue, 3);
                 hashValue ^= _threeBitsForPoint(points[2]);
                 break;
-            case NSClosePathBezierPathElement:
+            case NSBezierPathElementClosePath:
                 hashValue = _spinLeft(hashValue, 2);
                 hashValue ^= 3;
                 break;
@@ -3101,8 +3101,8 @@ BOOL initializeSubpathWalkingState(struct subpathWalkingState *s, NSBezierPath *
     s->elementCount = pathElementCount;
     s->possibleImplicitClosepath = implicitClosepath;
     s->what = [p elementAtIndex:startIndex associatedPoints:s->points];
-    if (s->what != NSMoveToBezierPathElement) {
-        OBASSERT_NOT_REACHED("Bezier path element should be NSMoveToBezierPathElement but isn't");
+    if (s->what != NSBezierPathElementMoveTo) {
+        OBASSERT_NOT_REACHED("Bezier path element should be NSBezierPathElementMoveTo but isn't");
         return NO;
     }
     s->startPoint = s->points[0];
@@ -3117,17 +3117,17 @@ BOOL nextSubpathElement(struct subpathWalkingState *s)
         default:
             OBASSERT_NOT_REACHED("Unknown NSBezierPathElement");
             /* FALL THROUGH */
-        case NSClosePathBezierPathElement:
+        case NSBezierPathElementClosePath:
             return NO;
             
-        case NSMoveToBezierPathElement:
+        case NSBezierPathElementMoveTo:
             /* The first element of the path */
             break;
             
-        case NSLineToBezierPathElement:
+        case NSBezierPathElementLineTo:
             s->points[0] = s->points[1];  // update currentpoint
             break;
-        case NSCurveToBezierPathElement:
+        case NSBezierPathElementCurveTo:
             s->points[0] = s->points[3];  // update currentpoint
             break;
     }
@@ -3136,7 +3136,7 @@ BOOL nextSubpathElement(struct subpathWalkingState *s)
     if (s->currentElt >= s->elementCount) {
         // Whoops. An unterminated path. Do the implicit closepath.
         if (s->possibleImplicitClosepath) {
-            s->what = NSClosePathBezierPathElement;
+            s->what = NSBezierPathElementClosePath;
             s->points[1] = s->startPoint;
         } else {
             // An open path; we're done.
@@ -3146,7 +3146,7 @@ BOOL nextSubpathElement(struct subpathWalkingState *s)
     } else {
         s->what = [s->pathBeingWalked elementAtIndex:s->currentElt associatedPoints:(s->points + 1)];    
         switch(s->what) {
-            case NSClosePathBezierPathElement:
+            case NSBezierPathElementClosePath:
                 s->possibleImplicitClosepath = NO;
                 s->elementCount = s->currentElt + 1;
                 s->points[1] = s->startPoint;
@@ -3155,12 +3155,12 @@ BOOL nextSubpathElement(struct subpathWalkingState *s)
             default:
                 OBASSERT_NOT_REACHED("Unknown NSBezierPathElement");
                 /* FALL THROUGH */
-            case NSMoveToBezierPathElement:
+            case NSBezierPathElementMoveTo:
                 // An unterminated subpath.
                 s->elementCount = s->currentElt; // The moveto we just extracted is part of the next subpath, not this one.
                 if (s->possibleImplicitClosepath) {
                     // Do the implicit closepath.
-                    s->what = NSClosePathBezierPathElement;
+                    s->what = NSBezierPathElementClosePath;
                     s->points[1] = s->startPoint;
                 } else {
                     // Back up.
@@ -3169,8 +3169,8 @@ BOOL nextSubpathElement(struct subpathWalkingState *s)
                 }
                 break;
                 
-            case NSLineToBezierPathElement:
-            case NSCurveToBezierPathElement:
+            case NSBezierPathElementLineTo:
+            case NSBezierPathElementCurveTo:
                 /* These require no special actions */
                 break;
         }
@@ -3182,7 +3182,7 @@ BOOL nextSubpathElement(struct subpathWalkingState *s)
 // This predicts whether nextSubpathElement() would return YES or NO on the next call
 BOOL hasNextSubpathElement(struct subpathWalkingState *s)
 {
-    if (s->what == NSClosePathBezierPathElement)
+    if (s->what == NSBezierPathElementClosePath)
         return NO;
     
     NSBezierPathSegmentIndex nextEltIndex = s->currentElt + 1;
@@ -3191,7 +3191,7 @@ BOOL hasNextSubpathElement(struct subpathWalkingState *s)
             return NO;
         } else {
             NSBezierPathElement nextOp = [s->pathBeingWalked elementAtIndex:nextEltIndex];
-            if (nextOp == NSMoveToBezierPathElement)
+            if (nextOp == NSBezierPathElementMoveTo)
                 return NO;
         }
     }
@@ -3208,10 +3208,10 @@ void repositionSubpathWalkingState(struct subpathWalkingState *s, NSInteger toIn
     
     NSBezierPathElement previousElt = [s->pathBeingWalked elementAtIndex:toIndex-1 associatedPoints:(s->points)];
     switch(previousElt) {
-        case NSLineToBezierPathElement:
-        case NSMoveToBezierPathElement:
+        case NSBezierPathElementLineTo:
+        case NSBezierPathElementMoveTo:
             break;
-        case NSCurveToBezierPathElement:
+        case NSBezierPathElementCurveTo:
             s->points[0] = s->points[2];
             break;
         default:
@@ -3221,14 +3221,14 @@ void repositionSubpathWalkingState(struct subpathWalkingState *s, NSInteger toIn
 
     s->currentElt = toIndex;
     if (s->currentElt == s->elementCount && s->possibleImplicitClosepath)
-        s->what = NSClosePathBezierPathElement;
+        s->what = NSBezierPathElementClosePath;
     else
         s->what = [s->pathBeingWalked elementAtIndex:s->currentElt associatedPoints:(s->points + 1)];
-    if (s->what == NSClosePathBezierPathElement) {
+    if (s->what == NSBezierPathElementClosePath) {
         s->points[1] = s->startPoint;
     }
     
-    OBASSERT(s->what == NSLineToBezierPathElement || s->what == NSCurveToBezierPathElement || s->what == NSClosePathBezierPathElement);
+    OBASSERT(s->what == NSBezierPathElementLineTo || s->what == NSBezierPathElementCurveTo || s->what == NSBezierPathElementClosePath);
 }
 
 static BOOL _straightLineIntersectsRect(const NSPoint *a, NSRect rect) {
@@ -3539,13 +3539,13 @@ static BOOL _curvedLineIntersectsRect(const NSPoint *c, NSRect rect, CGFloat tol
     NSPoint points[3];
     NSBezierPathElement element = [self elementAtIndex:i associatedPoints:points];
     switch(element) {
-        case NSCurveToBezierPathElement:
+        case NSBezierPathElementCurveTo:
             return points[2];
-        case NSClosePathBezierPathElement:
+        case NSBezierPathElementClosePath:
             /* element = */ [self elementAtIndex:0 associatedPoints:points];
             /* FALL THROUGH */
-        case NSMoveToBezierPathElement:
-        case NSLineToBezierPathElement:
+        case NSBezierPathElementMoveTo:
+        case NSBezierPathElementLineTo:
             return points[0];
     }
     return NSZeroPoint;

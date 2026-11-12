@@ -35,7 +35,7 @@ RCS_ID("$Id$")
     [NSView performDeferredScrolling];
     [[NSThread currentThread] yieldMainThreadLock];
 
-    NSEvent *event = [NSApp nextEventMatchingMask:NSAnyEventMask untilDate:[NSDate distantPast] inMode:NSEventTrackingRunLoopMode dequeue:NO];
+    NSEvent *event = [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate distantPast] inMode:NSEventTrackingRunLoopMode dequeue:NO];
     if (event) {
         if (OFQueueProcessorDebug)
             NSLog(@"%@: breaking for event: %@", OBShortObjectDescription(self), event);

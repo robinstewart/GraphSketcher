@@ -482,7 +482,7 @@ NSComparisonResult sortByDefaultDisplayOrderInGroup(OIInspectorController *a, OI
 
 - (void)_buildWindow;
 {
-    window = [[OIInspectorWindow alloc] initWithContentRect:NSMakeRect(500.0f, 300.0f, NSWidth([headingButton frame]), OIInspectorStartingHeaderButtonHeight + OIInspectorSpaceBetweenButtons) styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
+    window = [[OIInspectorWindow alloc] initWithContentRect:NSMakeRect(500.0f, 300.0f, NSWidth([headingButton frame]), OIInspectorStartingHeaderButtonHeight + OIInspectorSpaceBetweenButtons) styleMask:NSWindowStyleMaskBorderless backing:NSBackingStoreBuffered defer:NO];
     [window setDelegate:self];
     [window setBecomesKeyOnlyIfNeeded:YES];
 }

@@ -219,11 +219,11 @@ static id (*originalValueInCharactersAtIndex)(id self, SEL _cmd, CHARACTER_INDEX
         return 'OTa0'; // left
     paragraphStyle = [self attribute:NSParagraphStyleAttributeName atIndex:0 effectiveRange:NULL];
     switch([paragraphStyle alignment]) {
-        case NSLeftTextAlignment: return 'OTa0';
-        case NSCenterTextAlignment: return 'OTa1';
-        case NSRightTextAlignment: return 'OTa2';
-        case NSJustifiedTextAlignment: return 'OTa3';
-        case NSNaturalTextAlignment:
+        case NSTextAlignmentLeft: return 'OTa0';
+        case NSTextAlignmentCenter: return 'OTa1';
+        case NSTextAlignmentRight: return 'OTa2';
+        case NSTextAlignmentJustified: return 'OTa3';
+        case NSTextAlignmentNatural:
         default:
             return 'OTa0'; // assume natural is left aligned
     }
@@ -240,19 +240,19 @@ static id (*originalValueInCharactersAtIndex)(id self, SEL _cmd, CHARACTER_INDEX
     
     switch(value - 'OTa0') {
         case 0: 
-            newAlignment = NSLeftTextAlignment;
+            newAlignment = NSTextAlignmentLeft;
             break;
         case 1:
-            newAlignment = NSCenterTextAlignment;
+            newAlignment = NSTextAlignmentCenter;
             break;
         case 2:
-            newAlignment = NSRightTextAlignment;
+            newAlignment = NSTextAlignmentRight;
             break;
         case 3:
-            newAlignment = NSJustifiedTextAlignment;
+            newAlignment = NSTextAlignmentJustified;
             break;
         default:
-            newAlignment = NSLeftTextAlignment;
+            newAlignment = NSTextAlignmentLeft;
             break;
     }
     paragraphStyle = [self attribute:NSParagraphStyleAttributeName atIndex:0 effectiveRange:NULL];

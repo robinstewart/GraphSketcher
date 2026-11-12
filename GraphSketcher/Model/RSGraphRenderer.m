@@ -228,7 +228,7 @@ void RSAppendShapeToBezierPath(NSBezierPath *P, CGPoint p, NSInteger shape, CGFl
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
         P.usesEvenOddFillRule = YES;
 #else
-        [P setWindingRule:NSEvenOddWindingRule];
+        [P setWindingRule:NSWindingRuleEvenOdd];
 #endif
         
         // old method
@@ -1809,7 +1809,7 @@ void RSAppendShapeToBezierPath(NSBezierPath *P, CGPoint p, NSInteger shape, CGFl
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
     [P setLineJoinStyle:kCGLineJoinRound];
 #else
-    [P setLineJoinStyle:NSRoundLineJoinStyle];
+    [P setLineJoinStyle:NSLineJoinStyleRound];
 #endif
     
     return P;
@@ -1882,7 +1882,7 @@ void RSAppendShapeToBezierPath(NSBezierPath *P, CGPoint p, NSInteger shape, CGFl
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
             [P setLineJoinStyle:kCGLineJoinRound];
 #else
-            [P setLineJoinStyle:NSRoundLineJoinStyle];
+            [P setLineJoinStyle:NSLineJoinStyleRound];
 #endif
 	}
 	
@@ -1949,7 +1949,7 @@ void RSAppendShapeToBezierPath(NSBezierPath *P, CGPoint p, NSInteger shape, CGFl
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
         P.lineCapStyle = kCGLineCapRound;
 #else
-	[P setLineCapStyle:NSRoundLineCapStyle];  // new in OGS
+	[P setLineCapStyle:NSLineCapStyleRound];  // new in OGS
 #endif
     }
     
@@ -2020,7 +2020,7 @@ void RSAppendShapeToBezierPath(NSBezierPath *P, CGPoint p, NSInteger shape, CGFl
 //      controlPoint1:CGPointMake(cp.x - uw.x + u.x*g - u2.x*g1, cp.y - uw.y + u.y*g - u2.y*g1)
 //      controlPoint2:CGPointMake(cp.x - uw.x - u.x*g - u2.x*g1, cp.y - uw.y - u.y*g - u2.y*g1)];
 //    
-//    [P setLineCapStyle:NSRoundLineCapStyle];
+//    [P setLineCapStyle:NSLineCapStyleRound];
 //    return P;
 //}
 //- (NSBezierPath *)pathForCurvePointFromLine:(RSLine *)L atTime:(CGFloat)t width:(CGFloat)w {
@@ -2075,7 +2075,7 @@ void RSAppendShapeToBezierPath(NSBezierPath *P, CGPoint p, NSInteger shape, CGFl
 //      controlPoint1:CGPointMake(cp.x - uw.x + u.x*g - u2.x*g1, cp.y - uw.y + u.y*g - u2.y*g1)
 //      controlPoint2:CGPointMake(cp.x - uw.x - u.x*g - u2.x*g1, cp.y - uw.y - u.y*g - u2.y*g1)];
 //    
-//    [P setLineCapStyle:NSRoundLineCapStyle];
+//    [P setLineCapStyle:NSLineCapStyleRound];
 //    return P;
 //}
 
@@ -2847,7 +2847,7 @@ static void appendTick(NSBezierPath *path, int axisOrientation, CGFloat p, CGFlo
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
         [P setLineCapStyle:kCGLineCapRound];
 #else
-	[P setLineCapStyle:NSRoundLineCapStyle];
+	[P setLineCapStyle:NSLineCapStyleRound];
 #endif
 	[P stroke];
     }
@@ -2867,7 +2867,7 @@ static void appendTick(NSBezierPath *path, int axisOrientation, CGFloat p, CGFlo
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
             [P setLineCapStyle:kCGLineCapRound];
 #else
-            [P setLineCapStyle:NSRoundLineCapStyle];
+            [P setLineCapStyle:NSLineCapStyleRound];
 #endif
             [P stroke];
         } else {

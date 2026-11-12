@@ -72,7 +72,7 @@ RCS_ID("$Id$")
     static NSCalendar *cal = nil;
     
     if (!cal) {
-        cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         OBASSERT(cal);
         
         [cal setTimeZone:[self UTCTimeZone]];

@@ -213,13 +213,13 @@ static NSGradient *unifiedGradientKey, *unifiedGradientNonKey;
         NSRect gradient, hairline, hairline2;
         NSDivideRect(backgroundBounds, &hairline, &gradient, 1.0f, NSMinYEdge);
         NSDivideRect(gradient, &hairline2, &gradient, 1.0f, NSMaxYEdge);
-        [backgroundImage drawFlippedInRect:gradient fromRect:(NSRect){{0,1},{gradientSize.width,gradientSize.height-2}} operation:NSCompositeCopy];
+        [backgroundImage drawFlippedInRect:gradient fromRect:(NSRect){{0,1},{gradientSize.width,gradientSize.height-2}} operation:NSCompositingOperationCopy];
         if (NSIntersectsRect(hairline, dirtyRect))
-            [backgroundImage drawFlippedInRect:hairline fromRect:(NSRect){{0,gradientSize.height-1},{gradientSize.width,1}} operation:NSCompositeCopy];
+            [backgroundImage drawFlippedInRect:hairline fromRect:(NSRect){{0,gradientSize.height-1},{gradientSize.width,1}} operation:NSCompositingOperationCopy];
         if (NSIntersectsRect(hairline2, dirtyRect))
-            [backgroundImage drawFlippedInRect:hairline2 fromRect:(NSRect){{0,0},{gradientSize.width,1}} operation:NSCompositeCopy];
+            [backgroundImage drawFlippedInRect:hairline2 fromRect:(NSRect){{0,0},{gradientSize.width,1}} operation:NSCompositingOperationCopy];
     } else {
-        [backgroundImage drawFlippedInRect:backgroundBounds operation:NSCompositeCopy];
+        [backgroundImage drawFlippedInRect:backgroundBounds operation:NSCompositingOperationCopy];
     }
 }
 
@@ -234,7 +234,7 @@ static NSGradient *unifiedGradientKey, *unifiedGradientNonKey;
         NSImage *closeImage = _closeButtonImages[imageTint][clickingClose ? OIInspectorCloseButtonStatePressed : (overClose ? OIInspectorCloseButtonStateRollover : OIInspectorCloseButtonStateNormal)];
         NSRect closeImagePoint = NSMakeRect(nextElementX, NSMinY(bounds) + 1.0f, closeImage.size.width, closeImage.size.height);
         
-        [closeImage drawFlippedInRect:closeImagePoint operation:NSCompositeSourceOver];
+        [closeImage drawFlippedInRect:closeImagePoint operation:NSCompositingOperationSourceOver];
     }
     nextElementX += 20.0f;
     
@@ -242,22 +242,22 @@ static NSGradient *unifiedGradientKey, *unifiedGradientNonKey;
         NSImage *disclosureImage = isExpanded ? _expandedImage : _collapsedImage;
         NSRect disclosureImageRect = NSMakeRect(nextElementX, rint(NSMidY(bounds) - [disclosureImage size].height / 2.0f) - 1, disclosureImage.size.width, disclosureImage.size.height);
 
-        [disclosureImage drawFlippedInRect:disclosureImageRect operation:NSCompositeSourceOver];
+        [disclosureImage drawFlippedInRect:disclosureImageRect operation:NSCompositingOperationSourceOver];
 
         if (isClicking && !overClose && !isDragging) // our triangle images are 100% black, but about 50% opaque, so we just draw it again over itself
-            [disclosureImage drawFlippedInRect:disclosureImageRect operation:NSCompositeSourceOver fraction:0.6666f];
+            [disclosureImage drawFlippedInRect:disclosureImageRect operation:NSCompositingOperationSourceOver fraction:0.6666f];
 
         nextElementX += 20.0f;
     }
     
     if (image != nil) {
         NSGraphicsContext *currentContext = [NSGraphicsContext currentContext];
-        CGContextRef cgContext = [currentContext graphicsPort];
+        CGContextRef cgContext = [currentContext CGContext];
 
         CGContextSaveGState(cgContext);
         CGContextTranslateCTM(cgContext, nextElementX, NSMaxY(bounds)-2.0f);
         CGContextScaleCTM(cgContext, 1.0f, -1.0f);
-        [image drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
+        [image drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1.0f];
         CGContextRestoreGState(cgContext);
         
         nextElementX += 20.0f;
@@ -272,10 +272,10 @@ static NSGradient *unifiedGradientKey, *unifiedGradientNonKey;
     if (drawAll) {
         NSRect rect = NSMakeRect(nextElementX, NSMinY(bounds), NSMaxX(bounds) - nextElementX - 5.0f - keyEquivalentWidth, NSHeight(bounds));
         if ([title isKindOfClass:[NSAttributedString class]]) {
-            [(NSAttributedString *)title drawInRectangle:rect alignment:NSLeftTextAlignment verticallyCentered:YES];
+            [(NSAttributedString *)title drawInRectangle:rect alignment:NSTextAlignmentLeft verticallyCentered:YES];
         } else {
             NSAttributedString *attr = [[NSAttributedString alloc] initWithString:title attributes:_textAttributes];
-            [attr drawInRectangle:rect alignment:NSLeftTextAlignment verticallyCentered:YES];
+            [attr drawInRectangle:rect alignment:NSTextAlignmentLeft verticallyCentered:YES];
         }
     }
 
@@ -303,7 +303,7 @@ static NSGradient *unifiedGradientKey, *unifiedGradientNonKey;
     [self display];
     
     do {
-        theEvent = [window nextEventMatchingMask:(NSLeftMouseDraggedMask | NSLeftMouseUpMask)];
+        theEvent = [window nextEventMatchingMask:(NSEventMaskLeftMouseDragged | NSEventMaskLeftMouseUp)];
         click = [NSEvent mouseLocation];
         
         if (overClose) {
@@ -349,7 +349,7 @@ static NSGradient *unifiedGradientKey, *unifiedGradientNonKey;
             [window setFrame:resultRect display:YES];
             newTopLeft = NSMakePoint(NSMinX(resultRect), NSMaxY(resultRect));
         }
-    } while ([theEvent type] != NSLeftMouseUp);
+    } while ([theEvent type] != NSEventTypeLeftMouseUp);
 
     if (isDragging)
         [delegate headerViewDidEndDragging:self toFrame:NSMakeRect(newTopLeft.x, newTopLeft.y - dragWindowHeight, windowFrame.size.width, dragWindowHeight)];

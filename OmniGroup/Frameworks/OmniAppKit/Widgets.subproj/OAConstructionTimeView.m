@@ -31,7 +31,7 @@ RCS_ID("$Id$");
     const CGFloat stripeWidth = 10.0f;
     CGFloat height = bounds.size.height;
     
-    CGContextRef ctx = [[NSGraphicsContext currentContext] graphicsPort];
+    CGContextRef ctx = [[NSGraphicsContext currentContext] CGContext];
     CGContextSaveGState(ctx);
     {
 	CGContextSetBlendMode(ctx, kCGBlendModeDarken);

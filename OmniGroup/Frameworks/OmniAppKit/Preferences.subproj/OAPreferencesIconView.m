@@ -42,7 +42,7 @@ static const CGFloat iconBaseline = 36;
     selectedClientRecord = nil;
     
     preferenceTitleCell = [[NSTextFieldCell alloc] init];
-    [preferenceTitleCell setAlignment:NSCenterTextAlignment];
+    [preferenceTitleCell setAlignment:NSTextAlignmentCenter];
     [preferenceTitleCell setFont:[NSFont toolTipsFontOfSize:11.0f]];
     
     return self;
@@ -103,7 +103,7 @@ static const CGFloat iconBaseline = 36;
         NSPoint nextEventLocation;
         NSUInteger newPressedIconIndex;
 
-        nextEvent = [NSApp nextEventMatchingMask:NSLeftMouseDraggedMask|NSLeftMouseUpMask untilDate:[NSDate distantFuture] inMode:NSEventTrackingRunLoopMode dequeue:YES];
+        nextEvent = [NSApp nextEventMatchingMask:NSEventMaskLeftMouseDragged|NSEventMaskLeftMouseUp untilDate:[NSDate distantFuture] inMode:NSEventTrackingRunLoopMode dequeue:YES];
 
         nextEventLocation = [self convertPoint:[nextEvent locationInWindow] fromView:nil];
         mouseInBounds = NSMouseInRect(nextEventLocation, buttonRect, [self isFlipped]);
@@ -113,7 +113,7 @@ static const CGFloat iconBaseline = 36;
             [self setNeedsDisplay:YES];
         }
 
-        if ([nextEvent type] == NSLeftMouseUp)
+        if ([nextEvent type] == NSEventTypeLeftMouseUp)
             break;
         else if (!NSMouseInRect(nextEventLocation, slopRect, NO)) {
             if ([self _dragIconIndex:index event:nextEvent]) {
@@ -255,14 +255,14 @@ static const CGFloat iconBaseline = 36;
     // Draw dark gray rectangle around currently selected icon (for MultipleIconView)
     if ([self _isIconSelectedAtIndex:index]) {
         [[NSColor colorWithCalibratedWhite:0.8f alpha:0.75f] set];
-        NSRectFillUsingOperation(buttonRect, NSCompositeSourceOver);
+        NSRectFillUsingOperation(buttonRect, NSCompositingOperationSourceOver);
     }
 
     // Draw icon, dark if it is currently being pressed
     destinationRect = NSIntegralRect(NSMakeRect(NSMidX(buttonRect) - iconSize.width / 2.0f, NSMaxY(buttonRect) - iconBaseline - iconSize.height, iconSize.width, iconSize.height));
     destinationRect.size = iconSize;
     if (index != pressedIconIndex)
-        [image drawFlippedInRect:destinationRect operation:NSCompositeSourceOver fraction:1.0f];
+        [image drawFlippedInRect:destinationRect operation:NSCompositingOperationSourceOver fraction:1.0f];
     else {
         NSImage *darkImage;
         NSSize darkImageSize;
@@ -271,11 +271,11 @@ static const CGFloat iconBaseline = 36;
         darkImageSize = [darkImage size];
         [darkImage lockFocus];
         [[NSColor blackColor] set];
-        NSRectFillUsingOperation(NSMakeRect(0, 0, darkImageSize.width, darkImageSize.height), NSCompositeSourceIn);
+        NSRectFillUsingOperation(NSMakeRect(0, 0, darkImageSize.width, darkImageSize.height), NSCompositingOperationSourceIn);
         [darkImage unlockFocus];
         
-        [darkImage drawFlippedInRect:destinationRect operation:NSCompositeSourceOver fraction:1.0f];
-        [image drawFlippedInRect:destinationRect operation:NSCompositeSourceOver fraction:0.6666f];
+        [darkImage drawFlippedInRect:destinationRect operation:NSCompositingOperationSourceOver fraction:1.0f];
+        [image drawFlippedInRect:destinationRect operation:NSCompositingOperationSourceOver fraction:0.6666f];
         [darkImage release];
     }
     
@@ -323,13 +323,13 @@ static const CGFloat iconBaseline = 36;
 {
     NSImage *dragImage = [[[NSImage alloc] initWithSize:buttonSize] autorelease];
     [dragImage lockFocus]; {
-        [iconImage drawInRect:NSMakeRect(buttonSize.width / 2.0f - iconSize.width / 2.0f, iconBaseline, iconSize.width, iconSize.height) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
+        [iconImage drawInRect:NSMakeRect(buttonSize.width / 2.0f - iconSize.width / 2.0f, iconBaseline, iconSize.width, iconSize.height) fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1.0f];
         
         [preferenceTitleCell setStringValue:name];
         [preferenceTitleCell drawWithFrame:NSMakeRect(0, 0, buttonSize.width, titleCellHeight) inView:self];
     } [dragImage unlockFocus];
        
-    NSPasteboard *pasteboard = [NSPasteboard pasteboardWithName:NSDragPboard];
+    NSPasteboard *pasteboard = [NSPasteboard pasteboardWithName:NSPasteboardNameDrag];
     [pasteboard declareTypes:[NSArray arrayWithObject:@"NSToolbarIndividualItemDragType"] owner:nil];
     [pasteboard setString:identifier forType:@"NSToolbarItemIdentifierPboardType"];
     [pasteboard setString:identifier forType:@"NSToolbarItemIdentiferPboardType"]; // Apple misspelled this type in 10.1

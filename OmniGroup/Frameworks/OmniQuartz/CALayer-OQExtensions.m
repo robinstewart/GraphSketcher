@@ -793,7 +793,7 @@ static void _writeString(NSString *str)
     NSImage *image = [[[NSImage alloc] initWithSize:rect.size] autorelease];
     [image lockFocus];
     {
-        CGContextRef ctx = [[NSGraphicsContext currentContext] graphicsPort];
+        CGContextRef ctx = [[NSGraphicsContext currentContext] CGContext];
         CGContextSaveGState(ctx);
         {
             CGContextTranslateCTM(ctx, -rect.origin.x, -rect.origin.y);

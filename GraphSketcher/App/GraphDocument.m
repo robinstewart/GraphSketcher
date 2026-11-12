@@ -520,8 +520,8 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
     NSPrintInfo *pInfo = [self printInfo];
     [pInfo setHorizontallyCentered:YES];
     [pInfo setVerticallyCentered:YES];
-    [pInfo setHorizontalPagination:NSFitPagination];
-    [pInfo setVerticalPagination:NSFitPagination];
+    [pInfo setHorizontalPagination:NSPrintingPaginationModeFit];
+    [pInfo setVerticalPagination:NSPrintingPaginationModeFit];
     [pInfo setLeftMargin:30];
     [pInfo setRightMargin:30];
     [pInfo setTopMargin:30];
@@ -582,24 +582,24 @@ NSString *RSErrorDomain = @"OmniGraphSketcher Error Domain";
     else if (menuAction == NSSelectorFromString(@"histogram:")) {
 	if ( [_editor.graph displayHistogram] ) {
 	    //[menuItem setTitle:@"Hide Grid"];
-	    [menuItem setState:NSOnState];
+	    [menuItem setState:NSControlStateValueOn];
 	} else {
 	    //[menuItem setTitle:@"Display Grid"];
-	    [menuItem setState:NSOffState];
+	    [menuItem setState:NSControlStateValueOff];
 	}
     }
     else if (menuAction == @selector(toggleContinuousSpellCheckingRS:)) {
 	if ( [[OFPreferenceWrapper sharedPreferenceWrapper] boolForKey:@"UseContinuousSpellChecking"] ) {
-	    [menuItem setState:NSOnState];
+	    [menuItem setState:NSControlStateValueOn];
 	} else {
-	    [menuItem setState:NSOffState];
+	    [menuItem setState:NSControlStateValueOff];
 	}
     }
     else if (menuAction == @selector(toggleWindowOpacity:)) {
 	if ( [self windowIsOpaque] )
-	    [menuItem setState:NSOffState];
+	    [menuItem setState:NSControlStateValueOff];
 	else
-	    [menuItem setState:NSOnState];
+	    [menuItem setState:NSControlStateValueOn];
     }
     // now pass request along to graphView
     return [_graphView validateMenuItem:menuItem];

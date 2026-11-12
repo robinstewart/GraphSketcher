@@ -22,11 +22,11 @@ RCS_ID("$Id$")
 {
     NSString *fullString = [NSString commandKeyIndicatorString];
 
-    if (mask & NSControlKeyMask)
+    if (mask & NSEventModifierFlagControl)
         fullString = [[NSString controlKeyIndicatorString] stringByAppendingString:fullString];
-    if (mask & NSAlternateKeyMask)
+    if (mask & NSEventModifierFlagOption)
         fullString = [[NSString alternateKeyIndicatorString] stringByAppendingString:fullString];
-    if (mask & NSShiftKeyMask)
+    if (mask & NSEventModifierFlagShift)
         fullString = [[NSString shiftKeyIndicatorString] stringByAppendingString:fullString];
 
     fullString = [fullString stringByAppendingString:[equivalent uppercaseString]];
